@@ -1,10 +1,8 @@
 
-import './App.css';
-
 function App() {
   return (
     <div className="App">
-
+      init proyect
     </div>
   );
 }
