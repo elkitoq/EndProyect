@@ -1,24 +1,30 @@
-import { Form, FormGroup, Container, Row, Col } from 'reactstrap'
-import { Buttons } from '../Components/Buttons.js'
-import { Inputs } from '../Components/Inputs.js'
-import { Labels } from '../Components/Labels.js'
+import { Form, FormGroup, Container, Row, Col, Button, Input, Label } from 'reactstrap'
+import md5 from 'md5'
+
 
 export const ViewLogin = () => {
+
+    const getUserData = () => {
+        let user = document.getElementById('userInput').value
+        let userPass = md5(document.getElementById('userPassword').value)
+        console.log(user, userPass)
+    }
+
     return (
         <Container className="themed-container">
             <Row>
                 <Col sm="12" md={{ size: 4, offset: 4 }}>
-                    <Form>
+                    <Form className="form-container">
                         <FormGroup>
-                            <Labels name="Usuario"></Labels>
-                            <Inputs classname="inputUser" />
+                            <Label for="userInput">Usuario</Label>
+                            <Input type="text" id="userInput" className="inputUser" name="user" />
                         </FormGroup>
                         <FormGroup>
-                            <Labels name="Password"></Labels>
-                            <Inputs type="password" classname="inputPassword"></Inputs>
+                            <Label for="userPassword">Password</Label>
+                            <Input type="password" id="userPassword" className="form-control" name="password" />
                         </FormGroup>
                         <FormGroup>
-                            <Buttons name="Login" size="lg" color="primary" blocks="true"></Buttons>
+                            <Button size="lg" color="primary" onClick={getUserData}>Login</Button>
                         </FormGroup>
                     </Form>
                 </Col>
@@ -26,3 +32,4 @@ export const ViewLogin = () => {
         </Container>
     )
 }
+
