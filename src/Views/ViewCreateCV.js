@@ -14,7 +14,7 @@ export const ViewCreateCV = () => {
                 <Row className="separado">
                     <Row>
                         <Col xs="4" sm="4" md="4" lg={{ size: 3, offset: 1 }}>
-                            <img src="./blank-profile.png" className="foto-perfil" id="fotoPerfil" onClick={cargarFotoPerfil} />
+                            <img src="/blank-profile.png" className="foto-perfil" id="fotoPerfil" onClick={cargarFotoPerfil} />
                             <Input type="hidden" name="MAX_FILE_SIZE" value="4" />
                             <Input type="file" id="cargarImagen" onChange={mostrarFotoPerfil} />
                         </Col>
