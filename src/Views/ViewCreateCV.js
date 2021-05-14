@@ -3,7 +3,6 @@ import { Button } from 'reactstrap'
 import { Input } from 'reactstrap'
 import { Labels } from '../Components/Labels'
 import { ViewAddCVData } from './ViewAddCVData'
-import '../style/generic.css';
 import '../style/cargarCV.css';
 
 

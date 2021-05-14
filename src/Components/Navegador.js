@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useCookies } from 'react-cookie';
 import {
     Navbar,
     NavbarBrand,
@@ -11,22 +12,29 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-    NavbarText,
     InputGroup,
     InputGroupAddon,
     Input,
     Button,
     ButtonGroup 
   } from 'reactstrap'
+// import { Cookie } from './Cookie';
 
 
 
 
 
 export const NavegadorPrincipal = ()=>{
-    const [isOpen, setIsOpen] = useState(false);
+
+    const [login, setCookie] = useCookies(['isLogin']);
+
+    const [isOpen, setIsOpen] = useState(false);  
 
     const toggle = () => setIsOpen(!isOpen);
+
+    const toggleLogin = () => {
+      setCookie("isLogin",!(login.isLogin==="true"),{ path: '/' });
+    }
 
     return(
         <Navbar color="primary" dark expand="md">
@@ -71,7 +79,7 @@ export const NavegadorPrincipal = ()=>{
           </Nav>
           <Nav className="ms-auto" navbar>
             <NavItem>
-              <NavLink href="/Login/">Login</NavLink>
+              <NavLink href="/Login/" onClick={toggleLogin}>{(login.isLogin==="true")?"Logout":"Login"}</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/Register/">Register</NavLink>

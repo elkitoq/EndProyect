@@ -1,7 +1,6 @@
 import { useHistory } from "react-router";
 import { Card, CardText, Container, Row } from "reactstrap";
 
-import '../style/generic.css';
 import '../style/home.css';
 
 
@@ -15,7 +14,7 @@ export const ViewHome = () => {
 
     return (
         <Container className="abs-center">
-            <div class="text-center">
+            <div className="text-center">
                 <h1>Bienvenido</h1>
                 <h2>¿Que estas buscando hoy?</h2>
                 <Row className="">
@@ -24,7 +23,7 @@ export const ViewHome = () => {
                     body inverse color="primary" className="text-wrap tarjetasQBuscas alinearVertical">
                         <CardText
                             tag="h5"
-                            style={{ "font-size": '3vh' }}>
+                            style={{ "fontSize": '3vh' }}>
                             Necesito Trabajo
                         </CardText>
                     </Card>
@@ -32,7 +31,7 @@ export const ViewHome = () => {
                     body inverse color="primary" className="text-wrap tarjetasQBuscas alinearVertical">
                         <CardText
                             tag="h5"
-                            style={{ "font-size": '3vh' }}>
+                            style={{ "fontSize": '3vh' }}>
                             Quiero Dinero
                         </CardText>
                     </Card>
@@ -40,7 +39,7 @@ export const ViewHome = () => {
                     body inverse color="primary" className="text-wrap tarjetasQBuscas alinearVertical">
                         <CardText
                             tag="h5"
-                            style={{ "font-size": '2vh' }} >
+                            style={{ "fontSize": '2vh' }} >
                             Busco trabajadores para mi viña/pequeño emprendimiento lucrativo
                             </CardText>
                     </Card>
