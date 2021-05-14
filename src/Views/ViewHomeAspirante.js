@@ -4,6 +4,6 @@
 
 export const ViewHomeAspirante = () => {
     return (
-        <h1>Paguina de inicio para Aspirantes<a href="/offerService/">ofrecer Servicio</a></h1>
+        <h1>Pagina de inicio para Aspirantes<a href="/offerService/">ofrecer Servicio</a></h1>
         );
     }

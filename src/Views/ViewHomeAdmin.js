@@ -3,6 +3,6 @@
 
 export const ViewHomeAdmin = () => {
     return (
-        <h1>Paguina de inicio para Administradores</h1>
+        <h1>Pagina de inicio para Administradores</h1>
         );
     }

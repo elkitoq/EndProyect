@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { ViewLogin } from './Views/ViewLogin.js'
 import { ViewCreateCV } from './Views/ViewCreateCV'
 import { ViewFindWorker } from "./Views/ViewFindWorker";
+import { ViewHome } from "./Views/ViewHome";
 import { ViewHomeAdmin } from "./Views/ViewHomeAdmin";
 import { ViewHomeAspirante } from "./Views/ViewHomeAspirante";
 import { ViewHomeEmpresa } from "./Views/ViewHomeEmpresa";
@@ -153,7 +154,7 @@ function App() {
         </Route>
         
         <Route path="/">
-          <h1>HOLA MUNDO</h1>
+          <ViewHome/>
         </Route>
       </Switch>
     </Router>

@@ -23,12 +23,16 @@ input::-webkit-inner-spin-button{
     float: right;
 }
 
-.center {
-    margin: auto;
-    width: 50%;
-    padding: 10px;
+
+.abs-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
   }
 
-.border{
-    border:green solid
+.alinearVertical{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
