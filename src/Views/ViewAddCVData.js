@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Collapse, List, FormGroup, Input } from 'reactstrap'
+import { Collapse, List, FormGroup, Input,Button } from 'reactstrap'
 
 
 
@@ -23,6 +23,7 @@ export const ViewAddCVData = () => {
     const onChange = (index,e) =>{
             lista[index].title = e.target.value;
             setLista(lista);
+            update();
     }
 
     return (
@@ -35,8 +36,8 @@ export const ViewAddCVData = () => {
 
                 return (
                     <div key={`element${index}`}>
-                        <a onClick={toggle} className={`list-group-item list-group-item-action ${index == activo ? "active" : ""}`}>{elemento.title}</a>
-                        <Collapse isOpen={index == activo}>
+                        <Button href="#" onClick={toggle} className={`list-group-item list-group-item-action ${index === activo ? "active" : ""}`}>{elemento.title}</Button>
+                        <Collapse isOpen={index === activo}>
                             <FormGroup className='list-group-item list-group-item-action'>
                                 <Input onChange={onChange.bind(undefined,index)} defaultValue={elemento.title} placeholder="Agrege un titulo"/>
                                 <Input type="textarea" placeholder="Agrege más detalles"/>
@@ -46,7 +47,7 @@ export const ViewAddCVData = () => {
                 );
             })
             }
-            <a onClick={addExperience} className='list-group-item list-group-item-action'>Click para agregar experiencia</a>
+            <Button onClick={addExperience} className='list-group-item list-group-item-action'>Click para agregar experiencia</Button>
         </List>
 
     )

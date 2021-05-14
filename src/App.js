@@ -1,6 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ViewLogin } from './Views/ViewLogin.js'
 import { ViewCreateCV } from './Views/ViewCreateCV'
+import { ViewFindWorker } from "./Views/ViewFindWorker";
+import { ViewHomeAdmin } from "./Views/ViewHomeAdmin";
+import { ViewHomeAspirante } from "./Views/ViewHomeAspirante";
+import { ViewHomeEmpresa } from "./Views/ViewHomeEmpresa";
+import { ViewJobOffice } from "./Views/ViewJobOffice";
+import { ViewLookForJob } from "./Views/ViewLookForJob";
+import { ViewLookForWorker } from "./Views/ViewLookForWorker";
+import { ViewOfferJob } from "./Views/ViewOfferJob";
+import { ViewOfferService } from "./Views/ViewOfferService";
+import { ViewFindJob } from "./Views/ViewFindJob";
+import { ViewFindService } from "./Views/ViewFindService";
+
 import { useState } from 'react';
 import {
   Navbar,
@@ -14,18 +26,21 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText
+  NavbarText,
+  InputGroup,
+  InputGroupAddon,
+  Input,
+  Button,
+  ButtonGroup 
 } from 'reactstrap'
 
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams
+  Route
 } from "react-router-dom";
 import React from 'react';
+
 
 
 function App() {
@@ -50,21 +65,32 @@ function App() {
                 Usuarios
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>
+                <DropdownItem href="/homeAspirante/">
                   Proletario
                 </DropdownItem>
-                <DropdownItem>
+                <DropdownItem href="/homeEmpresa/">
                   Cerdo Capitalista
                 </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem>
+                <DropdownItem href="/homeAdmin/">
                   Administrador
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
-
-            <NavbarText> Queremos que trabajes</NavbarText>
-
+            <NavItem>
+              <NavLink href="/jobOffice/">Oficina de empleo</NavLink>
+            </NavItem>
+            <Nav>
+              <InputGroup>
+                <Input placeholder="Busqueda" />
+                <InputGroupAddon addonType="append">
+                <ButtonGroup>
+                  <Button color="secondary" href="/lookforJob/">Buscar Trabajo</Button>
+                  <Button color="secondary" href="/lookforWorker/">Buscar Empleado</Button>
+                </ButtonGroup>
+                </InputGroupAddon>
+              </InputGroup>
+            </Nav>
           </Nav>
           <Nav className="ms-auto" navbar>
             <NavItem>
@@ -74,7 +100,7 @@ function App() {
               <NavLink href="/Register/">Register</NavLink>
             </NavItem>
           </Nav>
-            
+
 
         </Collapse>
       </Navbar>
@@ -89,7 +115,43 @@ function App() {
         </Route>
         <Route path="/CVCreate">
           <ViewCreateCV />
-          </Route>
+        </Route>
+        <Route path="/lookforJob">
+          <ViewLookForJob />
+        </Route>
+        <Route path="/lookforWorker">
+          <ViewLookForWorker />
+        </Route>
+        <Route path="/findWorker">
+          <ViewFindWorker />
+        </Route>
+        <Route path="/homeAdmin">
+          <ViewHomeAdmin/>
+        </Route>
+        <Route path="/homeAspirante">
+          <ViewHomeAspirante />
+        </Route>
+        <Route path="/homeEmpresa">
+          <ViewHomeEmpresa />
+        </Route>
+
+        <Route path="/jobOffice">
+          <ViewJobOffice />
+        </Route>        
+        <Route path="/offerJob">
+          <ViewOfferJob />
+        </Route>        
+        <Route path="/offerService">
+          <ViewOfferService />
+        </Route>
+        <Route path="/findJob">
+          <ViewFindJob />
+        </Route>
+
+        <Route path="/findService">
+          <ViewFindService />
+        </Route>
+        
         <Route path="/">
           <h1>HOLA MUNDO</h1>
         </Route>
