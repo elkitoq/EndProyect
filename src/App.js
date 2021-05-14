@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ViewLogin } from './Views/ViewLogin.js'
+import { ViewCreateCV } from './Views/ViewCreateCV'
 import { useState } from 'react';
 import {
   Navbar,
@@ -87,7 +88,7 @@ function App() {
           <ViewLogin />
         </Route>
         <Route path="/CVCreate">
-          Crear CV
+          <ViewCreateCV />
           </Route>
         <Route path="/">
           <h1>HOLA MUNDO</h1>
