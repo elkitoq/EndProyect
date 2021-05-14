@@ -1,34 +1,19 @@
-import { useHistory } from "react-router";
-import { Button, ButtonGroup, Card, CardText, Col, Container, Input, InputGroup, InputGroupAddon } from "reactstrap";
+import { useCookies } from "react-cookie";
+import { Button, ButtonGroup, Card, CardText, Col, Container} from "reactstrap";
+import { Busqueda } from "../Components/Busqueda";
 
 
 export const ViewLookForWorker = () => {
 
-    const history = useHistory();
-
-    const routeChange = (path) => {
-        history.push(path);
-    }
+    const [login] = useCookies(['isLogin']);
 
 
     return (
         <Container className="abs-center">
             <Col xs="12">
-                <InputGroup>
-                <Input autoFocus  placeholder="Busqueda" />
-                <InputGroupAddon addonType="append">
-                  <Button color="secondary" href="/findService/">Buscar Trabajador</Button>
-                </InputGroupAddon>
-            </InputGroup>
+                <Busqueda text="Buscar Trabajador" href="/findService" param="job"/>
             <Col xs={{size:4,offset:4}} className="separado">
-                <Card color="primary" inverse>
-                    <CardText>Si prefiere crear un puesto de trabajo, deveria logearse como empresa</CardText>
-                    <ButtonGroup>                    
-                        <Button onClick={routeChange.bind(this, "/login/")} color="secondary">Login</Button>
-                        <Button onClick={routeChange.bind(this, "/register/")} color="secondary"    >Registrarse</Button>
-                        </ButtonGroup>
-
-                </Card>
+                {!(login.isLogin==="true")?<LocalNoLoginCard/>:<SugerirCrearPuesto/>}
             </Col>
             
             </Col>
@@ -36,3 +21,18 @@ export const ViewLookForWorker = () => {
         </Container>
         );
     }
+
+    const LocalNoLoginCard = () =>
+        <Card color="primary" inverse>
+        <CardText>Si prefiere crear un puesto de trabajo, deveria logearse como empresa</CardText>
+        <ButtonGroup>                    
+            <Button href="/login"      color="secondary">    Login         </Button>
+            <Button href="/register"   color="secondary">    Registrarse   </Button>
+        </ButtonGroup>
+        </Card>
+
+    const SugerirCrearPuesto = () =>
+        <Card color="primary" inverse>
+            <CardText>Puede que prefiera crear un puesto de trabajo para recibir postulantes</CardText>
+            <Button href="/offerJob/" color="secondary">Crear Puesto</Button>
+        </Card>
