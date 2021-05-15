@@ -1,24 +1,43 @@
-import { Form, FormGroup, Container, Row, Col } from 'reactstrap'
-import { Buttons } from '../Components/Buttons.js'
-import { Inputs } from '../Components/Inputs.js'
-import { Labels } from '../Components/Labels.js'
+import { useState } from 'react'
+import { Form, FormGroup, Container, Row, Col, Button, Input, Label } from 'reactstrap'
+import md5 from 'md5'
+
 
 export const ViewLogin = () => {
+
+    const [datos, setdatos] = useState({
+        user: '',
+        password: ''
+    })
+
+    const handleInputChange = (event) => {
+        setdatos({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    const submit = (event) => {
+        event.preventDefault()
+        //aqui iria la llamada al server
+        console.log(datos)
+
+    }
+
     return (
         <Container className="themed-container">
             <Row>
                 <Col sm="12" md={{ size: 4, offset: 4 }}>
-                    <Form>
+                    <Form className="form-container" onSubmit={submit}>
                         <FormGroup>
-                            <Labels name="Usuario"></Labels>
-                            <Inputs classname="inputUser" />
+                            <Label for="userInput">Usuario</Label>
+                            <Input type="text" id="userInput" name="user" onChange={handleInputChange} />
                         </FormGroup>
                         <FormGroup>
-                            <Labels name="Password"></Labels>
-                            <Inputs type="password" classname="inputPassword"></Inputs>
+                            <Label for="userPassword">Password</Label>
+                            <Input type="password" id="userPassword" name="password" onChange={handleInputChange} />
                         </FormGroup>
                         <FormGroup>
-                            <Buttons name="Login" size="lg" color="primary" blocks="true"></Buttons>
+                            <Button size="lg" color="primary" type="submit">Login</Button>
                         </FormGroup>
                     </Form>
                 </Col>
@@ -26,3 +45,4 @@ export const ViewLogin = () => {
         </Container>
     )
 }
+
