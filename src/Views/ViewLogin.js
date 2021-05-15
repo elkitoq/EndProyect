@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Form, FormGroup, Container, Row, Col, Button, Input, Label } from 'reactstrap'
-import md5 from 'md5'
+
 
 
 export const ViewLogin = () => {
@@ -12,6 +12,7 @@ export const ViewLogin = () => {
 
     const handleInputChange = (event) => {
         setdatos({
+            ...datos,
             [event.target.name]: event.target.value
         })
     }
@@ -34,7 +35,7 @@ export const ViewLogin = () => {
                         </FormGroup>
                         <FormGroup>
                             <Label for="userPassword">Password</Label>
-                            <Input type="password" id="userPassword" name="password" onChange={handleInputChange} />
+                            <Input type="password" id="userPassword" name="password" autoComplete="off" onChange={handleInputChange} className="form-control" />
                         </FormGroup>
                         <FormGroup>
                             <Button size="lg" color="primary" type="submit">Login</Button>
