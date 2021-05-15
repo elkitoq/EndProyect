@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, CardBody, CardImg, CardText, Col, Row } from "reactstrap";
+import { Card, CardText, Col, Row } from "reactstrap";
 
 
 
@@ -27,7 +27,7 @@ export const CardWorkerDisplay = ({ seed,gender, cant = 10 }) => {
                 setTarjetas(recurso.results);
                 console.log(recurso.results);
             })
-    }, []);
+    }, [cant, gender, seed]);
 
     return (
         <>

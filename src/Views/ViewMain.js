@@ -14,6 +14,7 @@ import { ViewOfferService } from "./ViewOfferService";
 import { ViewFindJob } from "./ViewFindJob";
 import { ViewFindService } from "./ViewFindService";
 import { Route, Switch } from 'react-router';
+import { ViewCreateUser } from './ViewCreateUser.js';
 
 export const ViewMain = () => 
     <Switch>
@@ -21,7 +22,7 @@ export const ViewMain = () =>
           <ViewLogin />
         </Route>
         <Route path="/Register">
-          <ViewLogin />
+          <ViewCreateUser  />
         </Route>
         <Route path="/CVCreate">
           <ViewCreateCV />
