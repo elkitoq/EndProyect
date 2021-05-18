@@ -50,8 +50,8 @@ export const NavegadorPrincipal = () => {
             href="/lookforJob/" 
             text="Buscar Trabajo"
             othersButtons={[{href:"/lookforWorker/",text:"Buscar Empleado"}]}/>
-          <NavButton href="/lookforJob/" children="Buscar Trabajo"/>
-          <NavButton href="/lookforWorker/" children="Buscar Empleado"/>
+          <NavButton href="/lookforJob/" children="Buscar Trabajo" className="mostrar-search"/>
+          <NavButton href="/lookforWorker/" children="Buscar Empleado" className="mostrar-search"/>
           <NavButton href="/Login/" onClick={toggleLogin} children= {(login.isLogin === "true") ? "Logout" : "Login"}/>
           <NavButton href="/Register/" children={(login.isLogin === "true") ? "Crear Rol" : "Register"} />
         </Nav>
@@ -60,9 +60,9 @@ export const NavegadorPrincipal = () => {
   )
 }
 
-const NavButton= ({href,children,onClick}) =>{
+const NavButton= ({href,children,onClick,className}) =>{
   return (
-    <NavItem>
+    <NavItem className={className}>
       <NavLink href={href} onClick={onClick}>{children}</NavLink>
       </NavItem>
   );
