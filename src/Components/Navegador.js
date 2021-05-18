@@ -45,11 +45,13 @@ export const NavegadorPrincipal = () => {
           <NavButton href="/jobOffice/">Oficina de empleo</NavButton>
         </Nav>
         <Nav className="ms-auto" navbar>
-         <Busqueda 
+         <Busqueda className="ocultar-search"
             style={{ width: "40vw" }} 
             href="/lookforJob/" 
             text="Buscar Trabajo"
             othersButtons={[{href:"/lookforWorker/",text:"Buscar Empleado"}]}/>
+          <NavButton href="/lookforJob/" children="Buscar Trabajo"/>
+          <NavButton href="/lookforWorker/" children="Buscar Empleado"/>
           <NavButton href="/Login/" onClick={toggleLogin} children= {(login.isLogin === "true") ? "Logout" : "Login"}/>
           <NavButton href="/Register/" children={(login.isLogin === "true") ? "Crear Rol" : "Register"} />
         </Nav>

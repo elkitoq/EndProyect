@@ -15,6 +15,7 @@ import { ViewFindJob } from "./ViewFindJob";
 import { ViewFindService } from "./ViewFindService";
 import { Route, Switch } from 'react-router';
 import { ViewCreateUser } from './ViewCreateUser.js';
+import { Container } from 'reactstrap';
 
 export const ViewMain = () => 
     <Switch>
@@ -37,5 +38,7 @@ export const ViewMain = () =>
 
 const ViewRoute = ({path,view}) => 
       <Route path={path}>
-        {view()}
+        <Container className="abs-center">
+          {view()}
+        </Container>
       </Route>

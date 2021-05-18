@@ -12,7 +12,7 @@ export const ViewLookForWorker = () => {
         <Container className="abs-center">
             <Col xs="12">
                 <Busqueda text="Buscar Trabajador" href="/findService" param="job"/>
-                <Col xs={{size:4,offset:4}} className="separado">
+                <Col xs={{size:6,offset:3}} sm={{size:4,offset:4}} className="separado">
                     {!(login.isLogin==="true")?<LocalNoLoginCard/>:<SugerirCrearPuesto/>}
                 </Col>
             
@@ -25,7 +25,7 @@ export const ViewLookForWorker = () => {
     const LocalNoLoginCard = () =>
         <Card color="primary" inverse>
         <CardText>Si prefiere crear un puesto de trabajo, deveria logearse como empresa</CardText>
-        <ButtonGroup>                    
+        <ButtonGroup className="btn-group-vertical">                    
             <Button href="/login"      color="secondary">    Login         </Button>
             <Button href="/register"   color="secondary">    Registrarse   </Button>
         </ButtonGroup>
