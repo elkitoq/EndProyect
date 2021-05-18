@@ -1,5 +1,5 @@
 import { useCookies } from "react-cookie";
-import { Button, Card, Container, Input, Row } from "reactstrap";
+import { Button, Card, Col, Container, Input, Row } from "reactstrap";
 import { ViewRegister } from "./ViewRegister";
 
 
@@ -13,9 +13,9 @@ export const ViewCreateUser = () => {
             {
                 !(login.isLogin === "true") ? <ViewRegister /> : 
                 (!Array.isArray(user.selectUser)) ? <CrearUsuario user={user} setUser={setUser}/>:
-                !(user.selectUser[user.selectUser.length-1].new === true) ? <CrearUsuario user={user} setUser={setUser}/>:
-                (user.selectUser[user.selectUser.length-1].type === 0) ? <CrearEmpresa user={user} setUser={setUser}/>:
-                (user.selectUser[user.selectUser.length-1].type === 1) ? <CrearAspirante user={user} setUser={setUser}  />:     
+                !(user.selectUser[user.selectUser.length-1].new === true)   ? <CrearUsuario user={user} setUser={setUser}/>:
+                (user.selectUser[user.selectUser.length-1].type === 0)      ? <CrearEmpresa user={user} setUser={setUser}/>:
+                (user.selectUser[user.selectUser.length-1].type === 1)      ? <CrearAspirante user={user} setUser={setUser}/>:     
                 <CrearAdmin user={user} setUser={setUser}/>      
             }
         </Container>
@@ -36,20 +36,21 @@ const CrearUsuario = ({setUser,user}) =>{
 
     return(
         <Container className="abs-center">
-            <Row>
-            <h3>¿Por donde queres empezar?</h3>
-            </Row>
-            <Row className="">
-                <Card inverse color="primary" onClick={crear.bind(this,0)}>
-                    Tengo una empresa, Quiero esclavos
-                </Card>
-                <Card inverse color="primary" onClick={crear.bind(this,1)}>
-                    Soy pobre, Quiero Trabajo
-                </Card>
-                <Card inverse color="primary" onClick={crear.bind(this,2)}>
-                    Tengo un amigo que me pidio le cargara una cuenta
-                </Card>
-            </Row>
+            <div className="text-center">
+                <h3>¿Por donde queres empezar?</h3>
+                <Row>
+                    <Card inverse color="primary" className="tarjetasQBuscas" onClick={crear.bind(this,0)}>
+                        Tengo una empresa, Quiero esclavos
+                    </Card>
+                    <Card inverse color="primary" className="tarjetasQBuscas" onClick={crear.bind(this,1)}>
+                        Soy pobre, Quiero Trabajo
+                    </Card>
+                    <Card inverse color="primary" className="tarjetasQBuscas" onClick={crear.bind(this,2)}>
+                        Tengo un amigo que me pidio le cargara una cuenta
+                    </Card>
+                </Row>
+            </div>
+            
         </Container>
     );
 

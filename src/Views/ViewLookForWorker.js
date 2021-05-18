@@ -12,9 +12,9 @@ export const ViewLookForWorker = () => {
         <Container className="abs-center">
             <Col xs="12">
                 <Busqueda text="Buscar Trabajador" href="/findService" param="job"/>
-            <Col xs={{size:4,offset:4}} className="separado">
-                {!(login.isLogin==="true")?<LocalNoLoginCard/>:<SugerirCrearPuesto/>}
-            </Col>
+                <Col xs={{size:4,offset:4}} className="separado">
+                    {!(login.isLogin==="true")?<LocalNoLoginCard/>:<SugerirCrearPuesto/>}
+                </Col>
             
             </Col>
             

@@ -22,11 +22,11 @@ export const ViewRegister = () => {
                         </FormGroup>
                         <FormGroup>
                             <Labels name="Password"></Labels>
-                            <Inputs type="password" classname="inputPassword"></Inputs>
+                            <Inputs type="password" classname="inputPassword" autoComplete="off"></Inputs>
                         </FormGroup>
                         <FormGroup>
                             <Labels name="Repetir Password"></Labels>
-                            <Inputs type="password" classname="inputPassword"></Inputs>
+                            <Inputs type="password" classname="inputPassword" autoComplete="off"></Inputs>
                         </FormGroup>
                         <FormGroup className="separado">
                             <Button size="lg" color="primary" blocks="true">Crear</Button>

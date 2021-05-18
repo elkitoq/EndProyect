@@ -11,13 +11,9 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem,
-  InputGroup,
-  InputGroupAddon,
-  Input,
-  Button,
-  ButtonGroup
+  DropdownItem
 } from 'reactstrap'
+import { Busqueda } from './Busqueda';
 // import { Cookie } from './Cookie';
 
 
@@ -29,7 +25,6 @@ export const NavegadorPrincipal = () => {
   const [login, setCookie, removeCookie] = useCookies(['isLogin']);
 
   const [isOpen, setIsOpen] = useState(false);
-
   const toggle = () => setIsOpen(!isOpen);
 
   const toggleLogin = () => {
@@ -45,36 +40,30 @@ export const NavegadorPrincipal = () => {
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
-          <NavItem>
-            <NavLink href="/CVCreate/">Crear CV</NavLink>
-          </NavItem>
+          <NavButton href="/CVCreate/"> Crear CV </NavButton>
           <DropdownRol />
-          <NavItem>
-            <NavLink href="/jobOffice/">Oficina de empleo</NavLink>
-          </NavItem>
+          <NavButton href="/jobOffice/">Oficina de empleo</NavButton>
         </Nav>
         <Nav className="ms-auto" navbar>
-          <InputGroup style={{ width: "40vw" }}>
-            <Input placeholder="Busqueda" />
-            <InputGroupAddon addonType="append">
-              <ButtonGroup>
-                <Button color="secondary" href="/lookforJob/">Buscar Trabajo</Button>
-                <Button color="secondary" href="/lookforWorker/">Buscar Empleado</Button>
-              </ButtonGroup>
-            </InputGroupAddon>
-          </InputGroup>
-          <NavItem>
-            <NavLink href="/Login/" onClick={toggleLogin}>{(login.isLogin === "true") ? "Logout" : "Login"}</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/Register/">{(login.isLogin === "true") ? "Crear Rol" : "Register"}</NavLink>
-          </NavItem>
+         <Busqueda 
+            style={{ width: "40vw" }} 
+            href="/lookforJob/" 
+            text="Buscar Trabajo"
+            othersButtons={[{href:"/lookforWorker/",text:"Buscar Empleado"}]}/>
+          <NavButton href="/Login/" onClick={toggleLogin} children= {(login.isLogin === "true") ? "Logout" : "Login"}/>
+          <NavButton href="/Register/" children={(login.isLogin === "true") ? "Crear Rol" : "Register"} />
         </Nav>
-
-
       </Collapse>
     </Navbar>
   )
+}
+
+const NavButton= ({href,children,onClick}) =>{
+  return (
+    <NavItem>
+      <NavLink href={href} onClick={onClick}>{children}</NavLink>
+      </NavItem>
+  );
 }
 
 
@@ -83,7 +72,7 @@ export const NavegadorPrincipal = () => {
 const DropdownRol= () => {
 
 
-const [user, setUser] = useCookies(['selectUser']);
+const [user] = useCookies(['selectUser']);
 
   return (
     <UncontrolledDropdown nav inNavbar>
