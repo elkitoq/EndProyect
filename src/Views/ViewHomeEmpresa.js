@@ -11,5 +11,5 @@ export const ViewHomeEmpresa = () => {
             <Button href="/offerJob/">Crear puesto</Button>
             <Button href="/offerJob/">Crear puesto</Button>
         </Container>
-        );
-    }
+    );
+}

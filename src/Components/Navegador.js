@@ -45,36 +45,43 @@ export const NavegadorPrincipal = () => {
           <NavButton href="/jobOffice/">Oficina de empleo</NavButton>
         </Nav>
         <Nav className="ms-auto" navbar>
-         <Busqueda className="ocultar-search"
-            style={{ width: "40vw" }} 
-            href="/lookforJob/" 
+          <Busqueda className="ocultar-search"
+            style={{ width: "40vw" }}
+            href="/lookforJob/"
             text="Buscar Trabajo"
-            othersButtons={[{href:"/lookforWorker/",text:"Buscar Empleado"}]}/>
-          <NavButton href="/lookforJob/"    className="mostrar-search"  children="Buscar Trabajo"   />
-          <NavButton href="/lookforWorker/" className="mostrar-search"  children="Buscar Empleado"  />
-          <NavButton href="/Login/"         onClick={toggleLogin}       children= {(login.isLogin === "true") ? "Logout" : "Login"}/>
-          <NavButton href="/Register/"                                  children={(login.isLogin === "true") ? "Crear Rol" : "Register"} />
+            othersButtons={[{ href: "/lookforWorker/", text: "Buscar Empleado" }]} />
+          <NavButton href="/lookforJob/"
+            className="mostrar-search"
+            children="Buscar Trabajo" />
+          <NavButton href="/lookforWorker/"
+            className="mostrar-search"
+            children="Buscar Empleado" />
+          <NavButton href="/Login/"
+            onClick={toggleLogin}
+            children={(login.isLogin === "true") ? "Logout" : "Login"} />
+          <NavButton href="/Register/"
+            children={(login.isLogin === "true") ? "Crear Rol" : "Register"} />
         </Nav>
       </Collapse>
     </Navbar>
   )
 }
 
-const NavButton= ({href,children,onClick,className}) =>{
+const NavButton = ({ href, children, onClick, className }) => {
   return (
     <NavItem className={className}>
       <NavLink href={href} onClick={onClick}>{children}</NavLink>
-      </NavItem>
+    </NavItem>
   );
 }
 
 
 
 
-const DropdownRol= () => {
+const DropdownRol = () => {
 
 
-const [user] = useCookies(['selectUser']);
+  const [user] = useCookies(['selectUser']);
 
   return (
     <UncontrolledDropdown nav inNavbar>
@@ -82,18 +89,18 @@ const [user] = useCookies(['selectUser']);
         Roles
     </DropdownToggle>
       <DropdownMenu right>
-      {
-        Array.isArray(user.selectUser)?user.selectUser.map(
-          (element,index)=>
-          <DropdownItem href={
-            element.type === 0 ?    "/homeEmpresa/":
-            element.type === 1 ?    "/homeAspirante/":
-                                    "/homeAdmin/"
-          }>
-          {element.name}
-          </DropdownItem>
-        ):""
-      }
+        {
+          Array.isArray(user.selectUser) ? user.selectUser.map(
+            (element, index) =>
+              <DropdownItem href={
+                element.type === 0 ? "/homeEmpresa/" :
+                  element.type === 1 ? "/homeAspirante/" :
+                    "/homeAdmin/"
+              }>
+                {element.name}
+              </DropdownItem>
+          ) : ""
+        }
         <DropdownItem divider />
         <DropdownItem href="/Register/">
           Crear Roles

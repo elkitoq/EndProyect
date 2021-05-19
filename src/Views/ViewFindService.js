@@ -14,7 +14,7 @@ export const ViewFindService = (props) => {
             <Row>
                 <h1>Aca mostraria los trabajadores disponibles que sean "{busqueda.get("job")}" </h1>
 
-                <CardWorkerDisplay seed={busqueda.get("job")} gender={busqueda.get("gender")}/>
+                <CardWorkerDisplay seed={busqueda.get("job")} gender={busqueda.get("gender")} />
             </Row>
 
         </Container>

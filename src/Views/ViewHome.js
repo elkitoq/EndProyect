@@ -20,15 +20,15 @@ export const ViewHome = () => {
                 <Row className="">
 
                     <Card onClick={routeChange.bind(this, "/lookforJob/")}
-                    body inverse color="primary" className="text-wrap tarjetasQBuscas alinearVertical">
+                        body inverse color="primary" className="text-wrap tarjetasQBuscas alinearVertical">
                         <CardText
                             tag="h5"
                             style={{ "fontSize": '3vh' }}>
                             Necesito Trabajo
                         </CardText>
                     </Card>
-                    <Card  onClick={routeChange.bind(this, "/offerService/")}
-                    body inverse color="primary" className="text-wrap tarjetasQBuscas alinearVertical">
+                    <Card onClick={routeChange.bind(this, "/offerService/")}
+                        body inverse color="primary" className="text-wrap tarjetasQBuscas alinearVertical">
                         <CardText
                             tag="h5"
                             style={{ "fontSize": '3vh' }}>
@@ -36,7 +36,7 @@ export const ViewHome = () => {
                         </CardText>
                     </Card>
                     <Card onClick={routeChange.bind(this, "/lookforWorker/")}
-                    body inverse color="primary" className="text-wrap tarjetasQBuscas alinearVertical">
+                        body inverse color="primary" className="text-wrap tarjetasQBuscas alinearVertical">
                         <CardText
                             tag="h5"
                             style={{ "fontSize": '2vh' }} >

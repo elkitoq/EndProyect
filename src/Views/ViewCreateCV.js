@@ -1,9 +1,9 @@
 import { Form, FormGroup, Container, Row, Col } from 'reactstrap'
 import { Button } from 'reactstrap'
 import { Input } from 'reactstrap'
-import { Labels } from '../Components/Labels'
 import { ViewAddCVData } from './ViewAddCVData'
 import '../style/cargarCV.css';
+import { FormItem } from '../Components/FormItem'
 
 
 export const ViewCreateCV = () => {
@@ -29,10 +29,10 @@ export const ViewCreateCV = () => {
                                 <FormItem name="Codigo Postal" />
                             </Row>
                             <Row>
-                                <FormItem name="Telefono" />
+                                <FormItem name="Telefono" type="number"/>
                             </Row>
                             <Row>
-                                <FormItem name="E-Mail" />
+                                <FormItem name="E-Mail" type="email"/>
                             </Row>
                         </Col>
                     </Row>
@@ -69,9 +69,3 @@ const mostrarFotoPerfil = () => {
 const guardarCambios = (event) => {
     event.preventDefault();
 }
-
-const FormItem = ({name}) =>
-    <FormGroup>
-        <Labels name={name} />
-        <Input className="input" />
-    </FormGroup>

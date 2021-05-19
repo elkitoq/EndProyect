@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
 
-import { Collapse, List, FormGroup, Input,Button } from 'reactstrap'
+import { Collapse, List, FormGroup, Input, Button } from 'reactstrap'
 
 
 
 export const ViewAddCVData = () => {
 
-    const [lista,setLista] = useState([]);
+    const [lista, setLista] = useState([]);
 
     const [activo, setActivo] = useState();
     const updater = useState(false);
 
     const update = () => updater[1](!updater[0]);
 
-    const addExperience=()=>{
-        lista.push({title:""});
+    const addExperience = () => {
+        lista.push({ title: "" });
         setLista(lista);
-        setActivo(lista.length-1);
+        setActivo(lista.length - 1);
 
     }
 
-    const onChange = (index,e) =>{
-            lista[index].title = e.target.value;
-            setLista(lista);
-            update();
+    const onChange = (index, e) => {
+        lista[index].title = e.target.value;
+        setLista(lista);
+        update();
     }
 
     return (
@@ -39,8 +39,8 @@ export const ViewAddCVData = () => {
                         <Button href="#" onClick={toggle} className={`list-group-item list-group-item-action ${index === activo ? "active" : ""}`}>{elemento.title}</Button>
                         <Collapse isOpen={index === activo}>
                             <FormGroup className='list-group-item list-group-item-action'>
-                                <Input onChange={onChange.bind(undefined,index)} defaultValue={elemento.title} placeholder="Agrege un titulo"/>
-                                <Input type="textarea" placeholder="Agrege más detalles"/>
+                                <Input onChange={onChange.bind(undefined, index)} defaultValue={elemento.title} placeholder="Agrege un titulo" />
+                                <Input type="textarea" placeholder="Agrege más detalles" />
                             </FormGroup>
                         </Collapse>
                     </div>
