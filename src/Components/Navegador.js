@@ -50,10 +50,10 @@ export const NavegadorPrincipal = () => {
             href="/lookforJob/" 
             text="Buscar Trabajo"
             othersButtons={[{href:"/lookforWorker/",text:"Buscar Empleado"}]}/>
-          <NavButton href="/lookforJob/" children="Buscar Trabajo" className="mostrar-search"/>
-          <NavButton href="/lookforWorker/" children="Buscar Empleado" className="mostrar-search"/>
-          <NavButton href="/Login/" onClick={toggleLogin} children= {(login.isLogin === "true") ? "Logout" : "Login"}/>
-          <NavButton href="/Register/" children={(login.isLogin === "true") ? "Crear Rol" : "Register"} />
+          <NavButton href="/lookforJob/"    className="mostrar-search"  children="Buscar Trabajo"   />
+          <NavButton href="/lookforWorker/" className="mostrar-search"  children="Buscar Empleado"  />
+          <NavButton href="/Login/"         onClick={toggleLogin}       children= {(login.isLogin === "true") ? "Logout" : "Login"}/>
+          <NavButton href="/Register/"                                  children={(login.isLogin === "true") ? "Crear Rol" : "Register"} />
         </Nav>
       </Collapse>
     </Navbar>
