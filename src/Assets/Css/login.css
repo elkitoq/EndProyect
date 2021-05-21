@@ -1,0 +1,39 @@
+.themed-container .row-login .column .form-container{
+  margin-top: 20rem;
+}
+ 
+.themed-container .row-login .column .form-container label{
+  margin-bottom: 0.5rem;
+}
+
+.themed-container .row-login .column .form-container input{
+  margin-bottom: 1rem;
+}
+
+ .themed-container .row-login .column .form-container .button-submit{
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 1rem;
+ }
+ 
+ .my-facebook-button-class{
+   margin-left: 5px;
+   width: 45%;
+   height: 42px;
+   padding: 5px;
+   border-radius: 20px;
+   background-color: #3b5998;
+   color: white;
+   border-color: transparent;
+ }
+
+ .my-facebook-button-class:hover{
+  opacity: 0.85;
+}
+
+ .butonLoginGoogle{
+   width: 49%;
+   border-radius: 20px !important;
+   background-color: rgb(245, 245, 245) !important;
+   font-weight: 800 !important;
+ }
