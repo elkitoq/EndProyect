@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Form, FormGroup, Container, Row, Col, Button, Input, Label } from 'reactstrap'
 import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
+import logo from '../Assets/image/logo-sin-fondo-web.png'
 import '../Assets/Css/login.css'
 
 
@@ -46,6 +47,8 @@ export const ViewLogin = () => {
         <Container className="themed-container">
             <Row className="row-login">
                 <Col className="column" sm="12" md={{ size: 4, offset: 4 }}>
+                    <img className="logo-login" src={logo} />
+
                     <Form className="form-container" onSubmit={submit}>
 
                         <FormGroup>

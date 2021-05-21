@@ -1,5 +1,9 @@
+.logo-login{
+  width: 100%;
+}
+
 .themed-container .row-login .column .form-container{
-  margin-top: 20rem;
+  margin-top: 0rem;
 }
  
 .themed-container .row-login .column .form-container label{
@@ -36,4 +40,16 @@
    border-radius: 20px !important;
    background-color: rgb(245, 245, 245) !important;
    font-weight: 800 !important;
+ }
+
+ @media (max-width: 600px ){
+    .logo-login{
+      margin-top: -2rem;
+      width: 100%;
+      height: 350px;
+    }
+
+    .themed-container .row-login .column .form-container{
+      margin-top: -30px;
+    }
  }
