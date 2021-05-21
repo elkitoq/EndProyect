@@ -47,7 +47,9 @@ export const ViewLogin = () => {
         <Container className="themed-container">
             <Row className="row-login">
                 <Col className="column" sm="12" md={{ size: 4, offset: 4 }}>
-                    <img className="logo-login" src={logo} />
+                    <div className="container-logo">
+                        <img className="logo-login" src={logo} />
+                    </div>
 
                     <Form className="form-container" onSubmit={submit}>
 

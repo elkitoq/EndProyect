@@ -1,5 +1,6 @@
 .logo-login{
   width: 100%;
+  height: 100%;
 }
 
 .themed-container .row-login .column .form-container{
@@ -42,14 +43,24 @@
    font-weight: 800 !important;
  }
 
- @media (max-width: 600px ){
+ @media (max-width: 450px ){
     .logo-login{
       margin-top: -2rem;
       width: 100%;
-      height: 350px;
+      height: 100%;
     }
 
     .themed-container .row-login .column .form-container{
       margin-top: -30px;
     }
+ }
+
+ @media (min-width: 451px) and (max-width: 767px){
+   .logo-login{
+     margin-top: -5rem;
+   }
+
+   .themed-container .row-login .column .form-container{
+    margin-top: -3.5rem;
+  }
  }
