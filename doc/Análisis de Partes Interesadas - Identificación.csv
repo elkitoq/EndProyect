@@ -1,0 +1,21 @@
+,,,,,,,
+IDENTIFICACIÓN DE PARTES INTERESADAS,,,,,,,
+,,,,,,,
+,,,,,,,
+Definiciones,,,Nota,Criterio,Tipo,,
+Poder,Capacidad de influir positiva o negativamente sobre el proyecto,,1,Bajo Poder / Legitimidad / Urgencia,"Durmientes, Discrecionales, Demandantes",,
+Legitimidad,Autoridad y nivel de participación de los interesados,,2,Mediano  Poder / Legitimidad / Urgencia,"Dominantes, Peligrosos, Dependientes",,
+Urgencia,Tiempo de respuesta que esperan los interesados para satisfacer sus necesidades,,3,Alto  Poder / Legitimidad / Urgencia,Definitivos,,
+,,,,,,,
+,Partes Interesadas,Poder,Legitimidad,Urgencia,Promedio,Auxiliar,Tipo
+1,Equipo de trabajo,3,3,3,3.000,333,Definitivos
+2,Empresas ,3,2,3,2.667,323,Dominantes
+3,Aspirantes,3,3,3,3.000,333,Definitivos
+4,Profesora,3,2,3,2.667,323,Dominantes
+5,Pueblo de Maipú,2,2,3,2.333,223,Discrecionales
+6,,0,0,0,0.000,000,Sin Clasificar
+7,,0,0,0,0.000,000,Sin Clasificar
+8,,0,0,0,0.000,000,Sin Clasificar
+9,,0,0,0,0.000,000,Sin Clasificar
+10,,0,0,0,0.000,000,Sin Clasificar
+11,,0,0,0,0.000,000,Sin Clasificar
