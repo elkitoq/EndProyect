@@ -1,3 +1,4 @@
+
 import { Input } from 'reactstrap'
 
 export const Inputs = ({ name, classname, type }) => {

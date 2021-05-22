@@ -1,0 +1,38 @@
+
+
+
+.separado{
+    padding-top:10px;
+}
+.foto-perfil{
+    height: 200px;
+    width: 200px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.number{
+    -moz-appearance: textfield;
+}
+
+.right{
+    float: right;
+}
+
+
+.abs-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+.alinearVertical{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
