@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Card, CardText, Col, Row } from "reactstrap";
+import { Card, CardText, CardBody, CardImg, CardTitle, Col } from "reactstrap";
 
 
 
-export const CardWorkerDisplay = ({ seed,gender, cant = 10 }) => {
+export const CardWorkerDisplay = ({ seed, gender, cant = 10 }) => {
 
     const [tarjeta, setTarjetas] = useState([])
 
@@ -12,7 +12,7 @@ export const CardWorkerDisplay = ({ seed,gender, cant = 10 }) => {
         if (seed !== undefined)
             seedString = `seed=${seed}`;
 
-        let api=`https://randomuser.me/api/?gender=${gender}&${seedString}&results=${cant}&inc=gender,name,cell,email,picture`
+        let api = `https://randomuser.me/api/?gender=${gender}&${seedString}&results=${cant}&inc=gender,name,cell,email,picture`
         console.log(api);
         fetch(api)
             .then((response) => {
@@ -38,34 +38,51 @@ export const CardWorkerDisplay = ({ seed,gender, cant = 10 }) => {
 }
 
 
+// export const CardWorker = (elemento, index) => {
+//     return (
+//         <div key={`cardWorker-${index}`}>
+//             <Card>
+//                 <Row className="no-gutters">
+
+//                     <Col xs="8">
+//                     <CardText>
+//                         Nombre: <b>{` ${elemento.name.last}, ${elemento.name.first}`}</b>
+//                     </CardText>
+//                     <CardText>
+//                         Email: <b>{`${elemento.email.replace(/(@)([a-z]*)/, "@trabajesparatodes")}`}</b>
+//                     </CardText>
+//                     <CardText>
+//                         Telefono: <b>{`${elemento.cell}`}</b>
+//                     </CardText>
+//                     <CardText>
+//                         Ocupacion: <b>{`${elemento.job}`}</b>
+//                     </CardText>
+//                     </Col>
+//                     <Col xs="3">
+//                         <img width="200px" height="200px" src={`${elemento.picture.large  }`} alt="No se puede mostrar foto de Perfil" />
+//                     </Col>
+//                 </Row>
+
+
+//             </Card>
+//         </div>
+//     );
+// }
+
 export const CardWorker = (elemento, index) => {
     return (
-        <div key={`cardWorker-${index}`}>
-            <Card>
-                <Row className="no-gutters">
-
-                    <Col xs="8">
-                    <CardText>
-                        Nombre: <b>{` ${elemento.name.last}, ${elemento.name.first}`}</b>
-                    </CardText>
-                    <CardText>
-                        Email: <b>{`${elemento.email.replace(/(@)([a-z]*)/, "@trabajesparatodes")}`}</b>
-                    </CardText>
-                    <CardText>
-                        Telefono: <b>{`${elemento.cell}`}</b>
-                    </CardText>
-                    <CardText>
-                        Ocupacion: <b>{`${elemento.job}`}</b>
-                    </CardText>
-                    </Col>
-                    <Col xs="3">
-                        <img width="200px" height="200px" src={`${elemento.picture.large  }`} alt="No se puede mostrar foto de Perfil" />
-                    </Col>
-                </Row>
-                    
-                
-            </Card>
-        </div>
+        <Col xs="4">
+            <div key={`cardWorker-${index}`}>
+                <Card>
+                    <CardImg top width="200px" height="200px" src={`${elemento.picture.large}`} alt="No se puede mostrar foto de Perfil" />
+                    <CardBody>
+                        <CardText>Nombre: <b>{` ${elemento.name.last}, ${elemento.name.first}`}</b></CardText>
+                        <CardText>Email: <b>{`${elemento.email.replace(/(@)([a-z]*)/, "@trabajesparatodes")}`}</b></CardText>
+                        <CardText>Telefono: <b>{`${elemento.cell}`}</b></CardText>
+                        <CardText>Ocupacion: <b>{`${elemento.job}`}</b></CardText>
+                    </CardBody>
+                </Card>
+            </div>
+        </Col>
     );
 }
-
