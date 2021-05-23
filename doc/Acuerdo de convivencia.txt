@@ -1,0 +1,33 @@
+﻿ACUERDO DE CONVIVENCIA
+
+
+  El presente acuerdo constituye una guía para la atención y resolución de conflictos que puedan generarse al interior del equipo de trabajo, y contiene las pautas de convivencia, medidas y acciones definidas para abordar situaciones que pueden generar algún conflicto. 
+
+
+OBJETIVO GENERAL 
+  Resolver situaciones de conflicto interpersonal en forma pacífica preservando la continuidad del vínculo laboral.
+
+
+NORMAS DE CONVIVENCIA
+* No discriminación por ninguna razón: raza, sexo, religión, ideas políticas ni edad o incapacidad.
+* Respeto a la dignidad, la libertad de creencias y de pensamiento, la intimidad y la confidencialidad.
+* Crear espacios de diálogo y privacidad para mejorar la convivencia laboral.
+
+
+REGLAS DE CONVIVENCIA 
+  Con el objeto de minimizar conflictos, y también para generar un ambiente de trabajo agradable, resulta importante tener en cuenta y poner de manifiesto reglas sencillas que aunque parezcan obvias, no siempre son llevadas a cabo y su simple ejecución puede favorecer en gran medida el ambiente laboral. 
+
+
+* No sobrepasar los límites del proyecto.
+* No dejar tareas para último momento.
+* Priorizar planear, documentar, y testear antes que codificar.
+* La toma de decisiones de aspectos importantes se realizará a través de una votación entre los miembros del equipo.
+* Colaborar con quienes soliciten ayuda cuando no saben hacer cierta tarea.
+* Solicitar ayuda sin temor en caso de necesitarla.
+* Tratar a los compañeros cómo les gustaría ser tratados.
+* Ser agradable con todos los compañeros, aunque tengan diferencias de opinión u otras. 
+* Pautas a la hora de codificar:
+   * No utilizar “ñ” y tildes en las variables.
+   * Las constantes se definen en mayúsculas.
+   * Los componentes de react se exportarán por funciones y no por clases.
+   * Se separarán los componentes en dos carpetas, vistas y componentes.
