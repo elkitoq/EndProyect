@@ -93,9 +93,11 @@ const DropdownRol = () => {
           Array.isArray(user.selectUser) ? user.selectUser.map(
             (element, index) =>
               <DropdownItem href={
-                element.type === 0 ? "/homeEmpresa/" :
-                  element.type === 1 ? "/homeAspirante/" :
-                    "/homeAdmin/"
+                `${
+                element.type === 0 ? "/homeEmpresa" :
+                  element.type === 1 ? "/homeAspirante" :
+                    "/homeAdmin"
+                  }?user=${index}`
               }>
                 {element.name}
               </DropdownItem>
