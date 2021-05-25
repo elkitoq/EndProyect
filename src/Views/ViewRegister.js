@@ -1,13 +1,7 @@
-
-
-
-
-
 import { useCookies } from 'react-cookie';
 import { Form, FormGroup, Container, Row, Col, Button } from 'reactstrap'
 import { FormItem } from '../Components/FormItem.js';
-import { Inputs } from '../Components/Inputs.js'
-import { Labels } from '../Components/Labels.js'
+
 
 export const ViewRegister = () => {
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card, CardText, CardBody, CardImg, CardTitle, Col } from "reactstrap";
-
+import '../Assets/Css/cardWorker.css'
 
 
 export const CardWorkerDisplay = ({ seed, gender, cant = 10 }) => {
@@ -71,15 +71,17 @@ export const CardWorkerDisplay = ({ seed, gender, cant = 10 }) => {
 
 export const CardWorker = (elemento, index) => {
     return (
-        <Col xs="4">
+        <Col xs="3">
             <div key={`cardWorker-${index}`}>
-                <Card>
-                    <CardImg top width="200px" height="200px" src={`${elemento.picture.large}`} alt="No se puede mostrar foto de Perfil" />
-                    <CardBody>
-                        <CardText>Nombre: <b>{` ${elemento.name.last}, ${elemento.name.first}`}</b></CardText>
-                        <CardText>Email: <b>{`${elemento.email.replace(/(@)([a-z]*)/, "@trabajesparatodes")}`}</b></CardText>
-                        <CardText>Telefono: <b>{`${elemento.cell}`}</b></CardText>
-                        <CardText>Ocupacion: <b>{`${elemento.job}`}</b></CardText>
+                <Card className="card-worker">
+                    <Col className="col-img" sm="12" md={{ size: 6, offset: 3 }}><CardImg className="container-img" top width="128px" height="170px" src={`${elemento.picture.large}`} alt="No se puede mostrar foto de Perfil" /></Col>
+                    <CardBody className="card-body">
+                        <Col sm="12" md={{ size: 8, offset: 2 }}>
+                            <CardText>Nombre: <b>{` ${elemento.name.last}, ${elemento.name.first}`}</b></CardText>
+                            <CardText>Email: <b>{`${elemento.email.replace(/(@)([a-z]*)/, "@gmail")}`}</b></CardText>
+                            <CardText>Telefono: <b>{`${elemento.cell}`}</b></CardText>
+                            <CardText>Ocupacion: <b>{`${elemento.job}`}</b></CardText>
+                        </Col>
                     </CardBody>
                 </Card>
             </div>

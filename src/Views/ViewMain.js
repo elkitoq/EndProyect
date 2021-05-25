@@ -38,7 +38,7 @@ export const ViewMain = () =>
 
 const ViewRoute = ({ path, view }) =>
   <Route path={path}>
-    <Container className="abs-center">
+    <Container className="abs-center" fluid={true}>
       {view()}
     </Container>
   </Route>
