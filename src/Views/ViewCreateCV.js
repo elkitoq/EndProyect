@@ -1,9 +1,9 @@
 import { Form, FormGroup, Container, Row, Col } from 'reactstrap'
 import { Button } from 'reactstrap'
 import { Input } from 'reactstrap'
-import { Labels } from '../Components/Labels'
 import { ViewAddCVData } from './ViewAddCVData'
 import '../style/cargarCV.css';
+import { FormItem } from '../Components/FormItem'
 
 
 export const ViewCreateCV = () => {
@@ -14,51 +14,25 @@ export const ViewCreateCV = () => {
                     <Row>
                         <Col xs="4" sm="4" md="4" lg={{ size: 3, offset: 1 }}>
                             <img src="/blank-profile.png" className="foto-perfil" id="fotoPerfil" onClick={cargarFotoPerfil} alt="Cargar de perfil"/>
-                            <Input type="hidden" name="MAX_FILE_SIZE" value="4" />
                             <Input type="file" id="cargarImagen" onChange={mostrarFotoPerfil} />
                         </Col>
                         <Col md="8">
                             <Row md="2">
-                                <FormGroup>
-                                    <Labels name="Nombre" />
-                                    <Input className="input" />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Labels name="Apellido" />
-                                    <Input className="input" />
-                                </FormGroup>
+                                <FormItem name="Nombre" />
+                                <FormItem name="Apellido" />
                             </Row>
                             <Row>
-                                <FormGroup>
-                                    <Labels name="Direccion" />
-                                    <Input className="input" />
-                                </FormGroup>
+                                <FormItem name="Direccion" />
+                            </Row>
+                            <Row  md="2">
+                                <FormItem name="Distrito" />
+                                <FormItem name="Codigo Postal" />
                             </Row>
                             <Row>
-                                <Col>
-                                    <FormGroup>
-                                        <Labels name="Distrito" />
-                                        <Input className="input" />
-                                    </FormGroup>
-                                </Col>
-                                <Col>
-                                    <FormGroup>
-                                        <Labels name="Codigo Postal" />
-                                        <Input className="input" />
-                                    </FormGroup>
-                                </Col>
+                                <FormItem name="Telefono" type="number"/>
                             </Row>
                             <Row>
-                                <FormGroup>
-                                    <Labels name="Telefono" />
-                                    <Input className="input" />
-                                </FormGroup>
-                            </Row>
-                            <Row>
-                                <FormGroup>
-                                    <Labels name="E-Mail" />
-                                    <Input className="input" />
-                                </FormGroup>
+                                <FormItem name="E-Mail" type="email"/>
                             </Row>
                         </Col>
                     </Row>

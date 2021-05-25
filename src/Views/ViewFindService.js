@@ -10,7 +10,7 @@ export const ViewFindService = (props) => {
     let { search } = useLocation();
     let busqueda = new URLSearchParams(search)
     return (
-        <Container className="abs-center">
+        <Container className="abs-center" fluid={true}>
             <Row>
                 <h1>Aca mostraria los trabajadores disponibles que sean "{busqueda.get("job")}" </h1>
 

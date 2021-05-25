@@ -15,55 +15,30 @@ import { ViewFindJob } from "./ViewFindJob";
 import { ViewFindService } from "./ViewFindService";
 import { Route, Switch } from 'react-router';
 import { ViewCreateUser } from './ViewCreateUser.js';
+import { Container } from 'reactstrap';
 
-export const ViewMain = () => 
-    <Switch>
-        <Route path="/Login">
-          <ViewLogin />
-        </Route>
-        <Route path="/Register">
-          <ViewCreateUser  />
-        </Route>
-        <Route path="/CVCreate">
-          <ViewCreateCV />
-        </Route>
-        <Route path="/lookforJob">
-          <ViewLookForJob />
-        </Route>
-        <Route path="/lookforWorker">
-          <ViewLookForWorker />
-        </Route>
-        <Route path="/findWorker">
-          <ViewFindWorker />
-        </Route>
-        <Route path="/homeAdmin">
-          <ViewHomeAdmin/>
-        </Route>
-        <Route path="/homeAspirante">
-          <ViewHomeAspirante />
-        </Route>
-        <Route path="/homeEmpresa">
-          <ViewHomeEmpresa />
-        </Route>
+export const ViewMain = () =>
+  <Switch>
+    <ViewRoute path="/Login" view={ViewLogin} />
+    <ViewRoute path="/Register" view={ViewCreateUser} />
+    <ViewRoute path="/CVCreate" view={ViewCreateCV} />
+    <ViewRoute path="/lookforJob" view={ViewLookForJob} />
+    <ViewRoute path="/lookforWorker" view={ViewLookForWorker} />
+    <ViewRoute path="/findWorker" view={ViewFindWorker} />
+    <ViewRoute path="/homeAdmin" view={ViewHomeAdmin} />
+    <ViewRoute path="/homeAspirante" view={ViewHomeAspirante} />
+    <ViewRoute path="/homeEmpresa" view={ViewHomeEmpresa} />
+    <ViewRoute path="/jobOffice" view={ViewJobOffice} />
+    <ViewRoute path="/offerJob" view={ViewOfferJob} />
+    <ViewRoute path="/offerService" view={ViewOfferService} />
+    <ViewRoute path="/findJob" view={ViewFindJob} />
+    <ViewRoute path="/findService" view={ViewFindService} />
+    <ViewRoute path="/" view={ViewHome} />
+  </Switch>
 
-        <Route path="/jobOffice">
-          <ViewJobOffice />
-        </Route>        
-        <Route path="/offerJob">
-          <ViewOfferJob />
-        </Route>        
-        <Route path="/offerService">
-          <ViewOfferService />
-        </Route>
-        <Route path="/findJob">
-          <ViewFindJob />
-        </Route>
-
-        <Route path="/findService">
-          <ViewFindService />
-        </Route>
-        
-        <Route path="/">
-          <ViewHome/>
-        </Route>
-      </Switch>
+const ViewRoute = ({ path, view }) =>
+  <Route path={path}>
+    <Container className="abs-center" fluid={true}>
+      {view()}
+    </Container>
+  </Route>

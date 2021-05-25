@@ -11,13 +11,9 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem,
-  InputGroup,
-  InputGroupAddon,
-  Input,
-  Button,
-  ButtonGroup
+  DropdownItem
 } from 'reactstrap'
+import { Busqueda } from './Busqueda';
 // import { Cookie } from './Cookie';
 
 
@@ -29,7 +25,6 @@ export const NavegadorPrincipal = () => {
   const [login, setCookie, removeCookie] = useCookies(['isLogin']);
 
   const [isOpen, setIsOpen] = useState(false);
-
   const toggle = () => setIsOpen(!isOpen);
 
   const toggleLogin = () => {
@@ -45,45 +40,48 @@ export const NavegadorPrincipal = () => {
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
-          <NavItem>
-            <NavLink href="/CVCreate/">Crear CV</NavLink>
-          </NavItem>
+          <NavButton href="/CVCreate/"> Crear CV </NavButton>
           <DropdownRol />
-          <NavItem>
-            <NavLink href="/jobOffice/">Oficina de empleo</NavLink>
-          </NavItem>
+          <NavButton href="/jobOffice/">Oficina de empleo</NavButton>
         </Nav>
         <Nav className="ms-auto" navbar>
-          <InputGroup style={{ width: "40vw" }}>
-            <Input placeholder="Busqueda" />
-            <InputGroupAddon addonType="append">
-              <ButtonGroup>
-                <Button color="secondary" href="/lookforJob/">Buscar Trabajo</Button>
-                <Button color="secondary" href="/lookforWorker/">Buscar Empleado</Button>
-              </ButtonGroup>
-            </InputGroupAddon>
-          </InputGroup>
-          <NavItem>
-            <NavLink href="/Login/" onClick={toggleLogin}>{(login.isLogin === "true") ? "Logout" : "Login"}</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/Register/">{(login.isLogin === "true") ? "Crear Rol" : "Register"}</NavLink>
-          </NavItem>
+          <Busqueda className="ocultar-search"
+            style={{ width: "40vw" }}
+            href="/lookforJob/"
+            text="Buscar Trabajo"
+            othersButtons={[{ href: "/lookforWorker/", text: "Buscar Empleado" }]} />
+          <NavButton href="/lookforJob/"
+            className="mostrar-search"
+            children="Buscar Trabajo" />
+          <NavButton href="/lookforWorker/"
+            className="mostrar-search"
+            children="Buscar Empleado" />
+          <NavButton href="/Login/"
+            onClick={toggleLogin}
+            children={(login.isLogin === "true") ? "Logout" : "Login"} />
+          <NavButton href="/Register/"
+            children={(login.isLogin === "true") ? "Crear Rol" : "Register"} />
         </Nav>
-
-
       </Collapse>
     </Navbar>
   )
 }
 
+const NavButton = ({ href, children, onClick, className }) => {
+  return (
+    <NavItem className={className}>
+      <NavLink href={href} onClick={onClick}>{children}</NavLink>
+    </NavItem>
+  );
+}
 
 
 
-const DropdownRol= () => {
+
+const DropdownRol = () => {
 
 
-const [user, setUser] = useCookies(['selectUser']);
+  const [user] = useCookies(['selectUser']);
 
   return (
     <UncontrolledDropdown nav inNavbar>
@@ -91,18 +89,20 @@ const [user, setUser] = useCookies(['selectUser']);
         Roles
     </DropdownToggle>
       <DropdownMenu right>
-      {
-        Array.isArray(user.selectUser)?user.selectUser.map(
-          (element,index)=>
-          <DropdownItem href={
-            element.type === 0 ?    "/homeEmpresa/":
-            element.type === 1 ?    "/homeAspirante/":
-                                    "/homeAdmin/"
-          }>
-          {element.name}
-          </DropdownItem>
-        ):""
-      }
+        {
+          Array.isArray(user.selectUser) ? user.selectUser.map(
+            (element, index) =>
+              <DropdownItem href={
+                `${
+                element.type === 0 ? "/homeEmpresa" :
+                  element.type === 1 ? "/homeAspirante" :
+                    "/homeAdmin"
+                  }?user=${index}`
+              }>
+                {element.name}
+              </DropdownItem>
+          ) : ""
+        }
         <DropdownItem divider />
         <DropdownItem href="/Register/">
           Crear Roles

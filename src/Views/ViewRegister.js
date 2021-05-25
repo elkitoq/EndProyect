@@ -1,12 +1,7 @@
-
-
-
-
-
 import { useCookies } from 'react-cookie';
 import { Form, FormGroup, Container, Row, Col, Button } from 'reactstrap'
-import { Inputs } from '../Components/Inputs.js'
-import { Labels } from '../Components/Labels.js'
+import { FormItem } from '../Components/FormItem.js';
+
 
 export const ViewRegister = () => {
 
@@ -15,19 +10,10 @@ export const ViewRegister = () => {
         <Container className="themed-container">
             <Row>
                 <Col sm="12" md={{ size: 4, offset: 4 }}>
-                    <Form onSubmit={guardarCambios.bind(this,setCookie)}>
-                        <FormGroup>
-                            <Labels name="Usuario"></Labels>
-                            <Inputs classname="inputUser" />
-                        </FormGroup>
-                        <FormGroup>
-                            <Labels name="Password"></Labels>
-                            <Inputs type="password" classname="inputPassword"></Inputs>
-                        </FormGroup>
-                        <FormGroup>
-                            <Labels name="Repetir Password"></Labels>
-                            <Inputs type="password" classname="inputPassword"></Inputs>
-                        </FormGroup>
+                    <Form onSubmit={guardarCambios.bind(this, setCookie)}>
+                        <FormItem name="Usuario" />
+                        <FormItem name="Password" type="password" />
+                        <FormItem name="Repetir Password" type="password" />
                         <FormGroup className="separado">
                             <Button size="lg" color="primary" blocks="true">Crear</Button>
                         </FormGroup>
@@ -40,5 +26,5 @@ export const ViewRegister = () => {
 
 const guardarCambios = (setCookie, event) => {
     event.preventDefault();
-    setCookie("isLogin",true,{ path: '/' });
+    setCookie("isLogin", true, { path: '/' });
 }

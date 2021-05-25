@@ -28,7 +28,7 @@ input::-webkit-inner-spin-button{
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    min-height: 90vh;
   }
 
 .alinearVertical{
@@ -36,3 +36,16 @@ input::-webkit-inner-spin-button{
     align-items: center;
     justify-content: center;
 }
+
+@media screen and (max-width: 1060px) {
+    .ocultar-search{
+    display:none;
+    }
+    }
+
+
+ @media screen and (min-width: 1060px) {
+    .mostrar-search{
+    display:none;
+    }
+    }    
