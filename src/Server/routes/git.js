@@ -6,7 +6,7 @@ const terminal = new (require('../tools/terminal'));
 terminal.display = true;
 
 router.get('/pullgit', async(req, res) => {
-    res.write(execute("git status"));
+    res.write(await execute("git pull"));
     res.end();
 });
 
