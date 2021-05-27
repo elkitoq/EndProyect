@@ -96,6 +96,7 @@ const DropdownRol = () => {
                 `${
                 element.type === 0 ? "/homeEmpresa" :
                   element.type === 1 ? "/homeAspirante" :
+                  element.type === 2 ? "/homeAutonomo" :
                     "/homeAdmin"
                   }?user=${index}`
               }>

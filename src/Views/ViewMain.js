@@ -5,6 +5,7 @@ import { ViewFindWorker } from "./ViewFindWorker";
 import { ViewHome } from "./ViewHome";
 import { ViewHomeAdmin } from "./ViewHomeAdmin";
 import { ViewHomeAspirante } from "./ViewHomeAspirante";
+import { ViewHomeAutonomo } from "./ViewHomeAutonomo";
 import { ViewHomeEmpresa } from "./ViewHomeEmpresa";
 import { ViewJobOffice } from "./ViewJobOffice";
 import { ViewLookForJob } from "./ViewLookForJob";
@@ -28,6 +29,7 @@ export const ViewMain = () =>
     <ViewRoute path="/homeAdmin" view={ViewHomeAdmin} />
     <ViewRoute path="/homeAspirante" view={ViewHomeAspirante} />
     <ViewRoute path="/homeEmpresa" view={ViewHomeEmpresa} />
+    <ViewRoute path="/homeAutonomo" view={ViewHomeAutonomo} />
     <ViewRoute path="/jobOffice" view={ViewJobOffice} />
     <ViewRoute path="/offerJob" view={ViewOfferJob} />
     <ViewRoute path="/offerService" view={ViewOfferService} />
