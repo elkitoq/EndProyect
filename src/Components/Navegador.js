@@ -36,7 +36,7 @@ export const NavegadorPrincipal = () => {
 
   return (
     <Navbar color="primary" dark expand="md">
-      <NavbarBrand href="/">Trabaje para todes</NavbarBrand>
+      <NavbarBrand href="/">Maipú Jobs</NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>

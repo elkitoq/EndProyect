@@ -2,18 +2,23 @@ import { Form, FormGroup, Container, Row, Col } from 'reactstrap'
 import { Button } from 'reactstrap'
 import { Input } from 'reactstrap'
 import { ViewAddCVData } from './ViewAddCVData'
-import '../style/cargarCV.css';
+import '../Assets/Css/cargarCV.css';
 import { FormItem } from '../Components/FormItem'
+import noPhoto from '../Assets/image/blank-profile.png'
+import { useState } from 'react';
 
+let displayChargePhoto,setDisplayChargePhoto;
 
 export const ViewCreateCV = () => {
+    [displayChargePhoto,setDisplayChargePhoto] = useState("block");
     return (
         <Container>
             <Form onSubmit={guardarCambios}>
                 <Row className="separado">
                     <Row>
                         <Col xs="4" sm="4" md="4" lg={{ size: 3, offset: 1 }}>
-                            <img src="/blank-profile.png" className="foto-perfil" id="fotoPerfil" onClick={cargarFotoPerfil} alt="Cargar de perfil"/>
+                            <img src={noPhoto} className="foto-perfil" id="fotoPerfil" onClick={cargarFotoPerfil} alt="Cargar de perfil" style={{cursor: 'pointer'}}/>
+                            <div style={{display: displayChargePhoto}}>Clik en la imagen para cambiarla</div>
                             <Input type="file" id="cargarImagen" onChange={mostrarFotoPerfil} />
                         </Col>
                         <Col md="8">
@@ -52,7 +57,7 @@ export const ViewCreateCV = () => {
 }
 
 const cargarFotoPerfil = () => {
-    document.getElementById("cargarImagen").click();
+    document.getElementById("cargarImagen").click();  
 }
 
 const mostrarFotoPerfil = () => {
@@ -62,6 +67,7 @@ const mostrarFotoPerfil = () => {
         reader.readAsDataURL(archivo);
         reader.onloadend = function () {
             document.getElementById("fotoPerfil").src = reader.result;
+            setDisplayChargePhoto("none");
         }
     }
 }

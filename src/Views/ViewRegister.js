@@ -14,6 +14,7 @@ export const ViewRegister = () => {
                         <FormItem name="Usuario" />
                         <FormItem name="Password" type="password" />
                         <FormItem name="Repetir Password" type="password" />
+                        <FormItem name="Email" />
                         <FormGroup className="separado">
                             <Button size="lg" color="primary" blocks="true">Crear</Button>
                         </FormGroup>
