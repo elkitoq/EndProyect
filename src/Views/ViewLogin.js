@@ -11,7 +11,7 @@ export const ViewLogin = () => {
             <Row className="row-login">
                 <Col className="column" sm="5" >
                     <div className="container-logo">
-                        <img className="logo-login" src={logo} />
+                        <img className="logo-login" src={logo} alt="Maipu Jobs"/>
                     </div>
                     <FormLogin />
                 </Col>

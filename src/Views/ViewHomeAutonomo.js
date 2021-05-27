@@ -1,6 +1,6 @@
 import { useCookies } from "react-cookie";
-import { useHistory, useLocation } from "react-router";
-import { Button, Card, CardText, Col, Container, Row } from "reactstrap";
+import { useLocation } from "react-router";
+import { Container, Row } from "reactstrap";
 import { OptionMenu } from "../Components/OptionMenu";
 
 
@@ -8,12 +8,6 @@ import { OptionMenu } from "../Components/OptionMenu";
 
 export const ViewHomeAutonomo = () => {
 
-    const history = useHistory();
-    const routeChange = (path) => {
-        history.push(path);
-    }
-
-    
     const { search } = useLocation();
     const userNumber = new URLSearchParams(search).get("user")
     const [{selectUser}] = useCookies(['selectUser']);

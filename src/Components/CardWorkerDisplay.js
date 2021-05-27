@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, CardText, CardBody, CardImg, CardTitle, Col } from "reactstrap";
+import { Card, CardText, CardBody, CardImg, Col } from "reactstrap";
 import '../Assets/Css/cardWorker.css'
 
 
