@@ -6,7 +6,7 @@ import { OptionMenu } from "../Components/OptionMenu";
 
 
 
-export const ViewHomeAspirante = () => {
+export const ViewHomeAutonomo = () => {
 
     const { search } = useLocation();
     const userNumber = new URLSearchParams(search).get("user")

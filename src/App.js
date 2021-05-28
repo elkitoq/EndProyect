@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './style/generic.css';
+import './Assets/Css/generic.css';
 
 import {
   BrowserRouter as Router,

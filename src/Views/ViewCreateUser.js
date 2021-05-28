@@ -17,7 +17,8 @@ export const ViewCreateUser = () => {
                     (!Array.isArray(user.selectUser)) ? <CrearUsuario user={user} setUser={setUser} /> :
                         !(user.selectUser[user.selectUser.length - 1].new === true) ? <CrearUsuario /> :
                             (user.selectUser[user.selectUser.length - 1].type === 0) ? <CrearEmpresa /> :
-                                (user.selectUser[user.selectUser.length - 1].type === 1) ? <CrearAspirante /> :
+                            (user.selectUser[user.selectUser.length - 1].type === 1) ? <CrearAspirante /> :
+                            (user.selectUser[user.selectUser.length - 1].type === 2) ? <CrearAutonomo /> :
                                     <CrearAdmin />
             }
         </Container>
@@ -40,6 +41,7 @@ const CrearEmpresa = () => {
             Introduzca datos de la empresa:
             <Input defaultValue={user.selectUser[user.selectUser.length - 1].name}
                 placeholder="Nombre"
+                autoFocus
                 onChange={(e) => {
                     user.selectUser[user.selectUser.length - 1].name = e.target.value;
                     setUser("selectUser", user.selectUser, { path: '/' });
@@ -75,7 +77,10 @@ const CrearUsuario = () => {
                     <Card inverse color="primary" className="tarjetasQBuscas" onClick={crear.bind(this, 1)}>
                         Soy pobre, Quiero Trabajo
                         </Card>
-                    {/* <Card inverse color="primary" className="tarjetasQBuscas" onClick={crear.bind(this, 2)}>
+                    <Card inverse color="primary" className="tarjetasQBuscas" onClick={crear.bind(this, 2)}>
+                        Soy independiente, Quiero ofrecer mis servicios
+                        </Card>
+                    {/* <Card inverse color="primary" className="tarjetasQBuscas" onClick={crear.bind(this, 3)}>
                         Tengo un amigo que me pidio le cargara una cuenta
                         </Card> */}
                 </Row>
@@ -95,6 +100,7 @@ const CrearAspirante = () => {
             Introduzca sus datos
             <Input defaultValue={user.selectUser[user.selectUser.length - 1].name}
                 placeholder="Nombre"
+                autoFocus
                 onChange={(e) => {
                     user.selectUser[user.selectUser.length - 1].name = e.target.value;
                     setUser("selectUser", user.selectUser, { path: '/' })
@@ -115,6 +121,7 @@ const CrearAdmin = () => {
         <Container>
             Introduzca los datos de su asociado
             <Input defaultValue={user.selectUser[user.selectUser.length - 1].subordinate[0].name}
+                autoFocus
                 onChange={(e) => {
                     user.selectUser[user.selectUser.length - 1].subordinate[0].name = e.target.value;
                     setUser("selectUser", user.selectUser, { path: '/' })
@@ -128,3 +135,24 @@ const CrearAdmin = () => {
     )
 }
 
+
+const CrearAutonomo = () => {
+
+    return (
+        <Container>
+            Introduzca los datos de su emprendimiento
+            <Input defaultValue={user.selectUser[user.selectUser.length - 1].name}
+                placeholder="Nombre"
+                autoFocus
+                onChange={(e) => {
+                    user.selectUser[user.selectUser.length - 1].name = e.target.value;
+                    setUser("selectUser", user.selectUser, { path: '/' })
+                }
+                }
+            />
+            <ButtonCreate href="/homeAutonomo" />
+        </Container>
+
+
+    )
+}
