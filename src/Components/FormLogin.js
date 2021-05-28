@@ -30,7 +30,7 @@ export const FormLogin = () => {
 
             <FormGroup>
                 <Label for="userInput">Usuario</Label>
-                <Input type="text" id="userInput" name="user" onChange={handleInputChange} />
+                <Input type="text" id="userInput" name="user" onChange={handleInputChange} className="form-control" />
             </FormGroup>
 
             <FormGroup>
