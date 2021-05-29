@@ -31,6 +31,8 @@
   margin-bottom: 1.5rem;
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 5px;
+  position: relative;
+  z-index: 2;
 }
 
  .themed-container .row-login .column .form-container .button-submit{
