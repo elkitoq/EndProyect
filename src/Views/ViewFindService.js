@@ -1,20 +1,47 @@
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { Container, Row } from "reactstrap";
 import { CardWorkerDisplay } from "../Components/CardWorkerDisplay";
 
-
+import API from '../Tools/API';
 
 
 
 export const ViewFindService = (props) => {
-    let { search } = useLocation();
-    let busqueda = new URLSearchParams(search)
+    const { search } = useLocation();
+    const getJson = API.getSearchParam(search);
+    const [tarjeta, setTarjetas] = useState([]);
+
+    //Resultados por defecto 10
+    getJson.results = getJson.results || 10;  
+
+
+    useEffect(() => {
+
+            //Correccion para el API random
+            getJson.seed=getJson.job;
+            delete getJson.job;
+
+        let api=new API('https://randomuser.me/api/');
+        api.get(getJson)
+            .then((recurso) => {
+
+                //Correccion para el API random
+                if (getJson.seed !== undefined)
+                    for (let element of recurso.results) {
+                        element.job = getJson.seed;
+                    };
+                setTarjetas(recurso.results);
+            })
+    }, []);
+
+
     return (
         <Container className="abs-center" fluid={true}>
             <Row>
-                <h1>Aca mostraria los trabajadores disponibles que sean "{busqueda.get("job")}" </h1>
+                <h1>Aca mostraria los trabajadores disponibles que sean "{getJson.job}" </h1>
 
-                <CardWorkerDisplay seed={busqueda.get("job")} gender={busqueda.get("gender")} />
+                <CardWorkerDisplay tarjeta={tarjeta}/>
             </Row>
 
         </Container>

@@ -3,9 +3,8 @@ import { OptionMenu } from "../Components/OptionMenu";
 
 import '../Assets/Css/home.css';
 
+
 export const ViewHome = () => {
-
-
 
     return (
         <Container className="abs-center">
