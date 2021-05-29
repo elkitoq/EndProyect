@@ -1,3 +1,4 @@
+
 import { Container, Row, Col } from 'reactstrap'
 import logo from '../Assets/image/logo-sin-fondo-web.png'
 import '../Assets/Css/login.css'
@@ -11,7 +12,7 @@ export const ViewLogin = () => {
             <Row className="row-login">
                 <Col className="column" sm="5" >
                     <div className="container-logo">
-                        <img className="logo-login" src={logo} alt="Maipu Jobs"/>
+                        <img className="logo-login" alt="logo" src={logo} />
                     </div>
                     <FormLogin />
                 </Col>
