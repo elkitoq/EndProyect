@@ -18,22 +18,23 @@ export const ViewFindService = (props) => {
 
     useEffect(() => {
 
-            //Correccion para el API random
-            getJson.seed=getJson.job;
-            delete getJson.job;
+        //Correccion para el API random
+        getJson.seed=getJson.job;
+        delete getJson.job;
 
         let api=new API('https://randomuser.me/api/');
         api.get(getJson)
-            .then((recurso) => {
+            .then(({data}) => {
 
                 //Correccion para el API random
                 if (getJson.seed !== undefined)
-                    for (let element of recurso.results) {
+                    for (let element of data.results) {
                         element.job = getJson.seed;
                     };
-                setTarjetas(recurso.results);
+                
+                setTarjetas(data.results);
             })
-    }, []);
+    }, [getJson]);
 
 
     return (

@@ -1,3 +1,4 @@
+import axios from "axios";
 
 export default class API{
       
@@ -6,13 +7,21 @@ export default class API{
         
     }
     
-    get(json){
-        var getUrl = new URL(this.url)
-        for (var key in json)
-            getUrl.searchParams.append(key,json[key]);
-        return fetch(getUrl.toString())
-            .then((response) =>  response.json())
+    get(data={}){
+        // var getUrl = new URL(this.url)
+        // for (var key in data)
+        //     getUrl.searchParams.append(key,data[key]);
+        // return axios(getUrl.toString(),{params:data})
+        return axios.get(this.url,{params:data})
+        
     }
+
+    post(data={}){
+        return axios.post(this.url,data)
+    }
+
+    
+
 
     static getSearchParam(search){
         const params={}

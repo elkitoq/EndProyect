@@ -2,8 +2,6 @@
 //npm install express --save
 const express = require('express');
 
-const bodyParser = require('body-parser');
-
 //npm install cookie-parser --save
 const cookieParser = require('cookie-parser');
 
@@ -49,6 +47,11 @@ const corsOptions = {
 server.use(cors(corsOptions));
 
 server.use(session({ secret: 'keyboard cat', cookie: { maxAge: 8640000 } }))
+
+//Decodifica el body
+server.use(express.urlencoded({ extended: true }));
+server.use(express.json());
+
 
 server.use(require("./routes/routes"));
 
