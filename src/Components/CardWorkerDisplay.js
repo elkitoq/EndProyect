@@ -47,7 +47,7 @@ export const CardWorkerDisplay = ({ tarjeta }) => {
 
 export const CardWorker = (elemento, index) => {
     return (
-        <Col xs="3">
+        <Col xs="3" key={`cardWorker-${index}`}>
             <div key={`cardWorker-${index}`}>
                 <Card className="card-worker">
                     <Col className="col-img" sm="12" md={{ size: 6, offset: 3 }}><CardImg className="container-img" top width="128px" height="170px" src={`${elemento.picture.large}`} alt="No se puede mostrar foto de Perfil" /></Col>

@@ -5,8 +5,8 @@ import { Busqueda } from "../Components/Busqueda";
 
 export const ViewLookForWorker = () => {
 
-    const [login] = useCookies(['isLogin']);
-
+    // const [login] = useCookies(['isLogin']);
+    const login = false;
 
     return (
         <Container className="abs-center">

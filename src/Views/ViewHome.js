@@ -14,7 +14,6 @@ export const ViewHome = () => {
         api.post({pull:(api.getData().pull || 0)+1,ok:200});
     }
 
-
     return (
         <Container className="abs-center">
             <div className="text-center">

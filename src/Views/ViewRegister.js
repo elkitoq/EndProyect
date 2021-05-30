@@ -11,6 +11,7 @@ export const ViewRegister = () => {
     const [, setCookie] = useCookies(['isLogin']);
 
     const api = new API('/user',useState({}))
+    console.log(api.getHookData());
 
     return (
         <Container className="themed-container">
