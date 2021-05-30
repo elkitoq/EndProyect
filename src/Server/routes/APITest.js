@@ -17,4 +17,12 @@ router.post('/api', async(req, res) => {
     res.end();
 });
 
+router.post('/user', async(req, res) => {
+    datos.user=req.body;
+    console.log(datos);
+    res.json(datos);
+    res.end();
+});
+
+
 module.exports = router;

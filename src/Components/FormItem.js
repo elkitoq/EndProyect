@@ -1,19 +1,21 @@
 import { FormGroup, Input, Label } from "reactstrap";
 
 
-export const FormItem = ({ name, idInput = name, type, reference={value:"",onChange:()=>{}}
-}) => 
-        <FormGroup>
-            <Label for={idInput}>
-                {name}
-            </Label>
-            <Input
-                defaultValue={reference.value}
-                className="input"
-                type={type}
-                onChange={(e) => {
-                    reference.value = e.target.value;
-                    reference.onChange();
-                }
-                } />
-        </FormGroup>
+export const FormItem = ({ name, idInput = name, type, reference = { values: {}, onChange: () => { } }
+}) =>
+    <FormGroup>
+        <Label for={idInput}>
+            {name}
+        </Label>
+        <Input
+            defaultValue={reference.values[reference.id]}
+            className="input"
+            type={type}
+            onChange={(e) => {
+                if (reference.id !== undefined || reference.id !== null)
+                    reference.values[reference.id] = e.target.value;
+                if (typeof reference.onChange === "function")
+                    reference.onChange(e);
+            }
+            } />
+    </FormGroup>

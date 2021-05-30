@@ -37,9 +37,9 @@ const corsOptions = {
     //localhost para funcionar en local
     "http://localhost:3000",
     `http://localhost:${server.get('port')}`,
-    //y aca pondria los dns SI TUVIERA ALGUNO 
-    ``,
-    ``
+    //y aca van los dns
+    `http://maipujobs.ddns.net`,
+    `http://maipujobs.ddns.net:4000`
   ],
   credentials: true,
   exposedHeaders: ["set-cookie"],

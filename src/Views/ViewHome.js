@@ -8,7 +8,7 @@ import { useState } from "react";
 
 export const ViewHome = () => {
 
-    const api = new API('http://localhost:4000/api');
+    const api = new API('/api');
 
     const [get,setGet] = useState("hola");
 
