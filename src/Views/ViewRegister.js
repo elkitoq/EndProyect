@@ -34,5 +34,5 @@ export const ViewRegister = () => {
 }
 
 const guardarCambios = (setCookie) => {
-    setCookie("isLogin", true, { path: '/' });
+    //setCookie("isLogin", true, { path: '/' });
 }

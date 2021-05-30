@@ -8,19 +8,10 @@ import { useState } from "react";
 
 export const ViewHome = () => {
 
-    const api = new API('/api');
-
-    const [get,setGet] = useState("hola");
-
-    const getf = async () =>{
-        const {data} = await api.get();
-        console.log(data);
-        setGet(data);
-    }
+    const api = new API('/api',useState("hola"));
 
     const post = () =>{
-        api.post({pull:(get.pull || 0)+1,ok:200});
-        getf();
+        api.post({pull:(api.getData().pull || 0)+1,ok:200});
     }
 
 
@@ -34,7 +25,7 @@ export const ViewHome = () => {
                     <OptionMenu href="/offerService/"  fontSize="2vh"   >Quiero ofrecer mis humildes servicios</OptionMenu>
                     <OptionMenu href="/lookforWorker/" fontSize="2vh"   >Busco trabajadores para mi viña/pequeño emprendimiento lucrativo</OptionMenu>
                 </Row>
-                <div>{JSON.stringify(get)}</div>
+                <div>{JSON.stringify(api.getHookData())}</div>
                 <Button onClick={post}>post</Button>
             </div>
         </Container>

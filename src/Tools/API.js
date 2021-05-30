@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default class API {
 
-    constructor(url, [data, setData]=[{},null]) {
+    constructor(url, [data, setData] = [{}, null]) {
         this.url = window.location.protocol + "//" + window.location.host.replace(":3000", "") + ":4000" + url
         this._data = data || {};
         this._setData = setData;
@@ -16,25 +16,44 @@ export default class API {
         return this._data;
     }
 
+    send(method = "post", data = this._data) {
+        var result;
+        switch (method) {
+            case "put": result = axios.put(this.url, data);
+                break;
+            case "delete": result = axios.delete(this.url, data);
+                break;
+            case "get": result = axios.get(this.url, { params: data })
+                break;
+            default: result = axios.post(this.url, data);
+        }
+        if (method === "get")
+            result.then((res) => {
+                this._setData(res.data)
+            })
+        else
+            result.then((res) => {
+                if (res.data.response !== undefined)
+                    this._setData(res.data.response)
+            })
+        return result;
+    }
+
     get(data = this._data) {
-        // var getUrl = new URL(this.url)
-        // for (var key in data)
-        //     getUrl.searchParams.append(key,data[key]);
-        // return axios(getUrl.toString(),{params:data})
-        return axios.get(this.url, { params: data })
+        return this.send("get",data);
 
     }
 
     post(data = this._data) {
-        return axios.post(this.url, data)
+        return this.send("post",data);
     }
 
-    put(data = this._data) {
-        return axios.put(this.url, data)
+    put(data) {
+        return this.send("put", data)
     }
 
     delete(data = this._data) {
-        return axios.delete(this.url, data)
+        return this.delete("delete",data);
     }
 
     refresh() {
