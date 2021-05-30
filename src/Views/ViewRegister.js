@@ -21,7 +21,7 @@ export const ViewRegister = () => {
                         <FormItem name="Password" type="password" />
                         <FormItem name="Repetir Password" type="password" />
                         <FormItem name="Email" />
-                        <FormGroup className="separado">
+                        <FormGroup key="otros" className="separado">
                             <FormItem name="otro dato" />
                             <Button size="lg" color="primary" blocks="true">Crear</Button>
                         </FormGroup>

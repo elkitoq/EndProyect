@@ -49,8 +49,6 @@ export default class API {
     static getSearchParam(search) {
         const params = {}
         let url = new URLSearchParams(search);
-        console.log(url);
-        console.log(search);
 
         for (var key of url.keys())
             params[key] = url.get(key)

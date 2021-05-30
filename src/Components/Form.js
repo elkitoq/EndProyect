@@ -4,36 +4,44 @@ import { Form as FormB } from 'reactstrap'
 
 export const Form = ({ onSubmit, children, api }) => {
 
-    const createClone = (element) => {
-        console.log(element);
+    const createClone = (element, data) => {
         if (element.type.name === "FormItem") {
             const id = element.props.idInput || element.props.name;
             return React.cloneElement(element, {
                 key: id,
                 reference: {
-                    values: api.getHookData(),
+                    values: data,
                     id: id,
                     onChange: () => { api.refresh() }
                 }
             });
         }
-        else if (element.props.children !== undefined)
-            return React.cloneElement(element, { children: cloneChildren(element.props.children) });
+        else if (element.props.children !== undefined) {
+            if (element.key!==undefined && element.key!==null)
+                if (typeof data[element.key] !== "object")
+                    data[element.key]={};
+            return React.cloneElement(element, {
+                key: element.key || `subForm`,
+                children: cloneChildren(element.props.children, data[element.key] || data)
+
+            });
+        }
+
         else
             return element;
     }
 
-    const cloneChildren = (children) => {
+    const cloneChildren = (children, data) => {
         var newChildren = [];
         if (Symbol.iterator in Object(children)) {
-            if (typeof children === "string")                
+            if (typeof children === "string")
                 newChildren = children;
             else
                 for (var i in children)
-                    newChildren[i] = createClone(children[i]);
+                    newChildren[i] = createClone(children[i], data);
         }
         else
-            newChildren = createClone(children);
+            newChildren = createClone(children, data);
         return newChildren;
 
     }
@@ -45,6 +53,6 @@ export const Form = ({ onSubmit, children, api }) => {
             api.post();
             onSubmit(event);
         }}>
-            {cloneChildren(children)}
+            {cloneChildren(children, api.getHookData())}
         </FormB>);
 }
