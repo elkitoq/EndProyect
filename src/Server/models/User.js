@@ -10,13 +10,14 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
     },
-    cv: {
+    role: {
         type: JSON,
     }
 });
 
 exports.User = new mongoose.model('users', userSchema);
 
+//buscar usuario por nombre
 async function findUserByName(name) {
 
     const regExpTerm = new RegExp(name, 'i');
@@ -28,3 +29,17 @@ async function findUserByName(name) {
 }
 
 exports.User.findByName = findUserByName;
+
+//buscar usuario por email(para recuperacion de password)
+async function findUserByEmail(email) {
+
+    const regExpTerm = new RegExp(email, 'i');
+    const regExprSearch = [
+        { email: { $regex: regExpTerm } }
+    ];
+    const user = await exports.User.find({ '$or': regExprSearch });
+    return user[0];
+}
+
+
+exports.User.findByEmail = findUserByEmail;
