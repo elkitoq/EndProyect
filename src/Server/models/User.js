@@ -3,16 +3,42 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
+        require: true
     },
     password: {
         type: String,
+        require: true
     },
     email: {
         type: String,
+        require: true
     },
-    role: {
-        type: Array,
-    }
+    emailReference: {
+        type: String
+    },
+    socialAcount: {
+        google: String,
+        facebook: String
+    },
+    role: [{
+        status: Number,
+        roleName: String,
+        roleFile: [{
+            cv: {
+                name: String,
+                lastName: String,
+                age: Number,
+                imgCv: String,
+                adress: String,
+                cp: Number,
+                phone: String,
+                email: String,
+                experience: Array
+            },
+            applications: Array,
+            stalls: Array
+        }]
+    }]
 });
 
 exports.User = new mongoose.model('users', userSchema);
