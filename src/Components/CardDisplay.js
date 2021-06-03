@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Card, CardText, CardBody, CardImg, Col, Row, DropdownToggle, DropdownMenu, DropdownItem, Navbar, Nav, UncontrolledDropdown, Table } from "reactstrap";
 import '../Assets/Css/cardWorker.css'
@@ -6,6 +6,34 @@ import { Pagination } from "./Pagination";
 
 export const CardDisplay = ({ api, children, get }) => {
     const elementos = api.getHookData();
+
+    const paginas = [1, 10, 50, 100];
+    const [cookie, setCookie] = useCookies("apiConsumer")
+
+    if (cookie.apiConsumer === undefined)
+        setCookie("apiConsumer", { pages: 0, type: 0 })
+
+    // const [pages, setPages] = useCookies("apiConsumer")
+     const [type, setType] = useState(cookie.apiConsumer.type);
+
+    const useComponentWillMount = (func) => {
+        const willMount = useRef(true)
+        
+        if (willMount.current) func()
+        
+        willMount.current = false
+    }
+
+    const getNewData = () => {
+        api.get(get);
+        console.log(api.getData());
+        cookie.apiConsumer.pages = paginas.findIndex((e) => e === get.results)
+        setCookie("apiConsumer", cookie.apiConsumer)
+        console.log(cookie.apiConsumer);
+        // setPages(paginas.findIndex((e) => e === get.results))
+    }
+
+    useComponentWillMount(getNewData);
 
     const Cards = elementos.map((elemento, index) =>
         <Col xs="12" key={`card-${index}`} sm="12" md="6" lg="3">
@@ -72,34 +100,15 @@ export const CardDisplay = ({ api, children, get }) => {
     </Table>
 
 
-
-    const paginas = [1, 10, 50, 100];
-    const [cookie, setCookie] = useCookies("apiConsumer")
-
-
-    const getNewData = () => {
-        api.get(get);
-        console.log(api.getData());
-        cookie.apiConsumer.pages = paginas.findIndex((e) => e === get.results)
-        setCookie("apiConsumer", cookie.apiConsumer)
-        console.log(cookie.apiConsumer);
-        // setPages(paginas.findIndex((e) => e === get.results))
-    }
+    // useEffect(() => {
+    //     getNewData();
+    // }
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    //     , []);
 
 
-    if (cookie.apiConsumer === undefined)
-        setCookie("apiConsumer", { pages: 0, type: 0 })
+    
 
-    // const [pages, setPages] = useCookies("apiConsumer")
-     const [type, setType] = useState(cookie.apiConsumer.type);
-
-
-
-    useEffect(() => {
-        getNewData();
-    }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        , []);
     return (
         <>
 
