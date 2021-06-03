@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation } from "react-router";
-import { Container, Row, CardText, CardImg } from "reactstrap";
+import { Container, Row, CardText, CardImg} from "reactstrap";
 import { CardDisplay } from "../Components/CardDisplay";
 
 import API from '../Tools/API';
@@ -25,9 +25,8 @@ export const ViewFindService = (props) => {
 
     return (
         <Container className="abs-center" fluid={true}>
-            <Row>
+            <Row >
                 <h1>Aca mostraria los trabajadores disponibles que sean "{getJson.job}" </h1>
-
                 <CardDisplay api={api} get={getJson}>
                     <CardImg func={(elemento) => elemento.picture.large} />
                     <CardText func={(elemento) => ` ${elemento.name.last}, ${elemento.name.first}`}>Nombre: <b>{ }</b></CardText>

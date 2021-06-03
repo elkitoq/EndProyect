@@ -1,4 +1,3 @@
-import { useCookies } from "react-cookie";
 import { Button, ButtonGroup, Card, CardText, Col, Container } from "reactstrap";
 import { Busqueda } from "../Components/Busqueda";
 
