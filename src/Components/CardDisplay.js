@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { Card, CardText, CardBody, CardImg, Col, Row, DropdownToggle,  DropdownMenu, DropdownItem, Navbar, Nav, UncontrolledDropdown, Table } from "reactstrap";
+import { useCookies } from "react-cookie";
+import { Card, CardText, CardBody, CardImg, Col, Row, DropdownToggle, DropdownMenu, DropdownItem, Navbar, Nav, UncontrolledDropdown, Table } from "reactstrap";
 import '../Assets/Css/cardWorker.css'
+import { Pagination } from "./Pagination";
 
 export const CardDisplay = ({ api, children, get }) => {
     const elementos = api.getHookData();
@@ -34,7 +36,7 @@ export const CardDisplay = ({ api, children, get }) => {
         </Col>
     )
 
-    const Tabla = <Table>
+    const Tabla = <Table striped>
         <thead>
             <tr>
                 {children.map((card, index) => {
@@ -60,7 +62,7 @@ export const CardDisplay = ({ api, children, get }) => {
                                                 ""}
                                 </td>);
                         else if (card.type.name === "CardImg")
-                            return <img className="container-img" height="50px" style={{ "border-radius": "100px" }} src={`${card.props.func(elemento)}`} alt="No se puede mostrar foto" />
+                            return <td><img className="container-img" height="30px" style={{ borderRadius: "15px" }} src={`${card.props.func(elemento)}`} alt="No se puede mostrar foto" /></td>
                         return card;
                     })}
                 </tr>
@@ -72,26 +74,40 @@ export const CardDisplay = ({ api, children, get }) => {
 
 
     const paginas = [1, 10, 50, 100];
-    const [pages, setPages] = useState(0);
-    const [page, setPage] = useState(0);
-    const [type, setType] = useState(0);
+    const [cookie, setCookie] = useCookies("apiConsumer")
+
+
+    const getNewData = () => {
+        api.get(get);
+        console.log(api.getData());
+        cookie.apiConsumer.pages = paginas.findIndex((e) => e === get.results)
+        setCookie("apiConsumer", cookie.apiConsumer)
+        console.log(cookie.apiConsumer);
+        // setPages(paginas.findIndex((e) => e === get.results))
+    }
+
+
+    if (cookie.apiConsumer === undefined)
+        setCookie("apiConsumer", { pages: 0, type: 0 })
+
+    // const [pages, setPages] = useCookies("apiConsumer")
+     const [type, setType] = useState(cookie.apiConsumer.type);
+
 
 
     useEffect(() => {
-        api.get(get);
-        console.log(api.getData());
-        setPages(paginas.findIndex((e) => e === get.results))
+        getNewData();
     }
         // eslint-disable-next-line react-hooks/exhaustive-deps
         , []);
-
     return (
         <>
 
             <Navbar >
                 <Nav>
-                    <Selector items={["Tarjetas", "Tabla"]} onChange={(n) => { setType(n) }} />
-                    <Selector items={paginas} select={pages} onChange={(n) => { get.results = paginas[n]; api.get(get); setPages(paginas.findIndex((e) => e === get.results)) }} />
+                    <Selector items={["Tarjetas", "Tabla"]} select={type} onChange={(n) => {setType(n); cookie.apiConsumer.type = n; setCookie("apiConsumer", cookie.apiConsumer) }} />
+                    <Selector items={paginas} select={cookie.apiConsumer.pages} onChange={(n) => { get.results = paginas[n]; getNewData(); }} />
+                    <Pagination pages={10}/>
                 </Nav>
             </Navbar>
             <Row>
@@ -111,7 +127,7 @@ const Selector = ({ onChange = () => { }, items, select }) => {
     const [dropdownSelect, setDropdownSelect] = useState(0);
 
     return (
-        <UncontrolledDropdown>
+        <UncontrolledDropdown >
             <DropdownToggle caret>
                 {items[select || dropdownSelect]}
             </DropdownToggle>
