@@ -20,32 +20,32 @@ export const Pagination = ({ pages = 1}) => {
         {(actual > 1) ? <First paginas={paginas} actual={actual}/> :""}
 
         {paginas.map((pagina, i) =>
-            <PaginationItem active={actual-1===i}>
+            <PaginationItem key = {pagina} active={actual-1===i}>
                 <PaginationLink href={pagina}>
                     {i + 1}
                 </PaginationLink>
             </PaginationItem>
         )}
 
-        {(actual < paginas.length - 1) ? <Last paginas={paginas} actual={actual}/> :""}
+        {(actual < paginas.length) ? <Last paginas={paginas} actual={actual}/> :""}
     </PaginationB>);
 }
 
 
 const First = ({paginas,actual}) => <>
     <PaginationItem>
-        <PaginationLink first href={paginas[0]} />
+        <PaginationLink href={paginas[0]}>{"<<"}</PaginationLink>
     </PaginationItem>
     <PaginationItem>
-        <PaginationLink previous href={paginas[actual - 2]} />
+        <PaginationLink href={paginas[actual - 2]}>{"<"}</PaginationLink>
     </PaginationItem></>
 
 const Last = ({paginas,actual}) => <>
     <PaginationItem>
-        <PaginationLink next href={paginas[actual]} />
+        <PaginationLink href={paginas[actual]} >{">"}</PaginationLink>
     </PaginationItem>
     <PaginationItem>
-        <PaginationLink last href={paginas[paginas.length - 1]} />
+        <PaginationLink href={paginas[paginas.length - 1]} >{">>"}</PaginationLink>
     </PaginationItem>
 </>
 
