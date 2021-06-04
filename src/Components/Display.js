@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { useCookies } from "react-cookie";
-import { Row, DropdownToggle, DropdownMenu, DropdownItem, Navbar, Nav, UncontrolledDropdown } from "reactstrap";
+import { Row, DropdownToggle, DropdownMenu, DropdownItem, Navbar, Nav, UncontrolledDropdown, Modal, ModalBody, ModalFooter, Button } from "reactstrap";
 import '../Assets/Css/cardWorker.css'
-import { CardsDisplay } from "./CardsDisplay";
+import { CardsDisplay, CardCustom } from "./CardsDisplay";
 import { TableDisplay } from "./TableDisplay";
 import { Pagination } from "./Pagination";
 
@@ -38,6 +38,31 @@ export const Display = ({ api, children, get }) => {
 
     useComponentWillMount(getNewData);
 
+
+    
+    const [modal, setModal] = useState(false);
+    const [modalContents, setModalContents] = useState("");
+
+    const toggle = () => setModal(!modal);
+
+    const onClick = (id) => {
+        setModalContents(CardCustom(api.getHookData()[id],children, false))
+        toggle();
+    }
+
+    const ModalCard = () =>
+        <Modal isOpen={modal} toggle={toggle} >
+            <ModalBody children={modalContents}>
+
+            </ModalBody>
+            <ModalFooter>
+                <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
+                <Button color="secondary" onClick={toggle}>Cancel</Button>
+            </ModalFooter>
+        </Modal>
+
+
+
     return (
         <>
 
@@ -48,11 +73,12 @@ export const Display = ({ api, children, get }) => {
                     <Pagination pages={api.getHookInfo().pages} />
                 </Nav>
             </Navbar>
+            <ModalCard/>
             <Row>
                 {api.getHookData().length > 0 ?
                     type === 0 ?
-                        <CardsDisplay api={api} children={children}/> :
-                        <TableDisplay api={api} children={children}/> :
+                        <CardsDisplay api={api} children={children} onClick={onClick}/> :
+                        <TableDisplay api={api} children={children} onClick={onClick}/> :
                     ""}
             </Row>
         </>
