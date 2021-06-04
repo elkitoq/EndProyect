@@ -1,6 +1,6 @@
 import { Table } from "reactstrap";
 
-export const TableDisplay = ({ api, children, onClick }) => <Table striped>
+export const TableDisplay = ({ api, children, onClick }) => <Table>
     <thead>
         <tr>
             {children.map((card, index) => {
@@ -18,7 +18,7 @@ export const TableDisplay = ({ api, children, onClick }) => <Table striped>
     </thead>
     <tbody>
         {api.getHookData().map((elemento, i) =>
-            <tr key={`Card-${i}`} onClick={onClick.bind(this, i)}>
+            <tr key={`Card-${i}`} onClick={onClick.bind(this, i)} className={elemento.selected?"table-primary":""}>
                 {children.map((card, index) => {
                     if (card.type.name === "CardText") {
                         if (card.props.hideData !== true)

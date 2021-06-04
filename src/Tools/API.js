@@ -19,7 +19,14 @@ export default class API {
     }
 
     getData() {
-        return Object.assign({}, this._data);
+        if (Array.isArray(this._data)){
+            const r=[];
+            Array.prototype.push.apply(r,this._data);
+            return r;
+        }
+            
+        else
+            return Object.assign({}, this._data);
     }
 
     getHookData() {

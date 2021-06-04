@@ -1,26 +1,20 @@
 import { Card, CardBody, CardImg, CardText, Col} from "reactstrap";
 
 
-export const CardsDisplay = ({ api, children,onClick }) => {
-
-    return (
+export const CardsDisplay = ({ api, children,onClick }) => 
         <>
             {api.getHookData().map((elemento, index) =>
                 <Col key={`Card-${index}`} xs="12" sm="12" md="6" lg="3" onClick={onClick.bind(this, index)}>
-                    {CardCustom(elemento,children)}
+                    {CardCustom(elemento,children,elemento.selected)}
                 </Col>
             )
             }
-        </>)
+        </>
 
 
+export const CardCustom = (elemento,template,selected=false,hideData=true) =>
 
-}
-
-
-export const CardCustom = (elemento,template,hideData=true) =>
-
-<Card className="card-worker">
+<Card className="card-worker" inverse={selected} color={selected?"primary":""} >
 
     <CardBody className="card-body">
         <Col md="12" lg={{ size: 8, offset: 2 }}>
