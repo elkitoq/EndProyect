@@ -25,6 +25,8 @@
    4. [Inputs]()
    5. [Labels]()
    6. [NavegadorPrincipal](#navegadorprincipal)
+   7. [Api](#Api)
+   8. [Display / Api consumer](#Display)
 
 2. Views
 
@@ -270,6 +272,64 @@ Indice para usar en caso de crear una lista de tarjeta
 ### NavegadorPrincipal
 
 Del archivo Navegador. La barra superior que incluye botones para navegar por el sitio.
+
+[indice](#indice)
+
+---
+
+### API 
+
+La clase API del cliente es una interfaz entre el cliente y el servidor. Permite crear un vinculo hacia una url especifica del server para enviar datos y recibir una respuesta. 
+
+Para crear una instancia Api usamos:
+```javascript
+ const api = new API(url, dataState, responseKey , infoState , infoKey)
+
+ const apiEjemplo = new API('https://randomuser.me/api/', useState([]), "results",useState({}),"info");
+```
+
+Donde:
+
+#### url
+
+Es la direccion de la api a la que queremos conectarnos. Puede ser del mismo servidor ```"/user"``` en cuyo caso se redireccionara al puerto 4000. O de un servidor externo ```"https://randomuser.me/api/"``` para ello use siempre "http" o "https" al comienzo del string
+
+#### dataState
+
+Un conjunto del tipo ```[data, setData]``` de hook de estado de React donde se guardaran los datos. Para crearlo use ```useState([])``` en caso de multiples datos o ```useState({})``` en caso de un dato unico. No lo crea la clase automaticamente porque react no lo permite.
+
+#### responseKey
+
+La key con la que el servidor enviará los datos. En el caso del ejemplo el servidor envia un json del tipo ```{results:Array(10),info:{...}}``` por lo que recuperamos los datos en la key "results"  
+
+#### infoState
+
+Igual a dataState pero para la informacion extra del servidor (Cantidad de paginas, Estados del servidor, Errores, etc), creelo con ```useState({})```
+
+#### infoKey
+
+Igual a responseKey, pero para la key de informacion. En el ejemplo (```{results:Array(10),info:{...}}```) usamos la key "info"
+
+#### Metodos
+- ```getData()``` Devuelve una copia de los datos obtenidos o cargados para enviar (Estos datos son estaticos. Para renderizarlos en pantalla use "getHookData")
+- ```getHookData()``` Devuelve el Hook de estado de los datos (este se actualiza automaticamente al recibir datos nuevos)
+- ```getHookInfo()``` Devuelve el Hook de estado de la informacion extra
+- ```send(method = "post", data = this._data)``` Envia "data" a la api servidor usando el metodo "Method". Por defecto "send()" envia los datos pre-cargados por el metodo "post". Puede usar metodos: "post","get","put","delete"
+- ```get(data = this._data)``` igual a send("get").
+- ```post(data = this._data)``` igual a send("post").
+- ```put(data = this._data)``` igual a send("put").
+- ```delete(data = this._data)``` igual a send("delete").
+- ```refresh()``` Fuerza la actualizacion del render del hook de estado. Usese en caso de haber modificado una parte de los datos
+- ```setData()``` Carga datos manualmente. Puede usarse para cambiar los datos o para precargar datos que van a enviarse
+- ```static getSearchParam(search)``` crea un json a partir de los parametros de una url. Ejemplo: ```"?job=Electricista&page=1"``` devuelve ```{job:"Electricista", page: "1"}```. Es estatico.
+
+[indice](#indice)
+
+---
+
+### Display
+
+
 
 [indice](#indice)
 
