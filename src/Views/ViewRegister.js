@@ -10,22 +10,21 @@ export const ViewRegister = () => {
 
     const [, setCookie] = useCookies(['isLogin']);
 
-    const [info, setInfo] = useState({});
+    const api = new API('/user', useState({}), "response",useState({}), "info")
 
-    const changeInfo = (newValue) => {
-        setInfo(newValue);
+    api.changeInfo= (newValue) => {
         if (newValue.error)
             alert(newValue.error);
+        if (newValue.isLogin){
+            setCookie("isLogin", true, { path: '/' });
+        }
     }
-
-    const api = new API('/user', useState({}), "response", [info, changeInfo], "info")
-    console.log(api.getHookData());
 
     return (
         <Container className="themed-container">
             <Row>
                 <Col sm="12" md={{ size: 4, offset: 4 }}>
-                    <Form onSubmit={guardarCambios.bind(this, setCookie)} api={api} method="put">
+                    <Form api={api} method="put">
                         <FormItem name="Usuario" idInput="name"/>
                         <FormItem name="Password" type="password" idInput="password"/>
                         <FormItem name="Repetir Password" type="password" idInput="password2"/>
@@ -40,8 +39,4 @@ export const ViewRegister = () => {
             </Row>
         </Container>
     )
-}
-
-const guardarCambios = (setCookie) => {
-    //setCookie("isLogin", true, { path: '/' });
 }

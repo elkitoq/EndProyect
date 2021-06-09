@@ -22,6 +22,7 @@ const userSchema = new mongoose.Schema({
     },
     role: [{
         status: Number,
+        roleType: Number,
         roleName: String,
         roleFile: [{
             cv: {

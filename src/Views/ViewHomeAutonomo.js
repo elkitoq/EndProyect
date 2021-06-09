@@ -16,7 +16,7 @@ export const ViewHomeAutonomo = () => {
     return (
         <Container className="abs-center">
             <div className="text-center">
-                <h1>Bienvenido {user.name}</h1>
+                <h1>Bienvenido {user.roleName}</h1>
                 <h2>¿Que estas buscando hoy?</h2>
                 <Row className="">
                     <OptionMenu href="/CVCreate/"       >Crear Curriculum</OptionMenu>

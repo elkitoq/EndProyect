@@ -1,7 +1,7 @@
 import { FormGroup, Input, Label } from "reactstrap";
 
 
-export const FormItem = ({ name, idInput = name, type,autoComplete , reference = { values: {}, onChange: () => { } }
+export const FormItem = ({ name, idInput = name, type,autoComplete ,className="", reference = { values: {}, onChange: () => { } }
 }) =>
     <FormGroup>
         <Label for={idInput}>
@@ -9,7 +9,7 @@ export const FormItem = ({ name, idInput = name, type,autoComplete , reference =
         </Label>
         <Input
             defaultValue={reference.values[reference.id]}
-            className="input"
+            className={className}
             type={type}
             onChange={(e) => {
                 if (reference.id !== undefined || reference.id !== null)

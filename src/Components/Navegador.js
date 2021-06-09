@@ -11,8 +11,10 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  Dropdown
 } from 'reactstrap'
+import API from '../Tools/API';
 import { Busqueda } from './Busqueda';
 // import { Cookie } from './Cookie';
 
@@ -31,7 +33,7 @@ export const NavegadorPrincipal = () => {
     if (login.isLogin === "true")
       removeCookie('selectUser', { path: '/' })
     setCookie("isLogin", false, { path: '/' });
-
+    new API('/logout').send("post",{hola:"mundo"});
   }
 
   return (
@@ -83,8 +85,22 @@ const DropdownRol = () => {
 
   const [user] = useCookies(['selectUser']);
 
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+
+  const toggle = ()=>{
+    if (!dropdownOpen){
+      
+      new API('/role').send("get",{}).then((res)=>{
+        console.log(res.data);
+      });
+    }
+    setDropdownOpen(prevState => !prevState);
+  }
+
+
   return (
-    <UncontrolledDropdown nav inNavbar>
+    <Dropdown isOpen={dropdownOpen} toggle={toggle} nav inNavbar>
       <DropdownToggle nav caret>
         Roles
     </DropdownToggle>
@@ -93,13 +109,13 @@ const DropdownRol = () => {
           Array.isArray(user.selectUser) ? user.selectUser.map(
             (element, index) =>
               <DropdownItem href={
-                `${element.type === 0 ? "/homeEmpresa" :
-                  element.type === 1 ? "/homeAspirante" :
-                    element.type === 2 ? "/homeAutonomo" :
+                `${element.roleType === 0 ? "/homeEmpresa" :
+                  element.roleType === 1 ? "/homeAspirante" :
+                    element.roleType === 2 ? "/homeAutonomo" :
                       "/homeAdmin"
                 }?user=${index}`
               }>
-                {element.name}
+                {element.roleName}
               </DropdownItem>
           ) : ""
         }
@@ -109,5 +125,5 @@ const DropdownRol = () => {
       </DropdownItem>
 
       </DropdownMenu>
-    </UncontrolledDropdown>);
+    </Dropdown>);
 }

@@ -1,4 +1,4 @@
-import { Form, FormGroup, Container, Row, Col } from 'reactstrap'
+import { FormGroup, Container, Row, Col } from 'reactstrap'
 import { Button } from 'reactstrap'
 import { Input } from 'reactstrap'
 import { ViewAddCVData } from './ViewAddCVData'
@@ -6,14 +6,22 @@ import '../Assets/Css/cargarCV.css';
 import { FormItem } from '../Components/FormItem'
 import noPhoto from '../Assets/image/blank-profile.png'
 import { useState } from 'react';
+import API from '../Tools/API.js';
+import { Form } from '../Components/Form';
 
 let displayChargePhoto,setDisplayChargePhoto;
 
 export const ViewCreateCV = () => {
     [displayChargePhoto,setDisplayChargePhoto] = useState("block");
+
+    const api = new API('/cv', useState({}), "response",useState({}), "info")
+    api.changeInfo=()=>{
+        alert(api.toString())
+    }
+
     return (
         <Container>
-            <Form onSubmit={guardarCambios}>
+            <Form api={api} method="put">
                 <Row className="separado">
                     <Row>
                         <Col xs="4" sm="4" md="4" lg={{ size: 3, offset: 1 }}>
@@ -30,7 +38,7 @@ export const ViewCreateCV = () => {
                                 <FormItem name="Direccion" />
                             </Row>
                             <Row  md="2">
-                                <FormItem name="Distrito" />
+                                <FormItem name="Ciudad / Distrito"/>
                                 <FormItem name="Codigo Postal" />
                             </Row>
                             <Row>
@@ -70,8 +78,4 @@ const mostrarFotoPerfil = () => {
             setDisplayChargePhoto("none");
         }
     }
-}
-
-const guardarCambios = (event) => {
-    event.preventDefault();
 }

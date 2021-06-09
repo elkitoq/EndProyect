@@ -15,16 +15,17 @@ export default class API {
         this._info = info || {};
         this._setInfo = setInfo;
         this.infoKey = infoKey;
+        this.changeInfo = () => { };
 
     }
 
     getData() {
-        if (Array.isArray(this._data)){
-            const r=[];
-            Array.prototype.push.apply(r,this._data);
+        if (Array.isArray(this._data)) {
+            const r = [];
+            Array.prototype.push.apply(r, this._data);
             return r;
         }
-            
+
         else
             return Object.assign({}, this._data);
     }
@@ -39,14 +40,15 @@ export default class API {
 
     send(method = "post", data = this._data) {
         var result;
+        console.log(`send ${method} to ${this.url}`);
         switch (method) {
-            case "put": result = axios.put(this.url, data);
+            case "put": result = axios.put(this.url, data, { withCredentials: true });
                 break;
-            case "delete": result = axios.delete(this.url, data);
+            case "delete": result = axios.delete(this.url, data, { withCredentials: true });
                 break;
-            case "get": result = axios.get(this.url, { params: data })
+            case "get": result = axios.get(this.url, { params: data, withCredentials: true})
                 break;
-            default: result = axios.post(this.url, data);
+            default: result = axios.post(this.url, data, { withCredentials: true });
         }
         result.then((res) => {
             if (res.data[this.responseKey] !== undefined)
@@ -54,6 +56,7 @@ export default class API {
             if (res.data[this.infoKey] !== undefined) {
                 Object.assign(res.data[this.infoKey], { pages: 6 })
                 this._setInfo(res.data[this.infoKey])
+                this.changeInfo(res.data[this.infoKey]);
             }
         })
         return result;
@@ -73,7 +76,7 @@ export default class API {
     }
 
     delete(data = this._data) {
-        return this.delete("delete", data);
+        return this.send("delete", data);
     }
 
     refresh() {
@@ -86,7 +89,7 @@ export default class API {
         }
     }
 
-    toString(){
+    toString() {
         return JSON.stringify(this.getHookData());
     }
 

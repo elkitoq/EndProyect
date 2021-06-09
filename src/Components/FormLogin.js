@@ -12,40 +12,36 @@ import { useCookies } from 'react-cookie';
 
 export const FormLogin = () => {
 
-    const [datos, setdatos] = useState({
-        user: '',
-        password: ''
-    })
+    // const [datos, setdatos] = useState({
+    //     user: '',
+    //     password: ''
+    // })
 
-    const handleInputChange = (event) => {
-        setdatos({
-            ...datos,
-            [event.target.name]: event.target.value
-        })
-    }
+    // const handleInputChange = (event) => {
+    //     setdatos({
+    //         ...datos,
+    //         [event.target.name]: event.target.value
+    //     })
+    // }
 
     const submit = (event) => {
-        event.preventDefault()
-        //aqui iria la llamada al server
-        console.log(datos)
+        // event.preventDefault()
+        // //aqui iria la llamada al server
+        // console.log(datos)
 
-    }
-
-    const [info, setInfo] = useState({});
-
-    const changeInfo = (newValue) => {
-        setInfo(newValue);
-        if (newValue.error)
-            alert(newValue.error);
-        if (newValue.userId) {
-            setCookie("userId", newValue.userId, { path: '/' });
-            setCookie("isLogin", true, { path: '/' });
-        }
     }
 
     const [, setCookie] = useCookies(['isLogin']);
 
-    const api = new API('/login', useState({}), "response", [info, changeInfo], "info")
+    const api = new API('/login', useState({}), "response", useState({}), "info")
+    
+    api.changeInfo= (newValue) => {
+        if (newValue.error)
+            alert(newValue.error);
+        if (newValue.isLogin) {
+            setCookie("isLogin", true, { path: '/' });
+        }
+    }
 
     return (
         <Form className="form-container" onSubmit={submit} api={api}>

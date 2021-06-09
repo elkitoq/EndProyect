@@ -48,7 +48,13 @@ const corsOptions = {
 };
 server.use(cors(corsOptions));
 
-server.use(session({ secret: 'keyboard cat', cookie: { maxAge: 8640000 } }))
+server.use(session({
+  secret: 'keyboard cat',
+  resave:false,
+  saveUninitialized:true,
+  cookie: { maxAge: 8640000 }
+
+}))
 
 //Decodifica el body
 server.use(express.urlencoded({ extended: true }));
