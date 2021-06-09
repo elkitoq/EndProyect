@@ -17,6 +17,8 @@ const mongoose = require('mongoose');
 //tenemos intalado nodemon, para eso de facilitarle la vida al developer
 //npm i -D nodemon
 
+//cargamos las funciones de codificar contraseña
+require('./tools/hashcode')
 
 // Creamos el server express
 const server = express();

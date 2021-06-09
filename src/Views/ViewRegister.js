@@ -10,24 +10,32 @@ export const ViewRegister = () => {
 
     const [, setCookie] = useCookies(['isLogin']);
 
-    const api = new API('/user',useState({}))
+    const [info, setInfo] = useState({});
+
+    const changeInfo = (newValue) => {
+        setInfo(newValue);
+        if (newValue.error)
+            alert(newValue.error);
+    }
+
+    const api = new API('/user', useState({}), "response", [info, changeInfo], "info")
     console.log(api.getHookData());
 
     return (
         <Container className="themed-container">
             <Row>
                 <Col sm="12" md={{ size: 4, offset: 4 }}>
-                    <Form onSubmit={guardarCambios.bind(this, setCookie)} api={api}>
-                        <FormItem name="Usuario" />
-                        <FormItem name="Password" type="password" />
-                        <FormItem name="Repetir Password" type="password" />
-                        <FormItem name="Email" />
+                    <Form onSubmit={guardarCambios.bind(this, setCookie)} api={api} method="put">
+                        <FormItem name="Usuario" idInput="name"/>
+                        <FormItem name="Password" type="password" idInput="password"/>
+                        <FormItem name="Repetir Password" type="password" idInput="password2"/>
+                        <FormItem name="Email" idInput="email"/>
                         <FormGroup key="otros" className="separado">
                             <FormItem name="otro dato" />
                             <Button size="lg" color="primary" blocks="true">Crear</Button>
                         </FormGroup>
                     </Form>
-                    {JSON.stringify(api.getHookData())}
+                    {api.toString()}
                 </Col>
             </Row>
         </Container>

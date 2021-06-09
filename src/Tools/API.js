@@ -86,7 +86,9 @@ export default class API {
         }
     }
 
-
+    toString(){
+        return JSON.stringify(this.getHookData());
+    }
 
     static getSearchParam(search) {
         const params = {}

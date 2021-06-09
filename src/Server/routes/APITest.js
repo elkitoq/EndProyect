@@ -15,15 +15,5 @@ router.post('/api', async(req, res) => {
     res.end();
 });
 
-router.post('/user', async(req, res) => {
-    datos.user=req.body;
-    console.log(datos);
-    const response=Object.assign({}, datos.user);
-    response["Password"]="codificada";
-    response["Repetir Password"]="codificada";
-    res.json({response:response});
-    res.end();
-});
-
 
 module.exports = router;

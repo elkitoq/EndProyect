@@ -27,10 +27,10 @@ export const NavegadorPrincipal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
-  const toggleLogin = () => {
+  const logout = () => {
     if (login.isLogin === "true")
       removeCookie('selectUser', { path: '/' })
-    setCookie("isLogin", !(login.isLogin === "true"), { path: '/' });
+    setCookie("isLogin", false, { path: '/' });
 
   }
 
@@ -57,7 +57,7 @@ export const NavegadorPrincipal = () => {
             className="mostrar-search"
             children="Buscar Empleado" />
           <NavButton href="/Login/"
-            onClick={toggleLogin}
+            onClick={(login.isLogin === "true") ? logout : () => { }}
             children={(login.isLogin === "true") ? "Logout" : "Login"} />
           <NavButton href="/Register/"
             children={(login.isLogin === "true") ? "Crear Rol" : "Register"} />
@@ -93,12 +93,11 @@ const DropdownRol = () => {
           Array.isArray(user.selectUser) ? user.selectUser.map(
             (element, index) =>
               <DropdownItem href={
-                `${
-                element.type === 0 ? "/homeEmpresa" :
+                `${element.type === 0 ? "/homeEmpresa" :
                   element.type === 1 ? "/homeAspirante" :
-                  element.type === 2 ? "/homeAutonomo" :
-                    "/homeAdmin"
-                  }?user=${index}`
+                    element.type === 2 ? "/homeAutonomo" :
+                      "/homeAdmin"
+                }?user=${index}`
               }>
                 {element.name}
               </DropdownItem>
