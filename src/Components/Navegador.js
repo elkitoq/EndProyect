@@ -83,7 +83,7 @@ const NavButton = ({ href, children, onClick, className }) => {
 const DropdownRol = () => {
 
 
-  const [user] = useCookies(['selectUser']);
+  const [user,setUser] = useCookies(['selectUser']);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -92,6 +92,7 @@ const DropdownRol = () => {
     if (!dropdownOpen){
       
       new API('/role').send("get",{}).then((res)=>{
+        setUser("selectUser", res.data, { path: '/' });
         console.log(res.data);
       });
     }
