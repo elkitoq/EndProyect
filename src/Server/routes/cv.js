@@ -5,13 +5,18 @@ router.put('/cv', async (req, res) => {
     console.log(`CV:${req.sessionID}`);
     console.log(req.session);
     console.log(req.body);
-    const user = await User.findById(req.session.user._id);
+    if (req.session.user){
+        const user = await User.findById(req.session.user._id);
     const role = user.role[req.body.role]
     if (role.roleFile[0] === undefined)
         role.roleFile[0] = { cv: req.body }
     else
         role.roleFile[0].cv = req.body;
     user.save();
+    }
+    else{
+        req.session.cv=req.body
+    }
     res.status(201).json({});
     res.end();
 });
@@ -19,7 +24,7 @@ router.put('/cv', async (req, res) => {
 router.get('/cv', async (req, res) => {
     console.log(`getCV:${req.sessionID}`);
     console.log(req.query);
-    if (req.session.user) {
+    if (req.session.user && req.query.role>0) {
         const user = await User.findById(req.session.user._id);
         const role = user.role[req.query.role]
         if (role.roleFile[0] === undefined)
@@ -27,7 +32,7 @@ router.get('/cv', async (req, res) => {
         res.status(201).json({response:role.roleFile[0].cv});
     }
     else
-        res.status(203).json({ info: { error: "no se registra se registra su session" } });
+        res.status(201).json({response:req.session.cv});
     res.end();
 });
 module.exports = router;

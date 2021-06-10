@@ -1,4 +1,4 @@
-import { FormGroup, Container, Row, Col } from 'reactstrap'
+import { FormGroup, Container, Row, Col, Card, CardText, ButtonGroup } from 'reactstrap'
 import { Button } from 'reactstrap'
 import { Input } from 'reactstrap'
 import { ViewAddCVData } from './ViewAddCVData'
@@ -17,7 +17,10 @@ export const ViewCreateCV = () => {
 
     const [user] = useCookies(['selectUser']);
 
-    const dataDefault = { "role": user.selectUser.findIndex(aspirante).toString() }
+    const dataDefault = { "role":
+        user.selectUser? 
+        user.selectUser.findIndex(aspirante).toString()
+        :0}
 
     const api = new API('/cv', useState(dataDefault), "response", useState({}), "info")
 
@@ -70,12 +73,15 @@ export const ViewCreateCV = () => {
                     <ViewAddCVData />
                     <FormGroup>
                         <Row md="2" className="separado">
+                            {(Array.isArray(user.selectUser) && user.selectUser.length && user.selectUser.find(aspirante))?
                             <FormItem type="select" name="El CV se guardara en:" idInput="role">
-                                {Array.isArray(user.selectUser) ? user.selectUser.map(
+                                {(Array.isArray(user.selectUser) )? user.selectUser.map(
                                     (element, index) => aspirante(element) ?
                                         <option key={`option-${index}`} value={index}>{element.roleName}</option> : ""
                                 ) : ""}
                             </FormItem>
+                            :<LocalNoLoginCard isLogin={user.isLogin}/>
+                            }
                             <Button className="right" size="lg" color="primary">Guardar</Button>
                         </Row></FormGroup>
                 </Row>
@@ -105,3 +111,16 @@ const mostrarFotoPerfil = () => {
 
 
 const aspirante = (element) => element.roleType === 1;
+
+const LocalNoLoginCard = ({isLogin}) =>
+    <Card color="primary" inverse>
+        <CardText>Si creas un perfil de aspirante, podes guardar tu CV</CardText>
+        <Col lg={{size:6,offset:3}}>
+            <ButtonGroup>
+                {isLogin!=="true"?
+                <Button href="/login" color="secondary">        Login </Button>:""}
+                <Button href="/register" color="secondary">     Crear </Button>
+            </ButtonGroup>
+        </Col>
+    </Card>
+

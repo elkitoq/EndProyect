@@ -3,8 +3,12 @@ import axios from "axios";
 export default class API {
 
     constructor(url, [data, setData] = [{}, null], responseKey = "response", [info, setInfo] = [{}, null], infoKey = "info") {
-        if (url.substring(0, 4) !== "http")
-            this.url = window.location.protocol + "//" + window.location.host.replace(":3000", "") + ":4000" + url
+        
+        if (url.substring(0, 4) !== "http"){
+            this.withCredentials=true;
+            this.url = window.location.protocol + "//" + window.location.host.replace(":3000", "") + ":4000" + url;
+        }
+
         else this.url = url;
 
         this._data = data || {};
@@ -42,13 +46,13 @@ export default class API {
         var result;
         console.log(`send ${method} to ${this.url}`);
         switch (method) {
-            case "put": result = axios.put(this.url, data, { withCredentials: true });
+            case "put": result = axios.put(this.url, data, { withCredentials: this.withCredentials });
                 break;
-            case "delete": result = axios.delete(this.url, data, { withCredentials: true });
+            case "delete": result = axios.delete(this.url, data, { withCredentials: this.withCredentials });
                 break;
-            case "get": result = axios.get(this.url, { params: data, withCredentials: true})
+            case "get": result = axios.get(this.url, { params: data, withCredentials: this.withCredentials})
                 break;
-            default: result = axios.post(this.url, data, { withCredentials: true });
+            default: result = axios.post(this.url, data, { withCredentials: this.withCredentials });
         }
         result.then((res) => {
             if (res.data[this.responseKey] !== undefined)

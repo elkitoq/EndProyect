@@ -10,12 +10,13 @@ export const ViewCreateUser = () => {
     const [login] = useCookies(['isLogin']);
     [user, setUser] = useCookies(['selectUser']);
 
+    console.log(user.selectUser);
 
     return (
         <Container className="abs-center">
             {
                 !(login.isLogin === "true") ? <ViewRegister /> :
-                    (!Array.isArray(user.selectUser)) ? <CrearUsuario user={user} setUser={setUser} /> :
+                    !(Array.isArray(user.selectUser) && user.selectUser.length) ? <CrearUsuario user={user} setUser={setUser} /> :
                         !(user.selectUser[user.selectUser.length - 1].new === true) ? <CrearUsuario /> :
                             (user.selectUser[user.selectUser.length - 1].roleType === 0) ? <CrearEmpresa /> :
                             (user.selectUser[user.selectUser.length - 1].roleType === 1) ? <CrearAspirante /> :
