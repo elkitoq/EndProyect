@@ -2,9 +2,14 @@
 import React from 'react';
 import { Form as FormB } from 'reactstrap'
 
-export const Form = ({ onSubmit=()=>{}, children, api, method = "post" }) => {
 
+
+export const Form = 
+
+({ onSubmit=()=>{}, children, api, method = "post" }) => {
+    let i=0;
     const createClone = (element, data) => {
+        
         if (element.type)
             if (element.type.name === "FormItem") {
                 const id = element.props.idInput || element.props.name;
@@ -22,7 +27,7 @@ export const Form = ({ onSubmit=()=>{}, children, api, method = "post" }) => {
                     if (typeof data[element.key] !== "object")
                         data[element.key] = {};
                 return React.cloneElement(element, {
-                    key: element.key || `subForm`,
+                    key: element.key || `subForm-${i++}`,
                     children: cloneChildren(element.props.children, data[element.key] || data)
 
                 });

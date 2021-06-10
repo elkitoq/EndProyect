@@ -5,59 +5,82 @@ import { ViewAddCVData } from './ViewAddCVData'
 import '../Assets/Css/cargarCV.css';
 import { FormItem } from '../Components/FormItem'
 import noPhoto from '../Assets/image/blank-profile.png'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import API from '../Tools/API.js';
 import { Form } from '../Components/Form';
+import { useCookies } from 'react-cookie';
 
-let displayChargePhoto,setDisplayChargePhoto;
+let displayChargePhoto, setDisplayChargePhoto;
 
 export const ViewCreateCV = () => {
-    [displayChargePhoto,setDisplayChargePhoto] = useState("block");
+    [displayChargePhoto, setDisplayChargePhoto] = useState("block");
 
-    const api = new API('/cv', useState({}), "response",useState({}), "info")
-    api.changeInfo=()=>{
-        alert(api.toString())
+    const [user] = useCookies(['selectUser']);
+
+    const dataDefault = { "role": user.selectUser.findIndex(aspirante).toString() }
+
+    const api = new API('/cv', useState(dataDefault), "response", useState({}), "info")
+
+    useEffect(() => {
+        api.get(dataDefault).then((res) => { console.log(res.data); })
+    }, [])
+
+
+    api.changeInfo = (info) => {
+        if (info.error)
+            alert(info.error)
+        if (info.message)
+            alert(info.message)
     }
 
     return (
         <Container>
             <Form api={api} method="put">
                 <Row className="separado">
-                    <Row>
-                        <Col xs="4" sm="4" md="4" lg={{ size: 3, offset: 1 }}>
-                            <img src={noPhoto} className="foto-perfil" id="fotoPerfil" onClick={cargarFotoPerfil} alt="Cargar de perfil" style={{cursor: 'pointer'}}/>
-                            <div style={{display: displayChargePhoto}}>Clik en la imagen para cambiarla</div>
-                            <Input type="file" id="cargarImagen" onChange={mostrarFotoPerfil} />
-                        </Col>
-                        <Col md="8">
-                            <Row md="2">
-                                <FormItem name="Nombre" />
-                                <FormItem name="Apellido" />
-                            </Row>
-                            <Row>
-                                <FormItem name="Direccion" />
-                            </Row>
-                            <Row  md="2">
-                                <FormItem name="Ciudad / Distrito"/>
-                                <FormItem name="Codigo Postal" />
-                            </Row>
-                            <Row>
-                                <FormItem name="Telefono" type="number"/>
-                            </Row>
-                            <Row>
-                                <FormItem name="E-Mail" type="email"/>
-                            </Row>
-                        </Col>
-                    </Row>
+                    <FormGroup>
+                        <Row>
+                            <Col xs="4" sm="4" md="4" lg={{ size: 3, offset: 1 }}>
+                                <img src={noPhoto} className="foto-perfil" id="fotoPerfil" onClick={cargarFotoPerfil} alt="Cargar de perfil" style={{ cursor: 'pointer' }} />
+                                <div style={{ display: displayChargePhoto }}>Clik en la imagen para cambiarla</div>
+                                <Input type="file" id="cargarImagen" onChange={mostrarFotoPerfil} />
+                            </Col>
+
+                            <Col md="8">
+                                <Row md="2">
+                                    <FormItem name="Nombre" idInput="name" />
+                                    <FormItem name="Apellido" idInput="lastName" />
+                                </Row>
+                                <Row>
+                                    <FormItem name="Direccion" idInput="adress" />
+                                </Row>
+                                <Row md="2">
+                                    <FormItem name="Ciudad / Distrito" idInput="city" />
+                                    <FormItem name="Codigo Postal" idInput="cp" />
+                                </Row>
+                                <Row md="2">
+                                    <FormItem name="Edad" idInput="age" />
+                                    <FormItem name="Telefono" type="number" idInput="phone" />
+                                </Row>
+                                <Row>
+                                    <FormItem name="E-Mail" type="email" idInput="email" />
+                                </Row>
+                            </Col>
+                        </Row></FormGroup>
 
                     <ViewAddCVData />
-                    <Row className="separado">
-                        <FormGroup>
+                    <FormGroup>
+                        <Row md="2" className="separado">
+                            <FormItem type="select" name="El CV se guardara en:" idInput="role">
+                                {Array.isArray(user.selectUser) ? user.selectUser.map(
+                                    (element, index) => aspirante(element) ?
+                                        <option key={`option-${index}`} value={index}>{element.roleName}</option> : ""
+                                ) : ""}
+                            </FormItem>
                             <Button className="right" size="lg" color="primary">Guardar</Button>
-                        </FormGroup>
-                    </Row>
+                        </Row></FormGroup>
                 </Row>
             </Form>
+            {api.toString()}
 
 
         </Container>
@@ -65,7 +88,7 @@ export const ViewCreateCV = () => {
 }
 
 const cargarFotoPerfil = () => {
-    document.getElementById("cargarImagen").click();  
+    document.getElementById("cargarImagen").click();
 }
 
 const mostrarFotoPerfil = () => {
@@ -79,3 +102,6 @@ const mostrarFotoPerfil = () => {
         }
     }
 }
+
+
+const aspirante = (element) => element.roleType === 1;

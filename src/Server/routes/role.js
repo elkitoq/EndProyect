@@ -3,7 +3,7 @@ const router = require('express').Router();
 
 router.put('/role', async (req, res) => {
     console.log(`ROLEPUT:${req.sessionID}`);
-    user=await User.findById(req.session.user._id);
+    const user=await User.findById(req.session.user._id);
     user.role.push(req.body);
     req.session.user=user;
     user.save();

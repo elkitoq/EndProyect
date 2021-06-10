@@ -7,15 +7,11 @@ import {
   NavbarToggler,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Dropdown
+  NavLink
 } from 'reactstrap'
 import API from '../Tools/API';
 import { Busqueda } from './Busqueda';
+import { DropdownRol } from './role';
 // import { Cookie } from './Cookie';
 
 
@@ -77,54 +73,3 @@ const NavButton = ({ href, children, onClick, className }) => {
   );
 }
 
-
-
-
-const DropdownRol = () => {
-
-
-  const [user,setUser] = useCookies(['selectUser']);
-
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
-
-  const toggle = ()=>{
-    if (!dropdownOpen){
-      
-      new API('/role').send("get",{}).then((res)=>{
-        setUser("selectUser", res.data, { path: '/' });
-        console.log(res.data);
-      });
-    }
-    setDropdownOpen(prevState => !prevState);
-  }
-
-
-  return (
-    <Dropdown isOpen={dropdownOpen} toggle={toggle} nav inNavbar>
-      <DropdownToggle nav caret>
-        Roles
-    </DropdownToggle>
-      <DropdownMenu right>
-        {
-          Array.isArray(user.selectUser) ? user.selectUser.map(
-            (element, index) =>
-              <DropdownItem href={
-                `${element.roleType === 0 ? "/homeEmpresa" :
-                  element.roleType === 1 ? "/homeAspirante" :
-                    element.roleType === 2 ? "/homeAutonomo" :
-                      "/homeAdmin"
-                }?user=${index}`
-              }>
-                {element.roleName}
-              </DropdownItem>
-          ) : ""
-        }
-        <DropdownItem divider />
-        <DropdownItem href="/Register/">
-          Crear Roles
-      </DropdownItem>
-
-      </DropdownMenu>
-    </Dropdown>);
-}
