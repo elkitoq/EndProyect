@@ -3,9 +3,9 @@ import axios from "axios";
 export default class API {
 
     constructor(url, [data, setData] = [{}, null], responseKey = "response", [info, setInfo] = [{}, null], infoKey = "info") {
-        
-        if (url.substring(0, 4) !== "http"){
-            this.withCredentials=true;
+
+        if (url.substring(0, 4) !== "http") {
+            this.withCredentials = true;
             this.url = window.location.protocol + "//" + window.location.host.replace(":3000", "") + ":4000" + url;
         }
 
@@ -50,10 +50,12 @@ export default class API {
                 break;
             case "delete": result = axios.delete(this.url, data, { withCredentials: this.withCredentials });
                 break;
-            case "get": result = axios.get(this.url, { params: data, withCredentials: this.withCredentials})
+            case "get": result = axios.get(this.url, { params: data, withCredentials: this.withCredentials })
                 break;
             default: result = axios.post(this.url, data, { withCredentials: this.withCredentials });
         }
+
+
         result.then((res) => {
             if (res.data[this.responseKey] !== undefined)
                 this.setData(res.data[this.responseKey])
@@ -62,6 +64,7 @@ export default class API {
                 this._setInfo(res.data[this.infoKey])
                 this.changeInfo(res.data[this.infoKey]);
             }
+
         })
         return result;
     }
@@ -87,9 +90,9 @@ export default class API {
         this.setData(this.getData());
     }
 
-    setData(data) {
+    async setData(data) {
         if (typeof this._setData === "function") {
-            this._setData(data);
+            await this._setData(data);
         }
     }
 

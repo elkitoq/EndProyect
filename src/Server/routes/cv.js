@@ -25,8 +25,10 @@ router.get('/cv', async (req, res) => {
     console.log(req.query);
     if (req.session.user && req.query.role >= 0) {
         const user = await User.findById(req.session.user._id);
-        const role = user.role[req.query.role]
-        res.status(201).json({ response: role.cv, info:{role:req.query.role}});
+        const cv = {}
+        Object.assign(cv,user.role[req.query.role].cv)
+        cv.role=req.query.role;
+        res.status(201).json({ response: cv});
     }
     else
         res.status(201).json({ response: req.session.cv });

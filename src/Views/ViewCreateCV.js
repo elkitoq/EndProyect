@@ -36,7 +36,6 @@ export const ViewCreateCV = () => {
             alert(info.message)
         if (info.role){
             api.getHookData().role=info.role;
-            api.refresh();
         }
     }
 
