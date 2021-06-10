@@ -25,7 +25,7 @@ export const ViewCreateCV = () => {
     const api = new API('/cv', useState(dataDefault), "response", useState({}), "info")
 
     useEffect(() => {
-        api.get(dataDefault).then((res) => { console.log(res.data); })
+        api.get(dataDefault);
     }, [])
 
 
@@ -34,6 +34,10 @@ export const ViewCreateCV = () => {
             alert(info.error)
         if (info.message)
             alert(info.message)
+        if (info.role){
+            api.getHookData().role=info.role;
+            api.refresh();
+        }
     }
 
     return (

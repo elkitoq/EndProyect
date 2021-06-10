@@ -21,25 +21,21 @@ const userSchema = new mongoose.Schema({
         facebook: String
     },
     role: [{
-        status: Number,
         roleType: Number,
         roleName: String,
-        roleFile: [{
-            cv: {
-                name: String,
-                lastName: String,
-                age: Number,
-                imgCv: String,
-                city:String,
-                adress: String,
-                cp: Number,
-                phone: String,
-                email: String,
-                experience: Array
-            },
-            applications: Array,
-            stalls: Array
-        }]
+        cv: {
+            name: String,
+            lastName: String,
+            age: Number,
+            imgCv: String,
+            adress: String,
+            cp: Number,
+            phone: String,
+            email: String,
+            experience: Array
+        },
+        applications: Array,
+        stalls: Array
     }]
 });
 
