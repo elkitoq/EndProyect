@@ -30,7 +30,7 @@ export const LoadRoles = () => {
 export const DropdownRol = () => {
 
 
-    const [user] = useCookies(['selectUser']);
+    const [user,setCookie] = useCookies(['selectUser']);
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -39,6 +39,9 @@ export const DropdownRol = () => {
         setDropdownOpen(prevState => !prevState);
     }
 
+    const selectRol= (index,e)=>{
+        setCookie("selectRole", index, { path: '/' })
+    }
 
     return (
         <Dropdown isOpen={dropdownOpen} toggle={toggle} nav inNavbar>
@@ -56,7 +59,9 @@ export const DropdownRol = () => {
                                         element.roleType === 2 ? "/homeAutonomo" :
                                             "/homeAdmin"
                                 }?user=${index}`
-                            }>
+                            }
+                            onClick={selectRol.bind(this,index)}
+                            >
                                 {element.roleName}
                             </DropdownItem>
                     ) : ""

@@ -14,7 +14,6 @@ router.put('/role', async (req, res) => {
 router.get('/role', async (req, res) => {
     console.log(`ROLEGET${req.sessionID}`);
     if (req.session.user !== undefined){
-        console.log(req.session.user.role);
         res.status(201).json(req.session.user.role);
     }
     res.end();

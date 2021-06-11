@@ -56,12 +56,14 @@ export default class API {
         }
 
 
-        result.then((res) => {
-            if (res.data[this.responseKey] !== undefined)
-                this.setData(res.data[this.responseKey])
+        result.then((res) => {         
+            if (res.data[this.responseKey] !== undefined){
+                Object.assign(this.getHookData(),res.data[this.responseKey])
+                this.refresh();
+            }
             if (res.data[this.infoKey] !== undefined) {
                 Object.assign(res.data[this.infoKey], { pages: 6 })
-                this._setInfo(res.data[this.infoKey])
+                this.setInfo(res.data[this.infoKey])
                 this.changeInfo(res.data[this.infoKey]);
             }
 
@@ -93,6 +95,11 @@ export default class API {
     async setData(data) {
         if (typeof this._setData === "function") {
             await this._setData(data);
+        }
+    }
+    async setInfo(info) {
+        if (typeof this._setInfo === "function") {
+            await this._setInfo(info);
         }
     }
 

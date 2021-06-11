@@ -18,14 +18,17 @@ export const ViewCreateCV = () => {
     const [user] = useCookies(['selectUser']);
 
     const dataDefault = { "role":
+        aspirante(user.selectUser[user.selectRole])?
+        user.selectRole:
         user.selectUser? 
         user.selectUser.findIndex(aspirante).toString()
-        :0}
+        :0
+    }
 
-    const api = new API('/cv', useState(dataDefault), "response", useState({}), "info")
+    const api = new API('/cv', useState({}), "response", useState({}), "info")
 
     useEffect(() => {
-        api.get(dataDefault);
+        api.get();
     }, [])
 
 
@@ -34,9 +37,6 @@ export const ViewCreateCV = () => {
             alert(info.error)
         if (info.message)
             alert(info.message)
-        if (info.role){
-            api.getHookData().role=info.role;
-        }
     }
 
     return (
@@ -77,7 +77,7 @@ export const ViewCreateCV = () => {
                     <FormGroup>
                         <Row md="2" className="separado">
                             {(Array.isArray(user.selectUser) && user.selectUser.length && user.selectUser.find(aspirante))?
-                            <FormItem type="select" name="El CV se guardara en:" idInput="role">
+                            <FormItem type="select" name="El CV se guardara en:" idInput="role" defaultValue={dataDefault.role}>
                                 {(Array.isArray(user.selectUser) )? user.selectUser.map(
                                     (element, index) => aspirante(element) ?
                                         <option key={`option-${index}`} value={index}>{element.roleName}</option> : ""

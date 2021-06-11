@@ -34,7 +34,11 @@ const userSchema = new mongoose.Schema({
             email: String,
             experience: Array
         },
-        applications: Array,
+        applications: [{
+            name:String,
+            description:String,
+            req:String
+        }],
         stalls: Array
     }]
 });
