@@ -30,19 +30,20 @@ const userSchema = new mongoose.Schema({
             imgCv: String,
             adress: String,
             cp: Number,
+            city: String,
             phone: String,
             email: String,
             experience: Array
         },
         applications: [{
-            name:String,
-            description:String,
-            req:String
+            name: String,
+            description: String,
+            req: String
         }],
         stalls: [{
-            name:String,
-            description:String,
-            price:String
+            name: String,
+            description: String,
+            price: String
         }]
     }]
 });
