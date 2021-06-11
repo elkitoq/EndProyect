@@ -60,7 +60,8 @@ export const Form =
                 event.api = api;
                 onSubmit(event);
                 api.send(method);
-            }}>
+            }}
+            href="/">
                 {cloneChildren(children, api.getHookData())}
             </FormB>);
     }

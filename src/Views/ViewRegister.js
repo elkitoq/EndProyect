@@ -34,7 +34,6 @@ export const ViewRegister = () => {
                             <Button size="lg" color="primary" blocks="true">Crear</Button>
                         </FormGroup>
                     </Form>
-                    {api.toString()}
                 </Col>
             </Row>
         </Container>

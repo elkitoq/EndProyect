@@ -18,7 +18,7 @@ export const ViewCreateCV = () => {
     const [user] = useCookies(['selectUser']);
 
     const dataDefault = { "role":
-        aspirante(user.selectUser[user.selectRole])?
+        (user.selectUser && user.selectRole && aspirante(user.selectUser[user.selectRole]))?
         user.selectRole:
         user.selectUser? 
         user.selectUser.findIndex(aspirante).toString()
@@ -89,7 +89,6 @@ export const ViewCreateCV = () => {
                         </Row></FormGroup>
                 </Row>
             </Form>
-            {api.toString()}
 
 
         </Container>
