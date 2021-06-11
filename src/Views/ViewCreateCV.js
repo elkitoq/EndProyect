@@ -29,6 +29,8 @@ export const ViewCreateCV = () => {
 
     useEffect(() => {
         api.get();
+        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 

@@ -17,7 +17,8 @@ export const LoadRoles = () => {
         new API('/role').send("get", {}).then((res) => {
             setUser("selectUser", res.data, { path: '/' });
         });
-
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
 

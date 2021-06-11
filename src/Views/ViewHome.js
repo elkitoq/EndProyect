@@ -1,9 +1,7 @@
-import { Button, Container, Row } from "reactstrap";
+import { Container, Row } from "reactstrap";
 import { OptionMenu } from "../Components/OptionMenu";
 
 import '../Assets/Css/home.css';
-import API from "../Tools/API";
-import { useState } from "react";
 
 
 export const ViewHome = () => 

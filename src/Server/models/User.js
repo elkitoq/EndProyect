@@ -39,7 +39,11 @@ const userSchema = new mongoose.Schema({
             description:String,
             req:String
         }],
-        stalls: Array
+        stalls: [{
+            name:String,
+            description:String,
+            price:String
+        }]
     }]
 });
 

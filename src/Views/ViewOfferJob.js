@@ -6,8 +6,6 @@ import { Display } from "../Components/Display";
 import { useCookies } from "react-cookie";
 
 
-
-
 export const ViewOfferJob = () => {
     const { search } = useLocation();
     const getJson = API.getSearchParam(search);

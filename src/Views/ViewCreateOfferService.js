@@ -7,16 +7,16 @@ import API from "../Tools/API";
 
 
 
-export const ViewCreateOfferJob = () => {
+export const ViewCreateOfferService = () => {
 
     const [cookies] = useCookies(['selectRole'])
 
     return (
         <Container>
-            <Form api={new API("/job", useState({}), "response", useState({}), "info")} method="put">
-                <FormItem name="Se busca:" idInput="name" />
+            <Form api={new API("/service", useState({}), "response", useState({}), "info")} method="put">
+                <FormItem name="Ofresco:" idInput="name" />
                 <FormItem name="Descripion" type="textarea" idInput="description" />
-                <FormItem name="Requerimientos" type="textarea" idInput="req" />
+                <FormItem name="Precio" idInput="price" />
                 <Input name="role" type="hidden" defaultValue={cookies.selectRole} />
                 <Button className='button-submit' size="lg" color="primary" type="submit" block>Enviar</Button>
             </Form>
