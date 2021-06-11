@@ -54,7 +54,8 @@ export const DropdownRol = () => {
                 {
                     Array.isArray(user.selectUser) ? user.selectUser.map(
                         (element, index) =>
-                            <DropdownItem href={
+                            <DropdownItem key={`droprole-${index}`}
+                            href={
                                 `${element.roleType === 0 ? "/homeEmpresa" :
                                     element.roleType === 1 ? "/homeAspirante" :
                                         element.roleType === 2 ? "/homeAutonomo" :

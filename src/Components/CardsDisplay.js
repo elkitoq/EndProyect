@@ -35,7 +35,7 @@ export const CardCustom = (elemento, template, selected = false, hideData = true
                                     {card.props.children}
                                     <b>{contenido
                                         .split('\n')
-                                        .map((e) => <>{e}<br /></>)}
+                                        .map((e,i) => <span key={i}>{e}<br /></span>)}
                                     </b>
                                 </CardText>);
                         else return "";

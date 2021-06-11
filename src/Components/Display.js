@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Row, DropdownToggle, DropdownMenu, DropdownItem, Navbar, Nav, UncontrolledDropdown, Modal, ModalBody, ModalFooter, Button, ButtonGroup } from "reactstrap";
 import '../Assets/Css/cardWorker.css'
@@ -21,11 +21,11 @@ export const Display = ({ api, children, get }) => {
     // const [pages, setPages] = useCookies("apiConsumer")
     const [type, setType] = useState(cookie.apiConsumer.type);
 
-    const useComponentWillMount = (func) => {
-        const willMount = useRef(true)
-        if (willMount.current) func()
-        willMount.current = false
-    }
+    useEffect(() => {
+        getNewData();
+        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
 
     const getNewData = () => {
@@ -33,11 +33,10 @@ export const Display = ({ api, children, get }) => {
             cookie.apiConsumer.pages = paginas.findIndex((e) => e === get.results)
             setCookie("apiConsumer", cookie.apiConsumer, { path: '/' });
             console.log(api.getHookData());
+
             // api.getHookData()[2].selected=!api.getHookData()[2].selected
         });
     }
-
-    useComponentWillMount(getNewData);
 
     
 

@@ -19,7 +19,7 @@ export const ViewOfferService = () => {
             <Row >
                 <h1>Aca mostraria los servicios ofrecidos</h1>
                 <Display api={api} get={getJson}>
-                    <CardText key="name">Puesto:</CardText>
+                    <CardText key="name">Se ofrece:</CardText>
                     <CardText className="text-wrap" key="description">Descripcion:</CardText>
                     <CardText key="price" hideData>Requerimientos:</CardText>
                 </Display>
