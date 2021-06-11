@@ -2,7 +2,7 @@
 
 const router = require('express').Router();
 
-const terminal = new (require('../tools/terminal'));
+const terminal = new (require('../tools/terminal'))();
 terminal.display = true;
 
 router.get('/pullgit', async(req, res) => {

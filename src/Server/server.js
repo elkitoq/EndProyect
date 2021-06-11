@@ -20,6 +20,9 @@ const mongoose = require('mongoose');
 //cargamos las funciones de codificar contraseña
 require('./tools/hashcode')
 
+//este script actualiza el transitions dentro de reactstrap
+require('./tools/repairModule')("react-transition-group@","4.4.2",".\\node_modules\\reactstrap\\");
+
 // Creamos el server express
 const server = express();
 server.use(cookieParser());
