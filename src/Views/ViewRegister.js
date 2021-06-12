@@ -24,7 +24,7 @@ export const ViewRegister = () => {
         <Container className="themed-container">
             <Row>
                 <Col sm="12" md={{ size: 4, offset: 4 }}>
-                    <Form api={api} method="put">
+                    <Form api={api} method="put" className="form-container">
                         <FormItem name="Usuario" idInput="name"/>
                         <FormItem name="Password" type="password" minLength={8} idInput="password"/>
                         <FormItem name="Repetir Password" type="password" idInput="password2"/>

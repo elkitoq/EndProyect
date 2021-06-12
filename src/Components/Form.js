@@ -4,7 +4,7 @@ import { Form as FormB } from 'reactstrap'
 
 
 
-export const Form =({ onSubmit = () => { }, children, api, method = "post", className}) => {
+export const Form =({ onSubmit = () => { }, children, api, method = "post", ...props}) => {
         let i = 0;
         const createClone = (element, data) => {
 
@@ -52,7 +52,7 @@ export const Form =({ onSubmit = () => { }, children, api, method = "post", clas
         }
 
         return (
-            <FormB className = {className} onSubmit={(event) => {
+            <FormB {...props} onSubmit={(event) => {
                 event.preventDefault();
                 event.api = api;
                 onSubmit(event);
