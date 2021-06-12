@@ -9,13 +9,14 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-export const sendMail = (bodyMail) => {
+const sendMail = (bodyMail) => {
     transporter.sendMail({
         from: '"MaipuJobs"  maipujobs@gmail.com',
-        to: bodyMail.mail,
-        subject: "Recupera tu contraseña",
-        html: `<p> Aquí puedes recuperar tu contraseña </p>`,
+        to: bodyMail.email,
+        subject: bodyMail.subject,
+        html: bodyMail.html,
     });
+    console.log("Mensaje enviado: %s" /*messageId*/);
+}
 
-   console.log("Mensaje enviado: %s" /*messageId*/);
- }
+module.exports = { sendMail };
