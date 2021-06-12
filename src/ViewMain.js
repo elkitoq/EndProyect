@@ -19,7 +19,6 @@ import { ViewCreateUser } from './ViewCreateUser.js';
 import { Container } from 'reactstrap';
 import { ViewRecoverPassword } from './ViewRecoverPassword.js';
 
-
 export const ViewMain = () =>
   <Switch>
     <ViewRoute path="/Login" view={ViewLogin} />
@@ -37,8 +36,8 @@ export const ViewMain = () =>
     <ViewRoute path="/offerService" view={ViewOfferService} />
     <ViewRoute path="/findJob" view={ViewFindJob} />
     <ViewRoute path="/findService" view={ViewFindService} />
+    <ViewRoute path="/" view={ViewHome} />
     <ViewRoute path="/recovery-pass" view={ViewRecoverPassword} />
-    <ViewRoute path="/" view={ViewHome} />  
   </Switch>
 
 const ViewRoute = ({ path, view }) =>
