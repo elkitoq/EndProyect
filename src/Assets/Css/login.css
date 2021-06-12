@@ -110,6 +110,8 @@
 
  .col-slideshow{
    background-color: #0d6efd;
+   border-top-right-radius: 5px;
+   border-bottom-right-radius: 5px;
  }
 
  .carousel{
