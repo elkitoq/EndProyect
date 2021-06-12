@@ -10,7 +10,7 @@ router.post('/login', async (req, res) => {
     if (user)
         if (user.password === `${req.body.password.hashCode()}`) {
             req.session.user = user;
-            res.status(201).json({ response: {}, info: {isLogin:true} });
+            res.status(201).json({ response: {}, info: { isLogin: true } });
         }
         else {
             res.status(208).json({ info: { error: "Usuario o contraseña incorrecta" } });
@@ -20,10 +20,10 @@ router.post('/login', async (req, res) => {
     res.end();
 });
 
-router.post('/logout',(req,res)=>{
+router.post('/logout', (req, res) => {
     console.log(`LOGOUT:${req.sessionID}`);
-    req.session.user=undefined;
-    res.json({info:{message:"Se cerró sesión"}});
+    req.session.user = undefined;
+    res.json({ info: { message: "Se cerró sesión" } });
 });
 
 router.put('/user', async (req, res) => {
@@ -33,21 +33,32 @@ router.put('/user', async (req, res) => {
         const response = Object.assign({}, req.body);
         response["password"] = response["password2"] = "codificada";
 
+        if (req.body["password"].lengt <= 4)
+            res.status(208).json({ info: { error: "La contraseña debe tener un minimo de 4 caracteres" } })
 
-        if (req.body["password"] === req.body["password2"]) {
-            req.body.password = req.body.password.hashCode();
-            const newUser = await new User(req.body).save();
-            req.session.user = newUser;
-            res.status(201).json({ response: response, info: {isLogin:true} });
-        }
-        else {
-            res.status(208).json({ info: { error: "Las contraseñas deben coincidir" } });
+        else
 
-        }
+            if (!await User.findByName(req.body.name)) {
+                if (!await User.findByEmail(req.body.email)) {
+                    if (req.body["password"] === req.body["password2"]) {
+                        req.body.password = req.body.password.hashCode();
+                        const newUser = await new User(req.body).save();
+                        req.session.user = newUser;
+                        res.status(201).json({ response: response, info: { isLogin: true } });
+                    }
+                    else {
+                        res.status(208).json({ info: { error: "Las contraseñas deben coincidir" } });
+
+                    }
+                } else {
+                    res.status(208).json({ info: { error: "El email ya tiene una cuenta asoociada" } });
+                }
+            } else { res.status(208).json({ info: { error: "El usuario esta en linea" } }); }
+
     }
     else
         res.json({ info: { error: "Rellena todos los campos" } })
-        
+
     console.log(req.session);
     res.end();
 });
