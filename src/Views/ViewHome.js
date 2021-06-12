@@ -11,7 +11,7 @@ export const ViewHome = () =>
                 <h2>¿Que estas buscando hoy?</h2>
                 <Row className="">
                     <OptionMenu href="/lookforJob/"                     >Necesito Trabajo</OptionMenu>
-                    <OptionMenu href="/offerService/"  fontSize="2vh"   >Quiero ofrecer mis humildes servicios</OptionMenu>
+                    <OptionMenu href="/createService/"  fontSize="2vh"   >Quiero ofrecer mis humildes servicios</OptionMenu>
                     <OptionMenu href="/lookforWorker/" fontSize="2vh"   >Busco trabajadores para mi viña/pequeño emprendimiento lucrativo</OptionMenu>
                 </Row>
             </div>

@@ -1,13 +1,14 @@
 import { FormGroup, Input, Label } from "reactstrap";
 
 
-export const FormItem = ({ name, idInput = name, type, autoComplete, className = "", reference = { values: {}, onChange: () => { } }, children
+export const FormItem = ({ name, idInput = name, type, autoComplete, className = "", reference = { values: {}, onChange: () => { } }, children, minLength
 }) =>
     <FormGroup>
         <Label for={idInput}>
             {name}
         </Label>
         <Input
+            minLength={minLength}
             defaultValue={reference.values[reference.id]}
             className={className}
             type={type}
