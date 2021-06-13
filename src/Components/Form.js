@@ -14,7 +14,7 @@ export const Form =({ onSubmit = () => { }, children, api, method = "post", ...p
             if (element.type && element.type.name === "FormItem") {
                 const id = element.props.idInput || element.props.name;
                 return React.cloneElement(element, {
-                    key: id,
+                    key: element.key ||`formItem-${id}-${i}`,
                     reference: {
                         values: data,
                         id: id,
