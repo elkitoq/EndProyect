@@ -1,7 +1,7 @@
 import { useCookies } from "react-cookie";
-import { Button, Card, Container, Input, Row } from "reactstrap";
+import { Button, Card, Container, Input, Row, Col } from "reactstrap";
+import { FormRegister } from "../Components/FormRegister";
 import API from "../Tools/API";
-import { ViewRegister } from "./ViewRegister";
 
 let user, setUser;
 
@@ -13,17 +13,13 @@ export const ViewCreateUser = () => {
     console.log(user.selectUser);
 
     return (
-        <Container className="abs-center">
-            {
-                !(login.isLogin === "true") ? <ViewRegister /> :
-                    !(Array.isArray(user.selectUser) && user.selectUser.length) ? <CrearUsuario user={user} setUser={setUser} /> :
-                        !(user.selectUser[user.selectUser.length - 1].new === true) ? <CrearUsuario /> :
-                            (user.selectUser[user.selectUser.length - 1].roleType === 0) ? <CrearEmpresa /> :
-                            (user.selectUser[user.selectUser.length - 1].roleType === 1) ? <CrearAspirante /> :
+        !(login.isLogin === "true") ? <FormRegister /> : <div className="abs-center">{
+            !(Array.isArray(user.selectUser) && user.selectUser.length) ? <CrearUsuario user={user} setUser={setUser} /> :
+                !(user.selectUser[user.selectUser.length - 1].new === true) ? <CrearUsuario /> :
+                    (user.selectUser[user.selectUser.length - 1].roleType === 0) ? <CrearEmpresa /> :
+                        (user.selectUser[user.selectUser.length - 1].roleType === 1) ? <CrearAspirante /> :
                             (user.selectUser[user.selectUser.length - 1].roleType === 2) ? <CrearAutonomo /> :
-                                    <CrearAdmin />
-            }
-        </Container>
+                                <CrearAdmin />}</div>
     );
 }
 
@@ -31,10 +27,10 @@ const ButtonCreate = ({ href }) =>
     <Button size="lg" color="primary" blocks="true" href={`${href}?user=${user.selectUser.length - 1}`}
         onClick={(e) => {
             user.selectUser[user.selectUser.length - 1].new = false;
-            if (user.selectUser[user.selectUser.length - 1].roleName==="" || user.selectUser[user.selectUser.length - 1].roleName===undefined)
-                user.selectUser[user.selectUser.length - 1].roleName="N/N";
+            if (user.selectUser[user.selectUser.length - 1].roleName === "" || user.selectUser[user.selectUser.length - 1].roleName === undefined)
+                user.selectUser[user.selectUser.length - 1].roleName = "N/N";
             setUser("selectUser", user.selectUser, { path: '/' })
-            new API('/role').send("put",user.selectUser[user.selectUser.length - 1]);
+            new API('/role').send("put", user.selectUser[user.selectUser.length - 1]);
         }}>
         Crear</Button>
 
@@ -70,26 +66,26 @@ const CrearUsuario = () => {
 
 
     return (
-        <Container className="abs-center">
+        <>
             <div className="text-center">
                 <h3>¿Por donde queres empezar?</h3>
-                <Row>
-                    <Card inverse color="primary" className="tarjetasQBuscas" onClick={crear.bind(this, 0)}>
-                        Tengo una empresa, Quiero esclavos
+                <Container>
+                        <Card inverse color="primary" className="tarjetasVerticales" onClick={crear.bind(this, 0)}>
+                            Tengo una empresa, Quiero esclavos
                         </Card>
-                    <Card inverse color="primary" className="tarjetasQBuscas" onClick={crear.bind(this, 1)}>
-                        Soy pobre, Quiero Trabajo
+                        <Card inverse color="primary" className="tarjetasVerticales " onClick={crear.bind(this, 1)}>
+                            Soy pobre, Quiero Trabajo
                         </Card>
-                    <Card inverse color="primary" className="tarjetasQBuscas" onClick={crear.bind(this, 2)}>
-                        Soy independiente, Quiero ofrecer mis servicios
+                        <Card inverse color="primary" className="tarjetasVerticales" onClick={crear.bind(this, 2)}>
+                            Soy independiente, Quiero ofrecer mis servicios
                         </Card>
-                    {/* <Card inverse color="primary" className="tarjetasQBuscas" onClick={crear.bind(this, 3)}>
+                        {/* <Card inverse color="primary" className="tarjetasQBuscas" onClick={crear.bind(this, 3)}>
                         Tengo un amigo que me pidio le cargara una cuenta
                         </Card> */}
-                </Row>
+                </Container>
             </div>
 
-        </Container>
+        </>
     );
 
 }
@@ -99,7 +95,7 @@ const CrearUsuario = () => {
 const CrearAspirante = () => {
 
     return (
-        <Container>
+        <>
             Introduzca sus datos
             <Input defaultValue={user.selectUser[user.selectUser.length - 1].roleName}
                 placeholder="Nombre"
@@ -111,7 +107,7 @@ const CrearAspirante = () => {
                 }
             />
             <ButtonCreate href="/homeAspirante" />
-        </Container>
+        </>
 
 
     )
@@ -121,7 +117,7 @@ const CrearAspirante = () => {
 const CrearAdmin = () => {
     user.selectUser[user.selectUser.length - 1].roleName = "Administrados";
     return (
-        <Container>
+        <>
             Introduzca los datos de su asociado
             <Input defaultValue={user.selectUser[user.selectUser.length - 1].subordinate[0].roleName}
                 autoFocus
@@ -132,7 +128,7 @@ const CrearAdmin = () => {
                 }
             />
             <ButtonCreate href="/homeEmpresa" />
-        </Container>
+        </>
 
 
     )

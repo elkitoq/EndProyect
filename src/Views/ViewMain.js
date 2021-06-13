@@ -15,7 +15,6 @@ import { ViewOfferService } from "./ViewOfferService";
 import { ViewFindJob } from "./ViewFindJob";
 import { ViewFindService } from "./ViewFindService";
 import { Route, Switch } from 'react-router';
-import { ViewCreateUser } from './ViewCreateUser.js';
 import { Container } from 'reactstrap';
 import { ViewCreateOfferJob } from './ViewCreateOfferJob.js';
 import { ViewCreateOfferService } from './ViewCreateOfferService.js';
@@ -25,7 +24,7 @@ import { ViewRecoverPassword } from './ViewRecoverPassword.js';
 export const ViewMain = () =>
   <Switch>
     <ViewRoute path="/Login" view={ViewLogin} />
-    <ViewRoute path="/Register" view={ViewCreateUser} />
+    <ViewRoute path="/Register/" view={ViewLogin} />
     <ViewRoute path="/CVCreate" view={ViewCreateCV} />
     <ViewRoute path="/lookforJob" view={ViewLookForJob} />
     <ViewRoute path="/lookforWorker" view={ViewLookForWorker} />
