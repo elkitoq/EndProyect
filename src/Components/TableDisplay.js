@@ -4,15 +4,12 @@ export const TableDisplay = ({ api, children, onClick }) => <Table>
     <thead>
         <tr>
             {children.map((card, index) => {
-                if (card.type.name === "CardText") {
-                    if (card.props.hideData !== true)
+                    if (card.props && card.props.hideData !== true)
                         return (
                             <th className="text-truncate" key={`th-${index}`}>
                                 {card.props.children}
                             </th>);
-                    return "";
-                }
-                return <th className="text-truncate" key={`th-${index}`}></th>
+                    return <th className="text-truncate" key={`th-${index}`}></th>;
             })}
         </tr>
     </thead>
