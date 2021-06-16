@@ -55,7 +55,7 @@
 
 ## Introduccion
 
-Este proyecto lo hicimos para que la gente tenga trabajo, y aprobar la materia
+El proyecto se refiere a un software de oferta y demanda de empleo. Será el enlace entre las empresas y los candidatos, ya que su servicio consiste en servir como medio para que las empresas den a conocer las ofertas de trabajo que tienen y para que los postulantes ofrezcan sus servicios. Está orientado a personas en situación de desempleo o aquellas con empleo que busquen una oportunidad laboral mejor, también a empresas o instituciones que buscan cubrir sus puestos vacantes.
 
 ---
 
@@ -134,13 +134,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## Reactstrap
 
-Para usar Bootstrap dentro de Rect
-
+Para usar Bootstrap dentro de Rect ya que es una exelente opcion como su base de interfaz de usuar.io .
 [indice](#indice)
 
 ---
 
 ## Cookie parser
+
 
 Para convertir las cookies en Json
 
