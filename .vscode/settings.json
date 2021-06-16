@@ -1,10 +1,15 @@
 {
     "cSpell.words": [
         "Offer",
-        "blocks"
+        "blocks",
+        "hashcode",
+        "question",
+        "readdir",
+        "repair"
     ],
     "cSpell.ignoreWords": [
         "cant",
+        "readline",
         "redireccionar",
         "redireccionará"
     ]

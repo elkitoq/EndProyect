@@ -1,5 +1,4 @@
-
-
+// eslint-disable-next-line no-extend-native
 String.prototype.hashCode = function(){
     var hash = 0;
     for (var i = 0; i < this.length; i++) {

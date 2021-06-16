@@ -23,15 +23,16 @@ class Terminal {
     run(command = "", display = this.display) {
         return new Promise(resolve => {
             exec(command, { encoding: "utf-8", cwd: this.directory }, (err, stdout, stderr) => {
-                if (err) {
-                    // node couldn't execute the command
-                    return;
-                }
+ 
                 if (display) {
                     if (stdout)
                         this.stdout(`${stdout}`);
                     if (stderr)
                         this.stderr(`${stderr}`);
+                }               
+                if (err) {
+                    // node couldn't execute the command
+                    return;
                 }
                 resolve({ out: stdout, err: stderr })
             });
