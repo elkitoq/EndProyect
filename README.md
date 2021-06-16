@@ -13,6 +13,7 @@
    3. [Express](#express)
    4. [Express Sesion](#express-sesion)
    5. [Nodemon](#nodemon)
+   6. [Nodemailer](#nodemailer)
 3. [Concurrently](#concurrently)
 
 ## Cliente
@@ -45,7 +46,8 @@
    15. [ViewMain](#viewmain)
    16. [ViewOfferJob](#viewofferjob)
    17. [ViewOfferService](#viewofferservice)
-   18. [ViewRegister](#viewregister)
+   18. [ViewRecoverPassword](#viewrecoverpassword)
+   19. [ViewRegister](#viewregister)
 
 ## Servidor
 
@@ -55,7 +57,7 @@
 
 ## Introduccion
 
-Este proyecto lo hicimos para que la gente tenga trabajo, y aprobar la materia
+El proyecto se refiere a un software de oferta y demanda de empleo. Será el enlace entre las empresas y los candidatos, ya que su servicio consiste en servir como medio para que las empresas den a conocer las ofertas de trabajo que tienen y para que los postulantes ofrezcan sus servicios.
 
 ---
 
@@ -179,6 +181,14 @@ Constantemente revisa si hay modificaciones en los archivos para relanzar el ser
 "nodemon --watch src/Server src/Server/server.js".
 
 "--watch src/Server" evita que el server se reinicie por modificaciones fuera de la carpeta server.
+
+[indice](#indice)
+
+---
+
+## Nodemailer
+
+Es un módulo que permite enviar mails de forma sencilla. Vease en **mail.js**
 
 [indice](#indice)
 
@@ -374,6 +384,12 @@ Del archivo Navegador. La barra superior que incluye botones para navegar por el
 ---
 
 ## ViewOfferService
+
+[indice](#indice)
+
+---
+
+## ViewRecoverPassword
 
 [indice](#indice)
 
