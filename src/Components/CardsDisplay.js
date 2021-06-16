@@ -33,9 +33,12 @@ export const CardCustom = (elemento, template, selected = false, hideData = true
                                     data-toggle="tooltip"
                                     title={contenido}>
                                     {card.props.children}
-                                    <b>{contenido
+                                    <b>{
+                                    typeof contenido === 'string'?
+                                    contenido
                                         .split('\n')
-                                        .map((e,i) => <span key={i}>{e}<br /></span>)}
+                                        .map((e,i) => <span key={i}>{e}<br /></span>)
+                                    :contenido}
                                     </b>
                                 </CardText>);
                         else return "";
