@@ -12,6 +12,8 @@ import {
 import API from '../Tools/API';
 import { Busqueda } from './Busqueda';
 import { DropdownRol } from './role';
+import logo from '../Assets/image/logo_nabvar.png'
+import '../Assets/Css/navBar.css'
 // import { Cookie } from './Cookie';
 
 
@@ -29,21 +31,21 @@ export const NavegadorPrincipal = () => {
     if (login.isLogin === "true")
       removeCookie('selectUser', { path: '/' })
     setCookie("isLogin", false, { path: '/' });
-    new API('/logout').send("post",{hola:"mundo"});
+    new API('/logout').send("post", { hola: "mundo" });
   }
 
   return (
     <Navbar color="primary" dark expand="md">
-      <NavbarBrand href="/">Maipú Jobs</NavbarBrand>
+      <NavbarBrand href="/"><img className="logo_navbar" width="70px" height="45px" alt="logo" src={logo} /></NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
-          <NavButton href="/CVCreate/"> Crear CV </NavButton>
+          <NavButton className="btn-cv-navbar" href="/CVCreate/"> Crear CV </NavButton>
           <DropdownRol />
-          <NavButton href="/jobOffice/">Oficina de empleo</NavButton>
+          <NavButton className="btn-oficina-navbar" href="/jobOffice/">Oficina de empleo</NavButton>
         </Nav>
-        <Nav className="ms-auto" navbar>
-          <Busqueda className="ocultar-search"
+        <Nav className="ms-auto buscador" navbar>
+          <Busqueda className="ocultar-search input-search"
             style={{ width: "40vw" }}
             href="/lookforJob/"
             text="Buscar Trabajo"
@@ -54,11 +56,15 @@ export const NavegadorPrincipal = () => {
           <NavButton href="/lookforWorker/"
             className="mostrar-search"
             children="Buscar Empleado" />
-          <NavButton href="/Login/"
-            onClick={(login.isLogin === "true") ? logout : () => { }}
-            children={(login.isLogin === "true") ? "Logout" : "Login"} />
-          <NavButton href="/Register/"
-            children={(login.isLogin === "true") ? "Crear Rol" : "Register"} />
+          <div className="butons-login">
+            <NavButton href="/Login/"
+              onClick={(login.isLogin === "true") ? logout : () => { }}
+              children={(login.isLogin === "true") ? "Logout" : "Login"}
+              className="a-login" />
+            <NavButton href="/Register/"
+              className="a-register"
+              children={(login.isLogin === "true") ? "Crear Rol" : "Register"} />
+          </div>
         </Nav>
       </Collapse>
     </Navbar>

@@ -1,9 +1,21 @@
 
+.abs-center .abs-center .text-center .title-center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -10rem;
+    margin-bottom: 0.8rem;
+}
 
+.abs-center .abs-center .text-center .title-center h1, .abs-center .abs-center .text-center .title-center h2 {
+    font-size: 53px !important;
+}
 
-.tarjetasQBuscas{
+.row  .tarjetasQBuscas{
     width: 30vh;
-    height: 10vh;
+    height: 65px;
     padding: 1rem;
     cursor: pointer;
+    margin: 3rem 1.5rem 0px ;
+    font-size: 25px !important;
 }
