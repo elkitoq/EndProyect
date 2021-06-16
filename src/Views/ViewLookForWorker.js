@@ -1,12 +1,11 @@
-import { useCookies } from "react-cookie";
 import { Button, ButtonGroup, Card, CardText, Col, Container } from "reactstrap";
 import { Busqueda } from "../Components/Busqueda";
 
 
 export const ViewLookForWorker = () => {
 
-    const [login] = useCookies(['isLogin']);
-
+    // const [login] = useCookies(['isLogin']);
+    const login = false;
 
     return (
         <Container className="abs-center">

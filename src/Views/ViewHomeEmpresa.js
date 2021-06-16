@@ -10,9 +10,9 @@ export const ViewHomeEmpresa = () => {
             <div className="divtext center">
                 <h1>Paquina de inicio para empresas</h1>
                 <Row className="">
-                    <OptionMenu href="/offerJob/">Crear puesto</OptionMenu>
-                    <OptionMenu href="/offerJob/">Crear puesto</OptionMenu>
-                    <OptionMenu href="/offerJob/">Crear puesto</OptionMenu>
+                    <OptionMenu href="/createJob/">Crear puesto</OptionMenu>
+                    <OptionMenu href="/offerJob/">Ver puestos</OptionMenu>
+                    <OptionMenu href="/offerJob/">puestos</OptionMenu>
                 </Row>
             </div>
         </Container>

@@ -17,6 +17,8 @@ import { ViewFindService } from "./ViewFindService";
 import { Route, Switch } from 'react-router';
 import { ViewCreateUser } from './ViewCreateUser.js';
 import { Container } from 'reactstrap';
+import { ViewCreateOfferJob } from './ViewCreateOfferJob.js';
+import { ViewCreateOfferService } from './ViewCreateOfferService.js';
 
 export const ViewMain = () =>
   <Switch>
@@ -32,7 +34,9 @@ export const ViewMain = () =>
     <ViewRoute path="/homeAutonomo" view={ViewHomeAutonomo} />
     <ViewRoute path="/jobOffice" view={ViewJobOffice} />
     <ViewRoute path="/offerJob" view={ViewOfferJob} />
+    <ViewRoute path="/createJob" view={ViewCreateOfferJob} />
     <ViewRoute path="/offerService" view={ViewOfferService} />
+    <ViewRoute path="/createService" view={ViewCreateOfferService} />
     <ViewRoute path="/findJob" view={ViewFindJob} />
     <ViewRoute path="/findService" view={ViewFindService} />
     <ViewRoute path="/" view={ViewHome} />

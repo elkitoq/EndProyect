@@ -1,33 +1,9 @@
-import { useEffect, useState } from "react";
 import { Card, CardText, CardBody, CardImg, Col } from "reactstrap";
 import '../Assets/Css/cardWorker.css'
 
+export const CardWorkerDisplay = ({ tarjeta }) => {
 
-export const CardWorkerDisplay = ({ seed, gender, cant = 10 }) => {
-
-    const [tarjeta, setTarjetas] = useState([])
-
-    useEffect(() => {
-        let seedString = "";
-        if (seed !== undefined)
-            seedString = `seed=${seed}`;
-
-        let api = `https://randomuser.me/api/?gender=${gender}&${seedString}&results=${cant}&inc=gender,name,cell,email,picture`
-        console.log(api);
-        fetch(api)
-            .then((response) => {
-                return response.json()
-            })
-            .then((recurso) => {
-
-                if (seed !== undefined)
-                    for (let element of recurso.results) {
-                        element.job = seed;
-                    };
-                setTarjetas(recurso.results);
-                console.log(recurso.results);
-            })
-    }, [cant, gender, seed]);
+    
 
     return (
         <>
@@ -71,7 +47,7 @@ export const CardWorkerDisplay = ({ seed, gender, cant = 10 }) => {
 
 export const CardWorker = (elemento, index) => {
     return (
-        <Col xs="3">
+        <Col xs="3" key={`cardWorker-${index}`}>
             <div key={`cardWorker-${index}`}>
                 <Card className="card-worker">
                     <Col className="col-img" sm="12" md={{ size: 6, offset: 3 }}><CardImg className="container-img" top width="128px" height="170px" src={`${elemento.picture.large}`} alt="No se puede mostrar foto de Perfil" /></Col>

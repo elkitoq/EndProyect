@@ -2,8 +2,6 @@
 //npm install express --save
 const express = require('express');
 
-const bodyParser = require('body-parser');
-
 //npm install cookie-parser --save
 const cookieParser = require('cookie-parser');
 
@@ -19,6 +17,11 @@ const mongoose = require('mongoose');
 //tenemos intalado nodemon, para eso de facilitarle la vida al developer
 //npm i -D nodemon
 
+//cargamos las funciones de codificar contraseña
+require('./tools/hashcode')
+
+//este script actualiza el transitions dentro de reactstrap
+require('./tools/repairModule')("react-transition-group@","4.4.2",".\\node_modules\\reactstrap\\");
 
 // Creamos el server express
 const server = express();
@@ -39,16 +42,27 @@ const corsOptions = {
     //localhost para funcionar en local
     "http://localhost:3000",
     `http://localhost:${server.get('port')}`,
-    //y aca pondria los dns SI TUVIERA ALGUNO 
-    ``,
-    ``
+    //y aca van los dns
+    `http://maipujobs.ddns.net`,
+    `http://maipujobs.ddns.net:4000`
   ],
   credentials: true,
   exposedHeaders: ["set-cookie"],
 };
 server.use(cors(corsOptions));
 
-server.use(session({ secret: 'keyboard cat', cookie: { maxAge: 8640000 } }))
+server.use(session({
+  secret: 'keyboard cat',
+  resave:false,
+  saveUninitialized:true,
+  cookie: { maxAge: 8640000 }
+
+}))
+
+//Decodifica el body
+server.use(express.urlencoded({ extended: true }));
+server.use(express.json());
+
 
 server.use(require("./routes/routes"));
 

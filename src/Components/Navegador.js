@@ -7,13 +7,11 @@ import {
   NavbarToggler,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  NavLink
 } from 'reactstrap'
+import API from '../Tools/API';
 import { Busqueda } from './Busqueda';
+import { DropdownRol } from './role';
 // import { Cookie } from './Cookie';
 
 
@@ -27,11 +25,11 @@ export const NavegadorPrincipal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
-  const toggleLogin = () => {
+  const logout = () => {
     if (login.isLogin === "true")
       removeCookie('selectUser', { path: '/' })
-    setCookie("isLogin", !(login.isLogin === "true"), { path: '/' });
-
+    setCookie("isLogin", false, { path: '/' });
+    new API('/logout').send("post",{hola:"mundo"});
   }
 
   return (
@@ -57,7 +55,7 @@ export const NavegadorPrincipal = () => {
             className="mostrar-search"
             children="Buscar Empleado" />
           <NavButton href="/Login/"
-            onClick={toggleLogin}
+            onClick={(login.isLogin === "true") ? logout : () => { }}
             children={(login.isLogin === "true") ? "Logout" : "Login"} />
           <NavButton href="/Register/"
             children={(login.isLogin === "true") ? "Crear Rol" : "Register"} />
@@ -75,40 +73,3 @@ const NavButton = ({ href, children, onClick, className }) => {
   );
 }
 
-
-
-
-const DropdownRol = () => {
-
-
-  const [user] = useCookies(['selectUser']);
-
-  return (
-    <UncontrolledDropdown nav inNavbar>
-      <DropdownToggle nav caret>
-        Roles
-    </DropdownToggle>
-      <DropdownMenu right>
-        {
-          Array.isArray(user.selectUser) ? user.selectUser.map(
-            (element, index) =>
-              <DropdownItem href={
-                `${
-                element.type === 0 ? "/homeEmpresa" :
-                  element.type === 1 ? "/homeAspirante" :
-                  element.type === 2 ? "/homeAutonomo" :
-                    "/homeAdmin"
-                  }?user=${index}`
-              }>
-                {element.name}
-              </DropdownItem>
-          ) : ""
-        }
-        <DropdownItem divider />
-        <DropdownItem href="/Register/">
-          Crear Roles
-      </DropdownItem>
-
-      </DropdownMenu>
-    </UncontrolledDropdown>);
-}

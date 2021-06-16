@@ -1,5 +1,6 @@
 import { useCookies } from "react-cookie";
 import { Button, Card, Container, Input, Row } from "reactstrap";
+import API from "../Tools/API";
 import { ViewRegister } from "./ViewRegister";
 
 let user, setUser;
@@ -9,16 +10,17 @@ export const ViewCreateUser = () => {
     const [login] = useCookies(['isLogin']);
     [user, setUser] = useCookies(['selectUser']);
 
+    console.log(user.selectUser);
 
     return (
         <Container className="abs-center">
             {
                 !(login.isLogin === "true") ? <ViewRegister /> :
-                    (!Array.isArray(user.selectUser)) ? <CrearUsuario user={user} setUser={setUser} /> :
+                    !(Array.isArray(user.selectUser) && user.selectUser.length) ? <CrearUsuario user={user} setUser={setUser} /> :
                         !(user.selectUser[user.selectUser.length - 1].new === true) ? <CrearUsuario /> :
-                            (user.selectUser[user.selectUser.length - 1].type === 0) ? <CrearEmpresa /> :
-                            (user.selectUser[user.selectUser.length - 1].type === 1) ? <CrearAspirante /> :
-                            (user.selectUser[user.selectUser.length - 1].type === 2) ? <CrearAutonomo /> :
+                            (user.selectUser[user.selectUser.length - 1].roleType === 0) ? <CrearEmpresa /> :
+                            (user.selectUser[user.selectUser.length - 1].roleType === 1) ? <CrearAspirante /> :
+                            (user.selectUser[user.selectUser.length - 1].roleType === 2) ? <CrearAutonomo /> :
                                     <CrearAdmin />
             }
         </Container>
@@ -29,9 +31,10 @@ const ButtonCreate = ({ href }) =>
     <Button size="lg" color="primary" blocks="true" href={`${href}?user=${user.selectUser.length - 1}`}
         onClick={(e) => {
             user.selectUser[user.selectUser.length - 1].new = false;
-            if (user.selectUser[user.selectUser.length - 1].name==="" || user.selectUser[user.selectUser.length - 1].name===undefined)
-                user.selectUser[user.selectUser.length - 1].name="N/N";
+            if (user.selectUser[user.selectUser.length - 1].roleName==="" || user.selectUser[user.selectUser.length - 1].roleName===undefined)
+                user.selectUser[user.selectUser.length - 1].roleName="N/N";
             setUser("selectUser", user.selectUser, { path: '/' })
+            new API('/role').send("put",user.selectUser[user.selectUser.length - 1]);
         }}>
         Crear</Button>
 
@@ -39,11 +42,11 @@ const CrearEmpresa = () => {
     return (
         <Container >
             Introduzca datos de la empresa:
-            <Input defaultValue={user.selectUser[user.selectUser.length - 1].name}
+            <Input defaultValue={user.selectUser[user.selectUser.length - 1].roleName}
                 placeholder="Nombre"
                 autoFocus
                 onChange={(e) => {
-                    user.selectUser[user.selectUser.length - 1].name = e.target.value;
+                    user.selectUser[user.selectUser.length - 1].roleName = e.target.value;
                     setUser("selectUser", user.selectUser, { path: '/' });
                 }
                 }
@@ -60,7 +63,7 @@ const CrearUsuario = () => {
     const crear = (r, e) => {
         if (!Array.isArray(user.selectUser))
             user.selectUser = [];
-        user.selectUser.push({ type: r, new: true });
+        user.selectUser.push({ roleType: r, new: true });
         setUser("selectUser", user.selectUser, { path: '/' });
 
     }
@@ -98,11 +101,11 @@ const CrearAspirante = () => {
     return (
         <Container>
             Introduzca sus datos
-            <Input defaultValue={user.selectUser[user.selectUser.length - 1].name}
+            <Input defaultValue={user.selectUser[user.selectUser.length - 1].roleName}
                 placeholder="Nombre"
                 autoFocus
                 onChange={(e) => {
-                    user.selectUser[user.selectUser.length - 1].name = e.target.value;
+                    user.selectUser[user.selectUser.length - 1].roleName = e.target.value;
                     setUser("selectUser", user.selectUser, { path: '/' })
                 }
                 }
@@ -116,14 +119,14 @@ const CrearAspirante = () => {
 
 
 const CrearAdmin = () => {
-    user.selectUser[user.selectUser.length - 1].name = "Administrados";
+    user.selectUser[user.selectUser.length - 1].roleName = "Administrados";
     return (
         <Container>
             Introduzca los datos de su asociado
-            <Input defaultValue={user.selectUser[user.selectUser.length - 1].subordinate[0].name}
+            <Input defaultValue={user.selectUser[user.selectUser.length - 1].subordinate[0].roleName}
                 autoFocus
                 onChange={(e) => {
-                    user.selectUser[user.selectUser.length - 1].subordinate[0].name = e.target.value;
+                    user.selectUser[user.selectUser.length - 1].subordinate[0].roleName = e.target.value;
                     setUser("selectUser", user.selectUser, { path: '/' })
                 }
                 }
@@ -141,11 +144,11 @@ const CrearAutonomo = () => {
     return (
         <Container>
             Introduzca los datos de su emprendimiento
-            <Input defaultValue={user.selectUser[user.selectUser.length - 1].name}
+            <Input defaultValue={user.selectUser[user.selectUser.length - 1].roleName}
                 placeholder="Nombre"
                 autoFocus
                 onChange={(e) => {
-                    user.selectUser[user.selectUser.length - 1].name = e.target.value;
+                    user.selectUser[user.selectUser.length - 1].roleName = e.target.value;
                     setUser("selectUser", user.selectUser, { path: '/' })
                 }
                 }

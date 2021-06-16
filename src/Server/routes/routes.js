@@ -10,8 +10,13 @@ return;
 }
 for(archivo of archivos){
     if (archivo != 'routes.js'){
-        console.log('\x1b[33m%s\x1b[0m', `Cargando ruta del servidor: "${archivo}"`);
+        try{
         router.use(require(`./${archivo}`));
+        console.log('\x1b[34m%s\x1b[0m', `Cargada la ruta del servidor: "${archivo}"`);
+        } catch(e) {
+            console.log('\x1b[31m%s\x1b[0m', `Falló la carga de: "${archivo}"`);
+            console.error('\x1b[31m%s\x1b[0m',e);
+        }
     }
 }
 

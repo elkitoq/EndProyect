@@ -3,11 +3,8 @@ import { OptionMenu } from "../Components/OptionMenu";
 
 import '../Assets/Css/home.css';
 
-export const ViewHome = () => {
 
-
-
-    return (
+export const ViewHome = () => 
         <Container className="abs-center">
             <div className="text-center">
                 <h1>Bienvenido</h1>
@@ -19,5 +16,3 @@ export const ViewHome = () => {
                 </Row>
             </div>
         </Container>
-    );
-}

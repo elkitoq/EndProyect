@@ -16,11 +16,12 @@ export const ViewHomeAspirante = () => {
     return (
         <Container className="abs-center">
             <div className="text-center">
-                <h1>Bienvenido {user.name}</h1>
+                <h1>Bienvenido {user.roleName}</h1>
                 <h2>¿Que estas buscando hoy?</h2>
                 <Row className="">
-                    <OptionMenu href="/CVCreate/"       >Crear Curriculum</OptionMenu>
-                    <OptionMenu href="/offerService/"   >Ofrecer Servicio</OptionMenu>
+                    <OptionMenu href="/CVCreate"       >Crear Curriculum</OptionMenu>
+                    <OptionMenu href="/offerService/"   >Servicios</OptionMenu>
+                    <OptionMenu href="/createService/"   >Ofrecer Servicio</OptionMenu>
                     {/* <OptionMenu href="/message/"        >Ver mensajes</OptionMenu> */}
                 </Row>
             </div>
