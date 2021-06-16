@@ -13,6 +13,7 @@
    3. [Express](#express)
    4. [Express Session](#express-session)
    5. [Nodemon](#nodemon)
+   6. [Nodemailer](#nodemailer)
 3. [Concurrently](#concurrently)
 
 
@@ -49,17 +50,32 @@
    15. [ViewMain](#ViewMain)
    16. [ViewOfferJob](#ViewOfferJob)
    17. [ViewOfferService](#ViewOfferService)
-   18. [ViewRegister](#ViewRegister)
+   18. [ViewRecoveryPassword](#ViewRecoveryPassword)
+   19. [ViewRegister](#ViewRegister)
 
 ## Servidor
 
-## API
+1. API
+   1.  [routes](#routes)
+   2.  [cv](#cv)
+   3.  [git](#git)
+   4.  [job](#job)
+   5.  [role](#role)
+   6.  [service](#service)
+   7.  [user](#user)
 
+2. Tools
+   1. [hashCode](#hashCode)
+   2. [repairModule](#repairModule)
+   3. [terminal](#terminal)
+   
+3. DataBase
+   1. [User](#User-DB)
 ---
 
 ## Introducción
 
-Este proyecto lo hicimos para que la gente tenga trabajo, y aprobar la materia
+El proyecto se refiere a un software de oferta y demanda de empleo. Será el enlace entre las empresas y los candidatos, ya que su servicio consiste en servir como medio para que las empresas den a conocer las ofertas de trabajo que tienen y para que los postulantes ofrezcan sus servicios.
 
 ---
 
@@ -110,6 +126,14 @@ Constantemente revisa si hay modificaciones en los archivos para relanzar el ser
 "nodemon --watch src/Server src/Server/server.js".
 
 "--watch src/Server" evita que el server se reinicie por modificaciones fuera de la carpeta server.
+
+[indice](#indice)
+
+---
+
+## Nodemailer
+
+Es un módulo que permite enviar Emails de forma sencilla. Véase en **mail.js**
 
 [indice](#indice)
 
@@ -330,7 +354,7 @@ Los mismos se enviaran al clickear en el botón.
 
 Veamos el ejemplo:
 
-```javascript
+```html
 <Form api={api} method="put">
    <FormItem name="Usuario" idInput="name"/>
    <FormItem name="Password" type="password" idInput="password"/>
@@ -474,8 +498,192 @@ En el ejemplo el se crearía un json del tipo:
 
 ---
 
+## ViewRecoveryPassword
+
+[indice](#indice)
+
+---
+
 ## ViewRegister
 
 [indice](#indice)
 
 ---
+
+## routes
+
+Este modulo no es en si parte de la API sino que se encarga de cargar todos las rutas que estén en la carpeta **routes**. De esa forma no es necesario cargarlas manualmente
+
+Para usarla, incluya un archivo en la carpeta **routes**.
+En el solicite `Router` de `express`
+
+```javascript
+const router = require('express').Router();
+```
+
+utilícelo como acostumbra y luego exportelo
+
+```javascript
+module.exports = router;
+```
+El servidor entonces importara todas las rutas al usar la linea:
+
+```javascript
+const server = express();
+server.use(require("./routes/routes"));
+```
+
+[indice](#indice)
+
+---
+
+## cv
+
+### GET /cv (role)
+
+Devuelve el CV del rol numero `role`
+En caso de no haber iniciado sesión o no enviar el parámetro `role` devuelve el CV guardado temporalmente por el usuario.(véase [PUT](#PUT-/cv-(role)))
+
+### PUT /cv (role, ...body)
+
+Guarda los datos enviados en el `body` en el CV del rol numero `role`. En caso de no haber iniciado sesión o no enviar el parámetro `role` lo guarda de manera temporal usando [session](#express-session).
+Puede ver los datos del CV en [User](#user-db)
+
+[indice](#indice)
+
+---
+
+## git
+
+### GET /statusGit
+
+Ejecuta un `git status` en el servidor
+
+### GET /pullGit
+
+Ejecuta un `git pull` en el servidor
+
+[indice](#indice)
+
+---
+
+## job
+
+### GET /job (role)
+
+Devuelve la lista de **applications** cargados por el rol `role` 
+
+### PUT /job (role, ...body)
+
+Crea un nuevo json para **applications**, a partir de los datos enviados
+Puede ver los datos de los **applications** en [User](#user-db)
+
+[indice](#indice)
+
+---
+
+## role
+
+### GET /role ()
+
+Devuelve la lista de roles del usuario que haya iniciado sesión
+
+### PUT /role (role, ...body)
+
+Guarda un nuevo rol
+Puede ver los datos de los **role** en [User](#user-db)
+
+[indice](#indice)
+
+---
+
+## service
+
+### GET /service ()
+
+Devuelve la lista de **stalls** del usuario que haya iniciado sesión
+
+### PUT /service (role, ...body)
+
+Guarda un nuevo **stalls**
+Puede ver los datos de los **stalls** en [User](#user-db)
+
+[indice](#indice)
+
+---
+
+
+## user
+
+### POST /login (name,password)
+
+inicia sesión
+
+### POST /logout ()
+
+Termina la sesión
+
+### PUT /user (name, password, password2, email)
+
+Luego de hacer verificaciones crea un nuevo usuario
+
+[indice](#indice)
+
+---
+
+## hashCode
+
+Agrega a los String una función para obtener su hashCode. Ej:
+```javascript
+require('./tools/hashcode');
+var cadena="hola";
+console.log(cadena.hashCode());
+//3208380
+```
+
+[indice](#indice)
+
+---
+
+## repairModule
+
+Un script que verifica la version de un sub-modulo, en caso de no ser la versión esperada, pregunta al usuario y en caso afirmativo, actualiza.
+
+[indice](#indice)
+
+---
+
+## terminal
+
+Permite llamar a la consola desde nodejs.
+
+Creamos usando:
+
+```javascript
+const terminal = new (require('./terminal'))();
+```
+
+- `terminal.display` booleano que determina si se muestra la salida de la consola
+- `terminal.setDirectory(dir)` cambia el directorio actual. `dir` es un String que da la ruta en forma absoluta o en relación al root del proyecto (Donde se ejecuta el `npm start`)
+- `run(command = "", display = this.display)` ejecuta un comando, en forma async. Devuelve una promesa son el mensaje mostrado por consola.
+- `terminal.stdout` función donde se envía la salida de la consola en caso de `terminal.display = true`
+- `this.stderr` similar al anterior, para errores.
+- `terminal.readline` Una interfaz del modulo `"readline"`. Se usa para realizar preguntas al usuario a través de la consola de la forma:
+- 
+  ```javascript
+  terminal.readline.question("Mensaje", (respuesta)=>{
+     //Función que se ejecuta al recibir respuesta del usuario
+  })
+  ```
+
+
+[indice](#indice)
+
+---
+
+## User DB
+
+[indice](#indice)
+
+---
+
