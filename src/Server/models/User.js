@@ -20,6 +20,9 @@ const userSchema = new mongoose.Schema({
         google: String,
         facebook: String
     },
+    codeRecoveryPass:{
+        type: String
+    },
     role: [{
         roleType: Number,
         roleName: String,

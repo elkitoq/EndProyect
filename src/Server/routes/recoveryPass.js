@@ -6,32 +6,53 @@ const { User } = require('../models/User.js')
 
 router.post('/recovery-pass', async (req, res) => {
     console.log(req.body);
-    const email = await User.findByEmail(req.body.email);
-    if (email) {
-        req.session.codeRecoveryPass = Math.random();
-        sendMail({
+    const user = await User.findByEmail(req.body.email);
+    console.log(user);
+    if (user) {
+        user.codeRecoveryPass = Math.random();
+        user.save()
+        const mail = {
             email: req.body.email,
             subject: "Recupera tu contraseña",
-            html: `<p>Aquí puedes recuperar tu <b><a href="${req.hostname}:4000/recovery-pass?code=${req.session.codeRecoveryPass}" >Contraseña</a></b></p>`
-        });
+            html: `<p><h1>Hola ${user.name},</h1><br/>
+            Aquí puedes recuperar tu 
+            <b><a href="http://${req.body.clientUrl}/recovery-pass?user=${user.name}&code=${user.codeRecoveryPass}" >
+            Contraseña</a></b></p>`
+        }
+        sendMail(mail);
         res.status(201)
     }
 })
 
-router.get('/recovery-pass', (req, res) => {
-    if (req.session.codeRecoveryPass === req.params.code) {
-        res.write("hola mundo");
+router.put('/recovery-pass', async(req, res) => {
+    console.log(req.body);
+
+    const user = await User.findByName(req.body.user);
+
+    console.log(user.codeRecoveryPass === req.body.code);
+    console.log(req.body.code);
+    console.log(user.codeRecoveryPass);
+
+    if (user.codeRecoveryPass && user.codeRecoveryPass === req.body.code) {
+        if (req.body["password"] === req.body["password2"]) {
+            user.password=req.body.password.hashCode();
+            console.log(req.body.password);
+            console.log(req.body.password.hashCode());
+            user.codeRecoveryPass=undefined;
+            user.save()
+            req.session.user = user;
+            res.status(201).json({
+                response: {password:"",password2:""}, 
+                info: {isLogin:true,message:"Contraseña cambiada"} });
+        }
+        else 
+            res.status(208).json({ info: { error: "Las contraseñas deben coincidir" } });
     }
     else {
-        res.write("codigo expirado reintente")
+        res.json({info:{
+            error:"Codigo expirado o incorrecto"
+        }})
     }
-    res.end();
-});
-
-router.get('/recovery', (req, res) => {
-    req.session.codeRecoveryPass = Math.random();
-    res.write(`<p>Aquí puedes recuperar tu <b><a href="http://${req.hostname}:4000/recovery-pass?code=${req.session.codeRecoveryPass}" >Contraseña</a></b></p>`
-    )
     res.end();
 });
 
