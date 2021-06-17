@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
         google: String,
         facebook: String
     },
-    codeRecoveryPass:{
+    codeRecoveryPass: {
         type: String
     },
     role: [{
@@ -56,11 +56,7 @@ exports.User = new mongoose.model('users', userSchema);
 //buscar usuario por nombre
 async function findUserByName(name) {
 
-    const regExpTerm = new RegExp(name, 'i');
-    const regExprSearch = [
-        { name: { $regex: regExpTerm } }
-    ];
-    const user = await exports.User.find({ '$or': regExprSearch });
+    const user = await exports.User.find({ name: { '$eq': name } });
     return user[0];
 }
 
@@ -69,11 +65,7 @@ exports.User.findByName = findUserByName;
 //buscar usuario por email(para recuperacion de password)
 async function findUserByEmail(email) {
 
-    const regExpTerm = new RegExp(email, 'i');
-    const regExprSearch = [
-        { email: { $regex: regExpTerm } }
-    ];
-    const user = await exports.User.find({ '$or': regExprSearch });
+    const user = await exports.User.find({ email: { '$eq': regExprSearch } });
     return user[0];
 }
 
