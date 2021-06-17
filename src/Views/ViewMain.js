@@ -40,7 +40,7 @@ export const ViewMain = () =>
     <ViewRoute path="/createService" view={ViewCreateOfferService} />
     <ViewRoute path="/findJob" view={ViewFindJob} />
     <ViewRoute path="/findService" view={ViewFindService} />
-    <ViewRoute path="/recovery-pass" view={ViewRecoverPassword} />
+    <ViewRoute path="/recovery-pass" view={ViewLogin} />
     <ViewRoute path="/" view={ViewHome} />  
   </Switch>
 

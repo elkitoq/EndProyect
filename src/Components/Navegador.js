@@ -56,15 +56,15 @@ export const NavegadorPrincipal = () => {
           <NavButton href="/lookforWorker/"
             className="mostrar-search"
             children="Buscar Empleado" />
-          <div className="butons-login">
-            <NavButton href="/Login/"
-              onClick={(login.isLogin === "true") ? logout : () => { }}
-              children={(login.isLogin === "true") ? "Logout" : "Login"}
-              className="a-login" />
-            <NavButton href="/Register/"
-              className="a-register"
-              children={(login.isLogin === "true") ? "Crear Rol" : "Register"} />
-          </div>
+        </Nav>
+        <Nav className="ms-auto" navbar>
+          <NavButton href="/Login/"
+            onClick={(login.isLogin === "true") ? logout : () => { }}
+            children={(login.isLogin === "true") ? "Logout" : "Login"}
+            className="a-login" />
+          <NavButton href="/Register/"
+            className="a-register"
+            children={(login.isLogin === "true") ? "Crear Rol" : "Register"} />
         </Nav>
       </Collapse>
     </Navbar>

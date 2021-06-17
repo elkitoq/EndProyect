@@ -1,5 +1,5 @@
 import { useCookies } from "react-cookie";
-import { Button, Card, Container, Input, Row, Col } from "reactstrap";
+import { Button, Card, Container, Input} from "reactstrap";
 import { FormRegister } from "../Components/FormRegister";
 import API from "../Tools/API";
 

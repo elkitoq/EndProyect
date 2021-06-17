@@ -18,9 +18,9 @@ export const ViewCreateCV = () => {
     const [user] = useCookies(['selectUser']);
 
     const dataDefault = { "role":
-        (user.selectUser && user.selectRole && aspirante(user.selectUser[user.selectRole]))?
+        (user.selectUser && user.selectUser[user.selectRole] && aspirante(user.selectUser[user.selectRole]))?
         user.selectRole:
-        user.selectUser? 
+        Array.isArray(user.selectUser)? 
         user.selectUser.findIndex(aspirante).toString()
         :0
     }

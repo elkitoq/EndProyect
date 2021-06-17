@@ -37,12 +37,7 @@
     border-color: #25E9BA;  
 }
 
-.butons-login{
-    display: flex;
-    margin-left: 20rem;
-}
-
-.butons-login .a-login{
+.nav-link .a-login{
     margin-right: 3rem;
 } 
 

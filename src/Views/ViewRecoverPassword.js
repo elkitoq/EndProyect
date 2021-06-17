@@ -19,36 +19,31 @@ export const ViewRecoverPassword = () => {
         if (info.message)
             alert(info.message)
     }
+    
 
 
-
-
-    return (
-        <Container className="themed-container">
-            <Row>
-                <Col sm="12" md={{ size: 4, offset: 4 }}>
-                    {getJson.code ?
+    return getJson.code ?
                         <Form api={api} method="put" className="form-container">
+                            <h3>Cambiar contraseña:</h3>
                             <FormItem name="Contraseña" type="password" idInput="password" minLength={4} required />
                             <FormItem name="Repetir Contraseña" type="password" idInput="password2" required />
                             <Input type="hidden" name="user" defaultValue={getJson.user} />
                             <Input type="hidden" name="code" defaultValue={getJson.code} />
                             <FormGroup className="separado">
                                 <Button size="lg" color="primary" blocks="true">Cambiar Contraseña</Button>
+                                {(api.getHookInfo().error)?<Button size="lg" color="primary" blocks="true" href="/recovery-pass">Volver a Solicitar</Button>:""}
+                                {(api.getHookInfo().message)?<Button size="lg" color="primary" blocks="true" href="/login">Volver a Login</Button>:""}
                             </FormGroup>
                         </Form> :
                         <Form api={api} method="post" className="form-container">
+                            <h3>Recuperar Contraseña:</h3>
                             <FormItem name="Usuario" idInput="name" />
                             <FormItem name="Email" type="email" idInput="email" />
                             <Input name="clientUrl" type="hidden" defaultValue={window.location.host} />
                             <FormGroup className="separado">
-                                <Button size="lg" color="primary" blocks="true">Solicitar</Button>
+                                <Button size="lg" color="primary" blocks="true">Solicitar cambio de Contraseña</Button>
                             </FormGroup>
-                        </Form>}
-                </Col>
-            </Row>
-        </Container>
-    )
+                        </Form>
 }
 
 

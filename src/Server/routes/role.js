@@ -16,7 +16,7 @@ router.get('/role', async (req, res) => {
     if (req.session.user !== undefined)
         res.status(201).json({response:req.session.user.role});
     else
-        res.status(201).json({response:[],info:{error:"No ha iniciado sesión"}});
+        res.status(201).json({info:{error:"No ha iniciado sesión"}});
     res.end();
 });
 module.exports = router;
