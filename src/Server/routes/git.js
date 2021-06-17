@@ -20,15 +20,26 @@ router.get('/checkoutGit', async (req, res) => {
         res.write(await execute(`git checkout ${req.query.branch}`));
     else {
         const lista = (await execute(`git branch -a`)).split("\n")
-        const select = lista.findIndex((e)=>e.search(" * "));
+        const select = lista.findIndex((e) => e.search(" * "));
         res.write(`<html>
-    <form>${select}
-        <select name="branch" value=${lista[select]}>
-            ${lista.map((e)=>`<option value="${e.substring(2)}">${e}</option>`)}
+    <form>
+        <select name="branch" value=${lista[select].substring(2)}>
+            ${lista.map((e) => `<option value="${e.substring(2)}">${e}</option>`)}
         </select>
         <button>Enviar</button>
     </form></html>`);
     }
+    res.end();
+});
+
+router.get('/git', async (req, res) => {
+    res.write(`
+    <html>
+        <a href="/statusGit">git status</a><br/>
+        <a href="/checkoutGit">git checkout</a><br/>
+        <a href="/pullGit">git pull</a><br/>
+    </html>
+    `);
     res.end();
 });
 
