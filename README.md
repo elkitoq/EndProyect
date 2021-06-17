@@ -403,7 +403,7 @@ En el ejemplo el se crearía un json del tipo:
 ---
 
 ## ViewCreateCV
-
+Le permite al usuario crear su CV
 [indice](#indice)
 
 ---
@@ -457,31 +457,31 @@ En el ejemplo el se crearía un json del tipo:
 ---
 
 ## ViewJobOffice
-
+Le permite al usuario sacar turnos para la oficina de empleo (en progreso)
 [indice](#indice)
 
 ---
 
 ## ViewLogin
-
+Le permite al usuario infresar a la pagina 
 [indice](#indice)
 
 ---
 
 ## ViewLookForJob
-
+Le permite al usuario buscar el trabajo que desea 
 [indice](#indice)
 
 ---
 
 ## ViewLookForWorker
-
+ Le permite buscar ala empresa postulnates para el puesto que necesitan cubrir 
 [indice](#indice)
 
 ---
 
 ## ViewMain
-
+Pagina principal del sistema 
 [indice](#indice)
 
 ---
@@ -493,19 +493,19 @@ En el ejemplo el se crearía un json del tipo:
 ---
 
 ## ViewOfferService
-
+El postulante puede ofrecer su servicio 
 [indice](#indice)
 
 ---
 
 ## ViewRecoveryPassword
-
+Verificar o recuperar la contraseña 
 [indice](#indice)
 
 ---
 
 ## ViewRegister
-
+El usuario puede crear su perfil en la pagina 
 [indice](#indice)
 
 ---
