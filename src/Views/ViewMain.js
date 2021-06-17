@@ -18,7 +18,6 @@ import { Route, Switch } from 'react-router';
 import { Container } from 'reactstrap';
 import { ViewCreateOfferJob } from './ViewCreateOfferJob.js';
 import { ViewCreateOfferService } from './ViewCreateOfferService.js';
-import { ViewRecoverPassword } from './ViewRecoverPassword.js';
 
 
 export const ViewMain = () =>

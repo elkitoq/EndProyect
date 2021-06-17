@@ -18,10 +18,10 @@ export const ViewOfferJob = () => {
     return (
         <Container className="abs-center" fluid={true}>
             <Row >
-                <h1>Aca mostraria puestos de la empresa</h1>
+                <h1>Acá mostraría puestos de la empresa</h1>
                 <Display api={api} get={getJson}>
                     <CardText key="name">Puesto:</CardText>
-                    <CardText className="text-wrap" key="description">Descripcion:</CardText>
+                    <CardText className="text-wrap" key="description">Descripción:</CardText>
                     <CardText key="req" hideData>Requerimientos:</CardText>
                 </Display>
             </Row>

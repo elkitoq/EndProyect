@@ -68,7 +68,7 @@ const CrearUsuario = () => {
     return (
         <>
             <div className="text-center">
-                <h3>¿Por donde queres empezar?</h3>
+                <h3>¿Por donde querés empezar?</h3>
                 <Container>
                         <Card inverse color="primary" className="tarjetasVerticales" onClick={crear.bind(this, 0)}>
                             Tengo una empresa, Quiero esclavos

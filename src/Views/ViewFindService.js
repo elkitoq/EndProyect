@@ -23,13 +23,13 @@ export const ViewFindService = (props) => {
     return (
         <Container className="abs-center" fluid={true}>
             <Row >
-                <h1>Aca mostraria los trabajadores disponibles que sean "{getJson.job}" </h1>
+                <h1>Acá mostraría los trabajadores disponibles que sean "{getJson.job}" </h1>
                 <Display api={api} get={getJson}>
                     <CardImg func={(elemento) => elemento.picture.large} />
                     <CardText func={(elemento) => ` ${elemento.name.last}, ${elemento.name.first}`}>Nombre: <b>{ }</b></CardText>
                     <CardText func={(elemento) => elemento.email.replace(/(@)([a-z]*)/, "@gmail")}>Email: </CardText>
-                    <CardText key="cell">Telefono:</CardText>
-                    <CardText text={getJson.job}>Ocupacion: <b></b></CardText>
+                    <CardText key="cell">Teléfono:</CardText>
+                    <CardText text={getJson.job}>Ocupación: <b></b></CardText>
                     <CardText hideData>OTROS DATOS SON DESCONOCIDOS</CardText>
                 </Display>
             </Row>

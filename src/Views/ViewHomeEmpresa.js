@@ -8,7 +8,7 @@ export const ViewHomeEmpresa = () => {
     return (
         <Container className="abs-center">
             <div className="divtext center">
-                <h1>Paquina de inicio para empresas</h1>
+                <h1>Pagina de inicio para empresas</h1>
                 <Row className="">
                     <OptionMenu href="/createJob/">Crear puesto</OptionMenu>
                     <OptionMenu href="/offerJob/">Ver puestos</OptionMenu>

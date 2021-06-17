@@ -14,8 +14,8 @@ export const ViewCreateOfferService = () => {
     return (
         <Container>
             <Form api={new API("/service", useState({}), "response", useState({}), "info")} method="put">
-                <FormItem name="Ofresco:" idInput="name" />
-                <FormItem name="Descripion" type="textarea" idInput="description" />
+                <FormItem name="Ofrezco:" idInput="name" />
+                <FormItem name="Description" type="textarea" idInput="description" />
                 <FormItem name="Precio" idInput="price" />
                 <Input name="role" type="hidden" defaultValue={cookies.selectRole} />
                 <Button className='button-submit' size="lg" color="primary" type="submit" block>Enviar</Button>

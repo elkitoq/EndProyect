@@ -49,7 +49,7 @@ export const ViewCreateCV = () => {
                         <Row>
                             <Col xs="4" sm="4" md="4" lg={{ size: 3, offset: 1 }}>
                                 <img src={noPhoto} className="foto-perfil" id="fotoPerfil" onClick={cargarFotoPerfil} alt="Cargar de perfil" style={{ cursor: 'pointer' }} />
-                                <div style={{ display: displayChargePhoto }}>Clik en la imagen para cambiarla</div>
+                                <div style={{ display: displayChargePhoto }}>Click en la imagen para cambiarla</div>
                                 <Input type="file" id="cargarImagen" onChange={mostrarFotoPerfil} />
                             </Col>
 

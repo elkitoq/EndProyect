@@ -59,7 +59,7 @@ export const ViewRecoverPassword2 = () => {
             <Row>
                 <Col sm="12" md={{ size: 4, offset: 4 }}>
                     {getJson.code ?
-                        <Form api={api} method="put" className="form-container">asd
+                        <Form api={api} method="put" className="form-container">
                             <FormItem name="Contraseña" type="password" idInput="password" minLength={4} required />
                             <FormItem name="Repetir Contraseña" type="password" idInput="password2" required />
                             <FormGroup className="separado">

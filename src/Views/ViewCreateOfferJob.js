@@ -15,7 +15,7 @@ export const ViewCreateOfferJob = () => {
         <Container>
             <Form api={new API("/job", useState({}), "response", useState({}), "info")} method="put">
                 <FormItem name="Se busca:" idInput="name" />
-                <FormItem name="Descripion" type="textarea" idInput="description" />
+                <FormItem name="Descripción" type="textarea" idInput="description" />
                 <FormItem name="Requerimientos" type="textarea" idInput="req" />
                 <Input name="role" type="hidden" defaultValue={cookies.selectRole} />
                 <Button className='button-submit' size="lg" color="primary" type="submit" block>Enviar</Button>
