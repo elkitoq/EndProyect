@@ -59,15 +59,15 @@ export const ViewCreateCV = () => {
                                     <FormItem name="Apellido" idInput="lastName" />
                                 </Row>
                                 <Row>
-                                    <FormItem name="Direccion" idInput="adress" />
+                                    <FormItem name="Dirección" idInput="address" />
                                 </Row>
                                 <Row md="2">
                                     <FormItem name="Ciudad / Distrito" idInput="city" />
-                                    <FormItem name="Codigo Postal" idInput="cp" />
+                                    <FormItem name="Código Postal" idInput="cp" />
                                 </Row>
                                 <Row md="2">
                                     <FormItem name="Edad" idInput="age" />
-                                    <FormItem name="Telefono" type="number" idInput="phone" />
+                                    <FormItem name="Teléfono" type="number" idInput="phone" />
                                 </Row>
                                 <Row>
                                     <FormItem name="E-Mail" type="email" idInput="email" />
@@ -79,7 +79,7 @@ export const ViewCreateCV = () => {
                     <FormGroup>
                         <Row md="2" className="separado">
                             {(Array.isArray(user.selectUser) && user.selectUser.length && user.selectUser.find(aspirante))?
-                            <FormItem type="select" name="El CV se guardara en:" idInput="role" defaultValue={dataDefault.role}>
+                            <FormItem type="select" name="El CV se guardará en:" idInput="role" defaultValue={dataDefault.role}>
                                 {(Array.isArray(user.selectUser) )? user.selectUser.map(
                                     (element, index) => aspirante(element) ?
                                         <option key={`option-${index}`} value={index}>{element.roleName}</option> : ""

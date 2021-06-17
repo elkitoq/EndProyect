@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
             lastName: String,
             age: Number,
             imgCv: String,
-            adress: String,
+            address: String,
             cp: Number,
             city: String,
             phone: String,
@@ -62,10 +62,10 @@ async function findUserByName(name) {
 
 exports.User.findByName = findUserByName;
 
-//buscar usuario por email(para recuperacion de password)
+//buscar usuario por email(para recuperación de password)
 async function findUserByEmail(email) {
-
-    const user = await exports.User.find({ email: { '$eq': regExprSearch } });
+    
+    const user = await exports.User.find({ email: { '$eq': email } });
     return user[0];
 }
 

@@ -7,6 +7,11 @@ router.post('/login', async (req, res) => {
     const user = await User.findByName(req.body.name);
     // console.log(`login:${user.name}`);
     // console.log(`${user.password}=== ${req.body.password.hashCode()}`);
+
+
+    if (req.body.user)
+        req.body.user = req.body.user.toLowerCase()
+
     if (user)
         if (user.password === `${req.body.password.hashCode()}`) {
             req.session.user = user;
@@ -28,13 +33,19 @@ router.post('/logout', (req, res) => {
 
 router.put('/user', async (req, res) => {
     req.session.view = req.session.view * 2;
+    if (typeof req.body.email === "string")
+        req.body.email = req.body.email.toLowerCase()
+
+    if (typeof req.body.name === "string")
+        req.body.name = req.body.name.toLowerCase()
+
     if (req.body.name && req.body.password && req.body.email) {
 
         const response = Object.assign({}, req.body);
         response["password"] = response["password2"] = "codificada";
 
-        if (req.body["password"].lengt <= 4)
-            res.status(208).json({ info: { error: "La contraseña debe tener un minimo de 4 caracteres" } })
+        if (req.body["password"].length < 4)
+            res.status(208).json({ info: { error: "La contraseña debe tener un mínimo de 4 caracteres" } })
 
         else
 
@@ -51,7 +62,7 @@ router.put('/user', async (req, res) => {
 
                     }
                 } else {
-                    res.status(208).json({ info: { error: "El email ya tiene una cuenta asoociada" } });
+                    res.status(208).json({ info: { error: "El email ya tiene una cuenta asociada" } });
                 }
             } else { res.status(208).json({ info: { error: "El usuario esta en linea" } }); }
 

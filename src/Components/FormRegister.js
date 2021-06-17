@@ -29,7 +29,7 @@ export const FormRegister = () => {
             <FormGroup className="separado">
                 <Button size="lg" color="primary" blocks="true">Crear</Button>
                 <Label style={{marginLeft:"5rem"}}>
-                    Ya tenes cuenta? <a className="a-register" href="/Login/">Logea aca</a>
+                    ¿Ya tenes cuenta? <a className="a-register" href="/Login/">Logea acá</a>
                 </Label>
             </FormGroup>
         </Form>

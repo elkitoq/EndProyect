@@ -6,6 +6,14 @@ const { User } = require('../models/User.js')
 
 router.post('/recovery-pass', async (req, res) => {
     console.log(req.body);
+
+    if (req.body.email)
+        req.body.email = req.body.email.toLowerCase()
+
+
+    if (req.body.user)
+        req.body.user = req.body.user.toLowerCase()
+
     const user = await User.findByEmail(req.body.email) || await User.findByName(req.body.name);
     console.log(user);
     if (user) {
@@ -20,7 +28,7 @@ router.post('/recovery-pass', async (req, res) => {
             Contraseña</a></b></p>`
         }
         sendMail(mail);
-        res.status(201).json({ info: { message: `Email enviado a ${user.email.substring(0,4)}***${user.email.substring(user.email.indexOf("@"))}, revise su correo` } })
+        res.status(201).json({ info: { message: `Email enviado a ${user.email.substring(0, 4)}***${user.email.substring(user.email.indexOf("@"))}, revise su correo` } })
     } else
         res.status(208).json({ info: { error: "La dirección de correo no figura en nuestra DB" } })
     res.end()

@@ -17,7 +17,7 @@ export const ViewOfferService = () => {
     return (
         <Container className="abs-center" fluid={true}>
             <Row >
-                <h1>Aca mostraría los servicios ofrecidos</h1>
+                <h1>Acá mostraría los servicios ofrecidos</h1>
                 <Display api={api} get={getJson}>
                     <CardText key="name">Se ofrece:</CardText>
                     <CardText className="text-wrap" key="description">Descripción:</CardText>

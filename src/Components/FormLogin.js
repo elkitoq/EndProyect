@@ -72,7 +72,7 @@ export const FormLogin = () => {
 
             <FormGroup className="label-register">
                 <Label >
-                    No tenes cuenta todavia? <a className="a-register" href="/Register/">Registrate aca</a>
+                    ¿No tenes cuenta todavía? <a className="a-register" href="/Register/">Registrate acá</a>
                 </Label>
             </FormGroup>
         </Form>
