@@ -71,16 +71,16 @@ const CrearUsuario = () => {
                 <h3>¿Por donde querés empezar?</h3>
                 <Container>
                         <Card inverse color="primary" className="tarjetasVerticales" onClick={crear.bind(this, 0)}>
-                            Tengo una empresa, Quiero esclavos
+                            Tengo una empresa. Busco trabajadores
                         </Card>
                         <Card inverse color="primary" className="tarjetasVerticales " onClick={crear.bind(this, 1)}>
-                            Soy pobre, Quiero Trabajo
+                            Estoy buscando trabajo
                         </Card>
                         <Card inverse color="primary" className="tarjetasVerticales" onClick={crear.bind(this, 2)}>
-                            Soy independiente, Quiero ofrecer mis servicios
+                            Soy independiente. Quiero ofrecer mis servicios
                         </Card>
                         {/* <Card inverse color="primary" className="tarjetasQBuscas" onClick={crear.bind(this, 3)}>
-                        Tengo un amigo que me pidio le cargara una cuenta
+                        Tengo un amigo que me pidió le cargara una cuenta
                         </Card> */}
                 </Container>
             </div>
