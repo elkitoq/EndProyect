@@ -129,6 +129,142 @@
    position: static;
  }
 
+ @media (max-width: 1366px ){
+  .row-login{
+    margin-top: 0.7em;
+    border-radius: 9px;
+    box-shadow: 0px 3px 28px #0000002B;
+    padding: 5;
+    height: 530px;
+  }
+  
+  .column, .col-slideshow{
+    height: 530px;
+  }
+  
+  .logo-login{
+    margin-top: -5rem;
+    margin-left: 6rem;
+    margin-bottom: 3rem;
+    width: 60% !important;
+    height: 60%;
+  }
+  
+  .themed-container .row-login .column .form-container{
+    margin-top: -8rem;
+    margin-left: 2rem;
+    width: 85%;
+    height: 60%;
+  }
+   
+  .themed-container .row-login .column .form-container label{
+    margin-bottom: 0.2rem;
+  }
+  
+  .themed-container .row-login .column .form-container input{
+    margin-bottom: 0.5rem;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 5px;
+    position: relative;
+    z-index: 2;
+  }
+  
+   .themed-container .row-login .column .form-container .button-submit{
+      width: 100%;
+      height: 40px;
+      margin-top: 0.1rem;
+      border-radius: 5px;
+      font-size: larger;
+      font-weight: 600;
+      
+   }
+   
+   .my-facebook-button-class{
+     width: 100%;
+     height: 40px;
+     padding: 5px;
+     border-radius: 5px;
+     margin-bottom: 0.5em;
+     margin-top: 1.5rem;
+     background-color: #3b5998;
+     color: white;
+     border-color: transparent;
+     font-size: large;
+     font-weight: 600;
+   }
+  
+   .my-facebook-button-class:hover{
+    opacity: 0.85;
+    
+  }
+  
+   .butonLoginGoogle{
+     width: 100%;
+     height: 40px;
+     padding: 5px;
+     border-radius: 5px;
+     background-color: #E9523A !important;
+     border-color: transparent;
+     color: white !important;
+     font-size: large;
+     font-weight: 600;
+   }
+  
+   .butonLoginGoogle:hover{
+    opacity: 0.85;
+    
+  }
+  
+   .check-remember{
+     margin-top: 0.9rem;
+     width: 100%;
+     padding: 0;
+     margin-left: 1.5rem;
+   }
+  
+   .formgroup-a{
+     margin-left: 0.3rem;
+     margin-top: 0.9rem;
+   }
+  
+   .formgroup-a a{
+    text-decoration: none;
+   }
+  
+   .label-register{
+     margin-top: 1.2rem;
+     margin-left: 3.3rem;
+     width: 100%;
+     display: block;
+   }
+  
+   .label-register a{
+    margin-left: 3px;
+    text-decoration: none;
+   }
+  
+   .col-slideshow{
+     background-color: #0d6efd;
+     border-top-right-radius: 5px;
+     border-bottom-right-radius: 5px;
+   }
+  
+   .carousel{
+     width: 100%;
+     height: 100%;
+   }
+  
+   .img-carousel{
+     margin-left: 7.5rem;
+     margin-top: 3rem;
+   }
+  
+   .carousel-caption{
+     margin-top: -2.5rem;
+     position: static;
+   }
+ }
+
  @media (max-width: 450px ){
     .row-login{
       box-shadow: none;
