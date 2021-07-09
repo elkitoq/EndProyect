@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Component } from "react";
 
 export default class API {
 
@@ -24,14 +25,14 @@ export default class API {
     }
 
     getData() {
-        if (Array.isArray(this._data)) {
+        if (Array.isArray(this.getHookData())) {
             const r = [];
-            Array.prototype.push.apply(r, this._data);
+            Array.prototype.push.apply(r, this.getHookData());
             return r;
         }
 
         else
-            return Object.assign({}, this._data);
+            return Object.assign({}, this.getHookData());
     }
 
     getHookData() {
@@ -42,7 +43,7 @@ export default class API {
         return this._info;
     }
 
-    send(method = "post", data = this._data) {
+    send(method = "post", data = this.getHookData()) {
         var result;
         console.log(`send ${method} to ${this.url}`);
         switch (method) {
@@ -56,9 +57,9 @@ export default class API {
         }
 
 
-        result.then((res) => {         
-            if (res.data[this.responseKey] !== undefined){
-                Object.assign(this.getHookData(),res.data[this.responseKey])
+        result.then((res) => {
+            if (res.data[this.responseKey] !== undefined) {
+                Object.assign(this.getHookData(), res.data[this.responseKey])
                 this.refresh();
             }
             if (res.data[this.infoKey] !== undefined) {
@@ -71,12 +72,12 @@ export default class API {
         return result;
     }
 
-    get(data = this._data) {
+    get(data = this.getHookData()) {
         return this.send("get", data);
 
     }
 
-    post(data = this._data) {
+    post(data = this.getHookData()) {
         return this.send("post", data);
     }
 
@@ -84,7 +85,7 @@ export default class API {
         return this.send("put", data)
     }
 
-    delete(data = this._data) {
+    delete(data = this.getHookData()) {
         return this.send("delete", data);
     }
 
