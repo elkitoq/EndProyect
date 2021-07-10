@@ -1,10 +1,11 @@
 
 import React from 'react';
 import { Form as FormB } from 'reactstrap'
+import API from '../Tools/API';
 
 
 
-export const Form =({ onSubmit = () => { }, children, api, method = "post", ...props}) => {
+export const Form =({ onSubmit = () => { }, children, api = API.getApiComponent(children), method = "post", ...props}) => {
         let i = 0;
         const createClone = (element, data) => {
 

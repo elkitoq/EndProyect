@@ -1,7 +1,7 @@
 import { useCookies } from "react-cookie";
 import { Button, Card, Container, Input} from "reactstrap";
 import { FormRegister } from "../Components/FormRegister";
-import API from "../Tools/API";
+import { QAPI } from "../Tools/API";
 
 let user, setUser;
 
@@ -30,7 +30,7 @@ const ButtonCreate = ({ href }) =>
             if (user.selectUser[user.selectUser.length - 1].roleName === "" || user.selectUser[user.selectUser.length - 1].roleName === undefined)
                 user.selectUser[user.selectUser.length - 1].roleName = "N/N";
             setUser("selectUser", user.selectUser, { path: '/' })
-            new API('/role').send("put", user.selectUser[user.selectUser.length - 1]);
+            new QAPI('/role').send("put", user.selectUser[user.selectUser.length - 1]);
         }}>
         Crear</Button>
 

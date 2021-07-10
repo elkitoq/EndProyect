@@ -234,13 +234,37 @@ Del archivo Navegador. La barra superior que incluye botones para navegar por el
 
 La clase API del cliente es una interfaz entre el cliente y el servidor. Permite crear un vinculo hacia una url especifica del server para enviar datos y recibir una respuesta. 
 
-Para crear una instancia Api usamos:
+Para crear una instancia Api podemos usar 3 metodos:
+
+   1 - API Rapida
+   ```javascript
+   const api = new QAPI(url)
+
+   //La api en este caso no almacena los datos pero podemos hacer uso de ellos con promesas:
+   const apiEjemplo = new QAPI('/role') //Creamos la api
+                        .send("get", {}) // enviamos un get, sin datos
+                        .then((res) => { // al llegar la respuesta...
+                           setUser("selectUser", res.data.response, { path: '/' }); //... se ejecuta esta función
+                         });
+   ```
+
+   2 - API como componente:
+
+   Dentro del `<Form>` o del `<Display>` o lo que sea que utiliza la api, creamos el componente:
+   ```javascript
+   <APIComponent url="/recovery-pass" APIClass={APIRecovery} mode={APIComponent.mode.SINGLE} responseKey="response" infoKey = "info"/>
+   ```
+   En este caso sera el componente `<Form>` o `<Display>` el que se encarga de crear una api (con el método que veremos en el punto 3) 
+   usará la url que se le pase para crear una instancia de la APIClass que se le cargue, `mode={APIComponent.mode.SINGLE}` significa que los datos que se guardaran serán de un único json (default para los `<Form>`) y el `mode={APIComponent.mode.ARRAY}` sera una lista de json (default para los `<Display>`)
+
+   3 - API como objeto
 
 ```javascript
- const api = new API(url, dataState, responseKey , infoState , infoKey)
+ const api = new API({url, responseKey, infoKey,mode})
 
- const apiEjemplo = new API('https://randomuser.me/api/', useState([]), "results",useState({}),"info");
+ const apiEjemplo = new API({url:'https://randomuser.me/api/',responseKey: "results",infoKey: "info", mode: APIComponent.mode.ARRAY);
 ```
+
 
 Donde:
 
@@ -248,21 +272,19 @@ Donde:
 
 Es la dirección de la api a la que queremos conectarnos. Puede ser del mismo servidor ```"/user"``` en cuyo caso se redireccionará al puerto 4000. O de un servidor externo ```"https://randomuser.me/api/"``` para ello use siempre "http" o "https" al comienzo del string
 
-#### dataState
-
-Un conjunto del tipo ```[data, setData]``` de hook de estado de React donde se guardaran los datos. Para crearlo use ```useState([])``` en caso de múltiples datos o ```useState({})``` en caso de un dato único. No lo crea la clase automáticamente porque react no lo permite.
-
 #### responseKey
 
 La key con la que el servidor enviará los datos. En el caso del ejemplo el servidor envía un json del tipo ```{results:Array(10),info:{...}}``` por lo que recuperamos los datos en la key "results"  
 
-#### infoState
-
-Igual a dataState pero para la información extra del servidor (Cantidad de paginas, Estados del servidor, Errores, etc), creelo con ```useState({})```
-
 #### infoKey
 
 Igual a responseKey, pero para la key de información. En el ejemplo (```{results:Array(10),info:{...}}```) usamos la key "info"
+
+#### mode
+
+Representa la forma en la que se guardaran los datos:
+- `APIComponent.mode.SINGLE` para json simple.
+- `APIComponent.mode.ARRAY` para arreglo de jsons.
 
 #### Métodos
 - ```getData()``` Devuelve una copia de los datos obtenidos o cargados para enviar (Estos datos son estáticos. Para renderizarlos en pantalla use "getHookData")
@@ -295,7 +317,7 @@ Podemos crear el componente de la siguiente manera:
 ```html
 <Display api={api} get={get}>
 ```
-Donde ```api``` es una instancia de [API](#API-Client) que conectará con el servidor
+Donde ```api``` es una instancia de [API](#API-Client) que conectará con el servidor (También se puede usar un componente `<APIComponent>`, véase [Api](#api-client))
 
 ```get``` es un json que incluye los datos que se pedirán por method GET. Ej ```{job:"Electricista", page: "1"}```
 Para obtenerlos desde la url del cliente vea [API](#API-Client).getSearchParam(search)
@@ -366,7 +388,8 @@ Veamos el ejemplo:
 </Form>
 ```
 
-Al crear el Form le pasamos el api y el método con el que queremos qu se envíen los datos (get, post, put. Por defecto "post") 
+Al crear el Form le pasamos el api y el método con el que queremos que se envíen los datos (get, post, put. Por defecto "post") 
+(También se puede usar un componente `<APIComponent>`, véase [Api](#api-client))
 
 El componente `<FormItem>` se usa para crear un conjunto label-input con el texto de `name` en la label y el key asociado para los datos `idInput`
 

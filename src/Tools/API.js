@@ -1,9 +1,9 @@
 import axios from "axios";
-import { Component } from "react";
+import React, { Component, useState } from "react";
 
 export default class API {
 
-    constructor(url, [data, setData] = [{}, null], responseKey = "response", [info, setInfo] = [{}, null], infoKey = "info") {
+    constructor({url, responseKey = "response", infoKey = "info",mode=APIComponent.mode.SINGLE},qApi=false) {
 
         if (url.substring(0, 4) !== "http") {
             this.withCredentials = true;
@@ -12,17 +12,28 @@ export default class API {
 
         else this.url = url;
 
-        this._data = data || {};
-        this._setData = setData;
+        if (qApi){
+            this._data=mode===APIComponent.mode.SINGLE?{}:[];
+            this._setData=(value)=>{this._info=value};
+        }
+        else
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        [this._data, this._setData] = useState(mode===APIComponent.mode.SINGLE?{}:[]);
+        
         this.responseKey = responseKey;
 
-
-        this._info = info || {};
-        this._setInfo = setInfo;
-        this.infoKey = infoKey;
-        this.changeInfo = () => { };
-
+        if (qApi){
+            this._info={};
+            this._setInfo=(value)=>{this._info=value};
+        }
+        else
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        [this._info, this._setInfo] = useState({});
+        this.infoKey = infoKey;      
+        
     }
+   
+    changeInfo = () => { };
 
     getData() {
         if (Array.isArray(this.getHookData())) {
@@ -117,4 +128,49 @@ export default class API {
         return params;
     }
 
+    static getApiComponent(children,mode=APIComponent.mode.SINGLE){
+        for (let child of children){
+            if (child.type===APIComponent){
+                var props = Object.assign({},child.props);
+                if (props.mode===undefined)
+                    props.mode = mode
+                var api;
+                if (props.APIClass === undefined)
+                    api= new API(props);
+                else
+                    api= new props.APIClass(props);
+                if (api.didMount!==undefined && child.props.events!==undefined)
+                    child.props.events.didMount=()=>api.didMount();
+                return api;
+            }  
+        }
+        
+    }
+
 }
+
+export class APIComponent extends Component {
+
+
+    constructor({url,mode,responseKey,infoKey,APIClass,events}){
+        super();
+        
+        if (events !== undefined)
+        this.componentDidMount=events.didMount || (()=>{});
+    }
+
+    static mode = {
+        SINGLE:"single",
+        ARRAY:"array"
+    }
+
+    render() {
+        return (<></>)
+    }
+}
+
+export class QAPI extends API {
+    constructor(url){
+        super({url},true)
+    }
+} 

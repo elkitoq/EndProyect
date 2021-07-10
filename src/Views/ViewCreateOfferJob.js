@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 import { Button, Container, Input } from "reactstrap";
 import { Form } from "../Components/Form";
 import { FormItem } from "../Components/FormItem";
-import API from "../Tools/API";
+import API, { APIComponent } from "../Tools/API";
 
 
 
@@ -13,7 +13,8 @@ export const ViewCreateOfferJob = () => {
 
     return (
         <Container>
-            <Form api={new API("/job", useState({}), "response", useState({}), "info")} method="put">
+            <Form method="put">
+                <APIComponent url="/job"/>
                 <FormItem name="Se busca:" idInput="name" />
                 <FormItem name="Descripción" type="textarea" idInput="description" />
                 <FormItem name="Requerimientos" type="textarea" idInput="req" />

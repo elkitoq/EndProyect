@@ -9,7 +9,7 @@ import {
   NavItem,
   NavLink
 } from 'reactstrap'
-import API from '../Tools/API';
+import { QAPI } from '../Tools/API';
 import { Busqueda } from './Busqueda';
 import { DropdownRol } from './role';
 import logo from '../Assets/image/logo_nabvar.png'
@@ -31,7 +31,7 @@ export const NavegadorPrincipal = () => {
     if (login.isLogin === "true")
       removeCookie('selectUser', { path: '/' })
     setCookie("isLogin", false, { path: '/' });
-    new API('/logout').send("post", { hola: "mundo" });
+    new QAPI('/logout').send("post", { hola: "mundo" });
   }
 
   return (

@@ -1,9 +1,8 @@
-import { useState } from 'react'
 import { ButtonFacebook } from '../Components/ButtonFacebook';
 import { ButtonGoogle } from '../Components/ButtonGoogle';
 import { BoxLoginRecoveryPass } from '../Components/BoxLoginRecoveryPass'
 import { Form } from './Form';
-import API from '../Tools/API';
+import API, { APIComponent } from '../Tools/API';
 import { Button, FormGroup, Label } from 'reactstrap';
 import { FormItem } from './FormItem';
 import { useCookies } from 'react-cookie';
@@ -32,19 +31,21 @@ export const FormLogin = () => {
     }
 
     const [, setCookie] = useCookies(['isLogin']);
-
-    const api = new API('/login', useState({}), "response", useState({}), "info")
+   
+    class APILogin extends API{
+        changeInfo= (newValue) => {
+                if (newValue.error)
+                    alert(newValue.error);
+                if (newValue.isLogin) {
+                    setCookie("isLogin", true, { path: '/' });
+                }
+            }
+    } 
     
-    api.changeInfo= (newValue) => {
-        if (newValue.error)
-            alert(newValue.error);
-        if (newValue.isLogin) {
-            setCookie("isLogin", true, { path: '/' });
-        }
-    }
 
     return (
-        <Form className="form-container" onSubmit={submit} api={api}>
+        <Form className="form-container" onSubmit={submit}>
+            <APIComponent url='/login' APIClass={APILogin}/>
 
             {/* <FormGroup>
                 <Label for="userInput">Usuario</Label>

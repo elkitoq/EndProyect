@@ -4,26 +4,37 @@ import { useLocation } from 'react-router-dom';
 import { Container, Row, Col, FormGroup, Button, Input } from 'reactstrap';
 import { Form } from '../Components/Form.js';
 import { FormItem } from '../Components/FormItem.js';
-import API from '../Tools/API';
+import API, { APIComponent } from '../Tools/API';
 
 export const ViewRecoverPassword = () => {
 
     const { search } = useLocation();
     const getJson = API.getSearchParam(search);
 
-    const api = new API('/recovery-pass', useState({}), "response", useState({}), "info")
+    const [error,setError]=useState(false)
 
-    api.changeInfo = (info) => {
-        if (info.error)
-            alert(info.error)
-        if (info.message)
-            alert(info.message)
+    class APIRecovery extends API{
+
+         changeInfo = (info) => {
+        if (info.error){
+            alert(info.error);
+            setError(true);
+        }
+            
+        if (info.message){
+            alert(info.message);
+            setError("ok");
+        }
     }
+
+    }
+   
     
 
 
     return getJson.code ?
-                        <Form api={api} method="put" className="form-container">
+                        <Form method="put" className="form-container">
+                            <APIComponent url="/recovery-pass" APIClass={APIRecovery}/> 
                             <h3>Cambiar contraseña:</h3>
                             <FormItem name="Contraseña" type="password" idInput="password" minLength={4} required />
                             <FormItem name="Repetir Contraseña" type="password" idInput="password2" required />
@@ -31,11 +42,12 @@ export const ViewRecoverPassword = () => {
                             <Input type="hidden" name="code" defaultValue={getJson.code} />
                             <FormGroup className="separado">
                                 <Button size="lg" color="primary" blocks="true">Cambiar Contraseña</Button>
-                                {(api.getHookInfo().error)?<Button size="lg" color="primary" blocks="true" href="/recovery-pass">Volver a Solicitar</Button>:""}
-                                {(api.getHookInfo().message)?<Button size="lg" color="primary" blocks="true" href="/login">Volver a Login</Button>:""}
+                                {error===true?<Button size="lg" color="primary" blocks="true" href="/recovery-pass">Volver a Solicitar</Button>:""}
+                                {error==="ok"?<Button size="lg" color="primary" blocks="true" href="/login">Volver a Login</Button>:""}
                             </FormGroup>
                         </Form> :
-                        <Form api={api} method="post" className="form-container">
+                        <Form method="post" className="form-container">
+                            <APIComponent url="/recovery-pass" APIClass={APIRecovery}/> 
                             <h3>Recuperar Contraseña:</h3>
                             <FormItem name="Usuario" idInput="name" />
                             <FormItem name="Email" type="email" idInput="email" />
@@ -49,8 +61,6 @@ export const ViewRecoverPassword = () => {
 
 export const ViewRecoverPassword2 = () => {
 
-    const api = new API('/recovery-pass', useState({}), "response", useState({}), "info")
-
     const { search } = useLocation();
     const getJson = API.getSearchParam(search);
 
@@ -59,7 +69,8 @@ export const ViewRecoverPassword2 = () => {
             <Row>
                 <Col sm="12" md={{ size: 4, offset: 4 }}>
                     {getJson.code ?
-                        <Form api={api} method="put" className="form-container">
+                        <Form method="put" className="form-container">
+                            <APIComponent url='/recovery-pass' />
                             <FormItem name="Contraseña" type="password" idInput="password" minLength={4} required />
                             <FormItem name="Repetir Contraseña" type="password" idInput="password2" required />
                             <FormGroup className="separado">
@@ -67,7 +78,8 @@ export const ViewRecoverPassword2 = () => {
                             </FormGroup>
                         </Form>
                         :
-                        <Form api={api} method="post" className="form-container">
+                        <Form method="post" className="form-container">
+                            <APIComponent url='/recovery-pass' />
                             <FormItem name="Usuario" idInput="name" />
                             <FormItem name="Email" type="email" idInput="email" defaultValue="rey.cristian.eze@gmail.com"/>
                             <FormGroup className="separado">
