@@ -39,12 +39,6 @@ export const ViewCreateCV = () => {
             this.get();
         }
 
-        changeInfo = (info) => {
-            if (info.error)
-                alert(info.error)
-            if (info.message)
-                alert(info.message)
-        }
     }
 
 

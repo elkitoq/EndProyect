@@ -3,7 +3,7 @@ import React, { Component, useState } from "react";
 
 export default class API {
 
-    constructor({url, responseKey = "response", infoKey = "info",mode=APIComponent.mode.SINGLE},qApi=false) {
+    constructor({ url, responseKey = "response", infoKey = "info", mode = APIComponent.mode.SINGLE }, qApi = false) {
 
         if (url.substring(0, 4) !== "http") {
             this.withCredentials = true;
@@ -12,28 +12,48 @@ export default class API {
 
         else this.url = url;
 
-        if (qApi){
-            this._data=mode===APIComponent.mode.SINGLE?{}:[];
-            this._setData=(value)=>{this._info=value};
+        if (qApi) {
+            this._data = mode === APIComponent.mode.SINGLE ? {} : [];
+            this._setData = (value) => { this._info = value };
         }
         else
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        [this._data, this._setData] = useState(mode===APIComponent.mode.SINGLE?{}:[]);
-        
+            // eslint-disable-next-line react-hooks/rules-of-hooks
+            [this._data, this._setData] = useState(mode === APIComponent.mode.SINGLE ? {} : []);
+
         this.responseKey = responseKey;
 
-        if (qApi){
-            this._info={};
-            this._setInfo=(value)=>{this._info=value};
+        if (qApi) {
+            this._info = {};
+            this._setInfo = (value) => { this._info = value };
         }
         else
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        [this._info, this._setInfo] = useState({});
-        this.infoKey = infoKey;      
-        
+            // eslint-disable-next-line react-hooks/rules-of-hooks
+            [this._info, this._setInfo] = useState({});
+        this.infoKey = infoKey;
+
     }
-   
-    changeInfo = () => { };
+
+    changeInfo = (info) => {
+        if (info.error)
+            this.onError(info.error)
+        if (info.message)
+            this.onMessage(info.message)
+        if (info.cookies)
+            this.onCookie(info.cookies)
+    }
+
+    onError = (error) => {
+        alert(error);
+    }
+    onMessage = (message) => {
+        alert(message);
+    }
+
+    onCookie = (listCookie) => {
+        if (this.setCookie!==undefined)
+        for (let cookie of listCookie)
+            this.setCookie(cookie.key, cookie.value, { path: '/' });
+    }
 
     getData() {
         if (Array.isArray(this.getHookData())) {
@@ -128,23 +148,23 @@ export default class API {
         return params;
     }
 
-    static getApiComponent(children,mode=APIComponent.mode.SINGLE){
-        for (let child of children){
-            if (child.type===APIComponent){
-                var props = Object.assign({},child.props);
-                if (props.mode===undefined)
+    static getApiComponent(children, mode = APIComponent.mode.SINGLE) {
+        for (let child of children) {
+            if (child.type === APIComponent) {
+                var props = Object.assign({}, child.props);
+                if (props.mode === undefined)
                     props.mode = mode
                 var api;
                 if (props.APIClass === undefined)
-                    api= new API(props);
+                    api = new API(props);
                 else
-                    api= new props.APIClass(props);
-                if (api.didMount!==undefined && child.props.events!==undefined)
-                    child.props.events.didMount=()=>api.didMount();
+                    api = new props.APIClass(props);
+                if (api.didMount !== undefined && child.props.events !== undefined)
+                    child.props.events.didMount = () => api.didMount();
                 return api;
-            }  
+            }
         }
-        
+
     }
 
 }
@@ -152,16 +172,16 @@ export default class API {
 export class APIComponent extends Component {
 
 
-    constructor({url,mode,responseKey,infoKey,APIClass,events}){
+    constructor({ url, mode, responseKey, infoKey, APIClass, events }) {
         super();
-        
+
         if (events !== undefined)
-        this.componentDidMount=events.didMount || (()=>{});
+            this.componentDidMount = events.didMount || (() => { });
     }
 
     static mode = {
-        SINGLE:"single",
-        ARRAY:"array"
+        SINGLE: "single",
+        ARRAY: "array"
     }
 
     render() {
@@ -170,7 +190,7 @@ export class APIComponent extends Component {
 }
 
 export class QAPI extends API {
-    constructor(url){
-        super({url},true)
+    constructor(url) {
+        super({ url }, true)
     }
-} 
+}
