@@ -15,13 +15,19 @@ import { ViewOfferService } from "./ViewOfferService";
 import { ViewFindJob } from "./ViewFindJob";
 import { ViewFindService } from "./ViewFindService";
 import { Route, Switch } from 'react-router';
-import { Container } from 'reactstrap';
+// import { Container } from 'reactstrap';
 import { ViewCreateOfferJob } from './ViewCreateOfferJob.js';
 import { ViewCreateOfferService } from './ViewCreateOfferService.js';
+import RutaTutorial from '../Components/tutorial.js';
+import { Status } from '../Tools/Status.js';
+import { useCookies } from 'react-cookie';
 
 
-export const ViewMain = () =>
-  <Switch>
+export const ViewMain = () => {
+
+  new Status(useCookies(["status"]),"status")
+
+  return <Switch>
     <ViewRoute path="/Login" view={ViewLogin} />
     <ViewRoute path="/Register/" view={ViewLogin} />
     <ViewRoute path="/CVCreate" view={ViewCreateCV} />
@@ -40,12 +46,11 @@ export const ViewMain = () =>
     <ViewRoute path="/findJob" view={ViewFindJob} />
     <ViewRoute path="/findService" view={ViewFindService} />
     <ViewRoute path="/recovery-pass" view={ViewLogin} />
-    <ViewRoute path="/" view={ViewHome} />  
+    <ViewRoute path="/" view={RutaTutorial.Render("Home")} />
   </Switch>
+}
 
 const ViewRoute = ({ path, view }) =>
   <Route path={path}>
-    <Container className="abs-center" fluid={true}>
-      {view()}
-    </Container>
+    {view({ id: "hola" })}
   </Route>

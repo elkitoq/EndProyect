@@ -81,7 +81,7 @@ export const ViewRecoverPassword2 = () => {
                         <Form method="post" className="form-container">
                             <APIComponent url='/recovery-pass' />
                             <FormItem name="Usuario" idInput="name" />
-                            <FormItem name="Email" type="email" idInput="email" defaultValue="rey.cristian.eze@gmail.com"/>
+                            <FormItem name="Email" type="email" idInput="email"/>
                             <FormGroup className="separado">
                                 <Button size="lg" color="primary" blocks="true">Solicitar</Button>
                             </FormGroup>

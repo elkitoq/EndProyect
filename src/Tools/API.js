@@ -15,20 +15,20 @@ export default class API {
         if (qApi) {
             this._data = mode === APIComponent.mode.SINGLE ? {} : [];
             this._setData = (value) => { this._info = value };
-        }
-        else
-            // eslint-disable-next-line react-hooks/rules-of-hooks
-            [this._data, this._setData] = useState(mode === APIComponent.mode.SINGLE ? {} : []);
-
-        this.responseKey = responseKey;
-
-        if (qApi) {
             this._info = {};
             this._setInfo = (value) => { this._info = value };
         }
-        else
+        else {
+            // eslint-disable-next-line react-hooks/rules-of-hooks
+            [this._data, this._setData] = useState(mode === APIComponent.mode.SINGLE ? {} : []);
             // eslint-disable-next-line react-hooks/rules-of-hooks
             [this._info, this._setInfo] = useState({});
+            // eslint-disable-next-line react-hooks/rules-of-hooks
+
+        }
+
+        this.responseKey = responseKey;
+
         this.infoKey = infoKey;
 
     }
@@ -50,9 +50,9 @@ export default class API {
     }
 
     onCookie = (listCookie) => {
-        if (this.setCookie!==undefined)
-        for (let cookie of listCookie)
-            this.setCookie(cookie.key, cookie.value, { path: '/' });
+        if (this.setCookie !== undefined)
+            for (let cookie of listCookie)
+                this.setCookie(cookie.key, cookie.value, { path: '/' });
     }
 
     getData() {
@@ -161,6 +161,7 @@ export default class API {
                     api = new props.APIClass(props);
                 if (api.didMount !== undefined && child.props.events !== undefined)
                     child.props.events.didMount = () => api.didMount();
+                if (child.ref != undefined) child.ref.current = api;
                 return api;
             }
         }

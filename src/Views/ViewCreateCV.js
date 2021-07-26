@@ -9,8 +9,17 @@ import { useEffect, useState } from 'react';
 import API, { APIComponent } from '../Tools/API.js';
 import { Form } from '../Components/Form';
 import { useCookies } from 'react-cookie';
+import RutaTutorial from '../Components/tutorial';
+import { Señalador } from '../Components/Señalador';
 
 let displayChargePhoto, setDisplayChargePhoto;
+
+
+const tutorial =
+    new RutaTutorial("CV")
+    .setDescription(<>Puedes crear un Curriculum Vitae</>)
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearCV" text="Crear CV"/>, está en la esquina superior izquierda de la pagina</>);
+
 
 export const ViewCreateCV = () => {
     [displayChargePhoto, setDisplayChargePhoto] = useState("block");
