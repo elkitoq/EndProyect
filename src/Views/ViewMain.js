@@ -25,7 +25,7 @@ import { useCookies } from 'react-cookie';
 
 export const ViewMain = () => {
 
-  new Status(useCookies(["status"]),"status")
+  // new Status(useCookies(["status"]),"status")
 
   return <Switch>
     <ViewRoute path="/Login" view={ViewLogin} />
