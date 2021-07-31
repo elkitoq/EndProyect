@@ -18,39 +18,34 @@ import { Route, Switch } from 'react-router';
 // import { Container } from 'reactstrap';
 import { ViewCreateOfferJob } from './ViewCreateOfferJob.js';
 import { ViewCreateOfferService } from './ViewCreateOfferService.js';
-import RutaTutorial from '../Components/tutorial.js';
-import { Status } from '../Tools/Status.js';
+import RutaTutorial, { RenderProgress } from '../Components/tutorial.js';
+import { Status, StatusComponent } from '../Tools/Status.js';
 import { useCookies } from 'react-cookie';
 
 
-export const ViewMain = () => {
-
-  // new Status(useCookies(["status"]),"status")
-
-  return <Switch>
-    <ViewRoute path="/Login" view={ViewLogin} />
-    <ViewRoute path="/Register/" view={ViewLogin} />
-    <ViewRoute path="/CVCreate" view={ViewCreateCV} />
-    <ViewRoute path="/lookforJob" view={ViewLookForJob} />
-    <ViewRoute path="/lookforWorker" view={ViewLookForWorker} />
-    <ViewRoute path="/findWorker" view={ViewFindWorker} />
-    <ViewRoute path="/homeAdmin" view={ViewHomeAdmin} />
-    <ViewRoute path="/homeAspirante" view={ViewHomeAspirante} />
-    <ViewRoute path="/homeEmpresa" view={ViewHomeEmpresa} />
-    <ViewRoute path="/homeAutonomo" view={ViewHomeAutonomo} />
-    <ViewRoute path="/jobOffice" view={ViewJobOffice} />
-    <ViewRoute path="/offerJob" view={ViewOfferJob} />
-    <ViewRoute path="/createJob" view={ViewCreateOfferJob} />
-    <ViewRoute path="/offerService" view={ViewOfferService} />
-    <ViewRoute path="/createService" view={ViewCreateOfferService} />
-    <ViewRoute path="/findJob" view={ViewFindJob} />
-    <ViewRoute path="/findService" view={ViewFindService} />
-    <ViewRoute path="/recovery-pass" view={ViewLogin} />
-    <ViewRoute path="/" view={RutaTutorial.Render("Home")} />
-  </Switch>
-}
+export const ViewMain = () => <Switch>
+      <ViewRoute path="/Login" view={ViewLogin} />
+      <ViewRoute path="/Register/" view={ViewLogin} />
+      <ViewRoute path="/CVCreate" view={ViewCreateCV} />
+      <ViewRoute path="/lookforJob" view={ViewLookForJob} />
+      <ViewRoute path="/lookforWorker" view={ViewLookForWorker} />
+      <ViewRoute path="/findWorker" view={ViewFindWorker} />
+      <ViewRoute path="/homeAdmin" view={ViewHomeAdmin} />
+      <ViewRoute path="/homeAspirante" view={ViewHomeAspirante} />
+      <ViewRoute path="/homeEmpresa" view={ViewHomeEmpresa} />
+      <ViewRoute path="/homeAutonomo" view={ViewHomeAutonomo} />
+      <ViewRoute path="/jobOffice" view={ViewJobOffice} />
+      <ViewRoute path="/offerJob" view={ViewOfferJob} />
+      <ViewRoute path="/createJob" view={ViewCreateOfferJob} />
+      <ViewRoute path="/offerService" view={ViewOfferService} />
+      <ViewRoute path="/createService" view={ViewCreateOfferService} />
+      <ViewRoute path="/findJob" view={ViewFindJob} />
+      <ViewRoute path="/findService" view={ViewFindService} />
+      <ViewRoute path="/recovery-pass" view={ViewLogin} />
+      <ViewRoute path="/" view={RenderProgress("Home")} />
+    </Switch>
 
 const ViewRoute = ({ path, view }) =>
   <Route path={path}>
-    {view({ id: "hola" })}
+    {view()}
   </Route>

@@ -1,14 +1,13 @@
-import { Container, Row } from "reactstrap";
+import { Container, Row, Button} from "reactstrap";
 import { OptionMenu } from "../Components/OptionMenu";
 
 import '../Assets/Css/home.css';
-import RutaTutorial from "../Components/tutorial";
-import { Señalado, Señalador } from "../Components/Señalador";
-import { Mapa } from '../Components/tutorial.js'
+import RutaTutorial, { NextButton } from "../Components/tutorial";
+import { Señalador } from "../Components/Señalador";
+import { useContext } from "react";
+import { Status } from "../Tools/Status";
 
-export const ViewHome = ({id}) =>{
-    console.log(id);
-    return <Container className="abs-center">
+export const ViewHome = () =><Container className="abs-center">
         <div className="text-center">
             <div className="title-center">
                 <h1>Bienvenido</h1>
@@ -20,31 +19,15 @@ export const ViewHome = ({id}) =>{
                 <OptionMenu href="/lookforWorker/" fontSize="2vh"   >Busco empleados</OptionMenu>
             </Row>
         </div>
+        <NextButton ruta="Home"/>
     </Container>
-}
 
-const tutorial =
-    new RutaTutorial("Home")
+
+    RutaTutorial.get("Home")
     .setDescription(<>Puedes ver la pagina inicial</>)
     .setInstrucciones(<>Has clic en nuestro <Señalador marca="logo"/>, está en la esquina superior izquierda de la pagina</>)
-    .setRender(ViewHome);
+    .setRender(ViewHome)
+    .addRequisito("findJob")
+    ;
 
-
-new RutaTutorial("q").setRender(Mapa);
-
-new RutaTutorial("a").setRender(Mapa);
-
-new RutaTutorial("c").setRender(Mapa);
-
-new RutaTutorial("b").setRender(Mapa);
-
-new RutaTutorial("jaja").setRender(Mapa);
-
-    tutorial.addRequisito(RutaTutorial.get["a"]);
-    tutorial.addRequisito(RutaTutorial.get["c"]);
-    tutorial.addRequisito(RutaTutorial.get["b"]);
-    tutorial.addRequisito(RutaTutorial.get["jaja"]);
-    tutorial.addRequisito(RutaTutorial.get["a"]);
-    tutorial.addRequisito(RutaTutorial.get["q"]);
-    RutaTutorial.get["q"].addRequisito(RutaTutorial.get["c"])
     

@@ -1,39 +1,67 @@
 import { List } from "./List";
+import { useCookies } from 'react-cookie';
+import { useState } from "react";
+import React from "react";
 
-//new Status(useCookies(["status"]),"status")
+export class Status {
 
-export class Status{
+    static Context = null;
 
-    static cookie;
+    _setStatus = () => { };
 
-    static key;
-
-    static _setStatus=()=>{};
-
-    static _waiting=[];
+    _waiting = [];
 
 
-    constructor([cookie,setCookie],key="status"){
-        this.key=key;
-        this.cookie=cookie;
-        this._setStatus=(newValue)=>setCookie(key, newValue, { path: '/' });
+    useState = (value) => [value, () => { }]
+
+    constructor([cookie, setCookie], key = "status") {
+        if (Status.Context===null)
+            Status.Context=React.createContext(this);
+        document.status=this
+        this.key = key;
+        this.cookie = cookie;
+        this._setStatus = (newValue) => setCookie(key, newValue, { path: '/' });
+        if (cookie===undefined)
         this._setStatus(new List());
     }
 
-    static set(k,value=true){
-        this.cookie[this.key][k]=value;
-        this._setStatus(Object.assign(new List(),this.cookie[this.key]))
-
-        console.log(this.cookie[this.key]);
-
+    delete(k){
+        this.cookie[this.key][k] = undefined;
+        this._setStatus(Object.assign(new List(), this.cookie[this.key]));
     }
 
-    static check(array){
-
+    set(k, value = true) {
+        this.cookie[this.key][k] = value;
+        // if (this.state[k] === undefined)
+        //     this.state[k] = this.useState(value)
+        // else
+        //     this.state[k] = this.state[k][1](value)
+        this._setStatus(Object.assign(new List(), this.cookie[this.key]));
     }
 
-    static get(k){
+    list(){
+        return this.cookie[this.key];
+    }
+
+    check(array) {
+        return !(array.some((e)=>!this.cookie[this.key][e]))
+    }
+
+    use(key, defaultValue = false) {
+        if (this.cookie[this.key][key] === undefined) this.set(key, defaultValue);
+        return [this.get(key), ((value) => this.set(key, value))]
+    }
+
+    get(k) {
         return this.cookie[this.key][k] || false;
     }
 
+}
+
+export const StatusComponent = ({ name = "status", children }) => {
+
+    const status = new Status(useCookies([name]), name);
+    return <Status.Context.Provider value={status}>
+        {children}
+    </Status.Context.Provider>
 }
