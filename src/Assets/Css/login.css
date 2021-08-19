@@ -98,7 +98,7 @@
  }
 
  .label-register{
-   margin-top: 1.5rem;
+   margin-top: 0.8rem;
    margin-left: 4rem;
    width: 100%;
    display: block;
@@ -127,6 +127,16 @@
 
  .carousel-caption{
    position: static;
+ }
+
+ .buton-create-user{
+   display: block;
+   width: 100%;
+   margin-bottom: 2.8rem;
+ }
+
+ .label-login{
+   margin-left: 8rem;
  }
 
  @media (max-width: 1366px ){

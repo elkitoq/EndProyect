@@ -1,0 +1,119 @@
+body{
+    background-color: #f8f6f6;
+}
+.sub-navigation{
+    margin: 0 !important;
+    width: 100%;
+    height: 5.5rem;
+    box-shadow: 0px 0px 0px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.sub-navigation ul{
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin: 0
+}
+
+.sub-navigation ul a{
+    font-size: 16px;
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 1rem!important;
+    line-height: normal;
+    margin-bottom: 0;
+    
+}
+
+.content-about-me{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-content-about-me{
+    margin-top: 4rem;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0px 3px 6px #00000029;
+    width: auto; 
+}
+
+.card-content-about-me .container{
+    padding: 10px;
+    height: auto;
+
+}
+
+.card-content-about-me .container .header-card{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.card-content-about-me .container .header-card img{
+    width: 136px;
+    height: 136px;
+    border-radius:50% 
+}
+
+.card-content-about-me .container .header-card h4{
+    margin-top: 15px;
+    font-size:14px;
+    color: #000;
+    font-weight: bold;
+}
+
+.card-content-about-me .container .header-card h6{
+    font-size: 12px;
+    color: #929292
+}
+
+.card-content-about-me .container .card-body{
+    padding: 15px;
+    height:auto;
+    margin-bottom: 10px;
+}
+
+.card-content-about-me .container .card-body h5{
+    color: #000;
+    font-size:12px;
+    font-weight: bold;
+}
+
+.card-content-about-me .container .card-body p{
+    color: #929292;
+    font-size:12px;
+}
+
+.curriculum-container{
+    padding: 4rem;
+    border-radius: 6px;
+    margin-top: 4rem;
+    box-shadow: 0px 3px 6px #00000029;
+    background-color: #fff;
+    width: auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.curriculum-container .body{
+    padding: 3rem;
+}
+
+.curriculum-container .body .section-academy{
+    margin-top: 20px;
+}
+
+.curriculum-container .body .section-academy .head_section{
+    display: flex;
+    flex-direction: row;
+}
