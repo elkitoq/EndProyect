@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Popover, PopoverBody, PopoverHeader, Tooltip } from "reactstrap";
 
-export const Señalador = ({ marca, texto = marca }) => <Link to="" onClick={() => sign(marca)}>{texto}</Link>
+export const Señalador = ({ marca, texto = marca }) => <Link to="#" onClick={() => sign(marca)}>{texto}</Link>
 
 
 const marcas = {};
