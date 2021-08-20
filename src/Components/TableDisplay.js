@@ -4,18 +4,20 @@ export const TableDisplay = ({ api, children, onClick }) => <Table>
     <thead>
         <tr>
             {children.map((card, index) => {
-                    if (card.props && card.props.hideData !== true)
-                        return (
-                            <th className="text-truncate" key={`th-${index}`}>
-                                {card.props.children}
-                            </th>);
-                    return <th className="text-truncate" key={`th-${index}`}></th>;
+                if (card.type.name === "APIComponent")
+                    return <></>
+                else if (card.props && card.props.hideData !== true)
+                    return (
+                        <th className="text-truncate" key={`th-${index}`}>
+                            {card.props.children}
+                        </th>);
+                return <th className="text-truncate" key={`th-${index}`}></th>;
             })}
         </tr>
     </thead>
     <tbody>
         {api.getHookData().map((elemento, i) =>
-            <tr key={`Card-${i}`} onClick={onClick.bind(this, i)} className={elemento.selected?"table-primary":""}>
+            <tr key={`Card-${i}`} onClick={onClick.bind(this, i)} className={elemento.selected ? "table-primary" : ""}>
                 {children.map((card, index) => {
                     if (card.type.name === "CardText") {
                         if (card.props.hideData !== true)

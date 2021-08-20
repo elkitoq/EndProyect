@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 import { Button, Container, Input } from "reactstrap";
 import { Form } from "../Components/Form";
 import { FormItem } from "../Components/FormItem";
-import API from "../Tools/API";
+import API, { APIComponent } from "../Tools/API";
 
 
 
@@ -13,7 +13,8 @@ export const ViewCreateOfferService = () => {
 
     return (
         <Container>
-            <Form api={new API("/service", useState({}), "response", useState({}), "info")} method="put">
+            <Form method="put">
+                <APIComponent url="/service" /> 
                 <FormItem name="Ofrezco:" idInput="name" />
                 <FormItem name="Description" type="textarea" idInput="description" />
                 <FormItem name="Precio" idInput="price" />

@@ -9,11 +9,12 @@ import {
   NavItem,
   NavLink
 } from 'reactstrap'
-import API from '../Tools/API';
+import { QAPI } from '../Tools/API';
 import { Busqueda } from './Busqueda';
 import { DropdownRol } from './role';
 import logo from '../Assets/image/logo_nabvar.png'
 import '../Assets/Css/navBar.css'
+import { Señalado } from './Señalador';
 // import { Cookie } from './Cookie';
 
 
@@ -31,16 +32,20 @@ export const NavegadorPrincipal = () => {
     if (login.isLogin === "true")
       removeCookie('selectUser', { path: '/' })
     setCookie("isLogin", false, { path: '/' });
-    new API('/logout').send("post", { hola: "mundo" });
+    new QAPI('/logout').send("post", { hola: "mundo" });
   }
 
   return (
     <Navbar color="primary" dark expand="md">
-      <NavbarBrand href="/"><img className="logo_navbar" width="70px" height="45px" alt="logo" src={logo} /></NavbarBrand>
+      <NavbarBrand href="/">
+        <img className="logo_navbar" width="70px" height="45px" alt="logo" src={logo} id="logo"/>
+        <Señalado marca="logo" title="Logo" text="Si haces click te lleva a la pagina principal"/>
+      </NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
-          <NavButton className="btn-cv-navbar" href="/CVCreate/"> Crear CV </NavButton>
+          <NavButton className="btn-cv-navbar" href="/CVCreate/"><span id="CrearCV"> Crear CV </span></NavButton>
+          <Señalado marca="CrearCV" title="Crear CV" text="Si haces click te lleva a la pagina para crear tu Curriculum"/>
           <DropdownRol />
           <NavButton className="btn-oficina-navbar" href="/jobOffice/">Oficina de empleo</NavButton>
         </Nav>

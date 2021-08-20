@@ -1,4 +1,4 @@
-import API from "../Tools/API";
+import { QAPI } from "../Tools/API";
 import {
     DropdownToggle,
     DropdownMenu,
@@ -14,7 +14,7 @@ export const LoadRoles = () => {
     const [, setUser] = useCookies(['selectUser']);
 
     useEffect(() => {
-        new API('/role').send("get", {}).then((res) => {
+        new QAPI('/role').send("get", {}).then((res) => {
             setUser("selectUser", res.data.response, { path: '/' });
         });
     

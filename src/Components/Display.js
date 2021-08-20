@@ -5,8 +5,9 @@ import '../Assets/Css/cardWorker.css'
 import { CardsDisplay, CardCustom } from "./CardsDisplay";
 import { TableDisplay } from "./TableDisplay";
 import { Pagination } from "./Pagination";
+import API, { APIComponent } from "../Tools/API";
 
-export const Display = ({ api, children, get }) => {
+export const Display = ({children, api=API.getApiComponent(children,APIComponent.mode.ARRAY), get }) => {
     const paginas = [1, 10, 50, 100];
     const [cookie, setCookie] = useCookies(["apiConsumer"])
 
