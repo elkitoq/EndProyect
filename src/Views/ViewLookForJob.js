@@ -2,7 +2,9 @@ import { useCookies } from "react-cookie";
 import { Button, ButtonGroup, Card, CardText, Col, Container} from "reactstrap";
 import { Busqueda } from "../Components/Busqueda";
 
+import RutaTutorial from "../Components/tutorial";
 
+const tutorial=new RutaTutorial("look")
 
 export const ViewLookForJob = () => {
     const [login] = useCookies(['isLogin']);

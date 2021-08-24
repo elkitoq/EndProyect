@@ -7,6 +7,7 @@ import {
 import React from 'react';
 import { NavegadorPrincipal } from './Components/Navegador.js';
 import { ViewMain } from './Views/ViewMain.js';
+import { StatusComponent } from './Tools/Status';
 
 
 
@@ -14,8 +15,10 @@ function App() {
 
   return (
     <Router>
+      <StatusComponent>
       <NavegadorPrincipal />
       <ViewMain />
+      </StatusComponent>
     </Router>
   );
 }

@@ -15,7 +15,7 @@ import { ViewOfferService } from "./ViewOfferService";
 import { ViewFindJob } from "./ViewFindJob";
 import { ViewFindService } from "./ViewFindService";
 import { Route, Switch } from 'react-router';
-import { Container } from 'reactstrap';
+// import { Container } from 'reactstrap';
 import { ViewCreateOfferJob } from './ViewCreateOfferJob.js';
 import { ViewCreateOfferService } from './ViewCreateOfferService.js';
 import { ViewCompanyProfile } from './ViewCompanyProfile.js';
@@ -47,7 +47,5 @@ export const ViewMain = () =>
 
 const ViewRoute = ({ path, view }) =>
   <Route path={path}>
-    <Container className="abs-center" fluid={true}>
-      {view()}
-    </Container>
+    {view()}
   </Route>

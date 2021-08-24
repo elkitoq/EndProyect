@@ -1,27 +1,27 @@
-import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { FormGroup, Button, Label } from 'reactstrap'
 import { Form } from '../Components/Form.js';
 import { FormItem } from '../Components/FormItem.js';
-import API from '../Tools/API.js';
+import API, { APIComponent} from '../Tools/API.js';
 
 
 export const FormRegister = () => {
 
     const [, setCookie] = useCookies(['isLogin']);
-
-    const api = new API('/user', useState({}), "response", useState({}), "info")
-
-    api.changeInfo = (newValue) => {
-        if (newValue.error)
-            alert(newValue.error);
-        if (newValue.isLogin) {
-            setCookie("isLogin", true, { path: '/' });
-        }
-    }
+    
+    class APILogin extends API{
+        changeInfo= (newValue) => {
+                if (newValue.error)
+                    alert(newValue.error);
+                if (newValue.isLogin) {
+                    setCookie("isLogin", true, { path: '/' });
+                }
+            }
+    } 
 
     return (
-        <Form api={api} method="put" className="form-container">
+        <Form method="put" className="form-container">
+            <APIComponent url='/user' APIClass={APILogin}/>
             <FormItem name="Usuario" idInput="name" required />
             <FormItem name="Password" type="password" minLength={4} idInput="password" required />
             <FormItem name="Repetir Password" type="password" idInput="password2" required />
