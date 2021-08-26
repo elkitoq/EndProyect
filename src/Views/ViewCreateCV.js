@@ -5,33 +5,35 @@ import { ViewAddCVData } from './ViewAddCVData'
 import '../Assets/Css/cargarCV.css';
 import { FormItem } from '../Components/FormItem'
 import noPhoto from '../Assets/image/blank-profile.png'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import API, { APIComponent } from '../Tools/API.js';
 import { Form } from '../Components/Form';
-import { useCookies } from 'react-cookie';
 import RutaTutorial from '../Components/tutorial';
 import { Señalador } from '../Components/Señalador';
+
+import { Status } from "../Tools/Status";
+import { useContext } from "react";
+
 
 let displayChargePhoto, setDisplayChargePhoto;
 
 
-const tutorial =
-    new RutaTutorial("CV")
-    .setDescription(<>Puedes crear un Curriculum Vitae</>)
-    .setInstrucciones(<>Has clic en <Señalador marca="CrearCV" text="Crear CV"/>, está en la esquina superior izquierda de la pagina</>);
+
 
 
 export const ViewCreateCV = () => {
-    [displayChargePhoto, setDisplayChargePhoto] = useState("block");
+    [displayChargePhoto, setDisplayChargePhoto] = useState("block");   
 
-    const [user] = useCookies(['selectUser']);
+    const status = useContext(Status.Context)
+    const [selectUser,] = status.use('selectUser');
+    const [selectRole,] = status.use('selectRole');
 
     const dataDefault = {
         "role":
-            (user.selectUser && user.selectUser[user.selectRole] && aspirante(user.selectUser[user.selectRole])) ?
-                user.selectRole :
-                Array.isArray(user.selectUser) ?
-                    user.selectUser.findIndex(aspirante).toString()
+            (selectUser && selectUser[selectRole] && aspirante(selectUser[selectRole])) ?
+                selectRole :
+                Array.isArray(selectUser) ?
+                    selectUser.findIndex(aspirante).toString()
                     : 0
     }
 
@@ -93,14 +95,14 @@ return (
                 <ViewAddCVData />
                 <FormGroup>
                     <Row md="2" className="separado">
-                        {(Array.isArray(user.selectUser) && user.selectUser.length && user.selectUser.find(aspirante)) ?
+                        {(Array.isArray(selectUser) && selectUser.length && selectUser.find(aspirante)) ?
                             <FormItem type="select" name="El CV se guardará en:" idInput="role" defaultValue={dataDefault.role}>
-                                {(Array.isArray(user.selectUser)) ? user.selectUser.map(
+                                {(Array.isArray(selectUser)) ? selectUser.map(
                                     (element, index) => aspirante(element) ?
                                         <option key={`option-${index}`} value={index}>{element.roleName}</option> : ""
                                 ) : ""}
                             </FormItem>
-                            : <LocalNoLoginCard isLogin={user.isLogin} />
+                            : <LocalNoLoginCard isLogin={status.get("Login")} />
                         }
                         <Button className="right" size="lg" color="primary">Guardar</Button>
                     </Row></FormGroup>
@@ -143,3 +145,9 @@ const LocalNoLoginCard = ({ isLogin }) =>
         </Col>
     </Card>
 
+    new RutaTutorial("CreateCV")
+    .setDescription(<>Puedes crear un Curriculum Vitae</>)
+    .setRender(ViewCreateCV)
+    .addRequisito("Login")
+    .setMeta("Crear CV")
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearCV" text="Crear CV"/>, está en la esquina superior izquierda de la pagina</>);

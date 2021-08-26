@@ -1,8 +1,8 @@
-import { useCookies } from "react-cookie";
 import { useLocation } from "react-router";
 import { Container, Row } from "reactstrap";
 import { OptionMenu } from "../Components/OptionMenu";
-
+import { Status } from "../Tools/Status";
+import { useContext } from "react";
 
 
 
@@ -10,7 +10,10 @@ export const ViewHomeAspirante = () => {
 
     const { search } = useLocation();
     const userNumber = new URLSearchParams(search).get("user")
-    const [{selectUser}] = useCookies(['selectUser']);
+
+    const status = useContext(Status.Context)
+    const [selectUser,] = status.use('selectUser');
+
     const user = selectUser[userNumber];
 
     return (

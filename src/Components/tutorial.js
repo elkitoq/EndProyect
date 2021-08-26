@@ -117,7 +117,7 @@ export const RenderProgress = (page) => {
 
         {progress.length > 1 ? <ProgressBarStep steps={progress} toDo={toDo} /> : ""}
 
-        <Container className="abs-center" fluid={true} style={{ marginTop: progress.length > 1 ? "100px" : "0px" }}>
+        <Container className="abs-center" fluid={true} style={{ marginTop: progress.length > 1 ? "50px" : "0px" }}>
             {unDone[0].render(props)}
         </Container>
     </>

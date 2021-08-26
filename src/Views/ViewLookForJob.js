@@ -1,13 +1,18 @@
-import { useCookies } from "react-cookie";
+
 import { Button, ButtonGroup, Card, CardText, Col, Container} from "reactstrap";
 import { Busqueda } from "../Components/Busqueda";
 
 import RutaTutorial from "../Components/tutorial";
+import { Status } from "../Tools/Status";
+import { useContext } from "react";
 
 const tutorial=new RutaTutorial("look")
 
 export const ViewLookForJob = () => {
-    const [login] = useCookies(['isLogin']);
+
+    const status = useContext(Status.Context)
+    const [login,] = status.use('Login');
+
     return (
         <Container className="abs-center">
             <Col xs="12">

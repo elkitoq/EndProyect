@@ -18,15 +18,14 @@ import { Route, Switch } from 'react-router';
 // import { Container } from 'reactstrap';
 import { ViewCreateOfferJob } from './ViewCreateOfferJob.js';
 import { ViewCreateOfferService } from './ViewCreateOfferService.js';
-import RutaTutorial, { Mapa, RenderProgress } from '../Components/tutorial.js';
-import { Status, StatusComponent } from '../Tools/Status.js';
-import { useCookies } from 'react-cookie';
+import { Mapa, RenderProgress } from '../Components/tutorial.js';
+
 
 
 export const ViewMain = () => <Switch>
-      <ViewRoute path="/Login" view={ViewLogin} />
+      <ViewRoute path="/Login" view={RenderProgress("Login")} />
       <ViewRoute path="/Register/" view={ViewLogin} />
-      <ViewRoute path="/CVCreate" view={ViewCreateCV} />
+      <ViewRoute path="/CVCreate" view={RenderProgress("CreateCV")} />
       <ViewRoute path="/lookforJob" view={ViewLookForJob} />
       <ViewRoute path="/lookforWorker" view={ViewLookForWorker} />
       <ViewRoute path="/findWorker" view={ViewFindWorker} />

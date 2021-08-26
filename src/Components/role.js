@@ -5,17 +5,20 @@ import {
     DropdownItem,
     Dropdown
 } from 'reactstrap'
-import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { Status } from "../Tools/Status";
 
 
 export const LoadRoles = () => {
 
-    const [, setUser] = useCookies(['selectUser']);
+    const status = useContext(Status.Context)
+    const [,setUser] = status.use('selectUser');
+
 
     useEffect(() => {
         new QAPI('/role').send("get", {}).then((res) => {
-            setUser("selectUser", res.data.response, { path: '/' });
+            setUser( res.data.response)
         });
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -30,8 +33,8 @@ export const LoadRoles = () => {
 
 export const DropdownRol = () => {
 
-
-    const [user,setCookie] = useCookies(['selectUser']);
+    const status = useContext(Status.Context)
+    const [user,] = status.use('selectUser');
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -41,7 +44,8 @@ export const DropdownRol = () => {
     }
 
     const selectRol= (index,e)=>{
-        setCookie("selectRole", index, { path: '/' })
+        // setCookie("selectRole", index, { path: '/' })
+        status.set("selectRole", index)
     }
 
     return (
@@ -52,7 +56,7 @@ export const DropdownRol = () => {
             <DropdownMenu right>
                 {dropdownOpen?<LoadRoles/>:""}
                 {
-                    Array.isArray(user.selectUser) ? user.selectUser.map(
+                    Array.isArray(user) ? user.map(
                         (element, index) =>
                             <DropdownItem key={`droprole-${index}`}
                             href={

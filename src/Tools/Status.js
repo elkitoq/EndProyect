@@ -1,6 +1,5 @@
 import { List } from "./List";
 import { useCookies } from 'react-cookie';
-import { useState } from "react";
 import React from "react";
 
 export class Status {
@@ -36,6 +35,10 @@ export class Status {
         //     this.state[k] = this.useState(value)
         // else
         //     this.state[k] = this.state[k][1](value)
+        this.save(k);
+    }
+
+    save(k){
         this._setStatus(Object.assign(new List(), this.cookie[this.key]));
     }
 
