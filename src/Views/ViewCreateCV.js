@@ -14,6 +14,8 @@ import { Señalador } from '../Components/Señalador';
 import { Status } from "../Tools/Status";
 import { useContext } from "react";
 
+import { LoadRoles } from '../Components/role';
+
 
 let displayChargePhoto, setDisplayChargePhoto;
 
@@ -55,6 +57,7 @@ export const ViewCreateCV = () => {
 
 return (
     <Container>
+        <LoadRoles />
         <Form method="put">
             <APIComponent 
                 url='/cv' 
@@ -145,9 +148,9 @@ const LocalNoLoginCard = ({ isLogin }) =>
         </Col>
     </Card>
 
-    new RutaTutorial("CreateCV")
+RutaTutorial.get("CreateCV")
     .setDescription(<>Puedes crear un Curriculum Vitae</>)
     .setRender(ViewCreateCV)
-    .addRequisito("Login")
+    .addRequisito("haveAspirante")
     .setMeta("Crear CV")
     .setInstrucciones(<>Has clic en <Señalador marca="CrearCV" text="Crear CV"/>, está en la esquina superior izquierda de la pagina</>);

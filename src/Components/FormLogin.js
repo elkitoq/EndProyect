@@ -7,6 +7,7 @@ import { Button, FormGroup, Label } from 'reactstrap';
 import { FormItem } from './FormItem';
 import { Status } from "../Tools/Status";
 import { useContext } from "react";
+import { LoadRoles } from './role';
 
 // import { Form, Input } from 'reactstrap'
 
@@ -41,6 +42,7 @@ export const FormLogin = () => {
                     alert(newValue.error);
                 if (newValue.isLogin) {
                     status.set("Login");
+                    return <LoadRoles/>
                 }
             }
     } 

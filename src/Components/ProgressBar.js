@@ -28,7 +28,7 @@ export const ProgressBarStep = ({steps,toDo}) => {
                 steps.map((step, index) =>
                     
                     <div className={stepClasses(index)} style={{left: `calc(${(1+index)*(99/(1+steps.length))}vw - 10px)`}}>
-                        <div class="progress__indicator">
+                        <div className="progress__indicator">
                             <i className="fa fa-check"></i>
                         </div>
                         <div className="progress__label">

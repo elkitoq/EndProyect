@@ -17,7 +17,7 @@ function App() {
     <Router>
       <StatusComponent>
       <NavegadorPrincipal />
-      <ViewMain />
+      <ViewMain/>
       </StatusComponent>
     </Router>
   );

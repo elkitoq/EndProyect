@@ -2,22 +2,27 @@ import { Button, Card, Container, Input} from "reactstrap";
 import { FormRegister } from "../Components/FormRegister";
 import { QAPI } from "../Tools/API";
 import { Status } from "../Tools/Status";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import RutaTutorial from "../Components/tutorial";
+import { Señalador } from "../Components/Señalador";
+import { useLocation } from "react-router-dom";
+import { verificarRoles } from "../Components/role";
 
 let selectUser,saveUser;
 
-export const ViewCreateUser = () => {
+export const ViewCreateUser = ({roleType}) => {
 
     const status = useContext(Status.Context)
     const [login,] = status.use('Login');
 
     [selectUser,] = status.use('selectUser');
-    saveUser=()=>status.save("user");
+    saveUser=()=>status.set("selectUser",selectUser);
 
     return (
-        !(login.isLogin === "true") ? <FormRegister /> : <div className="abs-center">{
-            !(Array.isArray(selectUser) && selectUser.length) ? <CrearUsuario /> :
-                !(selectUser[selectUser.length - 1].new === true) ? <CrearUsuario /> :
+        !(login) ? <FormRegister /> : <div className="abs-center">
+            {
+            !(Array.isArray(selectUser) && selectUser.length) ? <CrearUsuario roleType={roleType}/> :
+                !(selectUser[selectUser.length - 1].new === true) ? <CrearUsuario roleType={roleType}/> :
                     (selectUser[selectUser.length - 1].roleType === 0) ? <CrearEmpresa /> :
                         (selectUser[selectUser.length - 1].roleType === 1) ? <CrearAspirante /> :
                             (selectUser[selectUser.length - 1].roleType === 2) ? <CrearAutonomo /> :
@@ -25,16 +30,22 @@ export const ViewCreateUser = () => {
     );
 }
 
-const ButtonCreate = ({ href }) =>
-    <Button size="lg" color="primary" blocks="true" href={`${href}?user=${selectUser.length - 1}`}
+const ButtonCreate = ({ href }) =>{
+    const status = useContext(Status.Context)
+
+    return  <Button size="lg" color="primary" blocks="true" href={`${href}?user=${selectUser.length - 1}`}
         onClick={(e) => {
             selectUser[selectUser.length - 1].new = false;
             if (selectUser[selectUser.length - 1].roleName === "" || selectUser[selectUser.length - 1].roleName === undefined)
                 selectUser[selectUser.length - 1].roleName = "N/N";
-            saveUser()
+            verificarRoles(status,selectUser);
+            saveUser();
             new QAPI('/role').send("put", selectUser[selectUser.length - 1]);
+            
         }}>
         Crear</Button>
+}
+   
 
 const CrearEmpresa = () => {
     return (
@@ -55,20 +66,30 @@ const CrearEmpresa = () => {
 }
 
 
-const CrearUsuario = () => {
+const CrearUsuario = ({roleType}) => {
 
 
-    const crear = (r, e) => {
+    const crear = (r) => {
         if (!Array.isArray(selectUser))
             selectUser = [];
         selectUser.push({ roleType: r, new: true });
-
+        console.log("///////////////////////////");
+        console.log(selectUser);
         saveUser()
-
+        
     }
 
+    useEffect(() => {
 
-    return (
+        if (roleType!==undefined)
+            crear(roleType)
+        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+
+    
+        return (
         <>
             <div className="text-center">
                 <h3>¿Por donde querés empezar?</h3>
@@ -96,7 +117,7 @@ const CrearUsuario = () => {
 
 
 const CrearAspirante = () => {
-
+    const { pathname} = useLocation();
     return (
         <>
             Introduzca sus datos
@@ -109,7 +130,7 @@ const CrearAspirante = () => {
                 }
                 }
             />
-            <ButtonCreate href="/homeAspirante" />
+            <ButtonCreate href={(pathname === "/Register/")?"/homeAspirante":"#"} />
         </>
 
 
@@ -158,3 +179,12 @@ const CrearAutonomo = () => {
 
     )
 }
+
+const AddAspirante=()=>ViewCreateUser({roleType:1})
+
+RutaTutorial.get("haveAspirante")
+    .setDescription(<>Te dará acceso a toda las herramientas para aspirantes</>)
+    .addRequisito("Login")
+    .setRender(AddAspirante)
+    .setMeta("Crear Perfil de Aspirante")
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearRol" text="Crear Roles" />, en el menu de <Señalador marca="Roles" text="Roles" /></>);

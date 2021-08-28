@@ -99,25 +99,23 @@ export default class RutaTutorial {
     static map(m) { return this.#list.map(m) }
 }
 
-document.RutaTutorial = RutaTutorial;
-
-
 export const RenderProgress = (page) => {
     let ruta = RutaTutorial.get(page, false);
-    document.ruta = ruta;
+    
     const unDone = ruta.check(useContext(Status.Context));
+    
     const progress = ruta.getRequisitos();
     progress.push(ruta);
     unDone.push(ruta);
     var toDo = progress.findIndex((e) => !e.isDone);
     if (toDo < 0) toDo = progress.length;
     return (props) => <>
-
+        {console.log(document.ruta=unDone)}
         {/* <ProgressBar ruta={ruta} /> */}
 
         {progress.length > 1 ? <ProgressBarStep steps={progress} toDo={toDo} /> : ""}
 
-        <Container className="abs-center" fluid={true} style={{ marginTop: progress.length > 1 ? "50px" : "0px" }}>
+        <Container className={`abs-center ${progress.length > 1 ?"main-progress-render":"main-render"} `} fluid={true} style={{ marginTop: progress.length > 1 ? "60px" : "0px" }}>
             {unDone[0].render(props)}
         </Container>
     </>

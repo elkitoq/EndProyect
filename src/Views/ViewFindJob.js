@@ -13,7 +13,7 @@ export const ViewFindJob = () => {
                 <h1>En estos momentos no hay puestos que respondan a "{busqueda.get("post")}" </h1>
                 
             </Row>
-            <NextButton ruta="findJob"/></>
+            </>
     );
 }
 
@@ -21,4 +21,3 @@ export const ViewFindJob = () => {
 RutaTutorial.get("findJob")
     .setMeta("Lista de Puestos")
     .setRender(ViewFindJob)
-    .addRequisito("homeAdmin");

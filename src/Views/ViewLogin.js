@@ -58,7 +58,7 @@ const CorrectLogin = () => {
     </div>);
 }
 
-    new RutaTutorial("Login")
+RutaTutorial.get("Login")
     .setDescription(<>Inicia Sesión</>)
     .setRender(ViewLogin)
     .setInstrucciones(<>Has clic en <Señalador marca="Login" text="Login"/>, está en la esquina superior derecha de la pagina</>);

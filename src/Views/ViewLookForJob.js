@@ -6,7 +6,7 @@ import RutaTutorial from "../Components/tutorial";
 import { Status } from "../Tools/Status";
 import { useContext } from "react";
 
-const tutorial=new RutaTutorial("look")
+const tutorial=RutaTutorial.get("look")
 
 export const ViewLookForJob = () => {
 

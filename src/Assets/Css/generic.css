@@ -52,7 +52,7 @@ input::-webkit-inner-spin-button{
     /* height: 100%; */
   }
 .abs-center.container {
-    min-height: 90vh;
+    /* min-height: 90vh; */
   }
 
 .alinearVertical{
@@ -76,6 +76,20 @@ input::-webkit-inner-spin-button{
 
 body {
     
-    height: 100%; 
-    overflow-x:hidden;
+    height: 100vh; 
+    overflow:hidden; 
+}
+
+.main-progress-render{
+    overflow-y: auto;  
+    height: calc(100% - 150px);
+}
+.main-render{
+    overflow-y: auto;  
+    height: calc(100% - 57px);
+}
+
+
+#root{
+    height: 100%;
 }
