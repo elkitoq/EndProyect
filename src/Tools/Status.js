@@ -21,7 +21,7 @@ export class Status {
         this.key = key;
         this.cookie = cookie;
         this._setStatus = (newValue) => setCookie(key, newValue, { path: '/' });
-        if (cookie===undefined)
+        if (cookie[this.key]===undefined)
         this._setStatus(new List());
     }
 

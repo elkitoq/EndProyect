@@ -18,7 +18,7 @@ import { Route, Switch } from 'react-router';
 // import { Container } from 'reactstrap';
 import { ViewCreateOfferJob } from './ViewCreateOfferJob.js';
 import { ViewCreateOfferService } from './ViewCreateOfferService.js';
-import RutaTutorial, { RenderProgress } from '../Components/tutorial.js';
+import RutaTutorial, { Mapa, RenderProgress } from '../Components/tutorial.js';
 import { Status, StatusComponent } from '../Tools/Status.js';
 import { useCookies } from 'react-cookie';
 
@@ -44,7 +44,8 @@ export const ViewMain = () => <Switch>
   <ViewRoute path="/findJob" view={ViewFindJob} />
   <ViewRoute path="/findService" view={ViewFindService} />
   <ViewRoute path="/recovery-pass" view={ViewLogin} />
-  <ViewRoute path="/profile-aspirante" view={ViewPerfilAspirante} />
+  <ViewRoute path="/perfilAspirante" view={ViewPerfilAspirante} />
+  <ViewRoute path="/mapSite" view={Mapa} />
   <ViewRoute path="/" view={RenderProgress("Home")} />
 </Switch>
 

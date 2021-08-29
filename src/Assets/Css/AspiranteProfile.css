@@ -41,7 +41,8 @@ body{
     background-color: #fff;
     border-radius: 6px;
     box-shadow: 0px 3px 6px #00000029;
-    width: auto; 
+    width: auto;
+    max-width: 300px; 
 }
 
 .card-content-about-me .container{
@@ -61,7 +62,7 @@ body{
 .card-content-about-me .container .header-card img{
     width: 136px;
     height: 136px;
-    border-radius:50% 
+    border-radius:50%
 }
 
 .card-content-about-me .container .header-card h4{

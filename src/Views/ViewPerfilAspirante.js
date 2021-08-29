@@ -14,7 +14,6 @@ export const ViewPerfilAspirante = () => {
 
             <Row className="sub-navigation">
                 <ul className="navigation-profile">
-                    <a href="#">Actividad</a>
                     <a href="#">Aptitudes</a>
                     <a href="#">Curriculum</a>
                 </ul>
