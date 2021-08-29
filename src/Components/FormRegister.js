@@ -27,8 +27,8 @@ export const FormRegister = () => {
             <FormItem name="Repetir Password" type="password" idInput="password2" required />
             <FormItem name="Email" type="email" idInput="email" required />
             <FormGroup className="separado">
-                <Button size="lg" color="primary" blocks="true">Crear</Button>
-                <Label style={{marginLeft:"5rem"}}>
+                <Button className="buton-create-user" size="lg" color="primary" blocks="true">Crear</Button>
+                <Label className="label-login" >
                     ¿Ya tenes cuenta? <a className="a-register" href="/Login/">Logea acá</a>
                 </Label>
             </FormGroup>
