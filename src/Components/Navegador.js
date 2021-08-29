@@ -32,8 +32,8 @@ export const NavegadorPrincipal = () => {
     // if (login.isLogin === "true")
     //    removeCookie('selectUser', { path: '/' })
     if (status.get("Login"))
-      status.set("selectUser",undefined)
-    status.set("Login",false)
+      status.set("selectUser", undefined)
+    status.set("Login", false)
     // setCookie("isLogin", false, { path: '/' });
     new QAPI('/logout').send("post", { hola: "mundo" });
   }
@@ -41,14 +41,14 @@ export const NavegadorPrincipal = () => {
   return (
     <Navbar color="primary" dark expand="md">
       <NavbarBrand href="/">
-        <img className="logo_navbar" width="70px" height="45px" alt="logo" src={logo} id="logo"/>
-        <Señalado marca="logo" title="Logo" text="Si haces click te lleva a la pagina principal"/>
+        <img className="logo_navbar" width="70px" height="45px" alt="logo" src={logo} id="logo" />
+        <Señalado marca="logo" title="Logo" text="Si haces click te lleva a la pagina principal" />
       </NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
           <NavButton className="btn-cv-navbar" href="/CVCreate/"><span id="CrearCV"> Crear CV </span></NavButton>
-          <Señalado marca="CrearCV" title="Crear CV" text="Si haces click te lleva a la pagina para crear tu Curriculum"/>
+          <Señalado marca="CrearCV" title="Crear CV" text="Si haces click te lleva a la pagina para crear tu Curriculum" />
           <DropdownRol />
           <NavButton className="btn-oficina-navbar" href="/jobOffice/">Oficina de empleo</NavButton>
         </Nav>
@@ -66,16 +66,24 @@ export const NavegadorPrincipal = () => {
             children="Buscar Empleado" />
         </Nav>
         <Nav className="ms-auto" navbar>
-          <NavButton href="/Login/"            
-          onClick={(status.get("Login")) ? logout : () => { }}
-            children={(status.get("Login")) ? "Logout" : "Login"}
+          <NavButton href="/Login/"
+            onClick={(status.get("Login")) ? logout : () => { }}
             // onClick={(login.isLogin === "true") ? logout : () => { }}
             // children={(login.isLogin === "true") ? "Logout" : "Login"}
-            className="a-login" />
+            className="a-login" >
+            <span id="Login">
+              {(status.get("Login")) ? "Logout" : "Login"}
+            </span>
+          </NavButton>
+          <Señalado marca="Login" title="Login" text={(status.get("Login")) ? "Cierra sesión" : "Te permite iniciar sesión"} />
           <NavButton href="/Register/"
             className="a-register"
-            children={(status.get("Login")) ? "Crear Rol" : "Register"} />
-             {/* children={(login.isLogin === "true") ? "Crear Rol" : "Register"} /> */}
+            // children={(status.get("Login")) ? "Crear Rol" : "Register"} 
+            // children={(login.isLogin === "true") ? "Crear Rol" : "Register"}
+          >
+            <span id="CrearRol">{(status.get("Login")) ? "Crear Rol" : "Register"}</span>
+          </NavButton>
+          <Señalado marca="CrearRol" title="Crear Rol" text={(status.get("Login")) ? "Crea un nuevo perfil con el Rol que prefieras (Aspirante, Empresa, Autónomo)" : ""} />
         </Nav>
       </Collapse>
     </Navbar>

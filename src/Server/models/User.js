@@ -36,7 +36,11 @@ const userSchema = new mongoose.Schema({
             city: String,
             phone: String,
             email: String,
-            experience: Array
+            puesto: String,
+            description: String,
+            laboral: Array,
+            academico: Array,
+            skill:Array
         },
         applications: [{
             name: String,

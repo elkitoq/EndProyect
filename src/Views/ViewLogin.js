@@ -59,6 +59,7 @@ const CorrectLogin = () => {
 }
 
 RutaTutorial.get("Login")
-    .setDescription(<>Inicia Sesión</>)
+    .setDescription(<>Ingresa con tu cuenta para guardar tus datos</>)
     .setRender(ViewLogin)
+    .setMeta("Iniciar Sesión")
     .setInstrucciones(<>Has clic en <Señalador marca="Login" text="Login"/>, está en la esquina superior derecha de la pagina</>);

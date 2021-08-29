@@ -50,7 +50,7 @@ export const DropdownRol = () => {
 
     const selectRol = (index, e) => {
         // setCookie("selectRole", index, { path: '/' })
-        status.set("selectRole", index)
+        status.set("selectRole", ""+index)
     }
 
     return (
@@ -81,9 +81,9 @@ export const DropdownRol = () => {
                 }
                 <DropdownItem divider />
                 <DropdownItem href="/Register/">
-                   <span id="CrearRol">Crear Roles</span>
+                   <span id="CrearRol2">Crear Roles</span>
                 </DropdownItem>
-                <Señalado marca="CrearRol" title="CrearRol" text="Crea un nuevo perfil con el Rol que prefieras"/>
+                <Señalado marca="CrearRol2" title="Crear Rol" text="Crea un nuevo perfil con el Rol que prefieras"/>
             </DropdownMenu>
         </Dropdown>);
 }

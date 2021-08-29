@@ -15,6 +15,7 @@ import { Status } from "../Tools/Status";
 import { useContext } from "react";
 
 import { LoadRoles } from '../Components/role';
+import { ViewCV } from './ViewCV';
 
 
 let displayChargePhoto, setDisplayChargePhoto;
@@ -29,6 +30,9 @@ export const ViewCreateCV = () => {
     const status = useContext(Status.Context)
     const [selectUser,] = status.use('selectUser');
     const [selectRole,] = status.use('selectRole');
+
+    const [ready,setReady]=useState(false)
+    const [role,setRole]=useState(-1)
 
     const dataDefault = {
         "role":
@@ -51,9 +55,19 @@ export const ViewCreateCV = () => {
         didMount = ()=>{
             this.get();
         }
+        changeInfo =(info)=>{
+            if (info.error)
+                    alert(info.error);               
+            if (info.role !== undefined){
+                setRole(info.role)
+                setReady(true)
+            }
+        }
 
     }
 
+    if (ready)
+        return (<ViewCV role={role}/>)
 
 return (
     <Container>
@@ -95,7 +109,40 @@ return (
                         </Col>
                     </Row></FormGroup>
 
-                <ViewAddCVData />
+                <FormItem name="Puesto al que aspira" idInput="puesto"/>
+                
+                <h3> Experiencia Academica</h3>
+                <ViewAddCVData idInput="academico">
+                    <Input idInput="title" placeholder="Agrege un titulo" />
+                    <Input idInput="year" placeholder="Agrege el año" />
+                    <Input idInput="description" type="textarea" placeholder="Agrege más detalles" />
+                </ViewAddCVData>
+
+                <h3> Experiencia Laboral</h3>
+                <ViewAddCVData idInput="laboral">
+                    <Input idInput="title" placeholder="Agrege un puesto" />
+                    <Input idInput="year" placeholder="Agrege el periodo" />
+                    <Input idInput="empresa" placeholder="Agrege la empresa" />
+                    <Input idInput="description" type="textarea" placeholder="Agrege más detalles" />
+                </ViewAddCVData>
+
+                <h3> Habilidades y Aptitudes</h3>
+                <ViewAddCVData idInput="skill">
+                    <Input idInput="title" placeholder="Agrege una habilidad" />
+                    <Input idInput="nivel" type="select" placeholder="Seleccione el nivel" >
+                    <option>Básico</option>
+                    <option>Medio</option>
+                    <option>Avanzado</option>
+                    <option>Experto</option> 
+                    </Input>
+                </ViewAddCVData>
+
+                <FormItem 
+                    name="Agregue una breve descripción de quien es y que busca" 
+                    idInput="description"
+                    type="textarea"/>
+
+
                 <FormGroup>
                     <Row md="2" className="separado">
                         {(Array.isArray(selectUser) && selectUser.length && selectUser.find(aspirante)) ?
@@ -107,7 +154,9 @@ return (
                             </FormItem>
                             : <LocalNoLoginCard isLogin={status.get("Login")} />
                         }
-                        <Button className="right" size="lg" color="primary">Guardar</Button>
+                        <Button className="right" size="lg" color="primary"
+                            // href="/MostrarCV"
+                        >Guardar</Button>
                     </Row></FormGroup>
             </Row>
         </Form>

@@ -82,11 +82,11 @@ body {
 
 .main-progress-render{
     overflow-y: auto;  
-    height: calc(100% - 150px);
+    height: calc(100vh - 150px);
 }
 .main-render{
     overflow-y: auto;  
-    height: calc(100% - 57px);
+    height: calc(100vh - 57px);
 }
 
 
