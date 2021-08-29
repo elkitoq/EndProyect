@@ -1,16 +1,16 @@
 body{
     background-color: #f8f6f6;
 }
+/** sub navegacion perfil **/
 .sub-navigation{
     margin: 0 !important;
     width: 100%;
-    height: 5.5rem;
+    height: 4rem;
     box-shadow: 0px 0px 0px;
     border-bottom: 1px solid #e7e7e7;
 }
 
 .sub-navigation ul{
-
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -29,7 +29,9 @@ body{
     margin-bottom: 0;
     
 }
+/* fin sub navegacion perfil*/ 
 
+/** tarjeta sobre mi **/
 .content-about-me{
     display: flex;
     flex-direction: column;
@@ -37,7 +39,7 @@ body{
 }
 
 .card-content-about-me{
-    margin-top: 4rem;
+    margin-top: 2.5rem;
     background-color: #fff;
     border-radius: 6px;
     box-shadow: 0px 3px 6px #00000029;
@@ -90,31 +92,94 @@ body{
 }
 
 .card-content-about-me .container .card-body p{
-    color: #929292;
+    color: #868686;
     font-size:12px;
 }
+/**fin tarjeta sobre mi **/
 
+/**imformacion curriculum **/
 .curriculum-container{
-    padding: 4rem;
+    padding-top: 2rem;
+    padding-bottom:2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
     border-radius: 6px;
-    margin-top: 4rem;
+    margin-top: 2.5rem;
     box-shadow: 0px 3px 6px #00000029;
     background-color: #fff;
     width: auto; 
+    max-width: 770px;
+    height: auto;
+    max-height: 700px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.curriculum-container .body{
-    padding: 3rem;
+.curriculum-container .body .bodyInner{
+   padding: 20px;
 }
 
-.curriculum-container .body .section-academy{
+.curriculum-container .body .section-cv{
     margin-top: 20px;
 }
 
-.curriculum-container .body .section-academy .head_section{
+.curriculum-container .body .section-cv .head_section .title h5{
+    margin-top: 5px;
+    font-size:16px
+}
+
+.curriculum-container .body .section-cv .head_section{
     display: flex;
     flex-direction: row;
 }
+
+.curriculum-container .body .section-cv .head_section .title{
+    margin-left: 10px;
+}
+
+.curriculum-container .body .section-cv .content{
+    font-size:12px;
+    margin-left: 26px;
+}
+/** fin informacion curriculum **/
+
+/** contacto **/
+
+.card-contact{
+    padding: 3rem;
+    border-radius: 6px;
+    margin-top: 2.5rem;
+    box-shadow: 0px 3px 6px #00000029;
+    background-color: #fff;
+    width: auto; 
+    max-width: 380px;
+    min-width: 300px;
+    display:flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 350px
+}
+
+.card-contact .title{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.card-contact .email, .card-contact .phone{
+   margin-top: 3rem;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   
+}
+
+.card-contact .email p, .card-contact .phone p{
+    margin-left: 5px;
+}
+
+.card-contact .email p a{
+    text-decoration: none;
+}
+/*fin contacto*/

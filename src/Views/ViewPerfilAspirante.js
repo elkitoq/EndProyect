@@ -6,6 +6,7 @@ import {
 } from 'reactstrap'
 
 import '../Assets/Css/AspiranteProfile.css';
+import { ContactProfile } from "../Components/ContactProfile";
 
 export const ViewPerfilAspirante = () => {
     return (
@@ -29,9 +30,8 @@ export const ViewPerfilAspirante = () => {
                 </Col>
 
                 <Col md={{ size: 3 }}>
-                    <h2>hola</h2>
+                    <ContactProfile number="+549026135549" email="elkitoq@gmail.com" />
                 </Col>
-
             </Row>
 
         </Container>

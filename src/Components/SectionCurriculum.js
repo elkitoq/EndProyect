@@ -8,11 +8,11 @@ export const SectionCurriculum = ({ sectionName, title, content, icon }) => {
                     <img src={icon} alt="" />
                 </div>
                 <div className="title">
-                    {title}
+                    <h5>{title}</h5>
                 </div>
             </div>
             <div className="content">
-                {content}
+                <p>{content}</p>
             </div>
         </Row>
     )
