@@ -9,13 +9,11 @@ import { useEffect, useState } from 'react';
 import API, { APIComponent } from '../Tools/API.js';
 import { Form } from '../Components/Form';
 import { useCookies } from 'react-cookie';
-<<<<<<< HEAD
 import { PDF } from '../Server/tools/PDF';
 import userSchema from '../Server/models/User';
-=======
 import RutaTutorial from '../Components/tutorial';
 import { Señalador } from '../Components/Señalador';
->>>>>>> 4ffcae79af0169d2cc3702d5db81a97e9c0f8968
+import api from '../Tools/API';
 
 let displayChargePhoto, setDisplayChargePhoto;
 
@@ -72,14 +70,11 @@ export const ViewCreateCV = () => {
     }
 
 
-<<<<<<< HEAD
     useEffect(() => {
         api.get();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-=======
->>>>>>> 4ffcae79af0169d2cc3702d5db81a97e9c0f8968
 
     // useEffect(() => {
     //     api.get();
@@ -95,7 +90,6 @@ export const ViewCreateCV = () => {
     }
 
 
-<<<<<<< HEAD
     return (
 
         
@@ -162,67 +156,6 @@ export const ViewCreateCV = () => {
                                        
     );
     
-=======
-return (
-    <Container>
-        <Form method="put">
-            <APIComponent 
-                url='/cv' 
-                APIClass={APICV}
-                events={{}}
-            />
-            <Row className="separado">
-                <FormGroup>
-                    <Row>
-                        <Col xs="4" sm="4" md="4" lg={{ size: 3, offset: 1 }}>
-                            <img src={noPhoto} className="foto-perfil" id="fotoPerfil" onClick={cargarFotoPerfil} alt="Cargar de perfil" style={{ cursor: 'pointer' }} />
-                            <div style={{ display: displayChargePhoto }}>Click en la imagen para cambiarla</div>
-                            <Input type="file" id="cargarImagen" onChange={mostrarFotoPerfil} />
-                        </Col>
-
-                        <Col md="8">
-                            <Row md="2">
-                                <FormItem name="Nombre" idInput="name" />
-                                <FormItem name="Apellido" idInput="lastName" />
-                            </Row>
-                            <Row>
-                                <FormItem name="Dirección" idInput="address" />
-                            </Row>
-                            <Row md="2">
-                                <FormItem name="Ciudad / Distrito" idInput="city" />
-                                <FormItem name="Código Postal" idInput="cp" />
-                            </Row>
-                            <Row md="2">
-                                <FormItem name="Edad" idInput="age" />
-                                <FormItem name="Teléfono" type="number" idInput="phone" />
-                            </Row>
-                            <Row>
-                                <FormItem name="E-Mail" type="email" idInput="email" />
-                            </Row>
-                        </Col>
-                    </Row></FormGroup>
-
-                <ViewAddCVData />
-                <FormGroup>
-                    <Row md="2" className="separado">
-                        {(Array.isArray(user.selectUser) && user.selectUser.length && user.selectUser.find(aspirante)) ?
-                            <FormItem type="select" name="El CV se guardará en:" idInput="role" defaultValue={dataDefault.role}>
-                                {(Array.isArray(user.selectUser)) ? user.selectUser.map(
-                                    (element, index) => aspirante(element) ?
-                                        <option key={`option-${index}`} value={index}>{element.roleName}</option> : ""
-                                ) : ""}
-                            </FormItem>
-                            : <LocalNoLoginCard isLogin={user.isLogin} />
-                        }
-                        <Button className="right" size="lg" color="primary">Guardar</Button>
-                    </Row></FormGroup>
-            </Row>
-        </Form>
-
-
-    </Container>
-)
->>>>>>> 4ffcae79af0169d2cc3702d5db81a97e9c0f8968
 }
 
 const cargarFotoPerfil = () => {
@@ -251,11 +184,7 @@ const LocalNoLoginCard = ({ isLogin }) =>
             <ButtonGroup>
                 {isLogin !== "true" ?
                     <Button href="/login" color="secondary">        Login </Button> : ""}
-<<<<<<< HEAD
                 <Button href="/register" color="secondary">     Crear </Button>
-=======
-                <Button href="/Register/" color="secondary">     Crear </Button>
->>>>>>> 4ffcae79af0169d2cc3702d5db81a97e9c0f8968
             </ButtonGroup>
         </Col>
     </Card>
