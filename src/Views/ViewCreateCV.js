@@ -5,13 +5,18 @@ import { ViewAddCVData } from './ViewAddCVData'
 import '../Assets/Css/cargarCV.css';
 import { FormItem } from '../Components/FormItem'
 import noPhoto from '../Assets/image/blank-profile.png'
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import API, { APIComponent } from '../Tools/API.js';
 import { Form } from '../Components/Form';
 
 // import { PDF } from '../Server/tools/PDF';
 import api from '../Tools/API';
 import { ViewCV } from './ViewCV';
+import { Status } from '../Tools/Status';
+
+import { LoadRoles } from '../Components/role';
+import RutaTutorial from '../Components/tutorial';
+import { Señalador } from '../Components//Señalador';
 
 
 let displayChargePhoto, setDisplayChargePhoto;
@@ -67,13 +72,6 @@ export const ViewCreateCV = () => {
                     : 0
     }
 
-
-    useEffect(() => {
-        api.get();
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
     // useEffect(() => {
     //     api.get();
 
@@ -112,7 +110,7 @@ return (
                     <Row>
                         <Col xs="4" sm="4" md="4" lg={{ size: 3, offset: 1 }}>
                             <img src={noPhoto} className="foto-perfil" id="fotoPerfil" onClick={cargarFotoPerfil} alt="Cargar de perfil" style={{ cursor: 'pointer' }} />
-                            <div style={{ display: displayChargePhoto }}>Click en la imagen para cambiarla</div>
+                            <div style={{ display: displayChargePhoto, marginTop:"-30px" }}>Click en la imagen para cambiarla</div>
                             <Input type="file" id="cargarImagen" onChange={mostrarFotoPerfil} />
                         </Col>
 
@@ -137,7 +135,7 @@ return (
                             </Row>
                         </Col>
                     </Row></FormGroup>
-
+                
                 <FormItem name="Puesto al que aspira" idInput="puesto"/>
                 
                 <h3> Experiencia Academica</h3>
