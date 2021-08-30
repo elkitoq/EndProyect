@@ -3,7 +3,6 @@ import { GoogleLogin } from 'react-google-login';
 export const ButtonGoogle = () => {
 
     const responseGoogle = (response) => {
-        console.log(response)
         console.log(response.profileObj)
         //se agregaria informacion a la cookie usando el response.profileObj que da mas datos sobre el usuario
     }

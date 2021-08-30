@@ -23,31 +23,6 @@ import { ViewCompanyProfile } from './ViewCompanyProfile.js';
 import { ViewPerfilAspirante } from './ViewPerfilAspirante.js';
 
 
-<<<<<<< HEAD
-export const ViewMain = () =>
-  <Switch>
-    <ViewRoute path="/Login" view={ViewLogin} />
-    <ViewRoute path="/Register/" view={ViewLogin} />
-    <ViewRoute path="/CVCreate" view={ViewCreateCV} />
-    <ViewRoute path="/lookforJob" view={ViewLookForJob} />
-    <ViewRoute path="/lookforWorker" view={ViewLookForWorker} />
-    <ViewRoute path="/findWorker" view={ViewFindWorker} />
-    <ViewRoute path="/homeAdmin" view={ViewHomeAdmin} />
-    <ViewRoute path="/homeAspirante" view={ViewHomeAspirante} />
-    <ViewRoute path="/homeEmpresa" view={ViewHomeEmpresa} />
-    <ViewRoute path="/homeAutonomo" view={ViewHomeAutonomo} />
-    <ViewRoute path="/jobOffice" view={ViewJobOffice} />
-    <ViewRoute path="/offerJob" view={ViewOfferJob} />
-    <ViewRoute path="/createJob" view={ViewCreateOfferJob} />
-    <ViewRoute path="/offerService" view={ViewOfferService} />
-    <ViewRoute path="/createService" view={ViewCreateOfferService} />
-    <ViewRoute path="/findJob" view={ViewFindJob} />
-    <ViewRoute path="/findService" view={ViewFindService} />
-    <ViewRoute path="/companyProfile" view={ViewCompanyProfile} />
-    <ViewRoute path="/recovery-pass" view={ViewLogin} />
-    <ViewRoute path="/" view={ViewHome} />  
-  </Switch>
-=======
 export const ViewMain = () => <Switch>
   <ViewRoute path="/Login" view={ViewLogin} />
   <ViewRoute path="/Register/" view={ViewLogin} />
@@ -71,7 +46,6 @@ export const ViewMain = () => <Switch>
   <ViewRoute path="/mapSite" view={Mapa} />
   <ViewRoute path="/" view={RenderProgress("Home")} />
 </Switch>
->>>>>>> b91885e1752de1bafe74cf25b451d41e8665470e
 
 const ViewRoute = ({ path, view }) =>
   <Route path={path}>

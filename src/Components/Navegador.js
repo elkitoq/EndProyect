@@ -38,20 +38,19 @@ export const NavegadorPrincipal = () => {
   return (
     <Navbar color="primary" dark expand="md">
       <NavbarBrand href="/">
-        <img className="logo_navbar" width="70px" height="45px" alt="logo" src={logo} id="logo"/>
-        <Señalado marca="logo" title="Logo" text="Si haces click te lleva a la pagina principal"/>
+        <img className="logo_navbar" width="70px" height="45px" alt="logo" src={logo} id="logo" />
+        <Señalado marca="logo" title="Logo" text="Si haces click te lleva a la pagina principal" />
       </NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
           <NavButton className="btn-cv-navbar" href="/CVCreate/"><span id="CrearCV"> Crear CV </span></NavButton>
-          <Señalado marca="CrearCV" title="Crear CV" text="Si haces click te lleva a la pagina para crear tu Curriculum"/>
+          <Señalado marca="CrearCV" title="Crear CV" text="Si haces click te lleva a la pagina para crear tu Curriculum" />
           <DropdownRol />
           <NavButton className="btn-oficina-navbar" href="/jobOffice/">Oficina de empleo</NavButton>
         </Nav>
         <Nav className="ms-auto buscador" navbar>
           <Busqueda className="ocultar-search input-search"
-            style={{ width: "40vw" }}
             href="/lookforJob/"
             text="Buscar Trabajo"
             othersButtons={[{ href: "/lookforWorker/", text: "Buscar Empleado" }]} />

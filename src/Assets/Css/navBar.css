@@ -15,8 +15,9 @@
     margin-left: 8rem;
 }
 
-.buscador .form-busqueda input{
+.buscador .form-busqueda .ocultar-search input{
     border-radius: 9px !important;
+    width: 600px;
 }
 
 .buscador .input-group-append .btn{
@@ -41,7 +42,7 @@
     margin-right: 3rem;
 } 
 
-@media (max-width: 1367px ){
+@media (max-width: 1366px ){
     
     .buscador{
         display: flex;
@@ -52,9 +53,9 @@
         margin-left: 3rem;
     }
     
-    .buscador .form-busqueda input{
+    .buscador .form-busqueda .ocultar-search input{
         border-radius: 9px !important;
-        width: 310px;
+        width: 320px !important;
     }
     
     .buscador .input-group-append .btn{
