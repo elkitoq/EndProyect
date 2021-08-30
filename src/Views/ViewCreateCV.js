@@ -5,24 +5,16 @@ import { ViewAddCVData } from './ViewAddCVData'
 import '../Assets/Css/cargarCV.css';
 import { FormItem } from '../Components/FormItem'
 import noPhoto from '../Assets/image/blank-profile.png'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import API, { APIComponent } from '../Tools/API.js';
 import { Form } from '../Components/Form';
-import { useCookies } from 'react-cookie';
-import { PDF } from '../Server/tools/PDF';
-import userSchema from '../Server/models/User';
-import RutaTutorial from '../Components/tutorial';
-import { Señalador } from '../Components/Señalador';
+
+// import { PDF } from '../Server/tools/PDF';
 import api from '../Tools/API';
+import { ViewCV } from './ViewCV';
+
 
 let displayChargePhoto, setDisplayChargePhoto;
-
-
-const tutorial =
-    new RutaTutorial("CV")
-    .setDescription(<>Puedes crear un Curriculum Vitae</>)
-    .setInstrucciones(<>Has clic en <Señalador marca="CrearCV" text="Crear CV"/>, está en la esquina superior izquierda de la pagina</>);
-
 
 export const ViewCreateCV = () => {
 /*
@@ -56,16 +48,22 @@ export const ViewCreateCV = () => {
         }
     }
 */
-    [displayChargePhoto, setDisplayChargePhoto] = useState("block");
 
-    const [user] = useCookies(['selectUser']);
+    [displayChargePhoto, setDisplayChargePhoto] = useState("block");   
+
+    const status = useContext(Status.Context)
+    const [selectUser,] = status.use('selectUser');
+    const [selectRole,] = status.use('selectRole');
+
+    const [ready,setReady]=useState(false)
+    const [role,setRole]=useState(-1)
 
     const dataDefault = {
         "role":
-            (user.selectUser && user.selectUser[user.selectRole] && aspirante(user.selectUser[user.selectRole])) ?
-                user.selectRole :
-                Array.isArray(user.selectUser) ?
-                    user.selectUser.findIndex(aspirante).toString()
+            (selectUser && selectUser[selectRole] && aspirante(selectUser[selectRole])) ?
+                selectRole :
+                Array.isArray(selectUser) ?
+                    selectUser.findIndex(aspirante).toString()
                     : 0
     }
 
@@ -86,76 +84,124 @@ export const ViewCreateCV = () => {
         didMount = ()=>{
             this.get();
         }
+        changeInfo =(info)=>{
+            if (info.error)
+                    alert(info.error);               
+            if (info.role !== undefined){
+                setRole(info.role)
+                setReady(true)
+            }
+        }
 
     }
 
+    if (ready)
+        return (<ViewCV role={role}/>)
 
-    return (
+return (
+    <Container>
+        <LoadRoles />
+        <Form method="put">
+            <APIComponent 
+                url='/cv' 
+                APIClass={APICV}
+                events={{}}
+            />
+            <Row className="separado">
+                <FormGroup>
+                    <Row>
+                        <Col xs="4" sm="4" md="4" lg={{ size: 3, offset: 1 }}>
+                            <img src={noPhoto} className="foto-perfil" id="fotoPerfil" onClick={cargarFotoPerfil} alt="Cargar de perfil" style={{ cursor: 'pointer' }} />
+                            <div style={{ display: displayChargePhoto }}>Click en la imagen para cambiarla</div>
+                            <Input type="file" id="cargarImagen" onChange={mostrarFotoPerfil} />
+                        </Col>
 
-        
-            <Container>
-                    <Form api={api} method="put">
-                        <Row className="separado">
-                            <FormGroup>
-                                <Row>
-                                    <Col xs="4" sm="4" md="4" lg={{ size: 3, offset: 1 }}>
-                                        <img src={noPhoto} className="foto-perfil" id="fotoPerfil" onClick={cargarFotoPerfil} alt="Cargar de perfil" style={{ cursor: 'pointer' }} />
-                                        <div style={{ display: displayChargePhoto }}>Click en la imagen para cambiarla</div>
-                                        <Input type="file" id="cargarImagen" onChange={mostrarFotoPerfil} />
-                                    </Col>
+                        <Col md="8">
+                            <Row md="2">
+                                <FormItem name="Nombre" idInput="name" />
+                                <FormItem name="Apellido" idInput="lastName" />
+                            </Row>
+                            <Row>
+                                <FormItem name="Dirección" idInput="address" />
+                            </Row>
+                            <Row md="2">
+                                <FormItem name="Ciudad / Distrito" idInput="city" />
+                                <FormItem name="Código Postal" idInput="cp" />
+                            </Row>
+                            <Row md="2">
+                                <FormItem name="Edad" idInput="age" />
+                                <FormItem name="Teléfono" type="number" idInput="phone" />
+                            </Row>
+                            <Row>
+                                <FormItem name="E-Mail" type="email" idInput="email" />
+                            </Row>
+                        </Col>
+                    </Row></FormGroup>
 
-                                    <Col md="8">
-                                        <Row md="2">
-                                            <FormItem name="Nombre" idInput="name"  /* onChange={this.onChange('name')} */ />
-                                            <FormItem name="Apellido" idInput="lastName" /* onChange={this.onChange('lastname')} */ />
-                                        </Row>
-                                        <Row>
-                                            <FormItem name="Dirección" idInput="address" />
-                                        </Row>
-                                        <Row md="2">
-                                            <FormItem name="Ciudad / Distrito" idInput="city" />
-                                            <FormItem name="Código Postal" idInput="cp" />
-                                        </Row>
-                                        <Row md="2">
-                                            <FormItem name="Edad" idInput="age" />
-                                            <FormItem name="Teléfono" type="number" idInput="phone" />
-                                        </Row>
-                                        <Row>
-                                            <FormItem name="E-Mail" type="email" idInput="email" />
-                                        </Row>
-                                        <br />
-                                        <Button size="sm"   /* onClick={window.print()} */>
-                                            <PDF /* name={this.state.name} onClick={this.sunmitPost} */ />
-                                            Imprimir
-                                        </Button>
+                <FormItem name="Puesto al que aspira" idInput="puesto"/>
+                
+                <h3> Experiencia Academica</h3>
+                <ViewAddCVData idInput="academico">
+                    <Input idInput="title" placeholder="Agrege un titulo" />
+                    <Input idInput="year" placeholder="Agrege el año" />
+                    <Input idInput="description" type="textarea" placeholder="Agrege más detalles" />
+                </ViewAddCVData>
 
-                                    </Col>
-                                </Row></FormGroup>
+                <h3> Experiencia Laboral</h3>
+                <ViewAddCVData idInput="laboral">
+                    <Input idInput="title" placeholder="Agrege un puesto" />
+                    <Input idInput="year" placeholder="Agrege el periodo" />
+                    <Input idInput="empresa" placeholder="Agrege la empresa" />
+                    <Input idInput="description" type="textarea" placeholder="Agrege más detalles" />
+                </ViewAddCVData>
 
-                            <ViewAddCVData />
+                <h3> Habilidades y Aptitudes</h3>
+                <ViewAddCVData idInput="skill">
+                    <Input idInput="title" placeholder="Agrege una habilidad" />
+                    <Input idInput="nivel" type="select" placeholder="Seleccione el nivel" >
+                    <option>Básico</option>
+                    <option>Medio</option>
+                    <option>Avanzado</option>
+                    <option>Experto</option> 
+                    </Input>
+                </ViewAddCVData>
 
-                            <FormGroup>
-                                <Row md="2" className="separado">
-                                    {(Array.isArray(user.selectUser) && user.selectUser.length && user.selectUser.find(aspirante)) ?
-                                        <FormItem type="select" name="El CV se guardará en:" idInput="role" defaultValue={dataDefault.role}>
-                                            {(Array.isArray(user.selectUser)) ? user.selectUser.map(
-                                                (element, index) => aspirante(element) ?
-                                                    <option key={`option-${index}`} value={index}>{element.roleName}</option> : ""
-                                            ) : ""}
-                                        </FormItem>
-                                        : <LocalNoLoginCard isLogin={user.isLogin} />
-                                    }
-                                    <Button className="right" size="lg" color="primary">Guardar</Button>
-                                </Row></FormGroup>
-                        </Row>
-                    </Form>
+                <FormItem 
+                    name="Agregue una breve descripción de quien es y que busca" 
+                    idInput="description"
+                    type="textarea"/>
 
-                                  
-                </Container>
-        
-                                       
-    );
-    
+
+                <FormGroup>
+                    <Row md="2" className="separado">
+                        {(Array.isArray(selectUser) && selectUser.length && selectUser.find(aspirante)) ?
+                            <FormItem type="select" name="El CV se guardará en:" idInput="role" defaultValue={dataDefault.role}>
+                                {(Array.isArray(selectUser)) ? selectUser.map(
+                                    (element, index) => aspirante(element) ?
+                                        <option key={`option-${index}`} value={index}>{element.roleName}</option> : ""
+                                ) : ""}
+                            </FormItem>
+                            : <LocalNoLoginCard isLogin={status.get("Login")} />
+                        }
+
+{/* 
+                        <Button size="sm"   /* onClick={window.print()} */ /*>
+                            <PDF /* name={this.state.name} onClick={this.sunmitPost} */ /* />
+                            Imprimir
+                        </Button>
+ */}
+
+                        <Button className="right" size="lg" color="primary"
+                            // href="/MostrarCV"
+                        >Guardar</Button>
+                    </Row></FormGroup>
+                
+            </Row>
+        </Form>
+
+
+    </Container>
+)
 }
 
 const cargarFotoPerfil = () => {
@@ -189,4 +235,9 @@ const LocalNoLoginCard = ({ isLogin }) =>
         </Col>
     </Card>
 
-
+RutaTutorial.get("CreateCV")
+    .setDescription(<>Puedes crear un Curriculum Vitae</>)
+    .setRender(ViewCreateCV)
+    .addRequisito("haveAspirante")
+    .setMeta("Crear CV")
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearCV" text="Crear CV"/>, está en la esquina superior izquierda de la pagina</>);

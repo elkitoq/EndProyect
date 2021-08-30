@@ -12,7 +12,8 @@ export const Form =({ onSubmit = () => { }, children, api = API.getApiComponent(
             if (element.props && element.props.defaultValue && (element.props.idInput || element.props.name)) {
                 data[(element.props.idInput || element.props.name)] = element.props.defaultValue;
             }
-            if (element.type && element.type.name === "FormItem") {
+       
+            if (element.type && (element.type.name === "FormItem" ||element.type.name === "ViewAddCVData")) {
                 const id = element.props.idInput || element.props.name;
                 return React.cloneElement(element, {
                     key: element.key ||`formItem-${id}-${i}`,

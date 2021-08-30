@@ -3,14 +3,17 @@ import { useLocation } from "react-router";
 import { CardText, Container, Row } from "reactstrap";
 import API, { APIComponent } from "../Tools/API";
 import { Display } from "../Components/Display";
-import { useCookies } from "react-cookie";
+import { Status } from "../Tools/Status";
+import { useContext } from "react";
 
 export const ViewOfferService = () => {
     const { search } = useLocation();
     const getJson = API.getSearchParam(search);
 
-    const [cookies]=useCookies(['selectRole'])
-    getJson.role=cookies.selectRole;
+    const status = useContext(Status.Context)
+    const [selectRole,] = status.use('selectRole');
+
+    getJson.role=selectRole;
 
     return (
         <Container className="abs-center" fluid={true}>

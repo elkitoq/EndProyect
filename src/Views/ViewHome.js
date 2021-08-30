@@ -2,12 +2,10 @@ import { Container, Row, Button} from "reactstrap";
 import { OptionMenu } from "../Components/OptionMenu";
 
 import '../Assets/Css/home.css';
-import RutaTutorial, { NextButton } from "../Components/tutorial";
+import RutaTutorial from "../Components/tutorial";
 import { Señalador } from "../Components/Señalador";
-import { useContext } from "react";
-import { Status } from "../Tools/Status";
 
-export const ViewHome = () =><Container className="abs-center">
+export const ViewHome = () =><Container className="abs-center no-scroll">
         <div className="text-center">
             <div className="title-center">
                 <h1>Bienvenido</h1>
@@ -19,7 +17,7 @@ export const ViewHome = () =><Container className="abs-center">
                 <OptionMenu href="/lookforWorker/" fontSize="2vh"   >Busco empleados</OptionMenu>
             </Row>
         </div>
-        <NextButton ruta="Home"/>
+
     </Container>
 
 
@@ -27,7 +25,6 @@ export const ViewHome = () =><Container className="abs-center">
     .setDescription(<>Puedes ver la pagina inicial</>)
     .setInstrucciones(<>Has clic en nuestro <Señalador marca="logo"/>, está en la esquina superior izquierda de la pagina</>)
     .setRender(ViewHome)
-    .addRequisito("findJob")
     ;
 
     

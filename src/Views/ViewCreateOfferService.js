@@ -1,15 +1,16 @@
-import { useState } from "react";
-import { useCookies } from "react-cookie";
 import { Button, Container, Input } from "reactstrap";
 import { Form } from "../Components/Form";
 import { FormItem } from "../Components/FormItem";
-import API, { APIComponent } from "../Tools/API";
-
+import { APIComponent } from "../Tools/API";
+import { Status } from "../Tools/Status";
+import { useContext } from "react";
 
 
 export const ViewCreateOfferService = () => {
 
-    const [cookies] = useCookies(['selectRole'])
+
+    const status = useContext(Status.Context)
+    const [selectRole,] = status.use('selectRole');
 
     return (
         <Container>
@@ -18,7 +19,7 @@ export const ViewCreateOfferService = () => {
                 <FormItem name="Ofrezco:" idInput="name" />
                 <FormItem name="Description" type="textarea" idInput="description" />
                 <FormItem name="Precio" idInput="price" />
-                <Input name="role" type="hidden" defaultValue={cookies.selectRole} />
+                <Input name="role" type="hidden" defaultValue={selectRole} />
                 <Button className='button-submit' size="lg" color="primary" type="submit" block>Enviar</Button>
             </Form>
         </Container>);

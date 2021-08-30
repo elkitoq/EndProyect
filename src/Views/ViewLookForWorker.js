@@ -1,10 +1,10 @@
 import { Button, ButtonGroup, Card, CardText, Col, Container } from "reactstrap";
 import { Busqueda } from "../Components/Busqueda";
-
+import { Status } from "../Tools/Status";
+import { useContext } from "react";
 
 export const ViewLookForWorker = () => {
 
-    // const [login] = useCookies(['isLogin']);
     const login = false;
 
     return (

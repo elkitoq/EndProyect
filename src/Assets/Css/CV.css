@@ -1,0 +1,36 @@
+
+
+
+.lateralCV{
+    background-color: rgba(43, 77, 34, 0.637);
+  }
+  
+  .separadorCV{
+    color: rgb(41, 78, 66);
+    border-top: #282c34 solid 4 px; 
+    border-bottom: #282c34 solid 2px;
+    font-size: 1.3rem; 
+  }
+  
+  .principalCV > .row{
+    margin: 3rem;
+  }
+  .principalCV > *{
+    font-size: 1.3rem;
+  }
+  
+  .lateralCV > .row{
+    margin: 5px;
+  }
+
+  .lateralCV > .name{
+      margin-top:3rem;
+
+      /* font-size: 3rem;
+      font-weight: "bold";    */
+  }
+  
+  .itemsCV > div{
+    border-bottom: rgba(35, 68, 57, 0.308) solid 1px;
+    border-top  : rgba(35, 68, 57, 0.308) solid 1px;
+  }

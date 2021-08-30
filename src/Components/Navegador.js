@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useCookies } from 'react-cookie';
 import {
   Navbar,
   NavbarBrand,
@@ -17,21 +16,25 @@ import '../Assets/Css/navBar.css'
 import { Señalado } from './Señalador';
 // import { Cookie } from './Cookie';
 
-
+import { useContext } from "react";
+import { Status } from "../Tools/Status";
 
 
 
 export const NavegadorPrincipal = () => {
 
-  const [login, setCookie, removeCookie] = useCookies(['isLogin']);
+  const status = useContext(Status.Context)
 
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
   const logout = () => {
-    if (login.isLogin === "true")
-      removeCookie('selectUser', { path: '/' })
-    setCookie("isLogin", false, { path: '/' });
+    // if (login.isLogin === "true")
+    //    removeCookie('selectUser', { path: '/' })
+    if (status.get("Login"))
+      status.set("selectUser", undefined)
+    status.set("Login", false)
+    // setCookie("isLogin", false, { path: '/' });
     new QAPI('/logout').send("post", { hola: "mundo" });
   }
 
@@ -63,12 +66,23 @@ export const NavegadorPrincipal = () => {
         </Nav>
         <Nav className="ms-auto" navbar>
           <NavButton href="/Login/"
-            onClick={(login.isLogin === "true") ? logout : () => { }}
-            children={(login.isLogin === "true") ? "Logout" : "Login"}
-            className="a-login" />
+            onClick={(status.get("Login")) ? logout : () => { }}
+            // onClick={(login.isLogin === "true") ? logout : () => { }}
+            // children={(login.isLogin === "true") ? "Logout" : "Login"}
+            className="a-login" >
+            <span id="Login">
+              {(status.get("Login")) ? "Logout" : "Login"}
+            </span>
+          </NavButton>
+          <Señalado marca="Login" title="Login" text={(status.get("Login")) ? "Cierra sesión" : "Te permite iniciar sesión"} />
           <NavButton href="/Register/"
             className="a-register"
-            children={(login.isLogin === "true") ? "Crear Rol" : "Register"} />
+            // children={(status.get("Login")) ? "Crear Rol" : "Register"} 
+            // children={(login.isLogin === "true") ? "Crear Rol" : "Register"}
+          >
+            <span id="CrearRol">{(status.get("Login")) ? "Crear Rol" : "Register"}</span>
+          </NavButton>
+          <Señalado marca="CrearRol" title="Crear Rol" text={(status.get("Login")) ? "Crea un nuevo perfil con el Rol que prefieras (Aspirante, Empresa, Autónomo)" : ""} />
         </Nav>
       </Collapse>
     </Navbar>

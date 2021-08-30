@@ -1,26 +1,25 @@
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
 import { Row, DropdownToggle, DropdownMenu, DropdownItem, Navbar, Nav, UncontrolledDropdown, Modal, ModalBody, ModalFooter, Button, ButtonGroup } from "reactstrap";
 import '../Assets/Css/cardWorker.css'
 import { CardsDisplay, CardCustom } from "./CardsDisplay";
 import { TableDisplay } from "./TableDisplay";
 import { Pagination } from "./Pagination";
 import API, { APIComponent } from "../Tools/API";
+import { useContext } from "react";
+import { Status } from "../Tools/Status";
 
 export const Display = ({children, api=API.getApiComponent(children,APIComponent.mode.ARRAY), get }) => {
     const paginas = [1, 10, 50, 100];
-    const [cookie, setCookie] = useCookies(["apiConsumer"])
 
-    if (cookie.apiConsumer === undefined) {
+    const status = useContext(Status.Context)
+
+    if (status.get("apiConsumer") === undefined) {
         get.results = get.results || 10;
-        cookie.apiConsumer = { pages: paginas.findIndex((e) => e === get.results), type: 0 }
-        setCookie("apiConsumer", cookie.apiConsumer, { path: '/' })
+        status.set("apiConsumer",{ pages: paginas.findIndex((e) => e === get.results), type: 0 })
     } else if (get.results === undefined)
-        get.results = paginas[cookie.apiConsumer.pages]
+        get.results = paginas[status.get("apiConsumer").pages]
 
-
-    // const [pages, setPages] = useCookies("apiConsumer")
-    const [type, setType] = useState(cookie.apiConsumer.type);
+    const [type, setType] = useState(status.get("apiConsumer").type);
 
     useEffect(() => {
         getNewData();
@@ -31,11 +30,10 @@ export const Display = ({children, api=API.getApiComponent(children,APIComponent
 
     const getNewData = () => {
         api.get(get).then((r) => {
-            cookie.apiConsumer.pages = paginas.findIndex((e) => e === get.results)
-            setCookie("apiConsumer", cookie.apiConsumer, { path: '/' });
+            status.get("apiConsumer").pages = paginas.findIndex((e) => e === get.results)
+            status.save("apiConsumer");
             console.log(api.getHookData());
 
-            // api.getHookData()[2].selected=!api.getHookData()[2].selected
         });
     }
 
@@ -91,8 +89,8 @@ export const Display = ({children, api=API.getApiComponent(children,APIComponent
 
             <Navbar >
                 <Nav>
-                    <Selector items={["Tarjetas", "Tabla"]} select={type} onChange={(n) => { setType(n); cookie.apiConsumer.type = n; setCookie("apiConsumer", cookie.apiConsumer, { path: '/' }) }} />
-                    <Selector items={paginas} select={cookie.apiConsumer.pages} onChange={(n) => { cookie.apiConsumer.pages = n; get.results = paginas[n]; getNewData(); }} />
+                    <Selector items={["Tarjetas", "Tabla"]} select={type} onChange={(n) => { setType(n); status.get("apiConsumer").type = n; status.save("apiConsumer") }} />
+                    <Selector items={paginas} select={status.get("apiConsumer").pages} onChange={(n) => { status.get("apiConsumer").pages = n;  status.save("apiConsumer"); get.results = paginas[n]; getNewData(); }} />
                     <Pagination pages={api.getHookInfo().pages} />
                     <Button outline={!selectMode} color="primary" onClick={togleSelectMode}>Seleccionar</Button>
                     <ButtonGroup hidden={!selectMode}>

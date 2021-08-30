@@ -1,20 +1,20 @@
-import { useCookies } from 'react-cookie';
 import { FormGroup, Button, Label } from 'reactstrap'
 import { Form } from '../Components/Form.js';
 import { FormItem } from '../Components/FormItem.js';
 import API, { APIComponent} from '../Tools/API.js';
-
+import { Status } from "../Tools/Status";
+import { useContext } from "react";
 
 export const FormRegister = () => {
 
-    const [, setCookie] = useCookies(['isLogin']);
+    const status = useContext(Status.Context)
     
     class APILogin extends API{
         changeInfo= (newValue) => {
                 if (newValue.error)
                     alert(newValue.error);
                 if (newValue.isLogin) {
-                    setCookie("isLogin", true, { path: '/' });
+                    status.set("Login")
                 }
             }
     } 
