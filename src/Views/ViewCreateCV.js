@@ -20,10 +20,6 @@ import { ViewCV } from './ViewCV';
 
 let displayChargePhoto, setDisplayChargePhoto;
 
-
-
-
-
 export const ViewCreateCV = () => {
     [displayChargePhoto, setDisplayChargePhoto] = useState("block");   
 

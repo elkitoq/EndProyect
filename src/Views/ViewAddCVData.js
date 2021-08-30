@@ -8,7 +8,7 @@ export const ViewAddCVData = ({reference = { values: {}, onChange: () => { } }, 
 
     // const [lista, setLista] = useState([]);
 
-    const [activo, setActivo] = useState();
+    const [activo, setActivo] = useState(-1);
     const updater = useState(false);
 
     const update = () => updater[1](!updater[0]);
@@ -53,7 +53,10 @@ export const ViewAddCVData = ({reference = { values: {}, onChange: () => { } }, 
             {(Array.isArray(reference.values[reference.id]))?
             reference.values[reference.id].map((elemento, index) => {
                 const toggle = () => {
+                    if (activo !== index)
                     setActivo(index)
+                    else
+                    setActivo(-1)
                 }
 
                 return (
@@ -76,7 +79,7 @@ export const ViewAddCVData = ({reference = { values: {}, onChange: () => { } }, 
                 );
             })
             :""}
-            <Button onClick={addExperience} className='list-group-item list-group-item-action'>Click para agregar experiencia</Button>
+            <Button onClick={addExperience} className={`list-group-item list-group-item-action ${activo===-1 ? "active" : ""}`}>Click para agregar experiencia</Button>
         </List>
 
     )
