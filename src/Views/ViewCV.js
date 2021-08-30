@@ -6,6 +6,9 @@ import RutaTutorial from '../Components/tutorial';
 import { QAPI } from '../Tools/API';
 import { Status } from "../Tools/Status";
 
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+
 
 export const ViewCV = ({ role }) => {
 
@@ -25,9 +28,12 @@ export const ViewCV = ({ role }) => {
                 setCV(res.data.response)
             console.log(res.data.response);
         });
-
+        
+        
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+
 
 
     return <>
@@ -88,20 +94,58 @@ export const ViewCV = ({ role }) => {
 
         </Container>
         <Button
-        onClick={()=>{ 
-                      
-            var contenido= document.getElementById("cvImprimible").innerHTML;
-            var contenidoOriginal= document.body.innerHTML;
-       
-            document.body.innerHTML = contenido;
-       
-            window.print();
-       
-            document.body.innerHTML = contenidoOriginal;
+            onClick={() => {
+
+                var contenido = document.getElementById("cvImprimible").outerHTML;
+                var contenidoOriginal = document.body.innerHTML;
+
+                document.body.innerHTML = contenido;
+
+                window.print();
+
+                document.body.innerHTML = contenidoOriginal;
 
 
+            }}
+        >Imprimir</Button>
+        <Button 
+        onClick={()=>{
+            var doc = new jsPDF({ orientation: 'p', format: [595, 842],unit: 'pt'  });
+            // doc.html(document.getElementById('cvImprimible').outerHTML, 10, 10);
+
+
+            // doc.html(document.getElementById('cvImprimible').outerHTML, {
+            //     callback: function (doc) {
+            //     //   doc.save("a4.pdf");
+            //       doc.output("dataurlnewwindow");
+            //     }
+            //  });
+
+            // doc.fromHTML(document.getElementById('cvImprimible').outerHTML, 15, 15, {
+            //     'width': 700
+            // });
+            // doc.save('sample_file.pdf');
+
+
+            html2canvas(document.getElementById('cvImprimible')).then(canvas=> {
+  
+                    //Returns the image data URL, parameter: image format and clarity (0-1)
+                    var pageData = canvas.toDataURL('image/jpeg', 1.0);
+  
+                    //Default vertical direction, size ponits, format a4[595.28,841.89]
+                    var pdf = new jsPDF('', 'pt', 'a4');
+  
+                    //Two parameters after addImage control the size of the added image, where the page height is compressed according to the width-height ratio column of a4 paper.
+                    pdf.addImage(pageData, 'JPEG', 0, 0, 595.28, 592.28/canvas.width * canvas.height );
+  
+                    pdf.save('stone.pdf');
+                    // doc.output("dataurlnewwindow");
+  
+                }).catch( error =>  console.log(error) );
+            
         }}
-    >Imprimir</Button>
+        >Descargar</Button>
+
         <Button
             href="/CVCreate/"
         >Editar</Button>

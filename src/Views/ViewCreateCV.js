@@ -10,7 +10,6 @@ import API, { APIComponent } from '../Tools/API.js';
 import { Form } from '../Components/Form';
 
 // import { PDF } from '../Server/tools/PDF';
-import api from '../Tools/API';
 import { ViewCV } from './ViewCV';
 import { Status } from '../Tools/Status';
 
