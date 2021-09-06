@@ -9,12 +9,12 @@ export const ContactProfile = ({ email, number }) => {
                 <h5>Contacto</h5>
             </div>
             <div className="email">
-                <span><img src={emailImg} width="20px" /> Email: </span>
+                <span><img src={emailImg} width="20px" alt="icon" /> Email: </span>
                 <p><a href={"mailto:" + email}>{email}</a></p>
 
             </div>
             <div className="phone">
-                <span><img src={phoneImg} width="20px" /> Teléfono: </span>
+                <span><img src={phoneImg} width="20px" alt="icon" /> Teléfono: </span>
                 <p>{number}</p>
 
             </div>

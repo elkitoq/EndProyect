@@ -1,9 +1,9 @@
 
 import { ViewLogin } from './ViewLogin.js'
-import {  } from './ViewCreateCV'
-import {  } from './ViewCV.js';
+import { } from './ViewCreateCV'
+import { } from './ViewCV.js';
 import { ViewFindWorker } from "./ViewFindWorker";
-import {  } from "./ViewHome";
+import { } from "./ViewHome";
 import { ViewHomeAdmin } from "./ViewHomeAdmin";
 import { ViewHomeAspirante } from "./ViewHomeAspirante";
 import { ViewHomeAutonomo } from "./ViewHomeAutonomo";
@@ -47,6 +47,7 @@ export const ViewMain = () => <Switch>
   <ViewRoute path="/perfilAspirante" view={ViewPerfilAspirante} />
   <ViewRoute path="/mapSite" view={Mapa} />
   <ViewRoute path="/" view={RenderProgress("Home")} />
+  <ViewRoute path="/profileCompany" view={ViewCompanyProfile} />
 </Switch>
 
 const ViewRoute = ({ path, view }) =>
