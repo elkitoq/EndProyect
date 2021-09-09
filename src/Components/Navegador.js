@@ -64,7 +64,7 @@ export const NavegadorPrincipal = () => {
             className="mostrar-search"
             children="Buscar Empleado" />
         </Nav>
-        <Nav className="ms-auto" navbar>
+        <Nav className="ms-auto ul-login" navbar>
           <NavButton href="/Login/"
             onClick={(status.get("Login")) ? logout : () => { }}
             // onClick={(login.isLogin === "true") ? logout : () => { }}
@@ -77,8 +77,8 @@ export const NavegadorPrincipal = () => {
           <Señalado marca="Login" title="Login" text={(status.get("Login")) ? "Cierra sesión" : "Te permite iniciar sesión"} />
           <NavButton href="/Register/"
             className="a-register"
-            // children={(status.get("Login")) ? "Crear Rol" : "Register"} 
-            // children={(login.isLogin === "true") ? "Crear Rol" : "Register"}
+          // children={(status.get("Login")) ? "Crear Rol" : "Register"} 
+          // children={(login.isLogin === "true") ? "Crear Rol" : "Register"}
           >
             <span id="CrearRol">{(status.get("Login")) ? "Crear Rol" : "Register"}</span>
           </NavButton>
