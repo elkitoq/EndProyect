@@ -43,8 +43,8 @@ const corsOptions = {
     "http://localhost:3000",
     `http://localhost:${server.get('port')}`,
     //y acá van los dns
-    `http://maipujobs.ddns.net`,
-    `http://maipujobs.ddns.net:4000`,
+    `http://maipujobs.sytes.net`,
+    `http://maipujobs.sytes.net:4000`,
     //y la red local
     `http://192.168.100.100:3000`,
     `http://192.168.100.100:4000`

@@ -138,7 +138,7 @@ export const ViewCV = ({ role }) => {
                     //Two parameters after addImage control the size of the added image, where the page height is compressed according to the width-height ratio column of a4 paper.
                     pdf.addImage(pageData, 'JPEG', 0, 0, 595.28, 592.28/canvas.width * canvas.height );
   
-                    pdf.save('stone.pdf');
+                    pdf.save(`${cv.lastName}.CV.pdf`);
                     // doc.output("dataurlnewwindow");
   
                 }).catch( error =>  console.log(error) );
