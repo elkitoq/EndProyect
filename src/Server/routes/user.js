@@ -33,6 +33,8 @@ router.post('/logout', (req, res) => {
 
 router.put('/user', async (req, res) => {
     req.session.view = req.session.view * 2;
+    console.log(req.body);
+
     if (typeof req.body.email === "string")
         req.body.email = req.body.email.toLowerCase()
 
@@ -64,7 +66,7 @@ router.put('/user', async (req, res) => {
                 } else {
                     res.status(208).json({ info: { error: "El email ya tiene una cuenta asociada" } });
                 }
-            } else { res.status(208).json({ info: { error: "El usuario esta en linea" } }); }
+            } else { res.status(208).json({ info: { error: "El nombre de usuario ya esta en uso, intente con otro" } }); }
 
     }
     else

@@ -1,3 +1,5 @@
+const roleSchema = require('./Role').schema
+
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
@@ -23,6 +25,7 @@ const userSchema = new mongoose.Schema({
     codeRecoveryPass: {
         type: String
     },
+    newRole: [roleSchema],
     role: [{
         roleType: Number,
         roleName: String,
