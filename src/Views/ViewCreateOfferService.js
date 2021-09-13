@@ -13,9 +13,9 @@ export const ViewCreateOfferService = () => {
     const [selectRole,] = status.use('selectRole');
 
     return (
-        <Container>
-            <Form method="put">
-                <APIComponent url="/service" /> 
+        <Container className="container-form">
+            <Form method="put" className="form">
+                <APIComponent url="/service" />
                 <FormItem name="Ofrezco:" idInput="name" />
                 <FormItem name="Description" type="textarea" idInput="description" />
                 <FormItem name="Precio" idInput="price" />

@@ -22,7 +22,7 @@ export const ViewLogin = () => {
 
     const { pathname } = useLocation();
     return (
-        <Container className="themed-container" fluid="md">
+        <Container className="themed-container" fluid="md" >
             <Row className="row-login">
                 <Col className="column" sm="5" >
                     <div className="container-logo">
@@ -44,14 +44,14 @@ export const ViewLogin = () => {
 
 const CorrectLogin = () => {
 
-    return (<div className="abs-center">
+    return (<div className="abs-center column-welcome">
         <Col xs="6">
             <Row>
                 <h1>Bienvenido</h1>
             </Row>
             <Row>
-                <Button className="separado3" href="/" fontSize="2vh" color="primary" >Inicio</Button>
-                <Button className="separado3" href="/CVCreate" fontSize="2vh" color="primary" >Crear CV</Button>
+                <Button className="separado3" href="/" color="primary" >Inicio</Button>
+                <Button className="separado3" href="/CVCreate" color="primary" >Crear CV</Button>
             </Row>
         </Col>
         <LoadRoles />
