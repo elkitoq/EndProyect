@@ -1,4 +1,4 @@
-const roleSchema = require('./Role').schema
+const roleSchema = require('./Profile').schema
 
 const mongoose = require('mongoose');
 
@@ -25,37 +25,7 @@ const userSchema = new mongoose.Schema({
     codeRecoveryPass: {
         type: String
     },
-    newRole: [roleSchema],
-    role: [{
-        roleType: Number,
-        roleName: String,
-        cv: {
-            name: String,
-            lastName: String,
-            age: Number,
-            imgCv: String,
-            address: String,
-            cp: Number,
-            city: String,
-            phone: String,
-            email: String,
-            puesto: String,
-            description: String,
-            laboral: Array,
-            academico: Array,
-            skill:Array
-        },
-        applications: [{
-            name: String,
-            description: String,
-            req: String
-        }],
-        stalls: [{
-            name: String,
-            description: String,
-            price: String
-        }]
-    }]
+    profile: [roleSchema]
 });
 
 exports.User = new mongoose.model('users', userSchema);

@@ -1,11 +1,13 @@
 const roleSchema = require('./Profile').schema
+const aplicationSchema = require('./Aplications').aplicationSchema;
 
 const mongoose = require('mongoose');
 const extendSchema = require('mongoose-extend-schema');
 
 
-const candidateSchema = extendSchema(roleSchema,{
-    cv: {
+
+const companySchema = extendSchema(roleSchema,{
+    data: {
         name: String,
         lastName: String,
         age: Number,
@@ -16,10 +18,9 @@ const candidateSchema = extendSchema(roleSchema,{
         phone: String,
         email: String,
         puesto: String,
-        description: String,
-        laboral: Array,
-        academico: Array,
-        skill:Array
-    }});
-    exports.Candidate = new mongoose.model('candidate', candidateSchema);
-    exports.candidateSchema = candidateSchema;
+        description: String
+    },
+    applications: [aplicationSchema]
+    });
+    exports.Company = new mongoose.model('company', companySchema);
+    exports.companySchema = companySchema;

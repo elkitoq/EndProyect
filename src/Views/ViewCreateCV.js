@@ -85,8 +85,9 @@ export const ViewCreateCV = () => {
             if (info.error)
                     alert(info.error);               
             if (info.role !== undefined){
-                setRole(info.role)
-                setReady(true)
+                setRole(info.role);
+                status.set("CreateCV");
+                setReady(true);
             }
         }
 
@@ -175,7 +176,7 @@ return (
                             <FormItem type="select" name="El CV se guardará en:" idInput="role" defaultValue={dataDefault.role}>
                                 {(Array.isArray(selectUser)) ? selectUser.map(
                                     (element, index) => aspirante(element) ?
-                                        <option key={`option-${index}`} value={index}>{element.roleName}</option> : ""
+                                        <option key={`option-${index}`} value={index}>{element.profileName}</option> : ""
                                 ) : ""}
                             </FormItem>
                             : <LocalNoLoginCard isLogin={status.get("Login")} />
@@ -218,7 +219,7 @@ const mostrarFotoPerfil = () => {
 }
 
 
-const aspirante = (element) => element.roleType === 1;
+const aspirante = (element) => element.profileType === 1;
 
 const LocalNoLoginCard = ({ isLogin }) =>
     <Card color="primary" inverse>

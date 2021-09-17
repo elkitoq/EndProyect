@@ -13,13 +13,13 @@ export const ViewHomeAspirante = () => {
 
     const status = useContext(Status.Context)
     const [selectUser,] = status.use('selectUser');
-
-    const user = selectUser[userNumber];
-
+    const [selectRole,] = status.use('selectRole');
+    const user = selectUser[userNumber || selectRole];
+    document.user=user
     return (
         <Container className="abs-center">
             <div className="text-center">
-                <h1>Bienvenido {user.roleName}</h1>
+                <h1>Bienvenido {user.profileName}</h1>
                 <h2>¿Que estas buscando hoy?</h2>
                 <Row className="">
                     <OptionMenu href="/CVCreate"       >Crear Curriculum</OptionMenu>

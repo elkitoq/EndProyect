@@ -147,6 +147,9 @@ export const ViewCV = ({ role }) => {
         >Descargar</Button>
 
         <Button
+            onClick={()=>{
+                status.set("CreateCV",false);
+            }}
             href="/CVCreate/"
         >Editar</Button>
     </>

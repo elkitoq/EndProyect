@@ -1,3 +1,4 @@
+const { newProfile } = require('../models/Profile.js');
 const { User } = require('../models/User.js')
 const router = require('express').Router();
 
@@ -55,6 +56,12 @@ router.put('/user', async (req, res) => {
                 if (!await User.findByEmail(req.body.email)) {
                     if (req.body["password"] === req.body["password2"]) {
                         req.body.password = req.body.password.hashCode();
+                        if (Array.isArray(req.body.profile))
+                        for (var i=0;i<req.body.profile.length;i++)
+                            req.body.profile[i]=await newProfile(req.body.profile[i])
+                        else
+                            req.body.profile=undefined
+                        console.log(req.body.profile);
                         const newUser = await new User(req.body).save();
                         req.session.user = newUser;
                         res.status(201).json({ response: response, info: { isLogin: true } });

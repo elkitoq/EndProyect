@@ -18,7 +18,7 @@ export const LoadRoles = () => {
 
 
     useEffect(() => {
-        new QAPI('/role').send("get", {}).then((res) => {
+        new QAPI('/profile').send("get", {}).then((res) => {
             status.set("selectUser",(res.data.response),true)
             if (res && res.data && res.data.response)
                 verificarRoles(status,res.data.response)
@@ -40,6 +40,7 @@ export const DropdownRol = () => {
 
     const status = useContext(Status.Context)
     const [user,] = status.use('selectUser');
+    const [selectRole,] = status.use('selectRole');
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -56,7 +57,7 @@ export const DropdownRol = () => {
     return (
         <Dropdown isOpen={dropdownOpen} toggle={toggle} nav inNavbar>
             <DropdownToggle nav caret>
-            <span id="Roles"> Roles</span>
+            <span id="Roles"> {(Array.isArray(user) && user[selectRole] && user[selectRole].profileName)?user[selectRole].profileName:"Perfiles"}</span>
             </DropdownToggle>
             <Señalado marca="Roles" title="Roles" text="Selecciona como quien quieres usar la app (Empresa, Aspirante o Autónomo) para que elijamos el conjunto de herramientas que necesitas"/>
             
@@ -67,15 +68,15 @@ export const DropdownRol = () => {
                         (element, index) =>
                             <DropdownItem key={`droprole-${index}`}
                                 href={
-                                    `${element.roleType === 0 ? "/homeEmpresa" :
-                                        element.roleType === 1 ? "/homeAspirante" :
-                                            element.roleType === 2 ? "/homeAutonomo" :
+                                    `${element.profileType === 0 ? "/homeEmpresa" :
+                                        element.profileType === 1 ? "/homeAspirante" :
+                                            element.profileType === 2 ? "/homeAutonomo" :
                                                 "/homeAdmin"
                                     }?user=${index}`
                                 }
                                 onClick={selectRol.bind(this, index)}
                             >
-                                {element.roleName}
+                                {element.profileName}
                             </DropdownItem>
                     ) : ""
                 }
@@ -91,5 +92,5 @@ export const DropdownRol = () => {
 
 
 export const verificarRoles=(status,users)=>{
-    status.set("haveAspirante", users.find((element) => element.roleType === 1)!==undefined,true)
+    status.set("haveAspirante", users.find((element) => element.profileType === 1)!==undefined,true)
 }

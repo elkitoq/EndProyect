@@ -23,9 +23,9 @@ export const ViewCreateUser = ({roleType}) => {
             {
             !(Array.isArray(selectUser) && selectUser.length) ? <CrearUsuario roleType={roleType}/> :
                 !(selectUser[selectUser.length - 1].new === true) ? <CrearUsuario roleType={roleType}/> :
-                    (selectUser[selectUser.length - 1].roleType === 0) ? <CrearEmpresa /> :
-                        (selectUser[selectUser.length - 1].roleType === 1) ? <CrearAspirante /> :
-                            (selectUser[selectUser.length - 1].roleType === 2) ? <CrearAutonomo /> :
+                    (selectUser[selectUser.length - 1].profileType === 0) ? <CrearEmpresa /> :
+                        (selectUser[selectUser.length - 1].profileType === 1) ? <CrearAspirante /> :
+                            (selectUser[selectUser.length - 1].profileType === 2) ? <CrearAutonomo /> :
                                 <CrearAdmin />}</div>
     );
 }
@@ -36,11 +36,12 @@ const ButtonCreate = ({ href }) =>{
     return  <Button size="lg" color="primary" blocks="true" href={`${href}?user=${selectUser.length - 1}`}
         onClick={(e) => {
             selectUser[selectUser.length - 1].new = false;
-            if (selectUser[selectUser.length - 1].roleName === "" || selectUser[selectUser.length - 1].roleName === undefined)
-                selectUser[selectUser.length - 1].roleName = "N/N";
+            if (selectUser[selectUser.length - 1].profileName === "" || selectUser[selectUser.length - 1].profileName === undefined)
+                selectUser[selectUser.length - 1].profileName = "N/N";
             verificarRoles(status,selectUser);
             saveUser();
-            new QAPI('/role').send("put", selectUser[selectUser.length - 1]);
+            status.set("userRole",""+(selectUser.length - 1))
+            new QAPI('/profile').send("put", selectUser[selectUser.length - 1]);
             
         }}>
         Crear</Button>
@@ -51,11 +52,11 @@ const CrearEmpresa = () => {
     return (
         <Container >
             Introduzca datos de la empresa:
-            <Input defaultValue={selectUser[selectUser.length - 1].roleName}
+            <Input defaultValue={selectUser[selectUser.length - 1].profileName}
                 placeholder="Nombre"
                 autoFocus
                 onChange={(e) => {
-                    selectUser[selectUser.length - 1].roleName = e.target.value;
+                    selectUser[selectUser.length - 1].profileName = e.target.value;
                     saveUser()
                 }
                 }
@@ -72,7 +73,7 @@ const CrearUsuario = ({roleType}) => {
     const crear = (r) => {
         if (!Array.isArray(selectUser))
             selectUser = [];
-        selectUser.push({ roleType: r, new: true });
+        selectUser.push({ profileType: r, new: true });
         console.log("///////////////////////////");
         console.log(selectUser);
         saveUser()
@@ -121,11 +122,11 @@ const CrearAspirante = () => {
     return (
         <>
             Introduzca sus datos
-            <Input defaultValue={selectUser[selectUser.length - 1].roleName}
+            <Input defaultValue={selectUser[selectUser.length - 1].profileName}
                 placeholder="Nombre"
                 autoFocus
                 onChange={(e) => {
-                    selectUser[selectUser.length - 1].roleName = e.target.value;
+                    selectUser[selectUser.length - 1].profileName = e.target.value;
                     saveUser()
                 }
                 }
@@ -139,14 +140,14 @@ const CrearAspirante = () => {
 
 
 const CrearAdmin = () => {
-    selectUser[selectUser.length - 1].roleName = "Administrados";
+    selectUser[selectUser.length - 1].profileName = "Administrados";
     return (
         <>
             Introduzca los datos de su asociado
-            <Input defaultValue={selectUser[selectUser.length - 1].subordinate[0].roleName}
+            <Input defaultValue={selectUser[selectUser.length - 1].subordinate[0].profileName}
                 autoFocus
                 onChange={(e) => {
-                    selectUser[selectUser.length - 1].subordinate[0].roleName = e.target.value;
+                    selectUser[selectUser.length - 1].subordinate[0].profileName = e.target.value;
                     saveUser();
                 }
                 }
@@ -164,11 +165,11 @@ const CrearAutonomo = () => {
     return (
         <Container>
             Introduzca los datos de su emprendimiento
-            <Input defaultValue={selectUser[selectUser.length - 1].roleName}
+            <Input defaultValue={selectUser[selectUser.length - 1].profileName}
                 placeholder="Nombre"
                 autoFocus
                 onChange={(e) => {
-                    selectUser[selectUser.length - 1].roleName = e.target.value;
+                    selectUser[selectUser.length - 1].profileName = e.target.value;
                     saveUser()
                 }
                 }

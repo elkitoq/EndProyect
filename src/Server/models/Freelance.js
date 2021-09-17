@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const extendSchema = require('mongoose-extend-schema');
 
 
-const candidateSchema = extendSchema(roleSchema,{
+const freelanceSchema = extendSchema(roleSchema,{
     cv: {
         name: String,
         lastName: String,
@@ -20,6 +20,13 @@ const candidateSchema = extendSchema(roleSchema,{
         laboral: Array,
         academico: Array,
         skill:Array
-    }});
-    exports.Candidate = new mongoose.model('candidate', candidateSchema);
-    exports.candidateSchema = candidateSchema;
+    },
+    stalls: [{
+        name: String,
+        description: String,
+        price: String
+    }],
+    private:{msg:String}
+});
+    exports.Freelance = new mongoose.model('freelance', freelanceSchema);
+    exports.freelanceSchema = freelanceSchema;
