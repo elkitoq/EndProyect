@@ -40,7 +40,7 @@ const ButtonCreate = ({ href }) =>{
                 selectUser[selectUser.length - 1].profileName = "N/N";
             verificarRoles(status,selectUser);
             saveUser();
-            status.set("userRole",""+(selectUser.length - 1))
+            status.set("selectRole",""+(selectUser.length - 1))
             new QAPI('/profile').send("put", selectUser[selectUser.length - 1]);
             
         }}>

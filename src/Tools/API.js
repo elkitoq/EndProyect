@@ -14,7 +14,7 @@ export default class API {
 
         if (qApi) {
             this._data = mode === APIComponent.mode.SINGLE ? {} : [];
-            this._setData = (value) => { this._info = value };
+            this._setData = (value) => { this._data = value };
             this._info = {};
             this._setInfo = (value) => { this._info = value };
         }
@@ -121,10 +121,15 @@ export default class API {
     }
 
     refresh() {
+
+        console.log(this.getData())
+
         this.setData(this.getData());
+        console.log(this.getData())
     }
 
     async setData(data) {
+        console.log("---------")
         if (typeof this._setData === "function") {
             await this._setData(data);
         }

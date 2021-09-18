@@ -13,7 +13,7 @@ export const Display = ({children, api=API.getApiComponent(children,APIComponent
 
     const status = useContext(Status.Context)
 
-    if (status.get("apiConsumer") === undefined) {
+    if (!status.get("apiConsumer")) {
         get.results = get.results || 10;
         status.set("apiConsumer",{ pages: paginas.findIndex((e) => e === get.results), type: 0 })
     } else if (get.results === undefined)

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Form, Input, InputGroup, InputGroupAddon } from "reactstrap";
 
 
-export const Busqueda = ({ href = "#", text = "Buscar", othersButtons, param = "b", placeholder = "Busqueda", style, className }) => {
+export const Busqueda = ({ href = "#", text = "Buscar", othersButtons, param = "b", placeholder = "Busqueda", style, className, defaultValue}) => {
 
     const [buscado, setBuscado] = useState("")
 
@@ -14,6 +14,7 @@ export const Busqueda = ({ href = "#", text = "Buscar", othersButtons, param = "
                     name={param}
                     autoFocus
                     placeholder={placeholder}
+                    defaultValue={defaultValue}
                     onChange={(e) => setBuscado(e.target.value)}
                     style={{ height: "2.4em" }}
                 />

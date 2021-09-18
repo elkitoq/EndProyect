@@ -57,10 +57,10 @@ export const ViewCreateCV = () => {
 
     const status = useContext(Status.Context)
     const [selectUser,] = status.use('selectUser');
-    const [selectRole,] = status.use('selectRole');
+    const [selectRole,setRole] = status.use('selectRole');
 
     const [ready,setReady]=useState(false)
-    const [role,setRole]=useState(-1)
+    //const [role,setRole]=useState(-1)
 
     const dataDefault = {
         "role":
@@ -94,7 +94,7 @@ export const ViewCreateCV = () => {
     }
 
     if (ready)
-        return (<ViewCV role={role}/>)
+        return (<ViewCV role={selectRole}/>)
 
 return (
     <Container>
