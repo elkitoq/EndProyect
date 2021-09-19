@@ -16,7 +16,7 @@ export const ViewLookForJob = () => {
     return (
         <Container className="abs-center">
             <Col xs="12">
-                <Busqueda text="Buscar Puesto" href="/findJob" param="post" />
+                <Busqueda text="Buscar Empleo" href="/findJob"/>
                 <Col xs={{ size: 6, offset: 3 }} sm={{ size: 4, offset: 4 }} className="separado">
                     {!(login.isLogin === "true") ? <LocalNoLoginCard /> : ""}
                 </Col>

@@ -19,7 +19,7 @@ export const ViewOfferJob = () => {
     return (
         <Container className="abs-center" fluid={true}>
             <Row >
-                <h1>Acá mostraría puestos de la empresa</h1>
+                <h1>Acá mostraría Busquedas laborales de la empresa</h1>
                 <Button size="lg"  style={{width:"100px",left:"10%"}} color="primary" href="/createJob/">Nuevo</Button>
                 <Display 
                 get={getJson}

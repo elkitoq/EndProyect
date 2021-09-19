@@ -39,8 +39,8 @@ export const ViewHomeEmpresa = () => {
                         <h2>¿Que estas buscando hoy?</h2>
                     </div>
                     <Row className="option-menu">
-                        <OptionMenu href="/createJob/">Crear puesto</OptionMenu>
-                        <OptionMenu href="/offerJob/">Ver puestos</OptionMenu>
+                        <OptionMenu href="/createJob/">Crear Busqueda laboral</OptionMenu>
+                        <OptionMenu href="/offerJob/">Ver Busquedas en curso</OptionMenu>
                         {/* <OptionMenu href={`/perfilEmpresa?id=${user._id}`}   >Mi perfil</OptionMenu> */}
                         <OptionMenu href="#">Mi perfil</OptionMenu>
                         {/* <OptionMenu href="/message/"        >Ver mensajes</OptionMenu> */}
