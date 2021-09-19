@@ -15,7 +15,7 @@ router.put('/job', async (req, res) => {
         }
     }
 
-    res.status(201).json({});
+    res.status(201).json({info:{saved:true}});
     res.end();
 });
 
@@ -32,9 +32,8 @@ router.post('/job', async (req, res) => {
         if (profile) {
 
 
-            const index = profile.applications.findIndex((e) => e._id.toString() === req.body._id)
-            console.log(index);
-            if (index) {
+            const index = profile.applications.findIndex((e) =>e._id.toString() === req.body._id)
+            if (index>=0) {
                 Object.assign(profile.applications[index], req.body);
                 console.log(profile.applications[index]);
                 profile.save()
@@ -42,6 +41,7 @@ router.post('/job', async (req, res) => {
                 const application = await await Application.findById(req.body._id)
                 Object.assign(application, req.body);
                 application.save()
+                info.saved=true;
             }
             else info.error = "No puede editar la busqueda laboral"
 
@@ -67,13 +67,14 @@ router.get('/jobs', async (req, res) => {
     console.log(`getJOBs:${req.sessionID}`);
     console.log(req.query);
 
-    if (req.query.post) {
+    if (req.query.b) {
         const response = [];
         const match = {}
 
-        for (const post of req.query.post.split(" ")) {
+        for (const post of req.query.b.split(" ")) {
             const applications = await Application.findSimilar(post)
             for (const application of applications) {
+                if(req.query.listAll || (application.status===1))
                 if (match[application._id] === undefined) {
                     response.push(Object.assign({ match: 1 }, application._doc));
                     match[application._id] = response.length - 1

@@ -54,7 +54,7 @@ export const NavegadorPrincipal = () => {
         </Nav>
         <Nav className="ms-auto buscador" navbar>
           <Busqueda className="ocultar-search input-search"
-            href="/lookforJob/"
+            href="/findJob/"
             text="Buscar Trabajo"
             othersButtons={[{ href: "/lookforWorker/", text: "Buscar Empleado" }]} />
           <NavButton href="/lookforJob/"
