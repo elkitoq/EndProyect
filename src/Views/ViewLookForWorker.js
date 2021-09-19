@@ -23,7 +23,7 @@ export const ViewLookForWorker = () => {
 
 const LocalNoLoginCard = () =>
     <Card color="primary" inverse>
-        <CardText>Si prefiere crear un puesto de trabajo, debería logearse como empresa</CardText>
+        <CardText>Si prefiere crear una busqueda laboral, debería logearse como empresa</CardText>
         <ButtonGroup className="btn-group-vertical">
             <Button href="/login" color="secondary">    Login         </Button>
             <Button href="/register" color="secondary">    Registrarse   </Button>
@@ -32,6 +32,6 @@ const LocalNoLoginCard = () =>
 
 const SugerirCrearPuesto = () =>
     <Card color="primary" inverse>
-        <CardText>Puede que prefiera crear un puesto de trabajo para recibir postulantes</CardText>
-        <Button href="/offerJob/" color="secondary">Crear Puesto</Button>
+        <CardText>Puede que prefiera crear una busqueda laboral para recibir postulantes</CardText>
+        <Button href="/offerJob/" color="secondary">Crear Busqueda</Button>
     </Card>

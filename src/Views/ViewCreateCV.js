@@ -79,7 +79,7 @@ export const ViewCreateCV = () => {
     class APICV extends API {
 
         didMount = ()=>{
-            this.get();
+            this.get(dataDefault);
         }
         changeInfo =(info)=>{
             if (info.error)
@@ -138,7 +138,7 @@ return (
                 
                 <FormItem name="Puesto al que aspira" idInput="puesto"/>
                 
-                <h3> Experiencia Academica</h3>
+                <h3> Historial Academico</h3>
                 <ViewAddCVData idInput="academico">
                     <Input idInput="title" placeholder="Agrege un titulo" />
                     <Input idInput="year" placeholder="Agrege el año" />

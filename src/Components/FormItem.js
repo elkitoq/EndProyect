@@ -19,6 +19,7 @@ export const FormItem = ({ name, idInput = name, autoComplete, reference = { val
     </FormGroup>
 
 const load = (reference, e) => {
+
     if (reference.id !== undefined || reference.id !== null)
         if (e.target.type === "password")
             reference.values[reference.id] = e.target.value;

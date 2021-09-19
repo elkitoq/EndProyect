@@ -39,7 +39,7 @@ $white: #FFFFFF;
   }
   
   .progress__label {
-    width: 100rem;
+    width: 200px;
     position: absolute;
     top: 40px;
   }
@@ -67,4 +67,14 @@ $white: #FFFFFF;
       font-weight: 600;
       color: $green;
     }
+  }
+
+  @media (max-width: 768px ){
+    .progress__label {
+      width: 100%;
+      position: absolute;
+      top: 40px;
+    }
+
+    
   }

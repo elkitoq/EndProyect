@@ -1,12 +1,13 @@
-import { Button, Card, Container, Input } from "reactstrap";
+import { Button, Card, Container, Input, Label } from "reactstrap";
 import { FormRegister } from "../Components/FormRegister";
 import { QAPI } from "../Tools/API";
 import { Status } from "../Tools/Status";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import RutaTutorial from "../Components/tutorial";
 import { Señalador } from "../Components/Señalador";
 import { useLocation } from "react-router-dom";
-import { verificarRoles } from "../Components/role";
+import { LoadRoles, verificarRoles } from "../Components/role";
+import { FormItem } from "../Components/FormItem";
 
 let selectUser, saveUser;
 
@@ -21,12 +22,12 @@ export const ViewCreateUser = ({ roleType }) => {
     return (
         !(login) ? <FormRegister /> : <div className="abs-center">
             {
-            !(Array.isArray(selectUser) && selectUser.length) ? <CrearUsuario roleType={roleType}/> :
-                !(selectUser[selectUser.length - 1].new === true) ? <CrearUsuario roleType={roleType}/> :
-                    (selectUser[selectUser.length - 1].profileType === 0) ? <CrearEmpresa /> :
-                        (selectUser[selectUser.length - 1].profileType === 1) ? <CrearAspirante /> :
-                            (selectUser[selectUser.length - 1].profileType === 2) ? <CrearAutonomo /> :
-                                <CrearAdmin />}</div>
+                !(Array.isArray(selectUser) && selectUser.length) ? <CrearUsuario roleType={roleType} /> :
+                    !(selectUser[selectUser.length - 1].new === true) ? <CrearUsuario roleType={roleType} /> :
+                        (selectUser[selectUser.length - 1].profileType === 0) ? <CrearEmpresa /> :
+                            (selectUser[selectUser.length - 1].profileType === 1) ? <CrearAspirante /> :
+                                (selectUser[selectUser.length - 1].profileType === 2) ? <CrearAutonomo /> :
+                                    <CrearAdmin />}</div>
     );
 }
 
@@ -38,30 +39,46 @@ const ButtonCreate = ({ href }) => {
             selectUser[selectUser.length - 1].new = false;
             if (selectUser[selectUser.length - 1].profileName === "" || selectUser[selectUser.length - 1].profileName === undefined)
                 selectUser[selectUser.length - 1].profileName = "N/N";
-            verificarRoles(status,selectUser);
+            verificarRoles(status, selectUser);
             saveUser();
-            status.set("selectRole",""+(selectUser.length - 1))
+            status.set("selectRole", "" + (selectUser.length - 1))
             new QAPI('/profile').send("put", selectUser[selectUser.length - 1]);
-            
+
         }}>
         Crear</Button>
 }
 
+const CancelButton = ({ visibility }) => <Button style={{ width: "100%", visibility: visibility ? "visible " : "hidden" }}
+    onClick={() => {
+        if (selectUser[selectUser.length - 1].new)
+            selectUser.pop();
+        saveUser();
+    }}
+>Crear otro tipo de perfil</Button>
 
 const CrearEmpresa = () => {
+
+    const { pathname } = useLocation();
+
+    const values = selectUser[selectUser.length - 1]
+    if (values.data === undefined)
+        values.data = {}
+
+    const onChange = () => {
+        values.data.razonSocial = values.profileName
+        saveUser()
+    }
     return (
-        <Container >
-            Introduzca datos de la empresa:
-            <Input defaultValue={selectUser[selectUser.length - 1].profileName}
-                placeholder="Nombre"
-                autoFocus
-                onChange={(e) => {
-                    selectUser[selectUser.length - 1].profileName = e.target.value;
-                    saveUser()
-                }
-                }
-            />
-            <ButtonCreate href="/homeEmpresa" />
+        <Container>
+            Creando Perfil para Empresa
+            <CancelButton visibility={pathname === "/Register/"} />
+            <FormItem name="Razón Social" idInput="razonSocial" reference={{ values, onChange, id: "profileName" }} />
+            <FormItem name="CUIT" idInput="CUIT" reference={{ values: values.data, onChange, id: "cuit" }} />
+            <FormItem name="Direccion" idInput="address" reference={{ values: values.data, onChange, id: "address" }} />
+            <FormItem name="Ciudad" idInput="city" reference={{ values: values.data, onChange, id: "city" }} />
+            <FormItem name="Telefono" idInput="phone" reference={{ values: values.data, onChange, id: "phone" }} />
+            <FormItem name="Email" idInput="email" reference={{ values: values.data, onChange, id: "email" }} />
+            <ButtonCreate href={(pathname === "/Register/") ? "/homeEmpresa" : "#"} />
         </Container>
     )
 }
@@ -82,8 +99,12 @@ const CrearUsuario = ({ roleType }) => {
 
     useEffect(() => {
 
-        if (roleType !== undefined)
+        if (roleType !== undefined) {
+            if (selectUser[selectUser.length - 1] && selectUser[selectUser.length - 1].new)
+                selectUser.pop()
             crear(roleType)
+        }
+
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -92,9 +113,9 @@ const CrearUsuario = ({ roleType }) => {
 
     return (
         <>
-            <div className="text-center">
+            <div className="text-center content">
                 <h3>¿Por donde querés empezar?</h3>
-                <Container>
+                <Container className="container-options">
                     <Card inverse color="primary" className="tarjetasVerticales" onClick={crear.bind(this, 0)}>
                         Tengo una empresa. Busco trabajadores
                     </Card>
@@ -118,21 +139,28 @@ const CrearUsuario = ({ roleType }) => {
 
 
 const CrearAspirante = () => {
+
+    const values = selectUser[selectUser.length - 1]
+    if (values.cv === undefined)
+        values.cv = {}
+
+    const onChange = () => {
+        values.cv.name = values.profileName
+        saveUser()
+    }
+
     const { pathname } = useLocation();
     return (
-        <>
-            Introduzca sus datos
-            <Input defaultValue={selectUser[selectUser.length - 1].profileName}
-                placeholder="Nombre"
-                autoFocus
-                onChange={(e) => {
-                    selectUser[selectUser.length - 1].profileName = e.target.value;
-                    saveUser()
-                }
-                }
-            />
+        <Container>
+            Creando Perfil para Aspirante
+            <CancelButton visibility={pathname === "/Register/"} />
+            <FormItem name="Nombre" idInput="name" reference={{ values, onChange, id: "profileName" }} />
+            <FormItem name="Direccion" idInput="address" reference={{ values: values.cv, onChange, id: "address" }} />
+            <FormItem name="Ciudad" idInput="city" reference={{ values: values.cv, onChange, id: "city" }} />
+            <FormItem name="Telefono" idInput="phone" reference={{ values: values.cv, onChange, id: "phone" }} />
+            <FormItem name="Email" idInput="email" reference={{ values: values.cv, onChange, id: "email" }} />
             <ButtonCreate href={(pathname === "/Register/") ? "/homeAspirante" : "#"} />
-        </>
+        </Container>
 
 
     )
@@ -162,26 +190,35 @@ const CrearAdmin = () => {
 
 const CrearAutonomo = () => {
 
+    const values = selectUser[selectUser.length - 1]
+    if (values.cv === undefined)
+        values.cv = {}
+
+    const onChange = () => {
+        values.cv.name = values.profileName
+        saveUser()
+    }
+
+    const { pathname } = useLocation();
+
     return (
         <Container>
-            Introduzca los datos de su emprendimiento
-            <Input defaultValue={selectUser[selectUser.length - 1].profileName}
-                placeholder="Nombre"
-                autoFocus
-                onChange={(e) => {
-                    selectUser[selectUser.length - 1].profileName = e.target.value;
-                    saveUser()
-                }
-                }
-            />
-            <ButtonCreate href="/homeAutonomo" />
+            Creando Perfil para Autonomo
+            <CancelButton visibility={pathname === "/Register/"} />
+            <FormItem name="Razón Social" idInput="razonSocial" reference={{ values, onChange, id: "profileName" }} />
+            <FormItem name="CUIT" idInput="CUIT" reference={{ values: values.cv, onChange, id: "cuit" }} />
+            <FormItem name="Direccion" idInput="address" reference={{ values: values.cv, onChange, id: "address" }} />
+            <FormItem name="Ciudad" idInput="city" reference={{ values: values.cv, onChange, id: "city" }} />
+            <FormItem name="Telefono" idInput="phone" reference={{ values: values.cv, onChange, id: "phone" }} />
+            <FormItem name="Email" idInput="email" reference={{ values: values.cv, onChange, id: "email" }} />
+            <ButtonCreate href={(pathname === "/Register/") ? "/homeAutonomo" : "#"} />
         </Container>
-
-
     )
 }
 
 const AddAspirante = () => ViewCreateUser({ roleType: 1 })
+
+const AddEmpresa = () => ViewCreateUser({ roleType: 0 })
 
 RutaTutorial.get("haveAspirante")
     .setDescription(<>Te dará acceso a toda las herramientas para aspirantes</>)
@@ -193,6 +230,6 @@ RutaTutorial.get("haveAspirante")
 RutaTutorial.get("haveEmpresa")
     .setDescription(<>Te dará acceso a toda las herramientas para Empresa</>)
     .addRequisito("Login")
-    .setRender(AddAspirante)
+    .setRender(AddEmpresa)
     .setMeta("Crear Perfil de Empresa")
     .setInstrucciones(<>Has clic en <Señalador marca="CrearRol" text="Crear Perfil" />, en el menu de <Señalador marca="Roles" text="Roles" /></>);

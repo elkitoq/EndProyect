@@ -19,6 +19,7 @@ export const ViewCreateOfferJob = ({ mode = "put",id}) => {
 
     class APIcreateJob extends API{
         didMount = ()=>{
+            this.setData({status:0})
             if (id)
             this.get({id}).then((res)=>(res.data && res.data.response)?setStatus(res.data.response.status):"");
         }
@@ -51,7 +52,7 @@ export const ViewCreateOfferJob = ({ mode = "put",id}) => {
                 <Input name="role" type="hidden" defaultValue={selectRole} />
                 <Button className='button-submit separado' size="lg" color="primary" type="submit" block>{mode==="put"?"Enviar":"Guardar"}</Button>
             </Form>
-                <Button className='separado' size="lg" color="primary" href="/offerJob/">Volver a Busquedas Laborales</Button>      
+                <Button className='separado' size="lg" href="/offerJob/">Volver a Busquedas Laborales</Button>      
         </Container>
         }
         </>);
