@@ -188,4 +188,11 @@ RutaTutorial.get("haveAspirante")
     .addRequisito("Login")
     .setRender(AddAspirante)
     .setMeta("Crear Perfil de Aspirante")
-    .setInstrucciones(<>Has clic en <Señalador marca="CrearRol" text="Crear Roles" />, en el menu de <Señalador marca="Roles" text="Roles" /></>);
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearRol" text="Crear Perfil" />, en el menu de <Señalador marca="Roles" text="Roles" /></>);
+
+RutaTutorial.get("haveEmpresa")
+    .setDescription(<>Te dará acceso a toda las herramientas para Empresa</>)
+    .addRequisito("Login")
+    .setRender(AddAspirante)
+    .setMeta("Crear Perfil de Empresa")
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearRol" text="Crear Perfil" />, en el menu de <Señalador marca="Roles" text="Roles" /></>);

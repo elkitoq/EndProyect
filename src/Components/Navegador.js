@@ -88,9 +88,9 @@ export const NavegadorPrincipal = () => {
           // children={(status.get("Login")) ? "Crear Rol" : "Register"} 
           // children={(login.isLogin === "true") ? "Crear Rol" : "Register"}
           >
-            <span id="CrearRol">{(status.get("Login")) ? "Crear Rol" : "Register"}</span>
+            <span id="CrearRol">{(status.get("Login")) ? "Crear Perfil" : "Register"}</span>
           </NavButton>
-          <Señalado marca="CrearRol" title="Crear Rol" text={(status.get("Login")) ? "Crea un nuevo perfil con el Rol que prefieras (Aspirante, Empresa, Autónomo)" : ""} />
+          <Señalado marca="CrearRol" title="Crear Perfil" text={(status.get("Login")) ? "Crea un nuevo perfil con el Rol que prefieras (Aspirante, Empresa, Autónomo)" : ""} />
         </Nav>
       </Collapse>
     </Navbar>

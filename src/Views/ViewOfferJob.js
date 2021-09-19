@@ -40,10 +40,9 @@ export const ViewOfferJob = () => {
     );
 }
 
-
 RutaTutorial.get("OfferJob")
     .setDescription(<>Lista las actuales Busquedas de tu empresa</>)
     .setRender(ViewOfferJob)
-    .addRequisito("NewJob")
+    .addRequisito("haveEmpresa")
     .setMeta("Listar Busquedas")
     .setInstrucciones(<>Guarda tu nueva Busqueda</>);
