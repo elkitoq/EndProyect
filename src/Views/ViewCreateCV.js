@@ -79,7 +79,7 @@ export const ViewCreateCV = () => {
     class APICV extends API {
 
         didMount = ()=>{
-            this.get();
+            this.get(dataDefault);
         }
         changeInfo =(info)=>{
             if (info.error)
