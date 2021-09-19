@@ -1,4 +1,4 @@
-import { Button, Card, Container, Input} from "reactstrap";
+import { Button, Card, Container, Input } from "reactstrap";
 import { FormRegister } from "../Components/FormRegister";
 import { QAPI } from "../Tools/API";
 import { Status } from "../Tools/Status";
@@ -8,15 +8,15 @@ import { Señalador } from "../Components/Señalador";
 import { useLocation } from "react-router-dom";
 import { verificarRoles } from "../Components/role";
 
-let selectUser,saveUser;
+let selectUser, saveUser;
 
-export const ViewCreateUser = ({roleType}) => {
+export const ViewCreateUser = ({ roleType }) => {
 
     const status = useContext(Status.Context)
     const [login,] = status.use('Login');
 
     [selectUser,] = status.use('selectUser');
-    saveUser=()=>status.set("selectUser",selectUser);
+    saveUser = () => status.set("selectUser", selectUser);
 
     return (
         !(login) ? <FormRegister /> : <div className="abs-center">
@@ -30,10 +30,10 @@ export const ViewCreateUser = ({roleType}) => {
     );
 }
 
-const ButtonCreate = ({ href }) =>{
+const ButtonCreate = ({ href }) => {
     const status = useContext(Status.Context)
 
-    return  <Button size="lg" color="primary" blocks="true" href={`${href}?user=${selectUser.length - 1}`}
+    return <Button size="lg" color="primary" blocks="true" href={`${href}?user=${selectUser.length - 1}`}
         onClick={(e) => {
             selectUser[selectUser.length - 1].new = false;
             if (selectUser[selectUser.length - 1].profileName === "" || selectUser[selectUser.length - 1].profileName === undefined)
@@ -46,7 +46,7 @@ const ButtonCreate = ({ href }) =>{
         }}>
         Crear</Button>
 }
-   
+
 
 const CrearEmpresa = () => {
     return (
@@ -67,7 +67,7 @@ const CrearEmpresa = () => {
 }
 
 
-const CrearUsuario = ({roleType}) => {
+const CrearUsuario = ({ roleType }) => {
 
 
     const crear = (r) => {
@@ -77,34 +77,34 @@ const CrearUsuario = ({roleType}) => {
         console.log("///////////////////////////");
         console.log(selectUser);
         saveUser()
-        
+
     }
 
     useEffect(() => {
 
-        if (roleType!==undefined)
+        if (roleType !== undefined)
             crear(roleType)
-        
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
-    
-        return (
+
+    return (
         <>
             <div className="text-center">
                 <h3>¿Por donde querés empezar?</h3>
                 <Container>
-                        <Card inverse color="primary" className="tarjetasVerticales" onClick={crear.bind(this, 0)}>
-                            Tengo una empresa. Busco trabajadores
-                        </Card>
-                        <Card inverse color="primary" className="tarjetasVerticales " onClick={crear.bind(this, 1)}>
-                            Estoy buscando trabajo
-                        </Card>
-                        <Card inverse color="primary" className="tarjetasVerticales" onClick={crear.bind(this, 2)}>
-                            Soy independiente. Quiero ofrecer mis servicios
-                        </Card>
-                        {/* <Card inverse color="primary" className="tarjetasQBuscas" onClick={crear.bind(this, 3)}>
+                    <Card inverse color="primary" className="tarjetasVerticales" onClick={crear.bind(this, 0)}>
+                        Tengo una empresa. Busco trabajadores
+                    </Card>
+                    <Card inverse color="primary" className="tarjetasVerticales " onClick={crear.bind(this, 1)}>
+                        Estoy buscando trabajo
+                    </Card>
+                    <Card inverse color="primary" className="tarjetasVerticales" onClick={crear.bind(this, 2)}>
+                        Soy independiente. Quiero ofrecer mis servicios
+                    </Card>
+                    {/* <Card inverse color="primary" className="tarjetasQBuscas" onClick={crear.bind(this, 3)}>
                         Tengo un amigo que me pidió le cargara una cuenta
                         </Card> */}
                 </Container>
@@ -118,7 +118,7 @@ const CrearUsuario = ({roleType}) => {
 
 
 const CrearAspirante = () => {
-    const { pathname} = useLocation();
+    const { pathname } = useLocation();
     return (
         <>
             Introduzca sus datos
@@ -131,7 +131,7 @@ const CrearAspirante = () => {
                 }
                 }
             />
-            <ButtonCreate href={(pathname === "/Register/")?"/homeAspirante":"#"} />
+            <ButtonCreate href={(pathname === "/Register/") ? "/homeAspirante" : "#"} />
         </>
 
 
@@ -181,7 +181,7 @@ const CrearAutonomo = () => {
     )
 }
 
-const AddAspirante=()=>ViewCreateUser({roleType:1})
+const AddAspirante = () => ViewCreateUser({ roleType: 1 })
 
 RutaTutorial.get("haveAspirante")
     .setDescription(<>Te dará acceso a toda las herramientas para aspirantes</>)

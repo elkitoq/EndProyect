@@ -1,6 +1,6 @@
 
-import { Container, Row, Col, Button} from 'reactstrap'
-import logo from '../Assets/image/logo-sin-fondo-web.png'
+import { Container, Row, Col, Button } from 'reactstrap'
+import logo from '../Assets/image/logo-sin-fondo-web1.png'
 import '../Assets/Css/login.css'
 import { FormLogin } from '../Components/FormLogin'
 import { SlideShow } from '../Components/SlideShow'
@@ -22,7 +22,7 @@ export const ViewLogin = () => {
 
     const { pathname } = useLocation();
     return (
-        <Container className="themed-container" fluid="md">
+        <Container className="themed-container" fluid="md" >
             <Row className="row-login">
                 <Col className="column" sm="5" >
                     <div className="container-logo">
@@ -44,14 +44,14 @@ export const ViewLogin = () => {
 
 const CorrectLogin = () => {
 
-    return (<div className="abs-center"> 
+    return (<div className="abs-center column-welcome">
         <Col xs="6">
             <Row>
                 <h1>Bienvenido</h1>
             </Row>
             <Row>
-                <Button className="separado3" href="/" fontSize="2vh"  color="primary" >Inicio</Button>
-                <Button className="separado3" href="/CVCreate" fontSize="2vh"  color="primary" >Crear CV</Button>
+                <Button className="separado3" href="/" color="primary" >Inicio</Button>
+                <Button className="separado3" href="/CVCreate" color="primary" >Crear CV</Button>
             </Row>
         </Col>
         <LoadRoles />
@@ -62,4 +62,4 @@ RutaTutorial.get("Login")
     .setDescription(<>Ingresa con tu cuenta para guardar tus datos</>)
     .setRender(ViewLogin)
     .setMeta("Iniciar Sesión")
-    .setInstrucciones(<>Has clic en <Señalador marca="Login" text="Login"/>, está en la esquina superior derecha de la pagina</>);
+    .setInstrucciones(<>Has clic en <Señalador marca="Login" text="Login" />, está en la esquina superior derecha de la pagina</>);
