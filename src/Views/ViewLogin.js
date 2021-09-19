@@ -52,6 +52,7 @@ const CorrectLogin = () => {
             <Row>
                 <Button className="separado3" href="/" color="primary" >Inicio</Button>
                 <Button className="separado3" href="/CVCreate" color="primary" >Crear CV</Button>
+                <Button className="separado3" href="/offerJob/" color="primary" >Ofrecer Empleo</Button>
             </Row>
         </Col>
         <LoadRoles />

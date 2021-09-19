@@ -28,6 +28,8 @@ export const NavegadorPrincipal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
+  const profile=status.get("selectUser")[status.get("selectRole")]
+
   const logout = () => {
     // if (login.isLogin === "true")
     //    removeCookie('selectUser', { path: '/' })
@@ -47,10 +49,16 @@ export const NavegadorPrincipal = () => {
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
-          <NavButton className="btn-cv-navbar" href="/CVCreate/"><span id="CrearCV"> Crear CV </span></NavButton>
+          <div style={profile && profile.profileType===0?{display:"none"}:{}}>
+          <NavButton className="btn-cv-navbar" href="/CVCreate/" ><span id="CrearCV"> Crear CV </span></NavButton>
           <Señalado marca="CrearCV" title="Crear CV" text="Si haces click te lleva a la pagina para crear tu Curriculum" />
+          </div>
+          <div style={profile && profile.profileType!==0?{display:"none"}:{}}>
+          <NavButton className="btn-cv-navbar" href="/OfferJob/" ><span id="OfferJob"> Ofrecer Empleo </span></NavButton>
+          <Señalado marca="OfferJob" title="Ofrecer Empleo" text="Si haces click te lleva a la pagina para crear busquedas laborales" />
+          </div>
           <DropdownRol />
-          <NavButton className="btn-oficina-navbar" href="/jobOffice/">Oficina de empleo</NavButton>
+          {/* <NavButton className="btn-oficina-navbar" href="/jobOffice/">Oficina de empleo</NavButton> */}
         </Nav>
         <Nav className="ms-auto buscador" navbar>
           <Busqueda className="ocultar-search input-search"

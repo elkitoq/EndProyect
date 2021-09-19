@@ -93,4 +93,6 @@ export const DropdownRol = () => {
 
 export const verificarRoles=(status,users)=>{
     status.set("haveAspirante", users.find((element) => element.profileType === 1)!==undefined,true)
+    status.set("haveEmpresa", users.find((element) => element.profileType === 0)!==undefined,true)
+    status.set("haveAutonomo", users.find((element) => element.profileType === 2)!==undefined,true)
 }
