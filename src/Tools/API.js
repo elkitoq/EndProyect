@@ -5,6 +5,7 @@ export default class API {
 
     constructor({ url, responseKey = "response", infoKey = "info", mode = APIComponent.mode.SINGLE }, qApi = false) {
 
+
         if (url.substring(0, 4) !== "http") {
             this.withCredentials = true;
             this.url = window.location.protocol + "//" + window.location.host.replace(":3000", "") + ":4000" + url;
@@ -13,20 +14,21 @@ export default class API {
         else this.url = url;
 
         if (qApi) {
-            this._data = mode === APIComponent.mode.SINGLE ? {} : [];
+            this._data = ( mode === APIComponent.mode.SINGLE ? {} : []);
             this._setData = (value) => { this._data = value };
             this._info = {};
             this._setInfo = (value) => { this._info = value };
         }
         else {
             // eslint-disable-next-line react-hooks/rules-of-hooks
-            [this._data, this._setData] = useState(mode === APIComponent.mode.SINGLE ? {} : []);
+            [this._data, this._setData] = useState((mode === APIComponent.mode.SINGLE ? {} : []));
             // eslint-disable-next-line react-hooks/rules-of-hooks
             [this._info, this._setInfo] = useState({});
             // eslint-disable-next-line react-hooks/rules-of-hooks
 
         }
 
+            
         this.responseKey = responseKey;
 
         this.infoKey = infoKey;
@@ -77,6 +79,7 @@ export default class API {
     send(method = "post", data = this.getHookData()) {
         var result;
         console.log(`send ${method} to ${this.url}`);
+        console.log(data);
         switch (method) {
             case "put": result = axios.put(this.url, data, { withCredentials: this.withCredentials });
                 break;
@@ -180,7 +183,6 @@ export class APIComponent extends Component {
 
     constructor({ url, mode, responseKey, infoKey, APIClass, events }) {
         super();
-
         if (events !== undefined)
             this.componentDidMount = events.didMount || (() => { });
     }

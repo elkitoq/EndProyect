@@ -17,7 +17,7 @@ export const ViewFindJob = () => {
                 <Busqueda text="Buscar Puesto" href="/findJob" param="post" defaultValue={busqueda.get("post")}/>
                 <h1>Estos son los puestos que responden a "{busqueda.get("post")}" </h1>
                 <Display get={busqueda}>
-                    <APIComponent url='/job' />
+                    <APIComponent url='/jobs' />
                     <CardText key="name">Puesto:</CardText>
                     <CardText className="text-wrap" key="description">Descripción:</CardText>
                     <CardText key="req" hideData>Requerimientos:</CardText>

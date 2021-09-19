@@ -18,11 +18,15 @@ export const ViewOfferJob = () => {
         <Container className="abs-center" fluid={true}>
             <Row >
                 <h1>Acá mostraría puestos de la empresa</h1>
-                <Display get={getJson}>
-                    <APIComponent url='/job' />
+                <Display 
+                get={getJson}
+                link={(element)=>`/ViewJob?application=${element._id}`}
+                >
+                    <APIComponent url='/jobs' />
                     <CardText key="name">Puesto:</CardText>
                     <CardText className="text-wrap" key="description">Descripción:</CardText>
                     <CardText key="req" hideData>Requerimientos:</CardText>
+                    <CardText key="status">Estado:</CardText>
                 </Display>
             </Row>
 

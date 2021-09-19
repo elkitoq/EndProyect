@@ -8,7 +8,7 @@ import API, { APIComponent } from "../Tools/API";
 import { useContext } from "react";
 import { Status } from "../Tools/Status";
 
-export const Display = ({children, api=API.getApiComponent(children,APIComponent.mode.ARRAY), get }) => {
+export const Display = ({children, api=API.getApiComponent(children,APIComponent.mode.ARRAY), get, link = ()=>"#" }) => {
     const paginas = [1, 10, 50, 100];
 
     const status = useContext(Status.Context)
@@ -41,6 +41,8 @@ export const Display = ({children, api=API.getApiComponent(children,APIComponent
 
     const [modal, setModal] = useState(false);
     const [modalContents, setModalContents] = useState("");
+    const [modalSelected,setModalSelected] = useState({});
+
     const toggle = () => setModal(!modal);
 
     const [selectMode, setSelectMode] = useState(false)
@@ -48,6 +50,7 @@ export const Display = ({children, api=API.getApiComponent(children,APIComponent
     const onClick = (id) => {
         if (!selectMode) {
             setModalContents(CardCustom(api.getHookData()[id], children, false, false))
+            setModalSelected(api.getHookData()[id]);
             toggle();
         }
         else{
@@ -77,7 +80,7 @@ export const Display = ({children, api=API.getApiComponent(children,APIComponent
 
             </ModalBody>
             <ModalFooter>
-                <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
+            <Button color="primary" href={link(modalSelected)} onClick={toggle}>Go</Button>{' '}
                 <Button color="secondary" onClick={toggle}>Cancel</Button>
             </ModalFooter>
         </Modal>

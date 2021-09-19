@@ -23,6 +23,7 @@ import { ViewCompanyProfile } from './ViewCompanyProfile.js';
 
 import { ViewPerfilAspirante } from './ViewPerfilAspirante.js';
 import { Mapa, RenderProgress } from '../Components/tutorial.js';
+import { ViewJob } from './ViewJob.js';
 
 export const ViewMain = () => <Switch>
   <ViewRoute path="/Login" view={RenderProgress("Login")} />
@@ -38,6 +39,7 @@ export const ViewMain = () => <Switch>
   <ViewRoute path="/homeAutonomo" view={ViewHomeAutonomo} />
   <ViewRoute path="/jobOffice" view={ViewJobOffice} />
   <ViewRoute path="/offerJob" view={ViewOfferJob} />
+  <ViewRoute path="/ViewJob" view={ViewJob} />
   <ViewRoute path="/createJob" view={ViewCreateOfferJob} />
   <ViewRoute path="/offerService" view={ViewOfferService} />
   <ViewRoute path="/createService" view={ViewCreateOfferService} />

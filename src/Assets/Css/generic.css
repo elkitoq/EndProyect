@@ -51,6 +51,16 @@ input::-webkit-inner-spin-button{
     width: 100%;
     /* height: 100%; */
   }
+
+  .center-container{
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    /* height: 100%; */
+  }
+
+
 .abs-center.container {
     /* min-height: 90vh; */
   }

@@ -1,5 +1,5 @@
 const roleSchema = require('./Profile').schema
-const aplicationSchema = require('./Aplications').aplicationSchema;
+const applicationSchema = require('./Applications').applicationSchema;
 
 const mongoose = require('mongoose');
 const extendSchema = require('mongoose-extend-schema');
@@ -8,19 +8,14 @@ const extendSchema = require('mongoose-extend-schema');
 
 const companySchema = extendSchema(roleSchema,{
     data: {
-        name: String,
-        lastName: String,
-        age: Number,
-        imgCv: String,
+        razonSocial: String,
         address: String,
         cp: Number,
         city: String,
         phone: String,
-        email: String,
-        puesto: String,
-        description: String
+        email: String
     },
-    applications: [aplicationSchema]
+    applications: [applicationSchema]
     });
     exports.Company = new mongoose.model('company', companySchema);
     exports.companySchema = companySchema;

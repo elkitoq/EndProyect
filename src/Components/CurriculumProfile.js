@@ -15,11 +15,15 @@ export const CurriculumProfile = ({info}) => {
                     {info.academico ?<SectionCurriculum icon={school} sectionName="section-cv" title="Informacion Academica" content={   
                         info.academico.map((item) => <><b>{item.year}-{item.title}</b><br />{item.description}<br /></>)
                     }></SectionCurriculum>:""}
-                    <SectionCurriculum icon={maletin} sectionName="section-cv" title="Experiencia Laboral" content={
+                    {info.laboral ?<SectionCurriculum icon={maletin} sectionName="section-cv" title="Experiencia Laboral" content={
                         info.laboral.map((item)=> <><b>{item.year} {item.title}</b> {item.empresa? `en ${item.empresa}`:""}<br />{item.description}<br /></>)
-                    }></SectionCurriculum>
-                    <SectionCurriculum icon={hammer} sectionName="section-cv" title="Trabajos Realizados" content={info.content}></SectionCurriculum>
-                    <SectionCurriculum icon={target} sectionName="section-cv" title="Objetivos" content={info.content}></SectionCurriculum>
+                    }></SectionCurriculum>:""}
+                    {info.jobs ?<SectionCurriculum icon={hammer} sectionName="section-cv" title="Trabajos Realizados" content={
+                        info.jobs
+                    }></SectionCurriculum>:""}
+                    {info.objetives ?<SectionCurriculum icon={target} sectionName="section-cv" title="Objetivos" content={
+                        info.objetives
+                    }></SectionCurriculum>:""}
                 </div>
             </div>
         </Container>
