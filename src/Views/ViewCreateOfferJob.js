@@ -39,6 +39,9 @@ export const ViewCreateOfferJob = ({ mode = "put",id}) => {
                 <FormItem name="Se busca:" idInput="name" />
                 <FormItem name="Descripción" type="textarea" idInput="description" />
                 <FormItem name="Requerimientos" type="textarea" idInput="req" />
+                <FormItem name="Zona" type="textarea" idInput="zona" />
+                <FormItem name="Tipo de contrato" type="textarea" idInput="tipoContrato" />
+                <FormItem name="Tipo de Jornada" type="textarea" idInput="tipoJornada" />
                 <FormItem name="Estado" type="select" idInput="status">
                     {ApplicationStatus.map(
                         (element, index) =>
