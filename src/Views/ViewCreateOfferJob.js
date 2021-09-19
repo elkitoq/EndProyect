@@ -12,10 +12,11 @@ export const ViewCreateOfferJob = ({ mode = "put",id}) => {
 
     const status = useContext(Status.Context)
     const [selectRole,] = status.use('selectRole');
+    const [selectStatus,setStatus]= useState(0)
 
     class APIcreateJob extends API{
         didMount = ()=>{
-            this.get({id});
+            this.get({id}).then((res)=>setStatus(res.data.response.status));
         }
     } 
 
@@ -29,7 +30,7 @@ export const ViewCreateOfferJob = ({ mode = "put",id}) => {
                 <FormItem name="Estado" type="select" idInput="status">
                     {ApplicationStatus.map(
                         (element, index) =>
-                            <option key={`option-${index}`} value={element.code}>{element.title}</option>
+                            <option key={`option-${index}`} value={element.code} selected={(element.code===selectStatus)?"selected":undefined}>{element.title}</option>
                     )}
                 </FormItem>
                 <Input name="role" type="hidden" defaultValue={selectRole} />
