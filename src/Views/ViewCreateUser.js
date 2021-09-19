@@ -113,10 +113,9 @@ const CrearUsuario = ({ roleType }) => {
 
     return (
         <>
-            <div className="text-center">
-
+            <div className="text-center content">
                 <h3>¿Por donde querés empezar?</h3>
-                <Container>
+                <Container className="container-options">
                     <Card inverse color="primary" className="tarjetasVerticales" onClick={crear.bind(this, 0)}>
                         Tengo una empresa. Busco trabajadores
                     </Card>

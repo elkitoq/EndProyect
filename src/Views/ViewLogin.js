@@ -23,7 +23,7 @@ export const ViewLogin = () => {
     const { pathname } = useLocation();
     return (
         <Container className="themed-container" fluid="md" >
-            <Row className="row-login">
+            <Row className="row-login" style={{ marginTop: pathname === "/Register/" || pathname === "/register" ? "1rem" : "-1rem" }}>
                 <Col className="column" sm="5" >
                     <div className="container-logo">
                         <img className="logo-login" alt="logo" src={logo} />
