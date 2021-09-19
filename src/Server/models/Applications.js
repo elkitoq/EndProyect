@@ -6,7 +6,7 @@ const applicationSchema = new mongoose.Schema({
     description: String,
     req: String,
     zona: String,
-    tipoContrato: String,
+    tipoContrato: Number,
     tipoJornada: String,
     status: Number,
     candidates:[CandidateSchema]
