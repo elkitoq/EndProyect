@@ -49,11 +49,11 @@ export const NavegadorPrincipal = () => {
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
-          <div style={profile && profile.profileType===0?{display:"none"}:{}}>
+          <div style={profile && !profile.new && profile.profileType===0?{display:"none"}:{}}>
           <NavButton className="btn-cv-navbar" href="/CVCreate/" ><span id="CrearCV"> Crear CV </span></NavButton>
           <Señalado marca="CrearCV" title="Crear CV" text="Si haces click te lleva a la pagina para crear tu Curriculum" />
           </div>
-          <div style={profile && profile.profileType!==0?{display:"none"}:{}}>
+          <div style={profile && !profile.new && profile.profileType!==0?{display:"none"}:{}}>
           <NavButton className="btn-cv-navbar" href="/OfferJob/" ><span id="OfferJob"> Ofrecer Empleo </span></NavButton>
           <Señalado marca="OfferJob" title="Ofrecer Empleo" text="Si haces click te lleva a la pagina para crear busquedas laborales" />
           </div>
@@ -90,7 +90,7 @@ export const NavegadorPrincipal = () => {
           >
             <span id="CrearRol">{(status.get("Login")) ? "Crear Perfil" : "Register"}</span>
           </NavButton>
-          <Señalado marca="CrearRol" title="Crear Perfil" text={(status.get("Login")) ? "Crea un nuevo perfil con el Rol que prefieras (Aspirante, Empresa, Autónomo)" : ""} />
+          <Señalado marca="CrearRol" title="Crear Perfil" text={(status.get("Login")) ? "Crea un nuevo perfil con el Rol que prefieras (Aspirante, Empresa, Autónomo)" : "Crear una cuenta de usuario"} />
         </Nav>
       </Collapse>
     </Navbar>

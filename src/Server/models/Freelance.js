@@ -7,7 +7,7 @@ const extendSchema = require('mongoose-extend-schema');
 const freelanceSchema = extendSchema(roleSchema,{
     cv: {
         name: String,
-        lastName: String,
+        cuit:Number,
         age: Number,
         imgCv: String,
         address: String,

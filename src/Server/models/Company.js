@@ -9,6 +9,7 @@ const extendSchema = require('mongoose-extend-schema');
 const companySchema = extendSchema(roleSchema,{
     data: {
         razonSocial: String,
+        cuit:Number,
         address: String,
         cp: Number,
         city: String,
