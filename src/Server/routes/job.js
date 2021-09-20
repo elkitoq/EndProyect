@@ -1,4 +1,5 @@
 const { Application } = require('../models/Applications.js');
+const { Candidate } = require('../models/candidate.js');
 const { getProfile } = require('../models/Profile.js');
 const { User } = require('../models/User.js')
 const router = require('express').Router();
@@ -15,7 +16,7 @@ router.put('/job', async (req, res) => {
         }
     }
 
-    res.status(201).json({info:{saved:true}});
+    res.status(201).json({ info: { saved: true } });
     res.end();
 });
 
@@ -32,8 +33,8 @@ router.post('/job', async (req, res) => {
         if (profile) {
 
 
-            const index = profile.applications.findIndex((e) =>e._id.toString() === req.body._id)
-            if (index>=0) {
+            const index = profile.applications.findIndex((e) => e._id.toString() === req.body._id)
+            if (index >= 0) {
                 Object.assign(profile.applications[index], req.body);
                 console.log(profile.applications[index]);
                 profile.save()
@@ -41,7 +42,7 @@ router.post('/job', async (req, res) => {
                 const application = await await Application.findById(req.body._id)
                 Object.assign(application, req.body);
                 application.save()
-                info.saved=true;
+                info.saved = true;
             }
             else info.error = "No puede editar la busqueda laboral"
 
@@ -57,8 +58,9 @@ router.get('/job', async (req, res) => {
     console.log(`getJOB:${req.sessionID}`);
     console.log(req.query);
     if (req.query.id) {
-        const applications = await Application.findById(req.query.id)
-        res.status(201).json({ response: applications });
+        const application = await Application.findById(req.query.id)
+        application.candidates = undefined
+        res.status(201).json({ response: application });
     }
     res.end();
 });
@@ -74,12 +76,13 @@ router.get('/jobs', async (req, res) => {
         for (const post of req.query.b.split(" ")) {
             const applications = await Application.findSimilar(post)
             for (const application of applications) {
-                if(req.query.listAll || (application.status===1))
-                if (match[application._id] === undefined) {
-                    response.push(Object.assign({ match: 1 }, application._doc));
-                    match[application._id] = response.length - 1
-                } else
-                    response[match[application._id]].match++;
+                application.candidates = undefined
+                if (req.query.listAll || (application.status === 1))
+                    if (match[application._id] === undefined) {
+                        response.push(Object.assign({ match: 1 }, application._doc));
+                        match[application._id] = response.length - 1
+                    } else
+                        response[match[application._id]].match++;
             }
         }
 
@@ -109,15 +112,35 @@ router.get('/candidates', async (req, res) => {
 
         const profile = await getProfile(req.session.user.profile[req.query.role])
         const application = profile.applications.find((e) => e._id.toString() === req.query.application);
-        const response = application.candidates;
+        const response = 
+        (await Application.findById(application._id)).candidates
         application.candidates = undefined
         if (profile) {
             res.status(201).json({ response, info: { application } });
         }
-    }
+    }else res.status(201).json({ info: { error: "No ha iniciado session" } });
     res.end();
 });
 
+router.post('/postulate', async (req, res) => {
+    console.log(`postCANDIDATES:${req.sessionID}`);
+    console.log(req.body);
+
+    if (req.session.user && req.body.role && req.body.id)
+        if (req.session.user.profile[req.body.role] && req.session.user.profile[req.body.role].profileType) {
+            const application = await Application.findById(req.body.id)
+            if (application.candidates.find((e) => e._id === req.session.user.profile[req.body.role]._id))
+                res.status(201).json({ info: { error: "Ya estaba postulado" } });
+            else {
+                application.candidates.push(req.session.user.profile[req.body.role])
+                application.save()
+                res.status(201).json({ info: { message: "Te has postulado" } });
+            }
+        }
+        else res.status(201).json({ info: { error: "Debe postularse desde un perfil de Aspirante" } });
+    else res.status(201).json({ info: { error: "No ha iniciado session" } });
+    res.end();
+});
 module.exports = router;
 
 

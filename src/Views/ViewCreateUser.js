@@ -145,7 +145,7 @@ const CrearAspirante = () => {
         values.cv = {}
 
     const onChange = () => {
-        values.cv.name = values.profileName
+        values.profileName = `${values.cv.lastName}, ${values.cv.name}` 
         saveUser()
     }
 
@@ -154,7 +154,8 @@ const CrearAspirante = () => {
         <Container>
             Creando Perfil para Aspirante
             <CancelButton visibility={pathname === "/Register/"} />
-            <FormItem name="Nombre" idInput="name" reference={{ values, onChange, id: "profileName" }} />
+            <FormItem name="Nombre" idInput="name" reference={{ values: values.cv, onChange, id: "name" }} />
+            <FormItem name="Apellido" idInput="lastName" reference={{ values: values.cv, onChange, id: "lastName" }} />
             <FormItem name="Direccion" idInput="address" reference={{ values: values.cv, onChange, id: "address" }} />
             <FormItem name="Ciudad" idInput="city" reference={{ values: values.cv, onChange, id: "city" }} />
             <FormItem name="Telefono" idInput="phone" reference={{ values: values.cv, onChange, id: "phone" }} />

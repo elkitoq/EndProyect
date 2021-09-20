@@ -8,7 +8,7 @@ import API, { APIComponent } from "../Tools/API";
 import { useContext } from "react";
 import { Status } from "../Tools/Status";
 
-export const Display = ({children, api=API.getApiComponent(children,APIComponent.mode.ARRAY), get, link = ()=>"#", emptyMsg = "No hay resultados para mostrar" }) => {
+export const Display = ({children, api=API.getApiComponent(children,APIComponent.mode.ARRAY), get,link = {onClick:()=>"#",text:"Go"}, emptyMsg = "No hay resultados para mostrar" }) => {
     const paginas = [1, 10, 50, 100];
 
     const status = useContext(Status.Context)
@@ -80,7 +80,7 @@ export const Display = ({children, api=API.getApiComponent(children,APIComponent
 
             </ModalBody>
             <ModalFooter>
-            <Button color="primary" href={link(modalSelected)} onClick={toggle}>Go</Button>{' '}
+            <Button color="primary" href={link.onClick(modalSelected)} onClick={toggle}>{link.text}</Button>{' '}
                 <Button color="secondary" onClick={toggle}>Cancel</Button>
             </ModalFooter>
         </Modal>

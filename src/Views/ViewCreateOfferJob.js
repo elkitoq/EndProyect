@@ -6,7 +6,7 @@ import API, { APIComponent } from "../Tools/API";
 import { Status } from "../Tools/Status";
 import { useContext } from "react";
 import { ApplicationStatus } from "../Server/models/ApplicationStatus";
-import { ApplicationContrato } from "../Server/models/ApplicationContrato";
+import { ApplicationContrato } from "../Server/models/AplicationContrato";
 import RutaTutorial from "../Components/tutorial";
 import { ViewOfferJob } from "./ViewOfferJob";
 

@@ -219,7 +219,7 @@ const mostrarFotoPerfil = () => {
 }
 
 
-const aspirante = (element) => element.profileType === 1;
+export const aspirante = (element) => element.profileType === 1;
 
 const LocalNoLoginCard = ({ isLogin }) =>
     <Card color="primary" inverse>

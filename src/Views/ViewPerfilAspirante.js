@@ -2,7 +2,7 @@ import { CardProfileAspirant } from "../Components/CardProfileAspirant";
 import { CurriculumProfile } from "../Components/CurriculumProfile";
 import { useLocation } from 'react-router-dom'
 import {
-    Container, Row, Col
+    Container, Row, Col, Button
 } from 'reactstrap'
 
 import '../Assets/Css/AspiranteProfile.css';
@@ -18,6 +18,8 @@ export const ViewPerfilAspirante = () => {
     const {id} = API.getSearchParam(search);
 
     const [cv, setCV] = useState({})
+
+    const [viewAptitudes,setViewAptitudes]=useState(false)
 
     useEffect(() => {
         new QAPI('/cv').send("get", { id,type:1 }).then((res) => {
@@ -35,8 +37,8 @@ export const ViewPerfilAspirante = () => {
 
             <Row className="sub-navigation">
                 <ul className="navigation-profile">
-                    <a className="link-aptitud" href="/perfilAspirante/aptitudes">Aptitudes</a>
-                    <a className="link-curriculum" href="/perfilAspirante/curriculum">Curriculum</a>
+                    <a  href="javascript:void(0)"  className="link-aptitud" onClick={()=>setViewAptitudes(true)}>Aptitudes</a>
+                    <a  href="javascript:void(0)"  className="link-curriculum"  onClick={()=>setViewAptitudes(false)}>Curriculum</a>
                 </ul>
             </Row>
 
@@ -46,7 +48,7 @@ export const ViewPerfilAspirante = () => {
                 </Col>
 
                 <Col md={{ size: 6 }}>
-                    {(pathname === "/perfilAspirante" || pathname === "/perfilAspirante/curriculum") ? <CurriculumProfile /> : (pathname === "/perfilAspirante/aptitudes") ? <AptitudesProfile /> : <CurriculumProfile />}
+                    {viewAptitudes ?<AptitudesProfile />: <CurriculumProfile info={cv}/>}
                 </Col>
 
                 <Col md={{ size: 3 }}>

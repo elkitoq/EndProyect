@@ -5,7 +5,7 @@ import maletin from '../Assets/icons/Icon metro-suitcase.svg'
 import school from '../Assets/icons/Icon material-school.svg'
 import hammer from '../Assets/icons/Icon awesome-hammer.svg'
 
-export const CurriculumProfile = ({info}) => {
+export const CurriculumProfile = ({info={}}) => {
 
     info.content = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure quidem obcaecati aliquid assumenda dolor totam impedit sunt! Nihil nemo ab quam vero inventore dolore, error deleniti?"
     return (

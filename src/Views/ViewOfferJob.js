@@ -23,7 +23,7 @@ export const ViewOfferJob = () => {
                 <Button size="lg"  style={{width:"100px",left:"10%"}} color="primary" href="/createJob/">Nuevo</Button>
                 <Display 
                 get={getJson}
-                link={(element)=>`/ViewJob?application=${element._id}`}
+                link={{onClick:(element)=>`/ViewJob?application=${element._id}`,text:"Ver y Editar"}}
                 >
                     <APIComponent url='/jobs' />
                     <CardText key="name">Puesto:</CardText>

@@ -25,9 +25,12 @@ export const ViewJob = () => {
             </Row>    
             <Row>
                 <h1>Acá mostraría candidatos de la busqueda</h1>
-                <Display get={getJson}>
+                <Display 
+                get={getJson}
+                link={{onClick:(element)=>`/perfilAspirante?id=${element._id}`,text:"Ver Perfil"}}
+                >
                     <APIComponent url='/candidates'/>
-                    <CardText text="name">Puesto:</CardText>
+                    <CardText key="profileName">Nombre:</CardText>
                     {/* <CardText className="text-wrap" key="description">Descripción:</CardText>
                     <CardText key="req" hideData>Requerimientos:</CardText>  */}
                 </Display>
