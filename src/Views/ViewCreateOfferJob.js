@@ -36,6 +36,7 @@ export const ViewCreateOfferJob = ({ mode = "put",id}) => {
         <>
         {saved?<ViewOfferJob/>:
         <Container >
+            <Button style={{visibility:"hidden",width:"80vw"}}>Esto es para q se expanda el container, revisar</ Button>
             <Form method={mode}>
                 <APIComponent url="/job" APIClass={APIcreateJob} events={{}}/>
                 <FormItem name="Se busca:" idInput="name" />

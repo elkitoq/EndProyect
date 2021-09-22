@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useLocation } from "react-router";
 import { CardText, Container, Row } from "reactstrap";
 import { Display } from "../Components/Display";
+import RutaTutorial from "../Components/tutorial";
 import API, { APIComponent } from "../Tools/API";
 import { Status } from "../Tools/Status";
 import { ViewCreateOfferJob } from "./ViewCreateOfferJob";
@@ -39,3 +40,10 @@ export const ViewJob = () => {
         </Container>
     );
 }
+
+
+RutaTutorial.get("ViewJob")
+    .setDescription(<>Muestra y permite editar una Busqueda laboral de tu empresa</>)
+    .setRender(ViewJob)
+    .setMeta("Editar Busqueda")
+    .setInstrucciones(<>Rellena los datos pedidos</>);

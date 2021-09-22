@@ -120,6 +120,8 @@ export const RenderProgress = (page) => {
             (ruta.checkStatus==="Login" 
                 || ruta.checkStatus==="PostulateJob"
                 || ruta.checkStatus==="FindJob"
+                || ruta.checkStatus==="CreateJob"
+                || ruta.checkStatus==="ViewJob"
             )?"-85vh":"0px"}}>
                 {unDone[0].render(props)}
             </div>
