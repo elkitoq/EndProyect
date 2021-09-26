@@ -25,6 +25,7 @@ import { ViewPerfilAspirante } from './ViewPerfilAspirante.js';
 import { Mapa, RenderProgress } from '../Components/tutorial.js';
 import { ViewJob } from './ViewJob.js';
 
+
 export const ViewMain = () => <Switch>
   <ViewRoute path="/Login" view={RenderProgress("Login")} />
   <ViewRoute path="/Register/" view={ViewLogin} />

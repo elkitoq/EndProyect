@@ -8,7 +8,7 @@ import React from 'react';
 import { NavegadorPrincipal } from './Components/Navegador.js';
 import { ViewMain } from './Views/ViewMain.js';
 import { StatusComponent } from './Tools/Status';
-
+import { Events } from './Components/Events.js';
 
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
   return (
     <Router>
       <StatusComponent>
+      <Events/>
       <NavegadorPrincipal />
       <ViewMain/>
       </StatusComponent>

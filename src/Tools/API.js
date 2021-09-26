@@ -32,24 +32,24 @@ export default class API {
         this.responseKey = responseKey;
 
         this.infoKey = infoKey;
-
+        document.API=this;
     }
 
     changeInfo = (info) => {
         if (info.error)
-            this.onError(info.error)
+            // this.onError(info.error)
+            this.call(API.events.ERROR)
         if (info.message)
-            this.onMessage(info.message)
+            // this.onMessage(info.message)
+            this.call(API.events.MESSAGE)
+        if (info.eventCalls)
+            for (const call of info.eventCalls)
+                this.call(call.eventName,call)
         if (info.cookies)
             this.onCookie(info.cookies)
     }
 
-    onError = (error) => {
-        alert(error);
-    }
-    onMessage = (message) => {
-        alert(message);
-    }
+
 
     onCookie = (listCookie) => {
         if (this.setCookie !== undefined)
@@ -79,7 +79,6 @@ export default class API {
     send(method = "post", data = this.getHookData()) {
         var result;
         console.log(`send ${method} to ${this.url}`);
-        console.log(data);
         switch (method) {
             case "put": result = axios.put(this.url, data, { withCredentials: this.withCredentials });
                 break;
@@ -98,6 +97,7 @@ export default class API {
             }
             if (res.data[this.infoKey] !== undefined) {
                 Object.assign(res.data[this.infoKey], { pages: 6 })
+                Object.assign(this.getHookInfo(), res.data[this.infoKey])
                 this.setInfo(res.data[this.infoKey])
                 this.changeInfo(res.data[this.infoKey]);
             }
@@ -124,15 +124,10 @@ export default class API {
     }
 
     refresh() {
-
-        console.log(this.getData())
-
         this.setData(this.getData());
-        console.log(this.getData())
     }
 
     async setData(data) {
-        console.log("---------")
         if (typeof this._setData === "function") {
             await this._setData(data);
         }
@@ -174,6 +169,35 @@ export default class API {
             }
         }
 
+    }
+    
+    static events = {
+        ERROR:'Error',
+        MESSAGE:'Message',
+        COOKIE:'Cookie'
+    }
+
+    static eventsList = {}
+
+    static removeEvent(eventName,id){
+        API.eventsList[eventName] = API.eventsList[eventName].filter((e)=>e.id!==id)
+    }
+
+    static on(eventName, func,id){
+        if (API.eventsList[eventName]===undefined)
+            API.eventsList[eventName]=[];
+        if (API.eventsList[eventName].findIndex((e)=>e.id===id)<0)
+            API.eventsList[eventName].push({func,id})
+
+    }
+
+    call(eventName,...arg){
+        console.log("--------------")
+        console.log(eventName)
+        console.log(API.eventsList[eventName].length)
+        console.log(API.eventsList)
+        for (const {func} of API.eventsList[eventName])
+           func.call(this,this,...arg)
     }
 
 }

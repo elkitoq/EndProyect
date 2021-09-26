@@ -5,9 +5,6 @@ import { Form } from './Form';
 import API, { APIComponent } from '../Tools/API';
 import { Button, FormGroup, Label } from 'reactstrap';
 import { FormItem } from './FormItem';
-import { Status } from "../Tools/Status";
-import { useContext } from "react";
-import { LoadRoles } from './role';
 
 // import { Form, Input } from 'reactstrap'
 
@@ -34,23 +31,12 @@ export const FormLogin = () => {
     }
 
 
-    const status = useContext(Status.Context)
    
-    class APILogin extends API{
-        changeInfo= (newValue) => {
-                if (newValue.error)
-                    alert(newValue.error);
-                if (newValue.isLogin) {
-                    status.set("Login");
-                    return <LoadRoles/>
-                }
-            }
-    } 
-    
+   
 
     return (
         <Form className="form-container" onSubmit={submit}>
-            <APIComponent url='/login' APIClass={APILogin}/>
+            <APIComponent url='/login'/>
 
             {/* <FormGroup>
                 <Label for="userInput">Usuario</Label>

@@ -53,7 +53,7 @@ router.put('/recovery-pass', async (req, res) => {
             req.session.user = user;
             res.status(201).json({
                 response: { password: "", password2: "" },
-                info: { isLogin: true, message: "Contraseña cambiada" }
+                info: { isLogin: true, eventCalls:[{eventName:"isLogin"}], message: "Contraseña cambiada" }
             });
         }
         else
