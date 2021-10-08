@@ -78,6 +78,7 @@ export const ViewCV = ({ role }) => {
                 </Col>
                 <Col xs="3" className="lateralCV">
                     <Row className="name" style={{ fontSize: "2.5rem", fontWeight: "bold" }}>{cv.name} {cv.lastName}</Row>
+                    {cv.photo?<Row><img src={cv.photo} className="foto-perfilCV" alt="Foto de perfil"/></Row>:""}
                     <Row className="div-puesto" style={{ fontSize: "1.2rem" }}>
                         <h5 className="puesto">{cv.puesto}</h5>
                     </Row>
@@ -168,7 +169,8 @@ export const ViewCV = ({ role }) => {
             >Descargar</Button>
 
             <Button
-                href="/CVCreate/"
+                //href="/CVCreate/"
+                onClick={()=>{status.set("CreateCV",false)}}
             >Editar</Button>
         </div>
     </>

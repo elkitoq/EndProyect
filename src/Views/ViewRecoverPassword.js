@@ -12,29 +12,20 @@ export const ViewRecoverPassword = () => {
     const getJson = API.getSearchParam(search);
 
     const [error,setError]=useState(false)
-
-    class APIRecovery extends API{
-
-         changeInfo = (info) => {
-        if (info.error){
-            alert(info.error);
-            setError(true);
-        }
-            
-        if (info.message){
-            alert(info.message);
-            setError("ok");
-        }
-    }
-
-    }
    
+    API.on(API.events.CHANGEINFO,(api)=>{
+        var info = api.getHookInfo()
+        if (info.error)
+            setError(true);
+        if (info.message)
+            setError("ok");
+    },'RecoverPassword')
     
 
 
     return getJson.code ?
                         <Form method="put" className="form-container">
-                            <APIComponent url="/recovery-pass" APIClass={APIRecovery}/> 
+                            <APIComponent url="/recovery-pass" /> 
                             <h3>Cambiar contraseña:</h3>
                             <FormItem name="Contraseña" type="password" idInput="password" minLength={4} required />
                             <FormItem name="Repetir Contraseña" type="password" idInput="password2" required />
@@ -47,7 +38,7 @@ export const ViewRecoverPassword = () => {
                             </FormGroup>
                         </Form> :
                         <Form method="post" className="form-container">
-                            <APIComponent url="/recovery-pass" APIClass={APIRecovery}/> 
+                            <APIComponent url="/recovery-pass"/> 
                             <h3>Recuperar Contraseña:</h3>
                             <FormItem name="Usuario" idInput="name" />
                             <FormItem name="Email" type="email" idInput="email" />

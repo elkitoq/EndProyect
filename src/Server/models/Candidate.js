@@ -21,7 +21,8 @@ const candidateSchema = extendSchema(roleSchema,{
         academico: Array,
         skill:Array,
         jobs:String,
-        objetives:String
+        objetives:String,
+        photo:String
     }});
     exports.Candidate = new mongoose.model('candidate', candidateSchema);
     exports.candidateSchema = candidateSchema;

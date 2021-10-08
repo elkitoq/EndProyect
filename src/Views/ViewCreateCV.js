@@ -60,7 +60,6 @@ export const ViewCreateCV = () => {
     const [selectRole,setRole] = status.use('selectRole');
 
     const [ready,setReady]=useState(false)
-    //const [role,setRole]=useState(-1)
 
     const dataDefault = {
         "role":
@@ -71,41 +70,34 @@ export const ViewCreateCV = () => {
                     : 0
     }
 
-    // useEffect(() => {
-    //     api.get();
+    API.on(API.events.MOUNT,
+        (api)=>api.get(dataDefault),
+        'CreateCV')
 
-    // // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [])
-    class APICV extends API {
+    const showCV=()=>setReady(true);
 
-        didMount = ()=>{
-            this.get(dataDefault);
+    API.on(API.events.CHANGEINFO,(api)=>{
+        if (api.getHookInfo().role !== undefined){
+            setRole(api.getHookInfo().role);
+            status.set("CreateCV");
+            showCV();
         }
-        changeInfo =(info)=>{
-            if (info.error)
-                    alert(info.error);               
-            if (info.role !== undefined){
-                setRole(info.role);
-                status.set("CreateCV");
-                setReady(true);
-            }
+    },'CreateCV')
+
+    API.on(API.events.CHANGEDATA,(api)=>{
+        if (!status.get("CreateCV") && api.getHookData() && api.getHookData().photo){
+            document.getElementById("fotoPerfil").src=api.getHookData().photo
         }
+    },'CreateCV')
 
-    }
 
-    if (ready)
-        return (<ViewCV role={selectRole}/>)
-
-return (
+return (<>{status.get("CreateCV")?<ViewCV role={selectRole}/>:
     <Container>
+        {ready.toString()}
         <LoadRoles />
         <Form method="put">
-            <APIComponent 
-                url='/cv' 
-                APIClass={APICV}
-                events={{}}
-            />
-            <Row className="separado">
+            <APIComponent url='/cv'/>
+             <Row className="separado">
                 <FormGroup>
                     <Row>
                         <Col xs="4" sm="4" md="4" lg={{ size: 3, offset: 1 }}>
@@ -198,12 +190,29 @@ return (
         </Form>
 
 
-    </Container>
+    </Container>}</>
 )
 }
 
 const cargarFotoPerfil = () => {
     document.getElementById("cargarImagen").click();
+}
+
+//Comprime la foto 
+const resizeBase64Img=(base64, newWidth, newHeight)=> {
+    return new Promise((resolve, reject)=>{
+        var canvas = document.createElement("canvas");
+        canvas.style.width = newWidth.toString()+"px";
+        canvas.style.height = newHeight.toString()+"px";
+        let context = canvas.getContext("2d");
+        let img = document.createElement("img");
+        img.src = base64;
+        img.onload = function () {
+            context.scale(newWidth/img.width,  newHeight/img.height);
+            context.drawImage(img, 0, 0); 
+            resolve(canvas.toDataURL());               
+        }
+    });
 }
 
 const mostrarFotoPerfil = () => {
@@ -212,8 +221,16 @@ const mostrarFotoPerfil = () => {
     if (archivo) {
         reader.readAsDataURL(archivo);
         reader.onloadend = function () {
-            document.getElementById("fotoPerfil").src = reader.result;
-            setDisplayChargePhoto("none");
+            const marco = document.getElementById("fotoPerfil"); 
+            resizeBase64Img(reader.result,260,130).then((img)=>{
+                marco.src = img;
+                console.log(img);
+                API.on(API.events.SENDING,(api)=>{
+                    api.getHookData().photo=img
+                    api.refresh()
+                },'uploadImageCV')
+                setDisplayChargePhoto("none");
+            });
         }
     }
 }

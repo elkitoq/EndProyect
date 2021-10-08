@@ -1,27 +1,12 @@
 import { FormGroup, Button, Label } from 'reactstrap'
 import { Form } from '../Components/Form.js';
 import { FormItem } from '../Components/FormItem.js';
-import API, { APIComponent} from '../Tools/API.js';
-import { Status } from "../Tools/Status";
-import { useContext } from "react";
+import { APIComponent} from '../Tools/API.js';
 
-export const FormRegister = () => {
 
-    const status = useContext(Status.Context)
-    
-    class APILogin extends API{
-        changeInfo= (newValue) => {
-                if (newValue.error)
-                    alert(newValue.error);
-                if (newValue.isLogin) {
-                    status.set("Login")
-                }
-            }
-    } 
-
-    return (
+export const FormRegister = () => 
         <Form method="put" className="form-container">
-            <APIComponent url='/user' APIClass={APILogin}/>
+            <APIComponent url='/user' />
             <FormItem name="Usuario" idInput="name" required />
             <FormItem name="Password" type="password" minLength={4} idInput="password" required />
             <FormItem name="Repetir Password" type="password" idInput="password2" required />
@@ -33,5 +18,3 @@ export const FormRegister = () => {
                 </Label>
             </FormGroup>
         </Form>
-    )
-}

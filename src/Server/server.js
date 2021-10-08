@@ -66,6 +66,9 @@ server.use(session({
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 
+//extendemos el limite, para las fotos de los cv
+//server.use(express.json({limit: '25mb'}));
+//server.use(express.urlencoded({limit: '25mb'}));
 
 server.use(require("./routes/routes"));
 

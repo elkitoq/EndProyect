@@ -36,6 +36,7 @@ export default class API {
     }
 
     changeInfo = (info) => {
+        this.call(API.events.CHANGEINFO)
         if (info.error)
             // this.onError(info.error)
             this.call(API.events.ERROR)
@@ -78,6 +79,7 @@ export default class API {
 
     send(method = "post", data = this.getHookData()) {
         var result;
+        this.call(API.events.SENDING)
         console.log(`send ${method} to ${this.url}`);
         switch (method) {
             case "put": result = axios.put(this.url, data, { withCredentials: this.withCredentials });
@@ -94,6 +96,7 @@ export default class API {
             if (res.data[this.responseKey] !== undefined) {
                 Object.assign(this.getHookData(), res.data[this.responseKey])
                 this.refresh();
+                this.call(API.events.CHANGEDATA)
             }
             if (res.data[this.infoKey] !== undefined) {
                 Object.assign(res.data[this.infoKey], { pages: 6 })
@@ -162,19 +165,27 @@ export default class API {
                     api = new API(props);
                 else
                     api = new props.APIClass(props);
-                if (api.didMount !== undefined && child.props.events !== undefined)
-                    child.props.events.didMount = () => api.didMount();
-                if (child.ref != undefined) child.ref.current = api;
-                return api;
+                //if (api.didMount !== undefined && child.props.events !== undefined)
+                //     child.props.events.didMount = () => api.didMount();
+                API.apis.push(api)
+
+                if (child.ref !== undefined && child.ref !== null) child.ref.current = api;
+                    return api;
             }
         }
 
     }
     
+    static apis = []
+
     static events = {
         ERROR:'Error',
         MESSAGE:'Message',
-        COOKIE:'Cookie'
+        COOKIE:'Cookie',
+        CHANGEINFO:'changeInfo',
+        MOUNT:'Mount',
+        SENDING:'Sending',
+        CHANGEDATA:'ChangeData'
     }
 
     static eventsList = {}
@@ -192,24 +203,27 @@ export default class API {
     }
 
     call(eventName,...arg){
-        console.log("--------------")
-        console.log(eventName)
-        console.log(API.eventsList[eventName].length)
-        console.log(API.eventsList)
-        for (const {func} of API.eventsList[eventName])
-           func.call(this,this,...arg)
+        if (API.eventsList[eventName]!==undefined)
+            for (const {func} of API.eventsList[eventName])
+                func.call(this,this,...arg)
     }
 
 }
 
 export class APIComponent extends Component {
+    static i=0
 
-
-    constructor({ url, mode, responseKey, infoKey, APIClass, events }) {
+    constructor({ url, mode, responseKey, infoKey, APIClass /*, events*/ }) {
         super();
-        if (events !== undefined)
-            this.componentDidMount = events.didMount || (() => { });
+        // if (events !== undefined)
+        //     this.componentDidMount = events.didMount || (() => { });      
+
+        var api = API.apis.shift()
+        this.componentDidMount = () => api.call(API.events.MOUNT)
+
+
     }
+
 
     static mode = {
         SINGLE: "single",

@@ -4,7 +4,7 @@ const router = require('express').Router();
 
 router.put('/cv', async (req, res) => {
     console.log(`CV:${req.sessionID}`);
-    console.log(req.body);
+    //console.log(req.body);
     if (req.session.user) {
         const role = await getProfile(req.session.user.profile[req.body.role])
         if (role) {
