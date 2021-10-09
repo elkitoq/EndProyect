@@ -44,7 +44,7 @@ export const ViewPerfilAspirante = () => {
 
             <Row className="content-profile">
                 <Col sm={{ size: 3 }} className="content-about-me">
-                    <CardProfileAspirant aboutme={cv.description} profession={cv.puesto} nameUser={`${cv.lastName}, ${cv.name}`}/>
+                    <CardProfileAspirant imgUser={cv.photo} aboutme={cv.description} profession={cv.puesto} nameUser={`${cv.lastName}, ${cv.name}`}/>
                 </Col>
 
                 <Col md={{ size: 6 }}>

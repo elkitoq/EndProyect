@@ -202,10 +202,17 @@ const cargarFotoPerfil = () => {
 const resizeBase64Img=(base64, newWidth, newHeight)=> {
     return new Promise((resolve, reject)=>{
         var canvas = document.createElement("canvas");
+        
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+
         canvas.style.width = newWidth.toString()+"px";
         canvas.style.height = newHeight.toString()+"px";
+
         let context = canvas.getContext("2d");
         let img = document.createElement("img");
+        // img.width=330;
+        // img.height=250;
         img.src = base64;
         img.onload = function () {
             context.scale(newWidth/img.width,  newHeight/img.height);
@@ -223,6 +230,7 @@ const mostrarFotoPerfil = () => {
         reader.onloadend = function () {
             const marco = document.getElementById("fotoPerfil"); 
             resizeBase64Img(reader.result,260,130).then((img)=>{
+            // resizeBase64Img(reader.result,300,150).then((img)=>{
                 marco.src = img;
                 console.log(img);
                 API.on(API.events.SENDING,(api)=>{
