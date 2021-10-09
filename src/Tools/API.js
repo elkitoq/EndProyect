@@ -217,9 +217,9 @@ export class APIComponent extends Component {
         super();
         // if (events !== undefined)
         //     this.componentDidMount = events.didMount || (() => { });      
-
         var api = API.apis.shift()
-        this.componentDidMount = () => api.call(API.events.MOUNT)
+        if (api)
+            this.componentDidMount = () => api.call(API.events.MOUNT)
 
 
     }

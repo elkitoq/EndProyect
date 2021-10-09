@@ -115,3 +115,8 @@ body {
 #root{
     height: 100%;
 }
+
+.display-overflow{
+    overflow-y:scroll ;  
+    height:600px ;
+}

@@ -21,14 +21,14 @@ export const ViewFindService = (props) => {
         <Container className="abs-center" fluid={true}>
             <Row >
                 <h1>Acá mostraría los trabajadores disponibles que sean "{getJson.job}" </h1>
-                <Display get={getJson}>
+                <Display get={getJson} nameDownload="BusquedaServicios">
                     <APIComponent url='https://randomuser.me/api/' responseKey="results"/>
                     <CardImg func={(elemento) => elemento.picture.large} />
-                    <CardText func={(elemento) => ` ${elemento.name.last}, ${elemento.name.first}`}>Nombre: <b>{ }</b></CardText>
+                    <CardText func={(elemento) => ` ${elemento.name.last}, ${elemento.name.first}`}>Nombre: </CardText>
                     <CardText func={(elemento) => elemento.email.replace(/(@)([a-z]*)/, "@gmail")}>Email: </CardText>
                     <CardText key="cell">Teléfono:</CardText>
-                    <CardText text={getJson.job}>Ocupación: <b></b></CardText>
-                    <CardText hideData>OTROS DATOS SON DESCONOCIDOS</CardText>
+                    <CardText text={getJson.job}>Ocupación: </CardText>
+                    <CardText hideData text="OTROS DATOS SON DESCONOCIDOS">{""}</CardText>
                 </Display>
             </Row>
 

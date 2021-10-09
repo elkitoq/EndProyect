@@ -7,8 +7,9 @@ import { Pagination } from "./Pagination";
 import API, { APIComponent } from "../Tools/API";
 import { useContext } from "react";
 import { Status } from "../Tools/Status";
+import { DownloadXLS } from "./DownloadXLS";
 
-export const Display = ({children, api=API.getApiComponent(children,APIComponent.mode.ARRAY), get,link = {onClick:()=>"#",text:"Go"}, emptyMsg = "No hay resultados para mostrar" }) => {
+export const Display = ({children, api=API.getApiComponent(children,APIComponent.mode.ARRAY), get,link = {onClick:()=>"#",text:"Go"}, emptyMsg = "No hay resultados para mostrar", nameDownload }) => {
     const paginas = [1, 10, 50, 100];
 
     const status = useContext(Status.Context)
@@ -101,6 +102,7 @@ export const Display = ({children, api=API.getApiComponent(children,APIComponent
                         <Button color="primary" onClick={() => selectAll(false)}>Ninguno</Button>
                         <Button color="primary" onClick={() => selectAll()}>invertir</Button>
                     </ButtonGroup>
+                    <DownloadXLS api={api} children={children} name={nameDownload}/>
                 </Nav>
             </Navbar>
             <ModalCard />

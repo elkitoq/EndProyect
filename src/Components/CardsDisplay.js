@@ -1,15 +1,15 @@
-import { Card, CardBody, CardImg, CardText, Col } from "reactstrap";
+import { Card, CardBody, CardImg, CardText, Col, Row } from "reactstrap";
 
 
 export const CardsDisplay = ({ api, children, onClick }) =>
-    <>
+    <Row className="display-overflow">
         {api.getHookData().map((elemento, index) =>
             <Col key={`Card-${index}`} xs="12" sm="12" md="6" lg="3" onClick={onClick.bind(this, index)}>
                 {CardCustom(elemento, children, elemento.selected)}
             </Col>
         )
         }
-    </>
+    </Row>
 
 
 export const CardCustom = (elemento, template, selected = false, hideData = true) =>
