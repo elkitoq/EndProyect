@@ -1,4 +1,4 @@
-import logo from '../Assets/image/logo_nabvar.png'
+
 import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle

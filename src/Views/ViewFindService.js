@@ -1,5 +1,5 @@
 import { useLocation } from "react-router";
-import { Container, Row, CardText, CardImg} from "reactstrap";
+import { Container, Row, CardText, CardImg } from "reactstrap";
 import { Display } from "../Components/Display";
 import API, { APIComponent } from "../Tools/API";
 
@@ -20,9 +20,9 @@ export const ViewFindService = (props) => {
     return (
         <Container className="abs-center" fluid={true}>
             <Row >
-                <h1>Acá mostraría los trabajadores disponibles que sean "{getJson.job}" </h1>
+                <h1 className="title-find">Estos son los resultados que responden a su busqueda de "{getJson.job}" </h1>
                 <Display get={getJson}>
-                    <APIComponent url='https://randomuser.me/api/' responseKey="results"/>
+                    <APIComponent url='https://randomuser.me/api/' responseKey="results" />
                     <CardImg func={(elemento) => elemento.picture.large} />
                     <CardText func={(elemento) => ` ${elemento.name.last}, ${elemento.name.first}`}>Nombre: <b>{ }</b></CardText>
                     <CardText func={(elemento) => elemento.email.replace(/(@)([a-z]*)/, "@gmail")}>Email: </CardText>
