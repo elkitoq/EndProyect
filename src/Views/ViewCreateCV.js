@@ -59,8 +59,6 @@ export const ViewCreateCV = () => {
     const [selectUser,] = status.use('selectUser');
     const [selectRole,setRole] = status.use('selectRole');
 
-    const [ready,setReady]=useState(false)
-
     const dataDefault = {
         "role":
             (selectUser && selectUser[selectRole] && aspirante(selectUser[selectRole])) ?
@@ -70,6 +68,8 @@ export const ViewCreateCV = () => {
                     : 0
     }
 
+    API.apis=[]
+
     API.on(API.events.MOUNT,
         (api)=>{
             console.log("MONTADO");
@@ -77,13 +77,11 @@ export const ViewCreateCV = () => {
             api.get(dataDefault)},
         'CreateCV')
 
-    const showCV=()=>setReady(true);
 
     API.on(API.events.CHANGEINFO,(api)=>{
         if (api.getHookInfo().role !== undefined){
             setRole(api.getHookInfo().role);
             status.set("CreateCV");
-            showCV();
         }
     },'CreateCV')
 
@@ -96,7 +94,6 @@ export const ViewCreateCV = () => {
 
 return (<>{status.get("CreateCV")?<ViewCV role={selectRole}/>:
     <Container>
-        {ready.toString()}
         <LoadRoles />
         <Form method="put">
             <APIComponent url='/cv'/>

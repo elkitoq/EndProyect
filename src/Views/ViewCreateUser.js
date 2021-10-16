@@ -83,7 +83,6 @@ const CrearEmpresa = () => {
     }
     return (
         <Container>
-            {/* <LoadRoles select={0}/> */}
             Creando Perfil para Empresa
             <CancelButton visibility={pathname === "/Register/" || isRegister} />
             <FormItem name="Razón Social" idInput="razonSocial" reference={{ values, onChange, id: "profileName" }} />
@@ -166,7 +165,6 @@ const CrearAspirante = () => {
     const { pathname } = useLocation();
     return (
         <Container>
-            {/* <LoadRoles select={1}/> */}
             Creando Perfil para Aspirante
             <CancelButton visibility={pathname === "/Register/"|| isRegister} />
             <FormItem name="Nombre" idInput="name" reference={{ values: values.cv, onChange, id: "name" }} />
@@ -219,7 +217,6 @@ const CrearAutonomo = () => {
 
     return (
         <Container>
-            {/* <LoadRoles select={2}/> */}
             Creando Perfil para Autonomo
             <CancelButton visibility={pathname === "/Register/"|| isRegister} />
             <FormItem name="Razón Social" idInput="razonSocial" reference={{ values, onChange, id: "profileName" }} />

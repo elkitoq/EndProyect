@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Collapse, List, FormGroup, Input, Button } from 'reactstrap'
+import { Collapse, List, FormGroup, Input, Button, Row, ButtonGroup } from 'reactstrap'
 
 
 
@@ -47,6 +47,11 @@ export const ViewAddCVData = ({reference = { values: {}, onChange: () => { } }, 
         console.log(reference.values);
     }
 
+    const remove=(index)=>{
+        reference.values[reference.id].splice(index,1);
+        setActivo(-1);
+    }
+
     return (
         <List className="separado">
 
@@ -61,7 +66,12 @@ export const ViewAddCVData = ({reference = { values: {}, onChange: () => { } }, 
 
                 return (
                     <div key={`element${index}`}>
+                        <Row>
+                        <ButtonGroup>
                         <Button href="#" onClick={toggle} className={`list-group-item list-group-item-action ${index === activo ? "active" : ""}`}>{elemento.title}</Button>
+                        <Button href="#" onClick={()=>{remove(index)}}>X</Button>
+                        </ButtonGroup>
+                        </Row>
                         <Collapse isOpen={index === activo}>
                             <FormGroup className='list-group-item list-group-item-action'>
                                 {children.map((child,i)=>
@@ -79,7 +89,7 @@ export const ViewAddCVData = ({reference = { values: {}, onChange: () => { } }, 
                 );
             })
             :""}
-            <Button onClick={addExperience} className={`list-group-item list-group-item-action ${activo===-1 ? "active" : ""}`}>Click para agregar experiencia</Button>
+            <Button onClick={addExperience} className={`list-group-item list-group-item-action ${activo===-1 ? "active" : ""}`}>Click para agregar</Button>
         </List>
 
     )
