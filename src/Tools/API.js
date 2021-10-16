@@ -40,6 +40,7 @@ export default class API {
         if (info.error)
             // this.onError(info.error)
             this.call(API.events.ERROR)
+        this.finishLoad=(info.error===undefined);
         if (info.message)
             // this.onMessage(info.message)
             this.call(API.events.MESSAGE)
@@ -178,6 +179,7 @@ export default class API {
     
     static apis = []
     mount=false;
+    finishLoad=false;
 
     static events = {
         ERROR:'Error',
@@ -186,7 +188,8 @@ export default class API {
         CHANGEINFO:'changeInfo',
         MOUNT:'Mount',
         SENDING:'Sending',
-        CHANGEDATA:'ChangeData'
+        CHANGEDATA:'ChangeData',
+        FINISHLOAD:'FinishLoad'
     }
 
     static eventsList = {}
@@ -201,6 +204,11 @@ export default class API {
         if (API.eventsList[eventName].findIndex((e)=>e.id===id)<0)
             API.eventsList[eventName].push({func,id})
 
+    }
+
+    static call(eventName,...arg){
+        for (const api of API.apis)
+            api.call(eventName,...arg)
     }
 
     call(eventName,...arg){

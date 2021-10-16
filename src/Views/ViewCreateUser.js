@@ -12,7 +12,6 @@ import { FormItem } from "../Components/FormItem";
 let selectUser, saveUser;
 
 export const ViewCreateUser = ({ roleType }) => {
-
     const status = useContext(Status.Context)
     const [login,] = status.use('Login');
 
@@ -21,9 +20,10 @@ export const ViewCreateUser = ({ roleType }) => {
 
     return (
         !(login) ? <FormRegister /> : <div className="abs-center">
+            <LoadRoles select={roleType}/>
             {
                 !(Array.isArray(selectUser) && selectUser.length) ? <CrearUsuario roleType={roleType} /> :
-                    !(selectUser[selectUser.length - 1].new === true) ? <CrearUsuario roleType={roleType} /> :
+                    (!(selectUser[selectUser.length - 1].new === true) || (roleType!==undefined && roleType !== selectUser[selectUser.length - 1].profileType)) ? <CrearUsuario roleType={roleType} /> :
                         (selectUser[selectUser.length - 1].profileType === 0) ? <CrearEmpresa /> :
                             (selectUser[selectUser.length - 1].profileType === 1) ? <CrearAspirante /> :
                                 (selectUser[selectUser.length - 1].profileType === 2) ? <CrearAutonomo /> :
@@ -70,7 +70,7 @@ const CrearEmpresa = () => {
     }
     return (
         <Container>
-            <LoadRoles select={0}/>
+            {/* <LoadRoles select={0}/> */}
             Creando Perfil para Empresa
             <CancelButton visibility={pathname === "/Register/"} />
             <FormItem name="Razón Social" idInput="razonSocial" reference={{ values, onChange, id: "profileName" }} />
@@ -86,8 +86,6 @@ const CrearEmpresa = () => {
 
 
 const CrearUsuario = ({ roleType }) => {
-
-
     const crear = (r) => {
         if (!Array.isArray(selectUser))
             selectUser = [];
@@ -95,7 +93,6 @@ const CrearUsuario = ({ roleType }) => {
         console.log("///////////////////////////");
         console.log(selectUser);
         saveUser()
-
     }
 
     useEffect(() => {
@@ -104,6 +101,7 @@ const CrearUsuario = ({ roleType }) => {
             if (selectUser[selectUser.length - 1] && selectUser[selectUser.length - 1].new)
                 selectUser.pop()
             crear(roleType)
+            
         }
 
 
@@ -113,7 +111,7 @@ const CrearUsuario = ({ roleType }) => {
 
 
     return (
-        <>
+        <>  
             <div className="text-center content">
                 <h3>¿Por donde querés empezar?</h3>
                 <Container className="container-options">
@@ -141,6 +139,8 @@ const CrearUsuario = ({ roleType }) => {
 
 const CrearAspirante = () => {
 
+    //LoadRoles({select:1})
+
     const values = selectUser[selectUser.length - 1]
     if (values.cv === undefined)
         values.cv = {}
@@ -153,7 +153,7 @@ const CrearAspirante = () => {
     const { pathname } = useLocation();
     return (
         <Container>
-            <LoadRoles select={1}/>
+            {/* <LoadRoles select={1}/> */}
             Creando Perfil para Aspirante
             <CancelButton visibility={pathname === "/Register/"} />
             <FormItem name="Nombre" idInput="name" reference={{ values: values.cv, onChange, id: "name" }} />
@@ -206,7 +206,7 @@ const CrearAutonomo = () => {
 
     return (
         <Container>
-            <LoadRoles select={2}/>
+            {/* <LoadRoles select={2}/> */}
             Creando Perfil para Autonomo
             <CancelButton visibility={pathname === "/Register/"} />
             <FormItem name="Razón Social" idInput="razonSocial" reference={{ values, onChange, id: "profileName" }} />

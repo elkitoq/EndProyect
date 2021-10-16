@@ -7,14 +7,28 @@ import { Status } from "../Tools/Status";
 import { useContext } from "react";
 import RutaTutorial from "../Components/tutorial";
 import { ApplicationStatus } from "../Server/models/ApplicationStatus";
+import { LoadRoles } from "../Components/role";
 
-export const ViewOfferJob = () => {
+export const ViewOfferJob=({...props})=>{
+    const status = useContext(Status.Context)
+        return <>{(status.get('selectUser')[status.get('selectRole')] 
+        && status.get('selectUser')[status.get('selectRole')].profileType===0)?
+            <OfferJob {...props}/>
+            :<LoadRoles select={0}/>}
+            </>
+}
+
+
+
+const OfferJob = () => {
     const { search } = useLocation();
     const getJson = API.getSearchParam(search);
 
     const status = useContext(Status.Context)
     const [selectRole,] = status.use('selectRole');
     getJson.role=selectRole;
+
+    
 
     return (
         <Container className="abs-center" fluid={true}>
@@ -39,6 +53,9 @@ export const ViewOfferJob = () => {
         </Container>
     );
 }
+
+
+
 
 RutaTutorial.get("OfferJob")
     .setDescription(<>Lista las actuales Busquedas de tu empresa</>)

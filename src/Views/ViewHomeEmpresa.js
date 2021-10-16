@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useLocation } from "react-router";
 import { Col, Container, Row } from "reactstrap"
 import { OptionMenu } from "../Components/OptionMenu";
+import { LoadRoles } from "../Components/role";
 import { Status } from "../Tools/Status";
 
 
@@ -26,15 +27,18 @@ export const ViewHomeEmpresa = () => {
 
     const status = useContext(Status.Context)
     const [selectUser,] = status.use('selectUser');
-    const [selectRole,] = status.use('selectRole');
+    const [selectRole,setProfile] = status.use('selectRole');
     const user = selectUser[userNumber || selectRole];
+    if (user && userNumber!==undefined && userNumber !== selectRole)
+    setProfile(userNumber)
     document.user = user
     return (
         <Container className="abs-center">
+            <LoadRoles/>
             <Col className="content-home">
                 <div className="content-home-inner">
                     <div className="title">
-                        <h1>Bienvenido {user.profileName}</h1>
+                        <h1>Bienvenido {user?user.profileName:""}</h1>
                         <h2>¿Que estas buscando hoy?</h2>
                     </div>
                     <Row className="option-menu">

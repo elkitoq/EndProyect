@@ -69,37 +69,41 @@ router.get('/jobs', async (req, res) => {
     console.log(`getJOBs:${req.sessionID}`);
     console.log(req.query);
 
-    if (req.query.b) {
-        const response = [];
-        const match = {}
+    try{
+        if (req.query.b) {
+            const response = [];
+            const match = {}
 
-        for (const post of req.query.b.split(" ")) {
-            const applications = await Application.findSimilar(post)
-            for (const application of applications) {
-                application.candidates = undefined
-                if (req.query.listAll || (application.status === 1))
-                    if (match[application._id] === undefined) {
-                        response.push(Object.assign({ match: 1 }, application._doc));
-                        match[application._id] = response.length - 1
-                    } else
-                        response[match[application._id]].match++;
+            for (const post of req.query.b.split(" ")) {
+                const applications = await Application.findSimilar(post)
+                for (const application of applications) {
+                    application.candidates = undefined
+                    if (req.query.listAll || (application.status === 1))
+                        if (match[application._id] === undefined) {
+                            response.push(Object.assign({ match: 1 }, application._doc));
+                            match[application._id] = response.length - 1
+                        } else
+                            response[match[application._id]].match++;
+                }
+            }
+
+            response.sort((a, b) => b.match - a.match)
+
+            res.status(201).json({ response });
+
+        }
+
+
+
+        if (req.session.user && req.query.role) {
+
+            const profile = await getProfile(req.session.user.profile[req.query.role])
+            if (profile) {
+                res.status(201).json({ response: profile.applications });
             }
         }
-
-        response.sort((a, b) => b.match - a.match)
-
-        res.status(201).json({ response });
-
-    }
-
-
-
-    if (req.session.user && req.query.role) {
-
-        const profile = await getProfile(req.session.user.profile[req.query.role])
-        if (profile) {
-            res.status(201).json({ response: profile.applications });
-        }
+    }catch(e){
+        //res.status(201).json({ info: { error: "No se puedo acceder a los datos" } })
     }
     res.end();
 });

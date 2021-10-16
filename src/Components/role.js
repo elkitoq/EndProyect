@@ -1,4 +1,4 @@
-import { QAPI } from "../Tools/API";
+import API, { QAPI } from "../Tools/API";
 import {
     DropdownToggle,
     DropdownMenu,
@@ -11,24 +11,34 @@ import { Status } from "../Tools/Status";
 import { Señalado } from "./Señalador";
 
 
-export const LoadRoles = ({select}) => {
+export const LoadRoles = ({select,add}) => {
 
     const status = useContext(Status.Context)
     // const [, setUser] = status.use('selectUser');
+    const [load,setLoad] = useState(false)
 
+    console.log("SELECT " + select);
 
     useEffect(() => {
+        if (!load)
         new QAPI('/profile').send("get", {}).then((res) => {
             status.set("selectUser",(res.data.response),true)
             if (res && res.data && res.data.response)
                 verificarRoles(status,res.data.response)
-            if (select!==undefined){
+            if (select!==undefined && status.get("selectUser")[status.get("selectRole")]!==select){
                 status.set("selectRole",res.data.response.findIndex((element) => element.profileType === select))
                 // alert (res.data.response.findIndex((element) => element.profileType === select))
                 // alert (status.get("selectRole"))
+                API.call(API.events.FINISHLOAD)
             }
-            status.save();
+            if (add!==undefined && (status.get("selectRole")<0 || select===undefined)){
+                  res.data.response.push(add)
+                  status.set("selectRole",""+res.data.response.indexOf(add))
+              }
             
+            status.save();
+            setLoad(true)
+            console.log("listo");
         });
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
