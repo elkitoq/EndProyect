@@ -230,7 +230,7 @@ export class APIComponent extends Component {
         for (const api of API.apis){
             if (!api.mount)
                 api.call(API.events.MOUNT)
-            api.mount=true
+            api.mount=true  
         }
     }
 
