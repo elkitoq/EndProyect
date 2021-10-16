@@ -177,6 +177,7 @@ export default class API {
     }
     
     static apis = []
+    mount=false;
 
     static events = {
         ERROR:'Error',
@@ -217,13 +218,21 @@ export class APIComponent extends Component {
         super();
         // if (events !== undefined)
         //     this.componentDidMount = events.didMount || (() => { });      
-        var api = API.apis.shift()
-        if (api)
-            this.componentDidMount = () => api.call(API.events.MOUNT)
+        //var api = API.apis.shift()
+        console.log("Construyendo");
+        //if (api)
+        //    this.componentDidMount = () => {}
 
 
     }
-
+    componentDidMount() {
+        console.log("Montando");
+        for (const api of API.apis){
+            if (!api.mount)
+                api.call(API.events.MOUNT)
+            api.mount=true
+        }
+    }
 
     static mode = {
         SINGLE: "single",

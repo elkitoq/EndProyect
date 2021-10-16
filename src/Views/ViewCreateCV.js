@@ -71,7 +71,10 @@ export const ViewCreateCV = () => {
     }
 
     API.on(API.events.MOUNT,
-        (api)=>api.get(dataDefault),
+        (api)=>{
+            console.log("MONTADO");
+            console.log(api);
+            api.get(dataDefault)},
         'CreateCV')
 
     const showCV=()=>setReady(true);

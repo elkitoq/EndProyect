@@ -14,8 +14,6 @@ export class DownloadXLS extends React.Component {
         const { api, children,name}=this.props
 
         const data = JSON.parse(JSON.stringify(api.getHookData()))
-        if (data.length>0)
-            data[2].cell="JAJA"
 
         return (
             <ExcelFile filename={name} element={<Button>Descargar</Button>}>

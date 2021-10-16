@@ -11,7 +11,7 @@ import { Status } from "../Tools/Status";
 import { Señalado } from "./Señalador";
 
 
-export const LoadRoles = () => {
+export const LoadRoles = ({select}) => {
 
     const status = useContext(Status.Context)
     // const [, setUser] = status.use('selectUser');
@@ -22,6 +22,9 @@ export const LoadRoles = () => {
             status.set("selectUser",(res.data.response),true)
             if (res && res.data && res.data.response)
                 verificarRoles(status,res.data.response)
+            if (select){
+                status.set("selectRole",res.data.response.findIndex((element) => element.profileType === select))
+            }
             status.save();
             
         });
