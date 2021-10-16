@@ -255,7 +255,7 @@ const LocalNoLoginCard = ({ isLogin }) =>
         <Col lg={{ size: 6, offset: 3 }}>
             <ButtonGroup>
                 {isLogin !== "true" ?
-                    <Button href="/login" color="secondary">        Login </Button> : ""}
+                    <Button href="/login" color="secondary">    Login </Button> : ""}
                 <Button href="/register" color="secondary">     Crear </Button>
             </ButtonGroup>
         </Col>

@@ -9,6 +9,7 @@ import { ApplicationStatus } from "../Server/models/ApplicationStatus";
 import { ApplicationContrato } from "../Server/models/AplicationContrato";
 import RutaTutorial from "../Components/tutorial";
 import { ViewOfferJob } from "./ViewOfferJob";
+import { LoadRoles } from "../Components/role";
 
 export const ViewCreateOfferJob = ({ mode = "put",id}) => {
 
@@ -36,6 +37,7 @@ export const ViewCreateOfferJob = ({ mode = "put",id}) => {
         <>
         {saved?<ViewOfferJob/>:
         <Container >
+            <LoadRoles select={0}/>
             <Button style={{visibility:"hidden",width:"80vw"}}>Esto es para q se expanda el container, revisar</ Button>
             <Form method={mode}>
                 <APIComponent url="/job" APIClass={APIcreateJob} events={{}}/>
@@ -68,5 +70,6 @@ export const ViewCreateOfferJob = ({ mode = "put",id}) => {
 RutaTutorial.get("CreateJob")
     .setDescription(<>Crea una Busqueda laboral para tu empresa</>)
     .setRender(ViewCreateOfferJob)
+    .addRequisito('haveEmpresa')
     .setMeta("Crear Busqueda")
     .setInstrucciones(<>Rellena los datos pedidos</>);

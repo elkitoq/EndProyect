@@ -25,7 +25,8 @@ export const LoadRoles = ({select,add}) => {
             status.set("selectUser",(res.data.response),true)
             if (res && res.data && res.data.response)
                 verificarRoles(status,res.data.response)
-            if (select!==undefined && status.get("selectUser")[status.get("selectRole")]!==select){
+            const user=status.get("selectUser")[status.get("selectRole")]
+            if (!user || (select!==undefined && user.profileType!==select)){
                 status.set("selectRole",res.data.response.findIndex((element) => element.profileType === select))
                 // alert (res.data.response.findIndex((element) => element.profileType === select))
                 // alert (status.get("selectRole"))

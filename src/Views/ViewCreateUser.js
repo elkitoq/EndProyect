@@ -11,16 +11,25 @@ import { FormItem } from "../Components/FormItem";
 
 let selectUser, saveUser;
 
+let refresh=()=>{}
+
 export const ViewCreateUser = ({ roleType }) => {
     const status = useContext(Status.Context)
     const [login,] = status.use('Login');
+    const [r,setr]= useState("")
+
+    refresh = (a)=>setr(a)
+
+    useEffect(() => {
+        return <LoadRoles select={roleType}/>
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     [selectUser,] = status.use('selectUser');
     saveUser = () => status.set("selectUser", selectUser);
-
     return (
-        !(login) ? <FormRegister /> : <div className="abs-center">
-            <LoadRoles select={roleType}/>
+        !(login) ? <FormRegister /> : <div className="abs-center">{r}
             {
                 !(Array.isArray(selectUser) && selectUser.length) ? <CrearUsuario roleType={roleType} /> :
                     (!(selectUser[selectUser.length - 1].new === true) || (roleType!==undefined && roleType !== selectUser[selectUser.length - 1].profileType)) ? <CrearUsuario roleType={roleType} /> :
@@ -86,13 +95,14 @@ const CrearEmpresa = () => {
 
 
 const CrearUsuario = ({ roleType }) => {
+    
     const crear = (r) => {
+        
         if (!Array.isArray(selectUser))
             selectUser = [];
         selectUser.push({ profileType: r, new: true });
-        console.log("///////////////////////////");
-        console.log(selectUser);
         saveUser()
+        refresh()
     }
 
     useEffect(() => {
@@ -103,7 +113,6 @@ const CrearUsuario = ({ roleType }) => {
             crear(roleType)
             
         }
-
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
