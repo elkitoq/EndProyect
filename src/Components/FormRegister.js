@@ -4,7 +4,7 @@ import { FormItem } from '../Components/FormItem.js';
 import { APIComponent} from '../Tools/API.js';
 
 
-export const FormRegister = () => 
+export const FormRegister = ({showRegister}) => 
         <Form method="put" className="form-container">
             <APIComponent url='/user' />
             <FormItem name="Usuario" idInput="name" required />
@@ -14,7 +14,7 @@ export const FormRegister = () =>
             <FormGroup className="separado">
                 <Button className="buton-create-user" size="lg" color="primary" blocks="true">Crear</Button>
                 <Label className="label-login" >
-                    ¿Ya tenes cuenta? <a className="a-register" href="/Login/">Logea acá</a>
+                    ¿Ya tenes cuenta? <a className="a-register" href="#" onClick={()=>{showRegister(false)}}>Logea acá</a>
                 </Label>
             </FormGroup>
         </Form>

@@ -13,7 +13,7 @@ export const ViewLookForWorker = () => {
             <Col xs="12">
                 <Busqueda text="Buscar Trabajador" href="/findService" param="job" />
                 <Col xs={{ size: 10, offset: 1 }} sm={{ size: 10, offset: 1 }} className="separado">
-                    {!(status.get('HaveEmpresa')) ? <LocalNoLoginCard login={(status.get('Login'))}/> : <SugerirCrearPuesto />}
+                    {!(status.get('haveEmpresa')) ? <LocalNoLoginCard login={(status.get('Login'))}/> : <SugerirCrearPuesto />}
                 </Col>
 
             </Col>
