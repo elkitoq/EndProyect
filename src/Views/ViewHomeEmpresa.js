@@ -34,7 +34,6 @@ export const ViewHomeEmpresa = () => {
             <Col className="content-home">
                 <div className="content-home-inner">
                     <div className="title">
-                        <h2>Pagina de inicio para empresas</h2>
                         <h1>Bienvenido {user.profileName}</h1>
                         <h2>¿Que estas buscando hoy?</h2>
                     </div>

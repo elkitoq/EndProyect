@@ -158,7 +158,7 @@ const CrearAspirante = () => {
             <FormItem name="Apellido" idInput="lastName" reference={{ values: values.cv, onChange, id: "lastName" }} />
             <FormItem name="Direccion" idInput="address" reference={{ values: values.cv, onChange, id: "address" }} />
             <FormItem name="Ciudad" idInput="city" reference={{ values: values.cv, onChange, id: "city" }} />
-            <FormItem name="Telefono" idInput="phone" reference={{ values: values.cv, onChange, id: "phone" }} />
+            <FormItem name="Telefono" type="number" idInput="phone" reference={{ values: values.cv, onChange, id: "phone" }} />
             <FormItem name="Email" idInput="email" reference={{ values: values.cv, onChange, id: "email" }} />
             <ButtonCreate href={(pathname === "/Register/") ? "/homeAspirante" : "#"} />
         </Container>

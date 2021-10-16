@@ -12,25 +12,25 @@ export const CurriculumProfile = ({info={}}) => {
         <Container className="curriculum-container">
             <div className="body">
                 <div className="bodyInner">
-                    {info.academico ?<SectionCurriculum icon={school} sectionName="section-cv" title="Informacion Academica" content={   
+                    {info.academico ? <SectionCurriculum icon={school} sectionName="section-cv" title="Informacion Academica" content={
                         info.academico.map((item) => <><b>{item.year}-{item.title}</b><br />{item.description}<br /></>)
-                    }></SectionCurriculum>:""}
-                    {info.laboral ?<SectionCurriculum icon={maletin} sectionName="section-cv" title="Experiencia Laboral" content={
-                        info.laboral.map((item)=> <><b>{item.year} {item.title}</b> {item.empresa? `en ${item.empresa}`:""}<br />{item.description}<br /></>)
-                    }></SectionCurriculum>:""}
-                    {info.jobs ?<SectionCurriculum icon={hammer} sectionName="section-cv" title="Trabajos Realizados" content={
+                    }></SectionCurriculum> : ""}
+                    {info.laboral ? <SectionCurriculum icon={maletin} sectionName="section-cv" title="Experiencia Laboral" content={
+                        info.laboral.map((item) => <><b>{item.year} {item.title}</b> {item.empresa ? `en ${item.empresa}` : ""}<br />{item.description}<br /></>)
+                    }></SectionCurriculum> : ""}
+                    {info.jobs ? <SectionCurriculum icon={hammer} sectionName="section-cv" title="Trabajos Realizados" content={
                         info.jobs
-                    }></SectionCurriculum>:""}
-                    {info.objetives ?<SectionCurriculum icon={target} sectionName="section-cv" title="Objetivos" content={
+                    }></SectionCurriculum> : ""}
+                    {info.objetives ? <SectionCurriculum icon={target} sectionName="section-cv" title="Objetivos" content={
                         info.objetives
-                    }></SectionCurriculum>:""}
+                    }></SectionCurriculum> : ""}
                 </div>
             </div>
         </Container>
     )
 }
 
-const toContent=()=>{
+const toContent = () => {
 
 
     return "hola"
