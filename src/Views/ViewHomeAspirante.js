@@ -29,7 +29,7 @@ export const ViewHomeAspirante = () => {
                     </div>
                     <Row className="option-menu">
                         <OptionMenu href="/CVCreate">Crear Curriculum</OptionMenu>
-                        <OptionMenu href="/offerService/">Puestos solicitados</OptionMenu>
+                        <OptionMenu href="/postulates">Puestos solicitados</OptionMenu>
                         <OptionMenu href={`/perfilAspirante?id=${user._id}`}   >Mi perfil</OptionMenu>
                         {/* <OptionMenu href="/message/"        >Ver mensajes</OptionMenu> */}
                     </Row>

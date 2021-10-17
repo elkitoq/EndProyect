@@ -63,6 +63,7 @@ export const ViewJob = () => {
                     <CardText hideData func={(elemento) => elemento.cv.address}>Dirección:</CardText>
                     <CardText hideData func={(elemento) => elemento.cv.city}>Ciudad / Distrito:</CardText>
                     <CardText hideData func={(elemento) => elemento.cv.cp}>Código Postal:</CardText>
+                    <CardText func={(elemento) => elemento.postulate.date}>Fecha: </CardText>
 
                 </Display>
             </Row>

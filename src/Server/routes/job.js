@@ -142,7 +142,10 @@ router.get('/postulates', async (req, res) => {
     console.log(req.query);
     if (req.session.user) {
         if (req.query.role) {
-            const response = (await Application.findCandidate(req.session.user.profile[req.query.role]._id))
+            const id = req.session.user.profile[req.query.role]._id
+            const response = (await Application.findCandidate(id))
+            for (const item of response){
+                item.candidates=item.candidates.filter((e)=>""+e.data._id===""+id)}
             res.status(201).json({ response });
         }
         else res.status(201).json({ info: { error: "Se debe especificar la Busqueda" } });
@@ -164,7 +167,7 @@ router.post('/postulate', async (req, res) => {
             console.log(application.candidates);
             if (application.status !== 1)
                 res.status(201).json({ info: { error: "La Busqueda no esta actualmente abierta" } });
-            else if (application.candidates.find((e) => e._id === req.session.user.profile[req.body.role]._id))
+            else if (application.candidates.find((e) => ""+e.data._id === ""+req.session.user.profile[req.body.role]._id))
                 res.status(201).json({ info: { error: "Ya estaba postulado" } });
             else {
                 application.candidates.push({

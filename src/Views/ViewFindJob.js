@@ -50,7 +50,7 @@ return (<>
                         const b = new URLSearchParams(search)
                         b.set("postulate", element._id)
                         return `/postulateJob?${b}`
-                    }, text: "Postularse"
+                    }, text: "Postularse como"+user[selectRole].profileName
                 }}
             >
                 <APIComponent url='/jobs' />
