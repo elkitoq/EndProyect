@@ -21,7 +21,7 @@ export const ViewFindService = (props) => {
         <Container className="abs-center" fluid={true}>
             <Row >
                 <h1 className="title-find">Estos son los resultados que responden a su busqueda de "{getJson.job}" </h1>
-                <Display get={getJson} nameDownload="BusquedaServicios">
+                <Display get={getJson} nameDownload={"Busqueda("+getJson.job+")"}>
                     <APIComponent url='https://randomuser.me/api/' responseKey="results" />
                     <CardImg func={(elemento) => elemento.picture.large} />
                     <CardText func={(elemento) => ` ${elemento.name.last}, ${elemento.name.first}`}>Nombre: </CardText>

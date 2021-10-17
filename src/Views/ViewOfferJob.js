@@ -32,10 +32,9 @@ const OfferJob = () => {
 
     return (
         <Container className="abs-center" fluid={true}>
-            <Row >
-                <h1>Acá mostraría Busquedas laborales de la empresa</h1>
+            <Row className="container-content-offerJob">
                 <Button size="lg"  style={{width:"100px",left:"10%"}} color="primary" href="/createJob/">Nuevo</Button>
-                <Display 
+                <Display nameDownload={"Busquedas"}
                 get={getJson}
                 link={{onClick:(element)=>`/ViewJob?application=${element._id}`,text:"Ver y Editar"}}
                 >

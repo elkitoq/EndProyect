@@ -5,7 +5,7 @@ import { ViewAddCVData } from './ViewAddCVData'
 import '../Assets/Css/cargarCV.css';
 import { FormItem } from '../Components/FormItem'
 import noPhoto from '../Assets/image/blank-profile.png'
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import API, { APIComponent } from '../Tools/API.js';
 import { Form } from '../Components/Form';
 
@@ -81,7 +81,8 @@ export const ViewCreateCV = () => {
     API.on(API.events.CHANGEINFO,(api)=>{
         if (api.getHookInfo().role !== undefined){
             setRole(api.getHookInfo().role);
-            status.set("CreateCV");
+            if(api.getHookInfo().readyCV)
+                status.set("CreateCV");
         }
     },'CreateCV')
 

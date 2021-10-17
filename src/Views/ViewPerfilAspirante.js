@@ -52,7 +52,7 @@ export const ViewPerfilAspirante = () => {
                 </Col>
 
                 <Col md={{ size: 6 }}>
-                    {viewAptitudes ?<AptitudesProfile info={skill} />: <CurriculumProfile info={cv}/>}
+                    {viewAptitudes ?<AptitudesProfile info={cv.skill} />: <CurriculumProfile info={cv}/>}
                 </Col>
 
                 <Col md={{ size: 3 }}>

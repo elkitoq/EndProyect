@@ -10,7 +10,6 @@ import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 
 import QRCode from "react-qr-code";
-import { useLocation } from "react-router";
 
 
 export const ViewCV = ({ role }) => {
@@ -173,7 +172,7 @@ export const ViewCV = ({ role }) => {
 
 
                     </Row>
-                    <QRCode size={100} value={`${window.location.host}/perfilAspirante?id=${user._id}`} />
+                    {(user)?<QRCode size={100} value={`${window.location.host}/perfilAspirante?id=${user._id}`} />:""}
                 </Col>
             </Row>
 

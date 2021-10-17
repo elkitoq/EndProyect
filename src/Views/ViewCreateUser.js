@@ -1,4 +1,4 @@
-import { Button, Card, Container, Input, Label } from "reactstrap";
+import { Button, Card, Container, Input} from "reactstrap";
 import { FormRegister } from "../Components/FormRegister";
 import { QAPI } from "../Tools/API";
 import { Status } from "../Tools/Status";

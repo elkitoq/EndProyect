@@ -43,7 +43,7 @@ return (<>
         <Row>
             <Busqueda text="Buscar Empleo" href="/findJob" defaultValue={busqueda.get("b")} />
             <h1>Estos son las busquedas laborales que responden a "{busqueda.get("b")}" </h1>
-            <Display
+            <Display nameDownload={()=>"Busquedas("+busqueda.get("b")+")"}
                 get={busqueda}
                 link={{
                     onClick: (element) => {

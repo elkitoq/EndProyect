@@ -116,7 +116,7 @@ export const RenderProgress = (page) => {
         {progress.length > 1 ? <ProgressBarStep steps={progress} toDo={toDo} /> : ""}
 
         <Container className={`abs-center ${progress.length > 1 ?"main-progress-render":"main-render"} `} fluid={true} style={{ marginTop: progress.length > 1 ? "60px" : "0px" }}>
-            <div style={{height:"1px",marginTop:progress.length > 1 ?"-80vh":
+            <div style={{height:"1px",width:"100%",marginTop:progress.length > 1 ?"-80vh":
             (ruta.checkStatus==="Login" 
                 || ruta.checkStatus==="PostulateJob"
                 || ruta.checkStatus==="FindJob"

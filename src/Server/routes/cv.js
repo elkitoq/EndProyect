@@ -15,7 +15,7 @@ router.put('/cv', async (req, res) => {
     else {
         req.session.cv = req.body
     }
-    res.status(201).json({info:{role:req.body.role}});
+    res.status(201).json({info:{role:req.body.role,readyCV:true}});
     res.end();
 });
 

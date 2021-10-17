@@ -1,0 +1,57 @@
+/* vista crear busqueda laboral*/
+.container-form-busqueda{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-form-busqueda .form-create-jobs{
+    width: 70% !important;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-form-busqueda .form-create-jobs .form-group{
+    margin-top: 10px;
+}
+
+.container-form-busqueda .form-create-jobs .form-group label{
+    margin-bottom: 5px
+}
+
+.container-form-busqueda .form-create-jobs .container-button-submit{
+    display: flex;
+    justify-content: center;
+}
+
+.container-form-busqueda .form-create-jobs .container-button-submit .button-submit{
+    width: 70%;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.container-back-button{
+    width: 100%;
+   display: flex;
+   justify-content: center;
+}
+
+.container-back-button .back-button{
+    width: 48%;
+}
+/*fin vista crear busqueda laboral*/
+
+@media (max-width: 480px){
+    /*vista crear busqueda laboral*/
+    .container-back-button .back-button{
+        width: 67%;
+    }
+
+    .container-form-busqueda .form-create-jobs .container-button-submit .button-submit{
+        width: 100%;
+    }
+    /*fin vista crear busqueda laboral*/
+}
