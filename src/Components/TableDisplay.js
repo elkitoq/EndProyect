@@ -31,7 +31,7 @@ export const TableDisplay = ({ api, children, onClick }) => <Table>
                         return "";
                     }
                     else if (card.type.name === "CardImg")
-                        return <td key={`CardImg-${index}`}><img className="container-img" height="30px" style={{ borderRadius: "15px" }} src={`${card.props.func(elemento)}`} alt="No se puede mostrar foto" /></td>
+                        return <td key={`CardImg-${index}`}>{card.props.func(elemento)?<img className="container-img" height="30px" style={{ borderRadius: "15px" }} src={`${card.props.func(elemento)}`} alt="No se puede mostrar foto" />:""}</td>
                     return card;
                 })}
             </tr>

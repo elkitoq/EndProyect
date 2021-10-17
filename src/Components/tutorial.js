@@ -110,7 +110,6 @@ export const RenderProgress = (page) => {
     var toDo = progress.findIndex((e) => !e.isDone);
     if (toDo < 0) toDo = progress.length;
     return (props) => <>
-        {console.log(document.ruta=unDone)}
         {/* <ProgressBar ruta={ruta} /> */}
 
         {progress.length > 1 ? <ProgressBarStep steps={progress} toDo={toDo} /> : ""}

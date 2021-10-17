@@ -21,38 +21,44 @@ export const ViewCreateOfferJob = ({ mode = "put",id}) => {
 
     const [saved,setSaved] = useState(false)
 
-    class APIcreateJob extends API{
-        didMount = ()=>{
-            this.setData({status:0})
-            if (id)
-            this.get({id}).then((res)=>(res.data && res.data.response)?setStatus(res.data.response.status):"");
-        }
-        changeInfo =(info)=>{
-            if (info.error)
-                alert(info.error);               
-            if (mode==="put") 
-            setSaved(info.saved)
-        }
-    } 
+    // class APIcreateJob extends API{
+    //     didMount = ()=>{
+    //         this.setData({status:0})
+    //         if (id)
+    //         this.get({id}).then((res)=>(res.data && res.data.response)?setStatus(res.data.response.status):"");
+    //     }
+    //     changeInfo =(info)=>{
+    //         if (info.error)
+    //             alert(info.error);               
+    //         if (mode==="put") 
+    //         setSaved(info.saved)
+    //     }
+    // } 
 
     
-    // const [api,setApi]=useState(null)
+    const [api,setApi]=useState(null)
 
-    // API.on(API.events.MOUNT,
-    //     (api)=>{
-    //         api.setData({status:0})
-    //         if (id)
-    //         api.get({id}).then((res)=>(res.data && res.data.response)?setStatus(res.data.response.status):"");
-    //         setApi(api)
-    //     },
-    //     'CreateJob')
+    //API.apis=[]
+    
+    API.on(API.events.MOUNT,
+        (api)=>{
+            if(api.id==='/job'){
+            api.setData({status:0})
+            if (id)
+            api.get({id}).then((res)=>(res.data && res.data.response)?setStatus(res.data.response.status):"");
+            setApi(api)
+            document.val=api
+        }
+        },
+        'CreateJob')
 
-    // API.on(API.events.CHANGEINFO,(api)=>{
-    //     if (mode==="put") 
-    //     setSaved(api.getHookInfo().saved)
-    // },'CreateJob')
+    API.on(API.events.CHANGEINFO,(api)=>{
+        if(api.id==='/job'){
+        if (mode==="put") 
+        setSaved(api.getHookInfo().saved)}
+    },'CreateJob')
 
-    // document.val=api
+    // setApi(API.get("/job"))
 
     return (
         <>
@@ -60,15 +66,15 @@ export const ViewCreateOfferJob = ({ mode = "put",id}) => {
         <Container className="container-form-busqueda">
             <LoadRoles select={0}/>
             <Form method={mode} className="form-create-jobs">
-                <APIComponent url="/job" APIClass={APIcreateJob} events={{}}/>
+                <APIComponent url="/job" />
                 <FormItem name="Se busca:" idInput="name" />
                 <FormItem name="Descripción:" type="textarea" idInput="description" />
                 <FormItem name="Requerimientos:" type="textarea" idInput="req" />
                 <FormItem name="Zona:" type="textarea" idInput="zona" />
                 
                 <FormItem name="Tipo de contratacion" type="select" idInput="tipoContratacion">
-                    <option value="Contratado" selected="selected"/>
-                    <option value="Planta Permanente"/>
+                    <option value="Contratado" selected="selected">Contratado</option>
+                    <option value="Planta Permanente">Planta Permanente</option>
                 </FormItem>
                 <FormItem name="Tipo de contrato" type="select" idInput="tipoContrato" style={{ visibility: true ? "visible " : "hidden" }}>
                 {ApplicationContrato.map(

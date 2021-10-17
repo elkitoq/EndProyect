@@ -59,6 +59,8 @@ export const ViewCreateCV = () => {
     const [selectUser,] = status.use('selectUser');
     const [selectRole,setRole] = status.use('selectRole');
 
+    const [data,setData]=useState(1);
+
     const dataDefault = {
         "role":
             (selectUser && selectUser[selectRole] && aspirante(selectUser[selectRole])) ?
@@ -68,7 +70,7 @@ export const ViewCreateCV = () => {
                     : 0
     }
 
-    API.apis=[]
+    //API.apis=[]
 
     API.on(API.events.MOUNT,
         (api)=>{
@@ -91,7 +93,6 @@ export const ViewCreateCV = () => {
             document.getElementById("fotoPerfil").src=api.getHookData().photo
         }
     },'CreateCV')
-
 
 return (<>{status.get("CreateCV")?<ViewCV role={selectRole}/>:
     <Container>

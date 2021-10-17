@@ -12,7 +12,7 @@ router.put('/profile', async (req, res) => {
         res.status(201).json({});
     }
     else
-        res.status(201).json({ info: { error: "No ha iniciado sesión" } });
+        res.status(201).json({ info: { error: "No ha iniciado sesión",eventCalls:[{eventName:"isLogOut"}] } });
     res.end();
 });
 
@@ -31,9 +31,8 @@ router.get('/profile', async (req, res) => {
             res.status(201).json({ response: req.session.user.profile });
     }
     else
-        res.status(201).json({ info: { error: "No ha iniciado sesión" } });
+        res.status(201).json({ info: { error: "No ha iniciado sesión",eventCalls:[{eventName:"isLogOut"}]    } });
     res.end();
 });
-
 
 module.exports = router;

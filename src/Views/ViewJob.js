@@ -1,6 +1,6 @@
 import { useContext, useState} from "react";
 import { useLocation } from "react-router";
-import { Button, CardText, Container, Input, Modal, ModalBody, ModalFooter, Row } from "reactstrap";
+import { Button, CardImg, CardText, Container, Input, Modal, ModalBody, ModalFooter, Row } from "reactstrap";
 import { Display } from "../Components/Display";
 import { Form } from "../Components/Form";
 import { FormItem } from "../Components/FormItem";
@@ -19,6 +19,7 @@ export const ViewJob = () => {
     const [selectRole,] = status.use('selectRole');
 
     getJson.role=selectRole;
+    const getJsonCandidates= Object.assign({},getJson)
 
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
@@ -28,10 +29,7 @@ export const ViewJob = () => {
         <ModalBody >
             <Form method="put">
                 <APIComponent url='/mensaje'/>
-                <ViewAddCVData idInput="destinatarios">
-                    <Input idInput="title" placeholder="Agrege un titulo" />
-                    <Input idInput="name" placeholder="Agrege un titulo" />
-                </ViewAddCVData>
+                <b>Se enviara el mensaje a todos los postulantes que esten en el estado actual de la Busqueda</b>
                 <FormItem type="textarea" idInput="mensaje"/>
             </Form>
         </ModalBody>
@@ -51,15 +49,21 @@ export const ViewJob = () => {
             <Row>
                 <h3>Candidatos de la busqueda:</h3>
                 <Display  nameDownload={"Candidatos"}
-                get={getJson}
-                link={{onClick:(element)=>`/perfilAspirante?id=${element._id}`,text:"Ver Perfil"
+                get={getJsonCandidates}
+                link={{onClick:(element)=>`/perfilAspirante?id=${element.postulate?element.postulate.data._id:""}`,text:"Ver Perfil"
             }}
             buttons={[{text:'Mensaje',onClick:(a)=>{toggle()}}]}
                 >
-                    <APIComponent url='/candidates'/>   
-                    <CardText key="profileName">Nombre:</CardText>
-                    {/* <CardText className="text-wrap" key="description">Descripción:</CardText>
-                    <CardText key="req" hideData>Requerimientos:</CardText>  */}
+                    <APIComponent url='/candidates'/>
+                    <CardImg func={(elemento) => elemento.cv.photo} />
+                    <CardText func={(elemento) => ` ${elemento.cv.name}, ${elemento.cv.lastName}`}>Nombre: </CardText>
+                    <CardText func={(elemento) => elemento.cv.age}>Edad:</CardText>
+                    <CardText func={(elemento) => elemento.cv.email}>Email: </CardText>
+                    <CardText hideData func={(elemento) => elemento.cv.phone}>Teléfono:</CardText>
+                    <CardText hideData func={(elemento) => elemento.cv.address}>Dirección:</CardText>
+                    <CardText hideData func={(elemento) => elemento.cv.city}>Ciudad / Distrito:</CardText>
+                    <CardText hideData func={(elemento) => elemento.cv.cp}>Código Postal:</CardText>
+
                 </Display>
             </Row>
 

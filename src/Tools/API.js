@@ -3,7 +3,7 @@ import React, { Component, useState } from "react";
 
 export default class API {
 
-    constructor({ url, responseKey = "response", infoKey = "info", mode = APIComponent.mode.SINGLE }, qApi = false) {
+    constructor({ url, responseKey = "response", infoKey = "info", mode = APIComponent.mode.SINGLE,id }, qApi = false) {
 
 
         if (url.substring(0, 4) !== "http") {
@@ -12,6 +12,8 @@ export default class API {
         }
 
         else this.url = url;
+        this.pathname=url
+        this.id=id||url;
 
         if (qApi) {
             this._data = ( mode === APIComponent.mode.SINGLE ? {} : []);
@@ -32,7 +34,13 @@ export default class API {
         this.responseKey = responseKey;
 
         this.infoKey = infoKey;
-        document.API=this;
+
+        document.API=API;
+        document.api=this;
+    }
+
+    static get(id){
+        return API.apis.find((e)=>e.id===id)
     }
 
     changeInfo = (info) => {
@@ -129,6 +137,7 @@ export default class API {
 
     refresh() {
         this.setData(this.getData());
+        this.call(API.events.INPUTDATA)
     }
 
     async setData(data) {
@@ -161,14 +170,21 @@ export default class API {
                 var props = Object.assign({}, child.props);
                 if (props.mode === undefined)
                     props.mode = mode
-                var api;
+                const id = props.id||props.url
+                var api=API.get(id);
+                if(api===undefined)
+                {
                 if (props.APIClass === undefined)
                     api = new API(props);
                 else
                     api = new props.APIClass(props);
+
                 //if (api.didMount !== undefined && child.props.events !== undefined)
                 //     child.props.events.didMount = () => api.didMount();
+                //if(API.get(id)===undefined){
                 API.apis.push(api)
+                }
+                
 
                 if (child.ref !== undefined && child.ref !== null) child.ref.current = api;
                     return api;
@@ -176,7 +192,7 @@ export default class API {
         }
 
     }
-    
+    id=null;
     static apis = []
     mount=false;
     finishLoad=false;
@@ -189,6 +205,7 @@ export default class API {
         MOUNT:'Mount',
         SENDING:'Sending',
         CHANGEDATA:'ChangeData',
+        INPUTDATA:'InputData',
         FINISHLOAD:'FinishLoad'
     }
 
@@ -222,7 +239,7 @@ export default class API {
 export class APIComponent extends Component {
     static i=0
 
-    constructor({ url, mode, responseKey, infoKey, APIClass /*, events*/ }) {
+    constructor({ url, mode, responseKey, infoKey, APIClass,id /*, events*/ }) {
         super();
         // if (events !== undefined)
         //     this.componentDidMount = events.didMount || (() => { });      

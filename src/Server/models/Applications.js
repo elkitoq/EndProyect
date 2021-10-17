@@ -6,10 +6,15 @@ const applicationSchema = new mongoose.Schema({
     description: String,
     req: String,
     zona: String,
+    tipoContratacion:String,
     tipoContrato: Number,
-    tipoJornada: String,
+    tipoJornada: Number,
     status: Number,
-    candidates:[CandidateSchema]
+    candidates:[{
+        data:CandidateSchema,
+        date:Date,
+        status:Number
+    }]
 });
 
 exports.applicationSchema = applicationSchema;

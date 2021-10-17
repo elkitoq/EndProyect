@@ -8,18 +8,18 @@ export const Events = () => {
 API.on("show",async (api)=>{
     console.log(api.getHookData())
     return ("OK")
-},'Eevents')
+},'Events')
 
 API.on(API.events.ERROR, async (api)=>{
         console.log(api.getHookInfo());
         alert("Error:"+api.getHookInfo().error);
     return ("OK")
-},'Eevents')
+},'Events')
 
 API.on(API.events.MESSAGE, async (api)=>{
     alert(api.getHookInfo().message);
 return ("OK")
-},'Eevents')
+},'Events')
 
 // onMessage = (message) => {
 //     alert(message);
@@ -33,8 +33,14 @@ const status = useContext(Status.Context)
 API.on("isLogin",()=>{
         status.set("Login");
         return <LoadRoles/>
-},'Eevents')
+},'Events')
 
+
+API.on("isLogOut",()=>{
+    status.clear(); 
+    window.location.reload(false);
+    return ("OK")
+},'Events')
 
 
 return <></>

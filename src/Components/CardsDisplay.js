@@ -44,7 +44,7 @@ export const CardCustom = (elemento, template, selected = false, hideData = true
                         else return "";
                     }
                     else if (card.type.name === "CardImg")
-                        return <Col key={`CardImg-${index}`} className="col-img" xs={{ size: 4, offset: 4 }} md={{ size: 6, offset: 3 }}><CardImg className="container-img" style={{ borderRadius: "2000px" }} top src={`${contenido}`} alt="No se puede mostrar foto" /></Col>
+                        return <Col key={`CardImg-${index}`} className="col-img" xs={{ size: 4, offset: 4 }} md={{ size: 6, offset: 3 }}>{contenido?<CardImg className="container-img" style={{ borderRadius: "2000px" }} top src={`${contenido}`} alt="No se puede mostrar foto" />:""}</Col>
                     return card;
                 })}
             </Col>
