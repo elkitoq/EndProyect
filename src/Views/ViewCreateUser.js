@@ -1,4 +1,4 @@
-import { Button, Card, Container, Input} from "reactstrap";
+import { Button, Card, Container, Form, Input} from "reactstrap";
 import { FormRegister } from "../Components/FormRegister";
 import { QAPI } from "../Tools/API";
 import { Status } from "../Tools/Status";
@@ -47,7 +47,7 @@ export const ViewCreateUser = ({ roleType,showRegister }) => {
 const ButtonCreate = ({ href }) => {
     const status = useContext(Status.Context)
 
-    return <Button size="lg" color="primary" blocks="true" href={`${href}?user=${selectUser.length - 1}`}
+    return <Button size="lg" color="primary" blocks="true" type="submit" href={`${href}?user=${selectUser.length - 1}`}
         onClick={(e) => {
             selectUser[selectUser.length - 1].new = false;
             if (selectUser[selectUser.length - 1].profileName === "" || selectUser[selectUser.length - 1].profileName === undefined)
@@ -85,6 +85,7 @@ const CrearEmpresa = () => {
         <Container>
             Creando Perfil para Empresa
             <CancelButton visibility={pathname === "/Register/" || isRegister} />
+            <Form>
             <FormItem name="Razón Social" idInput="razonSocial" reference={{ values, onChange, id: "profileName" }} />
             <FormItem name="CUIT" idInput="CUIT" reference={{ values: values.data, onChange, id: "cuit" }} />
             <FormItem name="Direccion" idInput="address" reference={{ values: values.data, onChange, id: "address" }} />
@@ -92,6 +93,7 @@ const CrearEmpresa = () => {
             <FormItem name="Telefono" type="number" idInput="phone" reference={{ values: values.data, onChange, id: "phone" }} />
             <FormItem name="Email" type="email" idInput="email" reference={{ values: values.data, onChange, id: "email" }} />
             <ButtonCreate href={(pathname === "/Register/" || isRegister) ? "/homeEmpresa" : "#"} />
+            </Form>
         </Container>
     )
 }
@@ -167,6 +169,7 @@ const CrearAspirante = () => {
         <Container>
             Creando Perfil para Aspirante
             <CancelButton visibility={pathname === "/Register/"|| isRegister} />
+            <Form>
             <FormItem name="Nombre" idInput="name" reference={{ values: values.cv, onChange, id: "name" }} />
             <FormItem name="Apellido" idInput="lastName" reference={{ values: values.cv, onChange, id: "lastName" }} />
             <FormItem name="Direccion" idInput="address" reference={{ values: values.cv, onChange, id: "address" }} />
@@ -174,6 +177,7 @@ const CrearAspirante = () => {
             <FormItem name="Telefono" type="number" idInput="phone" reference={{ values: values.cv, onChange, id: "phone" }} />
             <FormItem name="Email" idInput="email" reference={{ values: values.cv, onChange, id: "email" }} />
             <ButtonCreate href={(pathname === "/Register/"|| isRegister) ? "/homeAspirante" : "#"} />
+            </Form>
         </Container>
 
 

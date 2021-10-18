@@ -59,7 +59,7 @@ export const ViewCreateCV = () => {
     const [selectUser,] = status.use('selectUser');
     const [selectRole,setRole] = status.use('selectRole');
 
-    const [data,setData]=useState(1);
+    // const [data,setData]=useState(1);
 
     const dataDefault = {
         "role":
@@ -96,7 +96,7 @@ export const ViewCreateCV = () => {
 
 return (<>{status.get("CreateCV")?<ViewCV role={selectRole}/>:
     <Container>
-        <LoadRoles />
+        <LoadRoles select={1}/>
         <Form method="put">
             <APIComponent url='/cv'/>
              <Row className="separado">
