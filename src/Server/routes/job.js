@@ -41,7 +41,7 @@ router.post('/job', async (req, res) => {
                 console.log(profile.applications[index]);
                 profile.save()
 
-                const application = await await Application.findById(req.body._id)
+                const application = await Application.findById(req.body._id)
                 Object.assign(application, req.body);
                 application.save()
                 info.saved = true;

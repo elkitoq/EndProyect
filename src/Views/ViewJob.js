@@ -22,19 +22,35 @@ export const ViewJob = () => {
     const getJsonCandidates= Object.assign({},getJson)
 
     const [modal, setModal] = useState(false);
-    const toggle = () => setModal(!modal);
+    const toggle = () => {
+        setModal(!modal)
+    };
+
+    API.on(API.events.MOUNT, (api)=>{
+        if (api.id==='/mensajeApplications')
+        api.getHookData().application= API.get('/job').getHookData()._id
+        api.refresh()
+    },"ViewJob");
+
+    const sendMessage = () =>{
+        API.get('/mensajeApplications').put();
+        //API.get('/mensajeApplications').getHookData().mensaje=""
+        //API.get('/mensajeApplications').refresh()
+        setModal(false)
+    }
 
     const ModalCard = () =>
     <Modal isOpen={modal} toggle={toggle} >
         <ModalBody >
             <Form method="put">
-                <APIComponent url='/mensaje'/>
+                <APIComponent url='/mensajeApplications'/>
                 <b>Se enviara el mensaje a todos los postulantes que esten en el estado actual de la Busqueda</b>
+                <Input name="clientUrl" type="hidden" defaultValue={window.location.host} />
                 <FormItem type="textarea" idInput="mensaje"/>
             </Form>
         </ModalBody>
         <ModalFooter>
-            <Button color="primary" href="#" onClick={toggle}>Enviar</Button>{' '}
+            <Button color="primary" href="#" onClick={sendMessage}>Enviar</Button>{' '}
             <Button color="secondary" onClick={toggle}>Cancel</Button>
         </ModalFooter>
     </Modal>
