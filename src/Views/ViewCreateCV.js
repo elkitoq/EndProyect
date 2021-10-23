@@ -63,10 +63,10 @@ export const ViewCreateCV = () => {
 
     const dataDefault = {
         "role":
-            (selectUser && selectUser[selectRole] && aspirante(selectUser[selectRole])) ?
+            (selectUser && selectUser[selectRole] && perfilConCV(selectUser[selectRole])) ?
                 selectRole :
                 Array.isArray(selectUser) ?
-                    selectUser.findIndex(aspirante).toString()
+                    selectUser.findIndex(perfilConCV).toString()
                     : 0
     }
 
@@ -96,7 +96,7 @@ export const ViewCreateCV = () => {
 
 return (<>{status.get("CreateCV")?<ViewCV role={selectRole}/>:
     <Container>
-        <LoadRoles select={1}/>
+        <LoadRoles/>
         <Form method="put">
             <APIComponent url='/cv'/>
              <Row className="separado">
@@ -166,10 +166,10 @@ return (<>{status.get("CreateCV")?<ViewCV role={selectRole}/>:
 
                 <FormGroup>
                     <Row md="2" className="separado">
-                        {(Array.isArray(selectUser) && selectUser.length && selectUser.find(aspirante)) ?
+                        {(Array.isArray(selectUser) && selectUser.length && selectUser.find(perfilConCV)) ?
                             <FormItem type="select" name="El CV se guardará en:" idInput="role" defaultValue={dataDefault.role}>
                                 {(Array.isArray(selectUser)) ? selectUser.map(
-                                    (element, index) => aspirante(element) ?
+                                    (element, index) => perfilConCV(element) ?
                                         <option key={`option-${index}`} value={index}>{element.profileName}</option> : ""
                                 ) : ""}
                             </FormItem>
@@ -246,7 +246,8 @@ const mostrarFotoPerfil = () => {
 }
 
 
-export const aspirante = (element) => element.profileType === 1;
+const perfilConCV = (element) => element.profileType === 1 || element.profileType === 2;
+
 
 const LocalNoLoginCard = ({ isLogin }) =>
     <Card color="primary" inverse>
@@ -264,5 +265,13 @@ RutaTutorial.get("CreateCV")
     .setDescription(<>Puedes crear un Curriculum Vitae</>)
     .setRender(ViewCreateCV)
     .addRequisito("haveAspirante")
+    .setMeta("Crear CV")
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearCV" text="Crear CV"/>, está en la esquina superior izquierda de la pagina</>);
+
+
+RutaTutorial.get("CreateCVautonomo")
+    .setDescription(<>Crea y anexa un Curriculum Vitae a tu perfil</>)
+    .setRender(ViewCreateCV)
+    .addRequisito("haveAutonomo")
     .setMeta("Crear CV")
     .setInstrucciones(<>Has clic en <Señalador marca="CrearCV" text="Crear CV"/>, está en la esquina superior izquierda de la pagina</>);

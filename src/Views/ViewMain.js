@@ -32,6 +32,7 @@ export const ViewMain = () => <Switch>
   <ViewRoute path="/Register/" view={ViewLogin} />
   <ViewRoute path="/MostrarCV" view={RenderProgress("MostrarCV")} />
   <ViewRoute path="/CVCreate" view={RenderProgress("CreateCV")} />
+  <ViewRoute path="/CVCreate2" view={RenderProgress("CreateCVautonomo")} />
   <ViewRoute path="/lookforJob" view={RenderProgress("LookForJob")} />
   <ViewRoute path="/SendCV" view={RenderProgress("LookForJobSendCV")} />
   <ViewRoute path="/lookforWorker" view={RenderProgress("BuscarPostulantes")} />

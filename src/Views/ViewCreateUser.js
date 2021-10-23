@@ -87,7 +87,7 @@ const CrearEmpresa = () => {
             <CancelButton visibility={pathname === "/Register/" || isRegister} />
             <Form>
             <FormItem name="Razón Social" idInput="razonSocial" reference={{ values, onChange, id: "profileName" }} />
-            <FormItem name="CUIT" idInput="CUIT" reference={{ values: values.data, onChange, id: "cuit" }} />
+            <FormItem name="CUIT" type="number" idInput="CUIT" reference={{ values: values.data, onChange, id: "cuit" }} />
             <FormItem name="Direccion" idInput="address" reference={{ values: values.data, onChange, id: "address" }} />
             <FormItem name="Ciudad" idInput="city" reference={{ values: values.data, onChange, id: "city" }} />
             <FormItem name="Telefono" type="number" idInput="phone" reference={{ values: values.data, onChange, id: "phone" }} />
@@ -224,7 +224,7 @@ const CrearAutonomo = () => {
             Creando Perfil para Autonomo
             <CancelButton visibility={pathname === "/Register/"|| isRegister} />
             <FormItem name="Razón Social" idInput="razonSocial" reference={{ values, onChange, id: "profileName" }} />
-            <FormItem name="CUIT" idInput="CUIT" reference={{ values: values.cv, onChange, id: "cuit" }} />
+            <FormItem name="CUIT" type="number" idInput="CUIT" reference={{ values: values.cv, onChange, id: "cuit" }} />
             <FormItem name="Direccion" idInput="address" reference={{ values: values.cv, onChange, id: "address" }} />
             <FormItem name="Ciudad" idInput="city" reference={{ values: values.cv, onChange, id: "city" }} />
             <FormItem name="Telefono" type="number" idInput="phone" reference={{ values: values.cv, onChange, id: "phone" }} />
@@ -233,6 +233,9 @@ const CrearAutonomo = () => {
         </Container>
     )
 }
+
+
+const AddAutonomo = () => ViewCreateUser({ roleType: 2 })
 
 const AddAspirante = () => ViewCreateUser({ roleType: 1 })
 
@@ -250,4 +253,11 @@ RutaTutorial.get("haveEmpresa")
     .addRequisito("Login")
     .setRender(AddEmpresa)
     .setMeta("Crear Perfil de Empresa")
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearRol" text="Crear Perfil" />, en el menu de <Señalador marca="Roles" text="Roles" /></>);
+
+RutaTutorial.get("haveAutonomo")
+    .setDescription(<>Te dará acceso a toda las herramientas para autonomo</>)
+    .addRequisito("Login")
+    .setRender(AddAutonomo)
+    .setMeta("Crear Perfil de Autonomo  ")
     .setInstrucciones(<>Has clic en <Señalador marca="CrearRol" text="Crear Perfil" />, en el menu de <Señalador marca="Roles" text="Roles" /></>);
