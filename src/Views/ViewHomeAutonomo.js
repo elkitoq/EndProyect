@@ -28,7 +28,8 @@ export const ViewHomeAutonomo = () => {
                 <h2>¿Que estas buscando hoy?</h2>
                 <Row className="">
                     <OptionMenu href="/CVCreate/"       >Crear Curriculum</OptionMenu>
-                    <OptionMenu href="/offerService/"   >Ofrecer Servicio</OptionMenu>
+                    <OptionMenu href="/offerService/"   >Servicios Ofrecidos</OptionMenu>
+                    <OptionMenu href="/createService/"   >Ofrecer servicio</OptionMenu>
                     {/* <OptionMenu href="/message/"        >Ver mensajes</OptionMenu> */}
                 </Row>
             </div>

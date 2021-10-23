@@ -2,6 +2,7 @@ import { useLocation } from "react-router";
 import { Container, Row, CardText, CardImg } from "reactstrap";
 import { Display } from "../Components/Display";
 import API, { APIComponent } from "../Tools/API";
+import RutaTutorial, { NextButton } from "../Components/tutorial";
 
 
 
@@ -35,3 +36,15 @@ export const ViewFindService = (props) => {
         </Container>
     );
 }
+
+
+RutaTutorial.get("FindService")
+    .setMeta("Lista de servicios")
+    .setRender(ViewFindService)
+
+/*
+RutaTutorial.get("PostulateJob")
+    .setMeta("Postularse a una Busqueda")
+    .setRender(ViewFindService)
+    .addRequisito("haveAspirante")
+    */
