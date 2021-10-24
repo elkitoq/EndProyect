@@ -4,12 +4,12 @@ const mongoose = require('mongoose');
 const extendSchema = require('mongoose-extend-schema');
 
 
-const freelanceSchema = extendSchema(roleSchema,{
+const freelanceSchema = extendSchema(roleSchema, {
     cv: {
         name: String,
-        cuit:Number,
+        lastName: String,
+        cuit: Number,
         age: Number,
-        imgCv: String,
         address: String,
         cp: Number,
         city: String,
@@ -19,14 +19,30 @@ const freelanceSchema = extendSchema(roleSchema,{
         description: String,
         laboral: Array,
         academico: Array,
-        skill:Array
+        skill: Array,
+        photo:String
     },
     stalls: [{
         name: String,
         description: String,
         price: String
     }],
-    private:{msg:String}
+    private: { msg: String }
 });
-    exports.Freelance = new mongoose.model('freelance', freelanceSchema);
-    exports.freelanceSchema = freelanceSchema;
+exports.Freelance = new mongoose.model('freelance', freelanceSchema);
+
+
+
+exports.Freelance.finderService= (exp) =>new RegExp(exp, 'i')
+
+exports.freelanceSchema = freelanceSchema;
+
+async function findServices(exp) {
+
+    exp = exports.Freelance.finderService(exp)
+
+    return exports.Freelance.find({$or: [{ 'stalls.name': exp }, { 'stalls.description': exp }] });
+
+}
+
+exports.Freelance.findServices = findServices
