@@ -16,5 +16,6 @@ export const iconData = [
     { name: "vue", iconUrl: "https://img.icons8.com/color/48/000000/vue-js.png" },
     { name: "angular", iconUrl: "https://img.icons8.com/color/48/000000/angularjs.png" },
     { name: "node", iconUrl: "https://img.icons8.com/color/48/000000/nodejs.png" },
-    { name: "ruby", iconUrl: "https://img.icons8.com/color/48/000000/ruby-programming-language.png" }
+    { name: "ruby", iconUrl: "https://img.icons8.com/color/48/000000/ruby-programming-language.png" },
+    { name: "default", iconUrl: "https://img.icons8.com/ios/50/000000/business-network--v2.png" }
 ]
