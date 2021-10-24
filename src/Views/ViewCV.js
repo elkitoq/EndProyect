@@ -9,6 +9,8 @@ import { Status } from "../Tools/Status";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 
+import QRCode from "react-qr-code";
+
 
 export const ViewCV = ({ role }) => {
 
@@ -17,7 +19,9 @@ export const ViewCV = ({ role }) => {
     const ref = React.createRef();
 
     const status = useContext(Status.Context)
+    const [selectUser,] = status.use('selectUser');
     const [selectRole,] = status.use('selectRole');
+    const user = selectUser[selectRole];
 
     console.log(role);
     console.log(selectRole);
@@ -36,7 +40,65 @@ export const ViewCV = ({ role }) => {
 
 
 
-    return <>
+    return <><div className="row-button">
+        <Button
+            onClick={() => {
+
+                var contenido = document.getElementById("cvImprimible").outerHTML;
+                var contenidoOriginal = document.body.innerHTML;
+
+                document.body.innerHTML = contenido;
+
+                window.print();
+
+                document.body.innerHTML = contenidoOriginal;
+
+
+            }}
+        >Imprimir</Button>
+        <Button
+            onClick={() => {
+                var doc = new jsPDF({ orientation: 'p', format: [595, 842], unit: 'pt' });
+                // doc.html(document.getElementById('cvImprimible').outerHTML, 10, 10);
+
+
+                // doc.html(document.getElementById('cvImprimible').outerHTML, {
+                //     callback: function (doc) {
+                //     //   doc.save("a4.pdf");
+                //       doc.output("dataurlnewwindow");
+                //     }
+                //  });
+
+                // doc.fromHTML(document.getElementById('cvImprimible').outerHTML, 15, 15, {
+                //     'width': 700
+                // });
+                // doc.save('sample_file.pdf');
+
+
+                html2canvas(document.getElementById('cvImprimible')).then(canvas => {
+
+                    //Returns the image data URL, parameter: image format and clarity (0-1)
+                    var pageData = canvas.toDataURL('image/jpeg', 1.0);
+
+                    //Default vertical direction, size ponits, format a4[595.28,841.89]
+                    var pdf = new jsPDF('', 'pt', 'a4');
+
+                    //Two parameters after addImage control the size of the added image, where the page height is compressed according to the width-height ratio column of a4 paper.
+                    pdf.addImage(pageData, 'JPEG', 0, 0, 595.28, 841.89);
+
+                    pdf.save(`${cv.lastName}.CV.pdf`);
+                    // doc.output("dataurlnewwindow");
+
+                }).catch(error => console.log(error));
+
+            }}
+        >Descargar</Button>
+
+        <Button
+            href="/CVCreate/"
+            onClick={() => { status.set("CreateCV", false) }}
+        >Editar</Button>
+    </div>
         <Container id="cvImprimible" style={{ fontFamily: "Homer Simpson UI" }}>
             <Row className="cv-complete">
                 <Col className="principalCV" xs="9">
@@ -78,6 +140,7 @@ export const ViewCV = ({ role }) => {
                 </Col>
                 <Col xs="3" className="lateralCV">
                     <Row className="name" style={{ fontSize: "2.5rem", fontWeight: "bold" }}>{cv.name} {cv.lastName}</Row>
+                    {cv.photo ? <Row><img src={cv.photo} className="foto-perfilCV" alt="Foto de perfil" /></Row> : ""}
                     <Row className="div-puesto" style={{ fontSize: "1.2rem" }}>
                         <h5 className="puesto">{cv.puesto}</h5>
                     </Row>
@@ -109,68 +172,11 @@ export const ViewCV = ({ role }) => {
 
 
                     </Row>
+                    {(user)?<QRCode size={100} value={`${window.location.host}/perfilAspirante?id=${user._id}`} />:""}
                 </Col>
             </Row>
 
         </Container>
-        <div className="row-button">
-            <Button
-                onClick={() => {
-
-                    var contenido = document.getElementById("cvImprimible").outerHTML;
-                    var contenidoOriginal = document.body.innerHTML;
-
-                    document.body.innerHTML = contenido;
-
-                    window.print();
-
-                    document.body.innerHTML = contenidoOriginal;
-
-
-                }}
-            >Imprimir</Button>
-            <Button
-                onClick={() => {
-                    var doc = new jsPDF({ orientation: 'p', format: [595, 842], unit: 'pt' });
-                    // doc.html(document.getElementById('cvImprimible').outerHTML, 10, 10);
-
-
-                    // doc.html(document.getElementById('cvImprimible').outerHTML, {
-                    //     callback: function (doc) {
-                    //     //   doc.save("a4.pdf");
-                    //       doc.output("dataurlnewwindow");
-                    //     }
-                    //  });
-
-                    // doc.fromHTML(document.getElementById('cvImprimible').outerHTML, 15, 15, {
-                    //     'width': 700
-                    // });
-                    // doc.save('sample_file.pdf');
-
-
-                    html2canvas(document.getElementById('cvImprimible')).then(canvas => {
-
-                        //Returns the image data URL, parameter: image format and clarity (0-1)
-                        var pageData = canvas.toDataURL('image/jpeg', 1.0);
-
-                        //Default vertical direction, size ponits, format a4[595.28,841.89]
-                        var pdf = new jsPDF('', 'pt', 'a4');
-
-                        //Two parameters after addImage control the size of the added image, where the page height is compressed according to the width-height ratio column of a4 paper.
-                        pdf.addImage(pageData, 'JPEG', 0, 0, 595.28, 841.89);
-
-                        pdf.save(`${cv.lastName}.CV.pdf`);
-                        // doc.output("dataurlnewwindow");
-
-                    }).catch(error => console.log(error));
-
-                }}
-            >Descargar</Button>
-
-            <Button
-                href="/CVCreate/"
-            >Editar</Button>
-        </div>
     </>
 }
 

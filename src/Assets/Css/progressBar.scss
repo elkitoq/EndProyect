@@ -71,9 +71,9 @@ $white: #FFFFFF;
 
   @media (max-width: 768px ){
     .progress__label {
-      width: 100%;
       position: absolute;
       top: 40px;
+      font-size: 10px;
     }
 
     

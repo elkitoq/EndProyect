@@ -1,4 +1,8 @@
+
 export const AptitudesCards = ({ skill }) => {
+
+
+
     return (
         <div className="card-skill">
             <div className="icon-skill">
@@ -6,11 +10,11 @@ export const AptitudesCards = ({ skill }) => {
             </div>
             <div className="skill">
                 <p className="skill-name"><b>
-                    {skill}
+                    {skill.title}
                 </b>
                 </p>
                 <p className="skill-level">
-                    {skill}
+                    {skill.nivel}
                 </p>
             </div>
         </div>

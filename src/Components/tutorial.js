@@ -110,13 +110,18 @@ export const RenderProgress = (page) => {
     var toDo = progress.findIndex((e) => !e.isDone);
     if (toDo < 0) toDo = progress.length;
     return (props) => <>
-        {console.log(document.ruta=unDone)}
         {/* <ProgressBar ruta={ruta} /> */}
 
         {progress.length > 1 ? <ProgressBarStep steps={progress} toDo={toDo} /> : ""}
 
         <Container className={`abs-center ${progress.length > 1 ?"main-progress-render":"main-render"} `} fluid={true} style={{ marginTop: progress.length > 1 ? "60px" : "0px" }}>
-            <div style={{height:"1px",marginTop:progress.length > 1 ?"-80vh":ruta.checkStatus==="Login"?"-85vh":"0px"}}>
+            <div style={{height:"1px",width:"100%",marginTop:progress.length > 1 ?"-80vh":
+            (ruta.checkStatus==="Login" 
+                || ruta.checkStatus==="PostulateJob"
+                || ruta.checkStatus==="FindJob"
+                || ruta.checkStatus==="CreateJob"
+                || ruta.checkStatus==="ViewJob"
+            )?"-85vh":"0px"}}>
                 {unDone[0].render(props)}
             </div>
         </Container>

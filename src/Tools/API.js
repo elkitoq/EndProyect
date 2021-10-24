@@ -3,7 +3,7 @@ import React, { Component, useState } from "react";
 
 export default class API {
 
-    constructor({ url, responseKey = "response", infoKey = "info", mode = APIComponent.mode.SINGLE }, qApi = false) {
+    constructor({ url, responseKey = "response", infoKey = "info", mode = APIComponent.mode.SINGLE,id }, qApi = false) {
 
 
         if (url.substring(0, 4) !== "http") {
@@ -12,6 +12,8 @@ export default class API {
         }
 
         else this.url = url;
+        this.pathname=url
+        this.id=id||url;
 
         if (qApi) {
             this._data = ( mode === APIComponent.mode.SINGLE ? {} : []);
@@ -33,23 +35,31 @@ export default class API {
 
         this.infoKey = infoKey;
 
+        document.API=API;
+        document.api=this;
+    }
+
+    static get(id){
+        return API.apis.find((e)=>e.id===id)
     }
 
     changeInfo = (info) => {
+        this.call(API.events.CHANGEINFO)
         if (info.error)
-            this.onError(info.error)
+            // this.onError(info.error)
+            this.call(API.events.ERROR)
+        this.finishLoad=(info.error===undefined);
         if (info.message)
-            this.onMessage(info.message)
+            // this.onMessage(info.message)
+            this.call(API.events.MESSAGE)
+        if (info.eventCalls)
+            for (const call of info.eventCalls)
+                this.call(call.eventName,call)
         if (info.cookies)
             this.onCookie(info.cookies)
     }
 
-    onError = (error) => {
-        alert(error);
-    }
-    onMessage = (message) => {
-        alert(message);
-    }
+
 
     onCookie = (listCookie) => {
         if (this.setCookie !== undefined)
@@ -78,8 +88,8 @@ export default class API {
 
     send(method = "post", data = this.getHookData()) {
         var result;
+        this.call(API.events.SENDING)
         console.log(`send ${method} to ${this.url}`);
-        console.log(data);
         switch (method) {
             case "put": result = axios.put(this.url, data, { withCredentials: this.withCredentials });
                 break;
@@ -95,9 +105,11 @@ export default class API {
             if (res.data[this.responseKey] !== undefined) {
                 Object.assign(this.getHookData(), res.data[this.responseKey])
                 this.refresh();
+                this.call(API.events.CHANGEDATA)
             }
             if (res.data[this.infoKey] !== undefined) {
                 Object.assign(res.data[this.infoKey], { pages: 6 })
+                Object.assign(this.getHookInfo(), res.data[this.infoKey])
                 this.setInfo(res.data[this.infoKey])
                 this.changeInfo(res.data[this.infoKey]);
             }
@@ -124,15 +136,11 @@ export default class API {
     }
 
     refresh() {
-
-        console.log(this.getData())
-
         this.setData(this.getData());
-        console.log(this.getData())
+        this.call(API.events.INPUTDATA)
     }
 
     async setData(data) {
-        console.log("---------")
         if (typeof this._setData === "function") {
             await this._setData(data);
         }
@@ -162,29 +170,93 @@ export default class API {
                 var props = Object.assign({}, child.props);
                 if (props.mode === undefined)
                     props.mode = mode
-                var api;
+                const id = props.id||props.url
+                var api=API.get(id);
+                if(api===undefined)
+                {
                 if (props.APIClass === undefined)
                     api = new API(props);
                 else
                     api = new props.APIClass(props);
-                if (api.didMount !== undefined && child.props.events !== undefined)
-                    child.props.events.didMount = () => api.didMount();
-                if (child.ref != undefined) child.ref.current = api;
-                return api;
+
+                //if (api.didMount !== undefined && child.props.events !== undefined)
+                //     child.props.events.didMount = () => api.didMount();
+                //if(API.get(id)===undefined){
+                API.apis.push(api)
+                }
+                
+
+                if (child.ref !== undefined && child.ref !== null) child.ref.current = api;
+                    return api;
             }
         }
 
+    }
+    id=null;
+    static apis = []
+    mount=false;
+    finishLoad=false;
+
+    static events = {
+        ERROR:'Error',
+        MESSAGE:'Message',
+        COOKIE:'Cookie',
+        CHANGEINFO:'changeInfo',
+        MOUNT:'Mount',
+        SENDING:'Sending',
+        CHANGEDATA:'ChangeData',
+        INPUTDATA:'InputData',
+        FINISHLOAD:'FinishLoad'
+    }
+
+    static eventsList = {}
+
+    static removeEvent(eventName,id){
+        API.eventsList[eventName] = API.eventsList[eventName].filter((e)=>e.id!==id)
+    }
+
+    static on(eventName, func,id){
+        if (API.eventsList[eventName]===undefined)
+            API.eventsList[eventName]=[];
+        if (API.eventsList[eventName].findIndex((e)=>e.id===id)<0)
+            API.eventsList[eventName].push({func,id})
+
+    }
+
+    static call(eventName,...arg){
+        for (const api of API.apis)
+            api.call(eventName,...arg)
+    }
+
+    call(eventName,...arg){
+        if (API.eventsList[eventName]!==undefined)
+            for (const {func} of API.eventsList[eventName])
+                func.call(this,this,...arg)
     }
 
 }
 
 export class APIComponent extends Component {
+    static i=0
 
-
-    constructor({ url, mode, responseKey, infoKey, APIClass, events }) {
+    constructor({ url, mode, responseKey, infoKey, APIClass,id /*, events*/ }) {
         super();
-        if (events !== undefined)
-            this.componentDidMount = events.didMount || (() => { });
+        // if (events !== undefined)
+        //     this.componentDidMount = events.didMount || (() => { });      
+        //var api = API.apis.shift()
+        console.log("Construyendo");
+        //if (api)
+        //    this.componentDidMount = () => {}
+
+
+    }
+    componentDidMount() {
+        console.log("Montando");
+        for (const api of API.apis){
+            if (!api.mount)
+                api.call(API.events.MOUNT)
+            api.mount=true  
+        }
     }
 
     static mode = {

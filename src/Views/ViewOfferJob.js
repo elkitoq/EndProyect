@@ -7,8 +7,20 @@ import { Status } from "../Tools/Status";
 import { useContext } from "react";
 import RutaTutorial from "../Components/tutorial";
 import { ApplicationStatus } from "../Server/models/ApplicationStatus";
+import { LoadRoles } from "../Components/role";
 
-export const ViewOfferJob = () => {
+export const ViewOfferJob=({...props})=>{
+    const status = useContext(Status.Context)
+        return <>{(status.get('selectUser')[status.get('selectRole')] 
+        && status.get('selectUser')[status.get('selectRole')].profileType===0)?
+            <OfferJob {...props}/>
+            :<LoadRoles select={0}/>}
+            </>
+}
+
+
+
+const OfferJob = () => {
     const { search } = useLocation();
     const getJson = API.getSearchParam(search);
 
@@ -16,14 +28,15 @@ export const ViewOfferJob = () => {
     const [selectRole,] = status.use('selectRole');
     getJson.role=selectRole;
 
+    
+
     return (
         <Container className="abs-center" fluid={true}>
-            <Row >
-                <h1>Acá mostraría Busquedas laborales de la empresa</h1>
+            <Row className="container-content-offerJob">
                 <Button size="lg"  style={{width:"100px",left:"10%"}} color="primary" href="/createJob/">Nuevo</Button>
-                <Display 
+                <Display nameDownload={"Busquedas"}
                 get={getJson}
-                link={(element)=>`/ViewJob?application=${element._id}`}
+                link={{onClick:(element)=>`/ViewJob?application=${element._id}`,text:"Ver y Editar"}}
                 >
                     <APIComponent url='/jobs' />
                     <CardText key="name">Puesto:</CardText>
@@ -39,6 +52,9 @@ export const ViewOfferJob = () => {
         </Container>
     );
 }
+
+
+
 
 RutaTutorial.get("OfferJob")
     .setDescription(<>Lista las actuales Busquedas de tu empresa</>)

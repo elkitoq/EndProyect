@@ -1,4 +1,4 @@
-import { Button, Card, Container, Input, Label } from "reactstrap";
+import { Button, Card, Container, Form, Input} from "reactstrap";
 import { FormRegister } from "../Components/FormRegister";
 import { QAPI } from "../Tools/API";
 import { Status } from "../Tools/Status";
@@ -11,19 +11,32 @@ import { FormItem } from "../Components/FormItem";
 
 let selectUser, saveUser;
 
-export const ViewCreateUser = ({ roleType }) => {
+let refresh=()=>{}
 
+let isRegister;
+
+export const ViewCreateUser = ({ roleType,showRegister }) => {
     const status = useContext(Status.Context)
     const [login,] = status.use('Login');
+    const [r,setr]= useState("")
+
+    refresh = (a)=>setr(a)
+
+    isRegister=showRegister!==undefined
+
+    useEffect(() => {
+        return <LoadRoles select={roleType}/>
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     [selectUser,] = status.use('selectUser');
     saveUser = () => status.set("selectUser", selectUser);
-
     return (
-        !(login) ? <FormRegister /> : <div className="abs-center">
+        !(login) ? <FormRegister showRegister={showRegister}/> : <div className="abs-center">{r}
             {
                 !(Array.isArray(selectUser) && selectUser.length) ? <CrearUsuario roleType={roleType} /> :
-                    !(selectUser[selectUser.length - 1].new === true) ? <CrearUsuario roleType={roleType} /> :
+                    (!(selectUser[selectUser.length - 1].new === true) || (roleType!==undefined && roleType !== selectUser[selectUser.length - 1].profileType)) ? <CrearUsuario roleType={roleType} /> :
                         (selectUser[selectUser.length - 1].profileType === 0) ? <CrearEmpresa /> :
                             (selectUser[selectUser.length - 1].profileType === 1) ? <CrearAspirante /> :
                                 (selectUser[selectUser.length - 1].profileType === 2) ? <CrearAutonomo /> :
@@ -34,7 +47,7 @@ export const ViewCreateUser = ({ roleType }) => {
 const ButtonCreate = ({ href }) => {
     const status = useContext(Status.Context)
 
-    return <Button size="lg" color="primary" blocks="true" href={`${href}?user=${selectUser.length - 1}`}
+    return <Button size="lg" color="primary" blocks="true" type="submit" href={`${href}?user=${selectUser.length - 1}`}
         onClick={(e) => {
             selectUser[selectUser.length - 1].new = false;
             if (selectUser[selectUser.length - 1].profileName === "" || selectUser[selectUser.length - 1].profileName === undefined)
@@ -71,30 +84,30 @@ const CrearEmpresa = () => {
     return (
         <Container>
             Creando Perfil para Empresa
-            <CancelButton visibility={pathname === "/Register/"} />
+            <CancelButton visibility={pathname === "/Register/" || isRegister} />
+            <Form>
             <FormItem name="Razón Social" idInput="razonSocial" reference={{ values, onChange, id: "profileName" }} />
             <FormItem name="CUIT" idInput="CUIT" reference={{ values: values.data, onChange, id: "cuit" }} />
             <FormItem name="Direccion" idInput="address" reference={{ values: values.data, onChange, id: "address" }} />
             <FormItem name="Ciudad" idInput="city" reference={{ values: values.data, onChange, id: "city" }} />
-            <FormItem name="Telefono" idInput="phone" reference={{ values: values.data, onChange, id: "phone" }} />
-            <FormItem name="Email" idInput="email" reference={{ values: values.data, onChange, id: "email" }} />
-            <ButtonCreate href={(pathname === "/Register/") ? "/homeEmpresa" : "#"} />
+            <FormItem name="Telefono" type="number" idInput="phone" reference={{ values: values.data, onChange, id: "phone" }} />
+            <FormItem name="Email" type="email" idInput="email" reference={{ values: values.data, onChange, id: "email" }} />
+            <ButtonCreate href={(pathname === "/Register/" || isRegister) ? "/homeEmpresa" : "#"} />
+            </Form>
         </Container>
     )
 }
 
 
 const CrearUsuario = ({ roleType }) => {
-
-
+    
     const crear = (r) => {
+        
         if (!Array.isArray(selectUser))
             selectUser = [];
         selectUser.push({ profileType: r, new: true });
-        console.log("///////////////////////////");
-        console.log(selectUser);
         saveUser()
-
+        refresh()
     }
 
     useEffect(() => {
@@ -103,8 +116,8 @@ const CrearUsuario = ({ roleType }) => {
             if (selectUser[selectUser.length - 1] && selectUser[selectUser.length - 1].new)
                 selectUser.pop()
             crear(roleType)
+            
         }
-
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -112,7 +125,7 @@ const CrearUsuario = ({ roleType }) => {
 
 
     return (
-        <>
+        <>  
             <div className="text-center content">
                 <h3>¿Por donde querés empezar?</h3>
                 <Container className="container-options">
@@ -140,12 +153,14 @@ const CrearUsuario = ({ roleType }) => {
 
 const CrearAspirante = () => {
 
+    //LoadRoles({select:1})
+
     const values = selectUser[selectUser.length - 1]
     if (values.cv === undefined)
         values.cv = {}
 
     const onChange = () => {
-        values.cv.name = values.profileName
+        values.profileName = `${values.cv.lastName}, ${values.cv.name}` 
         saveUser()
     }
 
@@ -153,13 +168,16 @@ const CrearAspirante = () => {
     return (
         <Container>
             Creando Perfil para Aspirante
-            <CancelButton visibility={pathname === "/Register/"} />
-            <FormItem name="Nombre" idInput="name" reference={{ values, onChange, id: "profileName" }} />
+            <CancelButton visibility={pathname === "/Register/"|| isRegister} />
+            <Form>
+            <FormItem name="Nombre" idInput="name" reference={{ values: values.cv, onChange, id: "name" }} />
+            <FormItem name="Apellido" idInput="lastName" reference={{ values: values.cv, onChange, id: "lastName" }} />
             <FormItem name="Direccion" idInput="address" reference={{ values: values.cv, onChange, id: "address" }} />
             <FormItem name="Ciudad" idInput="city" reference={{ values: values.cv, onChange, id: "city" }} />
             <FormItem name="Telefono" type="number" idInput="phone" reference={{ values: values.cv, onChange, id: "phone" }} />
             <FormItem name="Email" idInput="email" reference={{ values: values.cv, onChange, id: "email" }} />
-            <ButtonCreate href={(pathname === "/Register/") ? "/homeAspirante" : "#"} />
+            <ButtonCreate href={(pathname === "/Register/"|| isRegister) ? "/homeAspirante" : "#"} />
+            </Form>
         </Container>
 
 
@@ -204,14 +222,14 @@ const CrearAutonomo = () => {
     return (
         <Container>
             Creando Perfil para Autonomo
-            <CancelButton visibility={pathname === "/Register/"} />
+            <CancelButton visibility={pathname === "/Register/"|| isRegister} />
             <FormItem name="Razón Social" idInput="razonSocial" reference={{ values, onChange, id: "profileName" }} />
             <FormItem name="CUIT" idInput="CUIT" reference={{ values: values.cv, onChange, id: "cuit" }} />
             <FormItem name="Direccion" idInput="address" reference={{ values: values.cv, onChange, id: "address" }} />
             <FormItem name="Ciudad" idInput="city" reference={{ values: values.cv, onChange, id: "city" }} />
-            <FormItem name="Telefono" idInput="phone" reference={{ values: values.cv, onChange, id: "phone" }} />
-            <FormItem name="Email" idInput="email" reference={{ values: values.cv, onChange, id: "email" }} />
-            <ButtonCreate href={(pathname === "/Register/") ? "/homeAutonomo" : "#"} />
+            <FormItem name="Telefono" type="number" idInput="phone" reference={{ values: values.cv, onChange, id: "phone" }} />
+            <FormItem name="Email" type="email" idInput="email" reference={{ values: values.cv, onChange, id: "email" }} />
+            <ButtonCreate href={(pathname === "/Register/"|| isRegister) ? "/homeAutonomo" : "#"} />
         </Container>
     )
 }

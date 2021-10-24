@@ -2,7 +2,7 @@ import { CardProfileAspirant } from "../Components/CardProfileAspirant";
 import { CurriculumProfile } from "../Components/CurriculumProfile";
 import { useLocation } from 'react-router-dom'
 import {
-    Container, Row, Col
+    Container, Row, Col, Button
 } from 'reactstrap'
 
 import '../Assets/Css/AspiranteProfile.css';
@@ -19,6 +19,8 @@ export const ViewPerfilAspirante = () => {
 
     const [cv, setCV] = useState({})
     const [skill, setSkill] = useState({})
+
+    const [viewAptitudes,setViewAptitudes]=useState(false)
 
     useEffect(() => {
         new QAPI('/cv').send("get", { id, type: 1 }).then((res) => {
@@ -39,18 +41,18 @@ export const ViewPerfilAspirante = () => {
 
             <Row className="sub-navigation">
                 <ul className="navigation-profile">
-                    <a className="link-aptitud" href="/perfilAspirante/aptitudes">Aptitudes</a>
-                    <a className="link-curriculum" href="/perfilAspirante/curriculum">Curriculum</a>
+                    <a  href="javascript:void(0)"  className="link-aptitud" onClick={()=>setViewAptitudes(true)}>Aptitudes</a>
+                    <a  href="javascript:void(0)"  className="link-curriculum"  onClick={()=>setViewAptitudes(false)}>Curriculum</a>
                 </ul>
             </Row>
 
             <Row className="content-profile">
                 <Col sm={{ size: 3 }} className="content-about-me">
-                    <CardProfileAspirant aboutme={cv.description} profession={cv.puesto} nameUser={`${cv.lastName}, ${cv.name}`} />
+                    <CardProfileAspirant imgUser={cv.photo} aboutme={cv.description} profession={cv.puesto} nameUser={`${cv.lastName}, ${cv.name}`}/>
                 </Col>
 
                 <Col md={{ size: 6 }}>
-                    {(pathname === "/perfilAspirante" || pathname === "/perfilAspirante/curriculum") ? <CurriculumProfile info={cv} /> : (pathname === "/perfilAspirante/aptitudes") ? <AptitudesProfile info={skill} /> : <CurriculumProfile info={cv} />}
+                    {viewAptitudes ?<AptitudesProfile info={cv.skill} />: <CurriculumProfile info={cv}/>}
                 </Col>
 
                 <Col md={{ size: 3 }}>

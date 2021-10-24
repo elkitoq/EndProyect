@@ -16,7 +16,7 @@ router.post('/login', async (req, res) => {
     if (user)
         if (user.password === `${req.body.password.hashCode()}`) {
             req.session.user = user;
-            res.status(201).json({ response: {}, info: { isLogin: true } });
+            res.status(201).json({ response: {}, info: { isLogin: true ,eventCalls:[{eventName:"isLogin"}]} });
         }
         else {
             res.status(208).json({ info: { error: "Usuario o contraseña incorrecta" } });
@@ -64,7 +64,7 @@ router.put('/user', async (req, res) => {
                         console.log(req.body.profile);
                         const newUser = await new User(req.body).save();
                         req.session.user = newUser;
-                        res.status(201).json({ response: response, info: { isLogin: true } });
+                        res.status(201).json({ response: response, info: { isLogin: true,eventCalls:[{eventName:"isLogin"}]  } });
                     }
                     else {
                         res.status(208).json({ info: { error: "Las contraseñas deben coincidir" } });

@@ -33,9 +33,11 @@ export const NavegadorPrincipal = () => {
   const logout = () => {
     // if (login.isLogin === "true")
     //    removeCookie('selectUser', { path: '/' })
-    if (status.get("Login"))
-      status.set("selectUser", undefined)
-    status.set("Login", false)
+    status.clear()
+    // if (status.get("Login"))
+    //   status.set("selectUser", undefined)
+    // status.set("Login", false)
+
     // setCookie("isLogin", false, { path: '/' });
     new QAPI('/logout').send("post", { hola: "mundo" });
   }
@@ -57,7 +59,7 @@ export const NavegadorPrincipal = () => {
           <NavButton className="btn-cv-navbar" href="/OfferJob/" ><span id="OfferJob"> Ofrecer Empleo </span></NavButton>
           <Señalado marca="OfferJob" title="Ofrecer Empleo" text="Si haces click te lleva a la pagina para crear busquedas laborales" />
           </div>
-          <DropdownRol />
+          {(status.get("Login")) ?<DropdownRol />:""}
           {/* <NavButton className="btn-oficina-navbar" href="/jobOffice/">Oficina de empleo</NavButton> */}
         </Nav>
         <Nav className="ms-auto buscador" navbar>

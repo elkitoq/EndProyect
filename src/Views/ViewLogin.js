@@ -21,6 +21,7 @@ export const ViewLogin = () => {
     const [login,] = status.use('Login');
 
     const { pathname } = useLocation();
+
     return (
         <Container className="themed-container" fluid="md" >
             <Row className="row-login" style={{ marginTop: pathname === "/Register/" || pathname === "/register" ? "1rem" : "-1rem" }}>

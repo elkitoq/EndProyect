@@ -5,14 +5,13 @@ import { Form } from './Form';
 import API, { APIComponent } from '../Tools/API';
 import { Button, FormGroup, Label } from 'reactstrap';
 import { FormItem } from './FormItem';
-import { Status } from "../Tools/Status";
-import { useContext } from "react";
-import { LoadRoles } from './role';
+import { ViewCreateUser } from '../Views/ViewCreateUser';
+import { useState } from 'react';
 
 // import { Form, Input } from 'reactstrap'
 
 
-export const FormLogin = () => {
+export const FormLogin = ({showRegister}) => {
 
     // const [datos, setdatos] = useState({
     //     user: '',
@@ -33,24 +32,13 @@ export const FormLogin = () => {
 
     }
 
-
-    const status = useContext(Status.Context)
+    const [register,setRegister] = useState(showRegister||false)
    
-    class APILogin extends API{
-        changeInfo= (newValue) => {
-                if (newValue.error)
-                    alert(newValue.error);
-                if (newValue.isLogin) {
-                    status.set("Login");
-                    return <LoadRoles/>
-                }
-            }
-    } 
-    
+   
 
-    return (
+    return (<>{register?<ViewCreateUser showRegister={setRegister}/>:
         <Form className="form-container" onSubmit={submit}>
-            <APIComponent url='/login' APIClass={APILogin}/>
+            <APIComponent url='/login'/>
 
             {/* <FormGroup>
                 <Label for="userInput">Usuario</Label>
@@ -78,9 +66,11 @@ export const FormLogin = () => {
 
             <FormGroup className="label-register">
                 <Label >
-                    ¿No tenes cuenta todavía? <a className="a-register" href="/Register/">Registrate acá</a>
+                    ¿No tenes cuenta todavía? <a className="a-register" href="#" onClick={
+                        ()=>{setRegister(true)}
+                    }>Registrate acá</a>
                 </Label>
             </FormGroup>
-        </Form>
+        </Form>}</>
     )
 }

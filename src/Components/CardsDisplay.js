@@ -1,15 +1,15 @@
-import { Card, CardBody, CardImg, CardText, Col } from "reactstrap";
+import { Card, CardBody, CardImg, CardText, Col, Row } from "reactstrap";
 
 
 export const CardsDisplay = ({ api, children, onClick }) =>
-    <>
+    <Row className="display-overflow">
         {api.getHookData().map((elemento, index) =>
             <Col key={`Card-${index}`} xs="12" sm="12" md="6" lg="3" onClick={onClick.bind(this, index)}>
                 {CardCustom(elemento, children, elemento.selected)}
             </Col>
         )
         }
-    </>
+    </Row>
 
 
 export const CardCustom = (elemento, template, selected = false, hideData = true) =>
@@ -44,7 +44,7 @@ export const CardCustom = (elemento, template, selected = false, hideData = true
                         else return "";
                     }
                     else if (card.type.name === "CardImg")
-                        return <Col key={`CardImg-${index}`} className="col-img" xs={{ size: 4, offset: 4 }} md={{ size: 6, offset: 3 }}><CardImg className="container-img" style={{ borderRadius: "2000px" }} top src={`${contenido}`} alt="No se puede mostrar foto" /></Col>
+                        return <Col key={`CardImg-${index}`} className="col-img" xs={{ size: 4, offset: 4 }} md={{ size: 6, offset: 3 }}>{contenido?<CardImg className="container-img" style={{ borderRadius: "2000px" }} top src={`${contenido}`} alt="No se puede mostrar foto" />:""}</Col>
                     return card;
                 })}
             </Col>

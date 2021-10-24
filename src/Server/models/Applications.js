@@ -6,16 +6,20 @@ const applicationSchema = new mongoose.Schema({
     description: String,
     req: String,
     zona: String,
-    tipoContrato: String,
-    tipoJornada: String,
+    tipoContratacion:String,
+    tipoContrato: Number,
+    tipoJornada: Number,
     status: Number,
-    candidates:[CandidateSchema]
+    candidates:[{
+        data:CandidateSchema,
+        date:Date,
+        status:Number
+    }]
 });
 
 exports.applicationSchema = applicationSchema;
 
 exports.Application = new mongoose.model('application', applicationSchema);
-
 
 //buscar usuario por nombre
 async function findByName(name,eq=false) {
@@ -40,7 +44,14 @@ async function findSimilar(exp) {
     
 }
 
-
 exports.Application.findSimilar = findSimilar
 
 
+//buscar usuario por candidato
+async function findCandidate(id) {
+    
+    return exports.Application.find({ "candidates.data._id":id });
+    
+}
+
+exports.Application.findCandidate = findCandidate

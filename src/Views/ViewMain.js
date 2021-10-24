@@ -24,29 +24,35 @@ import { ViewCompanyProfile } from './ViewCompanyProfile.js';
 import { ViewPerfilAspirante } from './ViewPerfilAspirante.js';
 import { Mapa, RenderProgress } from '../Components/tutorial.js';
 import { ViewJob } from './ViewJob.js';
+import { ViewPostulatedJobs } from './ViewPostulatedJobs.js';
+
 
 export const ViewMain = () => <Switch>
   <ViewRoute path="/Login" view={RenderProgress("Login")} />
   <ViewRoute path="/Register/" view={ViewLogin} />
   <ViewRoute path="/MostrarCV" view={RenderProgress("MostrarCV")} />
   <ViewRoute path="/CVCreate" view={RenderProgress("CreateCV")} />
-  <ViewRoute path="/lookforJob" view={ViewLookForJob} />
-  <ViewRoute path="/lookforWorker" view={ViewLookForWorker} />
-  <ViewRoute path="/findWorker" view={ViewFindWorker} />
-  <ViewRoute path="/homeAdmin" view={ViewHomeAdmin} />
+  <ViewRoute path="/lookforJob" view={RenderProgress("LookForJob")} />
+  <ViewRoute path="/SendCV" view={RenderProgress("LookForJobSendCV")} />
+  <ViewRoute path="/lookforWorker" view={RenderProgress("BuscarPostulantes")} />
+  {/* <ViewRoute path="/findWorker" view={ViewFindWorker} /> */}
+  {/* <ViewRoute path="/homeAdmin" view={ViewHomeAdmin} /> */}
   <ViewRoute path="/homeAspirante" view={ViewHomeAspirante} />
   <ViewRoute path="/homeEmpresa" view={ViewHomeEmpresa} />
   <ViewRoute path="/homeAutonomo" view={ViewHomeAutonomo} />
-  <ViewRoute path="/jobOffice" view={ViewJobOffice} />
+  {/* <ViewRoute path="/jobOffice" view={ViewJobOffice} /> */}
   {/* <ViewRoute path="/offerJob" view={ViewOfferJob} /> */}
   {/* <ViewRoute path="/ViewJob" view={ViewJob} /> */}
   {/* <ViewRoute path="/createJob" view={ViewCreateOfferJob} /> */}
   <ViewRoute path="/offerJob" view={RenderProgress("OfferJob")} />
-  <ViewRoute path="/ViewJob" view={ViewJob} />
-  <ViewRoute path="/createJob" view={ViewCreateOfferJob} />
+  <ViewRoute path="/ViewJob" view={RenderProgress("ViewJob")} />
+  <ViewRoute path="/createJob" view={RenderProgress("CreateJob")} />
   <ViewRoute path="/offerService" view={ViewOfferService} />
+  <ViewRoute path="/postulates" view={ViewPostulatedJobs} />
   <ViewRoute path="/createService" view={ViewCreateOfferService} />
-  <ViewRoute path="/findJob" view={ViewFindJob} />
+  {/* <ViewRoute path="/findJob" view={ViewFindJob} /> */}
+  <ViewRoute path="/findJob" view={RenderProgress("FindJob")} />
+  <ViewRoute path="/postulateJob" view={RenderProgress("PostulateJob")} />
   <ViewRoute path="/findService" view={ViewFindService} />
   <ViewRoute path="/recovery-pass" view={ViewLogin} />
   <ViewRoute path="/perfilAspirante" view={ViewPerfilAspirante} />

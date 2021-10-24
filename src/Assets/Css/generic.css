@@ -18,6 +18,11 @@
     width: 200px;
 }
 
+.foto-perfilCV{
+    height: 200px;
+    width: 200px;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button{
   -webkit-appearance: none;
@@ -109,4 +114,9 @@ body {
 
 #root{
     height: 100%;
+}
+
+.display-overflow{
+    overflow-y:scroll ;  
+    height:600px ;
 }

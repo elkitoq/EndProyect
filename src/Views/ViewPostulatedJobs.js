@@ -6,24 +6,20 @@ import { Display } from "../Components/Display";
 import { Status } from "../Tools/Status";
 import { useContext } from "react";
 
-export const ViewOfferService = () => {
-    const { search } = useLocation();
-    const getJson = API.getSearchParam(search);
+export const ViewPostulatedJobs = () => {
 
     const status = useContext(Status.Context)
     const [selectRole,] = status.use('selectRole');
 
-    getJson.role=selectRole;
-
     return (
         <Container className="abs-center" fluid={true}>
             <Row >
-                <Display nameDownload={()=>"Servicios" /*+getJson.get("b")+")"*/}
-                get={getJson}>
-                    <APIComponent url="/service"/> 
+                <Display nameDownload={()=>"EmpleosSolicitados"}
+                get={{role:selectRole}}>
+                    <APIComponent url="/postulates"/> 
                     <CardText key="name">Se ofrece:</CardText>
                     <CardText className="text-wrap" key="description">Descripción:</CardText>
-                    <CardText key="price" hideData>Requerimientos:</CardText>
+                    <CardText className="text-wrap" func={(e)=>e.candidates.date}>Fecha:</CardText>
                 </Display>
             </Row>
 

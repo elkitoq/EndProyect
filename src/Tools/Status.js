@@ -70,7 +70,11 @@ export class Status {
     }
 
     get(k) {
-        return this.cookie[this.key][k] || false;
+        return (this.cookie[this.key][k]===undefined)?false:this.cookie[this.key][k];
+    }
+
+    clear(){
+        this._setStatus(new List())
     }
 
 }
