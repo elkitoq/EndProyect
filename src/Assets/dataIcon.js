@@ -1,6 +1,6 @@
 export const iconData = [
     { name: "javascript", iconUrl: "https://img.icons8.com/color/48/000000/javascript--v1.png" },
-    { name: "java", iconUrl: "https://icons8.com/icon/13679/java" },
+    { name: "java", iconUrl: "https://img.icons8.com/color/50/000000/java-coffee-cup-logo--v1.png" },
     { name: "c++", iconUrl: "https://img.icons8.com/color/48/000000/c-plus-plus-logo.png" },
     { name: "python", iconUrl: "https://img.icons8.com/color/48/000000/python--v1.png" },
     { name: "photoshop", iconUrl: "https://img.icons8.com/color/48/000000/adobe-photoshop--v2.png" },
@@ -19,3 +19,4 @@ export const iconData = [
     { name: "ruby", iconUrl: "https://img.icons8.com/color/48/000000/ruby-programming-language.png" },
     { name: "default", iconUrl: "https://img.icons8.com/ios/50/000000/business-network--v2.png" }
 ]
+
