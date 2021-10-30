@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { Component, useState } from "react";
+import { Button } from "reactstrap";
 
 
 
@@ -21,11 +22,14 @@ export class APIConsumer extends Component {
             APIConsumer.apis={};
         
         //APIConsumer.apis[id]=React.createContext(this)
+        
+
+        this.state={count:0}
+        document.APIConsumer=APIConsumer
+
+        this.updaters=[]
+
         APIConsumer.apis[id]=this
-
-        this.setState({count:0})
-
-
     }
 
     componentDidMount() {
@@ -33,9 +37,13 @@ export class APIConsumer extends Component {
 
     }
 
-    static get(id){
+    toString(){
+        return JSON.stringify(this.state)
+    }
 
-        return new Promise((resolve,reject)=>{
+    static get(id,setter){
+
+        const promesa = new Promise((resolve,reject)=>{
             
             const loop= setInterval(() => {
                 
@@ -44,15 +52,29 @@ export class APIConsumer extends Component {
                     clearInterval(loop)
                 }
 
-            }, 300);
+            }, 30);
 
-        });        
+        }); 
+
+        if (setter) {
+            promesa.then((res)=>{
+            res.updaters.push(setter)
+            setter(res);
+            return res
+            })
+        }
+
+        return promesa
+        
+        
     }
 
     add(add=1){
         this.setState((state)=>{return {
             count:state.count+add
         }})
+        for (const updater of this.updaters)
+            updater({})
     }
 
     static mode = {
@@ -73,6 +95,6 @@ export class APIConsumer extends Component {
     }
 
     render() {
-        return (<>{this.props.children}</>)
+        return (<>{this.props.children}{JSON.stringify(this.state)}<Button onClick={()=>this.add()}>Go</Button></>)
     }
 }
