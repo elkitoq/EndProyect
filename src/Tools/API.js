@@ -37,6 +37,33 @@ export default class API {
 
         document.API=API;
         document.api=this;
+
+        this.actualizador=()=>{}
+    }
+
+    static updater(id,updater){
+
+        const promesa = new Promise((resolve,reject)=>{
+            
+            const loop= setInterval(() => {
+                
+                if (API.get(id)!==undefined){
+                    resolve(API.get(id))
+                    clearInterval(loop)
+                }
+
+            }, 30);
+
+        }); 
+        
+        if (updater) {
+            promesa.then((res)=>{
+            res.actualizador=updater
+            return res
+            })
+        }
+
+        return promesa
     }
 
     static get(id){
@@ -138,7 +165,10 @@ export default class API {
     refresh() {
         this.setData(this.getData());
         this.call(API.events.INPUTDATA)
+        this.actualizador(Math.random())
     }
+
+    
 
     async setData(data) {
         if (typeof this._setData === "function") {

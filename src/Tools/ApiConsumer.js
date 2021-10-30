@@ -22,12 +22,11 @@ export class APIConsumer extends Component {
             APIConsumer.apis={};
         
         //APIConsumer.apis[id]=React.createContext(this)
-        
 
         this.state={count:0}
         document.APIConsumer=APIConsumer
 
-        this.updaters=[]
+        this.actualizador=()=>{}
 
         APIConsumer.apis[id]=this
     }
@@ -40,6 +39,22 @@ export class APIConsumer extends Component {
     toString(){
         return JSON.stringify(this.state)
     }
+
+
+    static updater(id,updater){
+
+        const promesa = APIConsumer.get(id)
+        
+        if (updater) {
+            promesa.then((res)=>{
+            res.actualizador=updater
+            return res
+            })
+        }
+
+        return promesa
+    }
+
 
     static get(id,setter){
 
@@ -58,7 +73,6 @@ export class APIConsumer extends Component {
 
         if (setter) {
             promesa.then((res)=>{
-            res.updaters.push(setter)
             setter(res);
             return res
             })
@@ -72,9 +86,9 @@ export class APIConsumer extends Component {
     add(add=1){
         this.setState((state)=>{return {
             count:state.count+add
-        }})
-        for (const updater of this.updaters)
-            updater({})
+        }}, () => {
+            this.actualizador(Math.random());
+        })
     }
 
     static mode = {

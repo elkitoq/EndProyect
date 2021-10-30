@@ -53,11 +53,12 @@ export const TestApi = () =>{
     const get = () => API.get('/api').get()
 
 
-    //const apis = useContext(APIConsumer.apis)
+
     const [api,setApi] = useState({toString:()=>"asd"})
     APIConsumer.get('/api',setApi)
-
-    console.log({api});
+    
+    const [update,updater] = useState(-1)
+    APIConsumer.updater('/api',updater)
 
     return <>{ok}
     <Form method='post'>
