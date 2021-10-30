@@ -265,7 +265,7 @@ export class APIComponent extends Component {
     }
 
     render() {
-        return (<></>)
+        return (<>{this.props.children}</>)
     }
 }
 
