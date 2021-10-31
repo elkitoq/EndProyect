@@ -7,7 +7,7 @@ import RutaTutorial, { NextButton } from "../Components/tutorial";
 import { ApplicationContrato } from "../Server/models/AplicationContrato";
 import API, { APIComponent, QAPI } from "../Tools/API";
 import { Status } from "../Tools/Status";
-import { aspirante } from "./ViewCreateCV";
+import { aspirante } from "../Components/role";
 
 
 

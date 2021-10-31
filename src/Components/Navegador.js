@@ -52,7 +52,7 @@ export const NavegadorPrincipal = () => {
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
           <div style={profile && !profile.new && profile.profileType===0?{display:"none"}:{}}>
-          <NavButton className="btn-cv-navbar" href="/CVCreate/" ><span id="CrearCV"> Crear CV </span></NavButton>
+          <NavButton className="btn-cv-navbar" href={profile && !profile.new && profile.profileType===1?"/CVCreate/":"/CVCreate2/"} ><span id="CrearCV"> Crear CV </span></NavButton>
           <Señalado marca="CrearCV" title="Crear CV" text="Si haces click te lleva a la pagina para crear tu Curriculum" />
           </div>
           <div style={profile && !profile.new && profile.profileType!==0?{display:"none"}:{}}>

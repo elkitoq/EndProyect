@@ -145,6 +145,7 @@ export const DropdownRol = () => {
 }
 
 
+export const aspirante = (element) => element.profileType === 1;
 
 export const verificarRoles = (status, users) => {
     status.set("haveAspirante", users.find((element) => element.profileType === 1) !== undefined, true)

@@ -47,7 +47,6 @@ export const ViewCreateOfferJob = ({ mode = "put",id}) => {
             if (id)
             api.get({id}).then((res)=>(res.data && res.data.response)?setStatus(res.data.response.status):"");
             setApi(api)
-            document.val=api
         }
         },
         'CreateJob')
