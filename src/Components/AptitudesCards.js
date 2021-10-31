@@ -13,12 +13,11 @@ export const AptitudesCards = ({ skill }) => {
                 setUrl(item.iconUrl)
             }
         }
+
     }, [])
 
-    console.log(url)
-
     return (
-        <div className="card-skill">
+        <div className="card-skill animate__animated animate__fadeIn">
             <div className="icon-skill">
                 <img src={url} width="29px" height="29px" />
             </div>

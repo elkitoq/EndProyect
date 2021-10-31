@@ -35,43 +35,43 @@ export const ViewFindJob = () => {
                 })
         }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
-return (<>
-    <Container className="abs-center separado">
-        <Row>
-            <Busqueda text="Buscar Empleo" href="/findJob" defaultValue={busqueda.get("b")} />
-            <h1>Estos son las busquedas laborales que responden a "{busqueda.get("b")}" </h1>
-            <Display nameDownload={()=>"Busquedas("+busqueda.get("b")+")"}
-                get={busqueda}
-                link={{
-                    onClick: (element) => {
-                        const b = new URLSearchParams(search)
-                        b.set("postulate", element._id)
-                        return `/postulateJob?${b}`
-                    }, text: "Postularse como"+user[selectRole].profileName
-                }}
-            >
-                <APIComponent url='/jobs' />
-                <CardText key="name">Puesto:</CardText>
-                <CardText className="text-wrap" key="description">Descripción:</CardText>
-                <CardText key="req" hideData>Requerimientos:</CardText>
-                <CardText key="zona" hideData>Zona:</CardText>
+    return (<>
+        <Container className="abs-center separado">
+            <Row>
+                <Busqueda text="Buscar Empleo" href="/findJob" defaultValue={busqueda.get("b")} />
+                <h1 className="title-find">Estos son las busquedas laborales que responden a "{busqueda.get("b")}" </h1>
+                <Display nameDownload={() => "Busquedas(" + busqueda.get("b") + ")"}
+                    get={busqueda}
+                    link={{
+                        onClick: (element) => {
+                            const b = new URLSearchParams(search)
+                            b.set("postulate", element._id)
+                            return `/postulateJob?${b}`
+                        }, text: "Postularse como" + user[selectRole].profileName
+                    }}
+                >
+                    <APIComponent url='/jobs' />
+                    <CardText key="name">Puesto:</CardText>
+                    <CardText className="text-wrap" key="description">Descripción:</CardText>
+                    <CardText key="req" hideData>Requerimientos:</CardText>
+                    <CardText key="zona" hideData>Zona:</CardText>
 
-                <CardText hideData func={(elemento)=>{
-                        const type = ApplicationContrato.find((type)=>type.code===elemento.tipoContrato)
-                        return (type?type.title:"")
-                        }}>Tipo de Contrato:</CardText>
+                    <CardText hideData func={(elemento) => {
+                        const type = ApplicationContrato.find((type) => type.code === elemento.tipoContrato)
+                        return (type ? type.title : "")
+                    }}>Tipo de Contrato:</CardText>
 
-                <CardText key="tipoJornada" hideData>Tipo de Jornada:</CardText>
+                    <CardText key="tipoJornada" hideData>Tipo de Jornada:</CardText>
 
-                <CardText key="match">Coincidencias:</CardText>
-            </Display>
-        </Row>
-    </Container>
-</>
-);
+                    <CardText key="match">Coincidencias:</CardText>
+                </Display>
+            </Row>
+        </Container>
+    </>
+    );
 }
 
 

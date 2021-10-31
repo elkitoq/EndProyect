@@ -20,7 +20,7 @@ export const ViewFindService = (props) => {
 
     return (
         <Container className="abs-center" fluid={true}>
-            <Row >
+            <Row className="row-service-card">
                 <h1 className="title-find">Estos son los resultados que responden a su busqueda de "{getJson.job}" </h1>
                 {/* <Display get={getJson} nameDownload={"Busqueda("+getJson.job+")"}>
                     <APIComponent url='https://randomuser.me/api/' responseKey="results" />
@@ -31,16 +31,16 @@ export const ViewFindService = (props) => {
                     <CardText text={getJson.job}>Ocupación: </CardText>
                     <CardText hideData text="OTROS DATOS SON DESCONOCIDOS">{""}</CardText>
                 </Display> */}
-                <Display get={getJson} nameDownload={"Busqueda("+getJson.job+")"}>
+                <Display get={getJson} nameDownload={"Busqueda(" + getJson.job + ")"}>
                     <APIComponent url='/service' />
                     <CardImg func={(elemento) => elemento.freelance.photo} />
-                    <CardText func={(elemento) => ` ${elemento.freelance.lastName?elemento.freelance.lastName:""}${( elemento.freelance.lastName && elemento.freelance.name)?', ':''}${elemento.freelance.name?elemento.freelance.name:""}`}>Nombre: </CardText>
-                    <CardText func={(elemento)=> elemento.name}>Ofrece: </CardText>
-                    <CardText hideData func={(elemento)=> elemento.description}>Descripcion: </CardText>
+                    <CardText func={(elemento) => ` ${elemento.freelance.lastName ? elemento.freelance.lastName : ""}${(elemento.freelance.lastName && elemento.freelance.name) ? ', ' : ''}${elemento.freelance.name ? elemento.freelance.name : ""}`}>Nombre: </CardText>
+                    <CardText func={(elemento) => elemento.name}>Ofrece: </CardText>
+                    <CardText hideData func={(elemento) => elemento.description}>Descripcion: </CardText>
                     <CardText hideData func={(elemento) => elemento.freelance.email}>Email: </CardText>
                     <CardText hideData func={(elemento) => elemento.freelance.phone}>Teléfono:</CardText>
-                    <CardText hideData func={(elemento)=> elemento.price}>Precio: </CardText>
-                    <CardText func={(elemento)=> elemento.match}>Coincidencias: </CardText>
+                    <CardText hideData func={(elemento) => elemento.price}>Precio: </CardText>
+                    <CardText func={(elemento) => elemento.match}>Coincidencias: </CardText>
 
                 </Display>
             </Row>

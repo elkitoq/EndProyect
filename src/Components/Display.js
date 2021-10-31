@@ -10,21 +10,21 @@ import { Status } from "../Tools/Status";
 import { DownloadXLS } from "./DownloadXLS";
 
 export const Display = ({
-        children,
-        api=API.getApiComponent(children,APIComponent.mode.ARRAY),
-        get,
-        link = {onClick:()=>"#",text:"Go"},
-        emptyMsg = "No hay resultados para mostrar",
-        nameDownload,
-        buttons = []
-     }) => {
+    children,
+    api = API.getApiComponent(children, APIComponent.mode.ARRAY),
+    get,
+    link = { onClick: () => "#", text: "Go" },
+    emptyMsg = "No hay resultados para mostrar",
+    nameDownload,
+    buttons = []
+}) => {
     const paginas = [1, 10, 50, 100];
 
     const status = useContext(Status.Context)
 
     if (!status.get("apiConsumer")) {
         get.results = get.results || 10;
-        status.set("apiConsumer",{ pages: paginas.findIndex((e) => e === get.results), type: 0 })
+        status.set("apiConsumer", { pages: paginas.findIndex((e) => e === get.results), type: 0 })
     } else if (get.results === undefined)
         get.results = paginas[status.get("apiConsumer").pages]
 
@@ -32,8 +32,8 @@ export const Display = ({
 
     useEffect(() => {
         getNewData();
-        
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
@@ -41,16 +41,18 @@ export const Display = ({
         api.get(get).then((r) => {
             status.get("apiConsumer").pages = paginas.findIndex((e) => e === get.results)
             status.save("apiConsumer");
-            console.log(api.getHookData());
+            // console.log(api.getHookData());
 
         });
     }
 
-    
+    const width = window.screen.width
+
+
 
     const [modal, setModal] = useState(false);
     const [modalContents, setModalContents] = useState("");
-    const [modalSelected,setModalSelected] = useState({});
+    const [modalSelected, setModalSelected] = useState({});
 
     const toggle = () => setModal(!modal);
 
@@ -62,24 +64,24 @@ export const Display = ({
             setModalSelected(api.getHookData()[id]);
             toggle();
         }
-        else{
-            api.getHookData()[id].selected=!api.getHookData()[id].selected;
+        else {
+            api.getHookData()[id].selected = !api.getHookData()[id].selected;
             api.refresh()
         }
     }
-    
+
     const togleSelectMode = () => {
         if (selectMode)
             selectAll(false)
         setSelectMode(!selectMode);
     }
-    
-    const selectAll=(select)=>{
+
+    const selectAll = (select) => {
         for (var elemento of api.getHookData())
-            if (select===undefined)
-                elemento.selected=!elemento.selected;
+            if (select === undefined)
+                elemento.selected = !elemento.selected;
             else
-                elemento.selected=select
+                elemento.selected = select
         api.refresh()
     }
 
@@ -89,7 +91,7 @@ export const Display = ({
 
             </ModalBody>
             <ModalFooter>
-            <Button color="primary" href={link.onClick(modalSelected)} onClick={toggle}>{link.text}</Button>{' '}
+                <Button color="primary" href={link.onClick(modalSelected)} onClick={toggle}>{link.text}</Button>{' '}
                 <Button color="secondary" onClick={toggle}>Cancel</Button>
             </ModalFooter>
         </Modal>
@@ -100,24 +102,24 @@ export const Display = ({
         <>
 
             <Navbar >
-                <Nav>
-                    <Selector items={["Tarjetas", "Tabla"]} select={type} onChange={(n) => { setType(n); status.get("apiConsumer").type = n; status.save("apiConsumer") }} />
-                    <Selector items={paginas} select={status.get("apiConsumer").pages} onChange={(n) => { status.get("apiConsumer").pages = n;  status.save("apiConsumer"); get.results = paginas[n]; getNewData(); }} />
+                <Nav className="navbar-display">
+                    <Selector items={["Tarjetas", width < 500 ? "" : "Tabla"]} select={type} onChange={(n) => { setType(n); status.get("apiConsumer").type = n; status.save("apiConsumer") }} />
+                    <Selector items={paginas} select={status.get("apiConsumer").pages} onChange={(n) => { status.get("apiConsumer").pages = n; status.save("apiConsumer"); get.results = paginas[n]; getNewData(); }} />
                     <Pagination pages={api.getHookInfo().pages} />
-                    <Button outline={!selectMode} color="primary" onClick={togleSelectMode}>Seleccionar</Button>
+                    <Button className="button-select" outline={!selectMode} color="primary" onClick={togleSelectMode}>Seleccionar</Button>
                     <ButtonGroup hidden={!selectMode}>
                         <Button color="primary" onClick={() => selectAll(true)}>Todos</Button>
                         <Button color="primary" onClick={() => selectAll(false)}>Ninguno</Button>
                         <Button color="primary" onClick={() => selectAll()}>invertir</Button>
                     </ButtonGroup>
                     <ButtonGroup>
-                        {buttons.map((button)=><Button onClick={()=>button.onClick(api.getHookData())}>{button.text}</Button>)}
+                        {buttons.map((button) => <Button onClick={() => button.onClick(api.getHookData())}>{button.text}</Button>)}
                     </ButtonGroup>
-                    <DownloadXLS api={api} children={children} name={(typeof nameDownload === 'function')?nameDownload():nameDownload}/>
+                    <DownloadXLS api={api} children={children} name={(typeof nameDownload === 'function') ? nameDownload() : nameDownload} />
                 </Nav>
             </Navbar>
             <ModalCard />
-            <Row>
+            <Row className="container-cards">
                 {api.getHookData().length > 0 ?
                     type === 0 ?
                         <CardsDisplay api={api} children={children} onClick={onClick} /> :

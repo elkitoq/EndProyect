@@ -30,15 +30,6 @@ body{
     
 }
 
-.sub-navigation ul .link-aptitud:active{
-    color: #d0de;
-}
-
-.sub-navigation ul .link-curriculum:visited{
-    color: #d0de;
-}
-
-
 /* fin sub navegacion perfil*/ 
 
 .container-fluid .content-profile{
@@ -130,6 +121,8 @@ body{
     align-items: center;
 }
 
+
+
 .curriculum-container .body .bodyInner{
    padding: 20px;
 }
@@ -181,13 +174,21 @@ body{
     justify-content: center;
 }
 
-.card-contact .email, .card-contact .phone{
-   margin-top: 3rem;
+.card-contact .email{
+   margin-top: 3.5rem;
    display: flex;
    flex-direction: row;
    justify-content: center;
    
 }
+
+.card-contact .phone{
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+ }
 
 .card-contact .email p, .card-contact .phone p{
     margin-left: 5px;
@@ -205,10 +206,14 @@ body{
     justify-content: space-evenly;
 }
 
-.cards-skill{
+.card-skill{
     width: 33.3%;
     display:flex;
     justify-content: center;
+    user-select: none; 
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .card-skill{
@@ -224,6 +229,7 @@ body{
     flex-direction: row;
     justify-content:space-around;
     align-items: center;
+    cursor: default;
 }
 .card-skill .icon-skill{
     width: 30%;

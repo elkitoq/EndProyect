@@ -5,13 +5,13 @@ import maletin from '../Assets/icons/Icon metro-suitcase.svg'
 import school from '../Assets/icons/Icon material-school.svg'
 import hammer from '../Assets/icons/Icon awesome-hammer.svg'
 
-export const CurriculumProfile = ({info={}}) => {
+export const CurriculumProfile = ({ info = {} }) => {
 
     info.content = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure quidem obcaecati aliquid assumenda dolor totam impedit sunt! Nihil nemo ab quam vero inventore dolore, error deleniti?"
     return (
-        <Container className="curriculum-container">
+        <Container className="curriculum-container animate__animated animate__fadeIn">
             <div className="body">
-                <div className="bodyInner">
+                <div className="bodyInner  ">
                     {info.academico ? <SectionCurriculum icon={school} sectionName="section-cv" title="Informacion Academica" content={
                         info.academico.map((item) => <><b>{item.year}-{item.title}</b><br />{item.description}<br /></>)
                     }></SectionCurriculum> : ""}
