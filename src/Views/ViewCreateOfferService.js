@@ -13,14 +13,14 @@ export const ViewCreateOfferService = () => {
     const [selectRole,] = status.use('selectRole');
 
     return (
-        <Container className="container-form">
+        <Container className="container-form-service">
             <Form method="put" className="form">
                 <APIComponent url="/service" />
                 <FormItem name="Ofrezco:" idInput="name" />
-                <FormItem name="Description" type="textarea" idInput="description" />
-                <FormItem name="Precio" idInput="price" />
+                <FormItem name="Description:" type="textarea" idInput="description" />
+                <FormItem name="Precio:" idInput="price" />
                 <Input name="role" type="hidden" defaultValue={selectRole} />
-                <Button className='button-submit' size="lg" color="primary" type="submit" block>Enviar</Button>
+                <Button className='button-submit button-service-submit' size="lg" color="primary" type="submit" block>Enviar</Button>
             </Form>
         </Container>);
 }

@@ -13,7 +13,7 @@ export const ViewLookForWorker = () => {
             <Col xs="12">
                 <Busqueda text="Buscar Trabajador" href="/findService" param="job" />
                 <Col xs={{ size: 10, offset: 1 }} sm={{ size: 10, offset: 1 }} className="separado">
-                    {!(status.get('haveEmpresa')) ? <LocalNoLoginCard login={(status.get('Login'))}/> : <SugerirCrearPuesto />}
+                    {!(status.get('haveEmpresa')) ? <LocalNoLoginCard login={(status.get('Login'))} /> : <SugerirCrearPuesto />}
                 </Col>
 
             </Col>
@@ -22,17 +22,17 @@ export const ViewLookForWorker = () => {
     );
 }
 
-const LocalNoLoginCard = ({login}) =>
+const LocalNoLoginCard = ({ login }) =>
     <Card color="primary" inverse>
-        <CardText>Si prefiere crear una busqueda laboral, debería logearse como empresa</CardText>
+        <CardText className="text-center mt-2">Si prefiere crear una busqueda laboral, debería logearse como empresa</CardText>
         <ButtonGroup className="btn-group-vertical">
-            <Button href="/createJob" color="secondary">{!login?'Login':'Crear Perfil de Empresa'}</Button>
+            <Button href="/createJob" color="secondary">{!login ? 'Login' : 'Crear Perfil de Empresa'}</Button>
         </ButtonGroup>
     </Card>
 
 const SugerirCrearPuesto = () =>
     <Card color="primary" inverse>
-        <CardText>Puede que prefiera crear una busqueda laboral para recibir postulantes</CardText>
+        <CardText className="text-center mt-2">Puede que prefiera crear una busqueda laboral para recibir postulantes</CardText>
         <Button href="/offerJob/" color="secondary">Crear Busqueda</Button>
     </Card>
 

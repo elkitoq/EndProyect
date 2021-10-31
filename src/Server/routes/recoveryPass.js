@@ -22,10 +22,24 @@ router.post('/recovery-pass', async (req, res) => {
         const mail = {
             email: user.email,
             subject: "Recupera tu contraseña",
-            html: `<p><h1>Hola ${user.name},</h1><br/>
-            Aquí puedes recuperar tu 
-            <b><a href="http://${req.body.clientUrl}/recovery-pass?user=${user.name}&code=${user.codeRecoveryPass}" >
-            Contraseña</a></b></p>`
+            // html: `<p><h1>Hola ${user.name},</h1><br/>
+            // Aquí puedes recuperar tu 
+            // <b><a href="http://${req.body.clientUrl}/recovery-pass?user=${user.name}&code=${user.codeRecoveryPass}" >
+            // Contraseña</a></b></p>`
+            html: `<div class="content-email" style="width: 600px !important; heigth:750px !important">
+            <h1>Hola, ${user.name}:</h1>
+          
+          <p>Alguien solicitó una nueva contraseña para la cuenta asociada con ${user.email}.</p>
+          
+            <p>Aún no se han realizado cambios en su cuenta.</p>
+          
+            <p>Puede restablecer su contraseña haciendo click en el enlace a continuación: </p><a href="http://${req.body.clientUrl}/recovery-pass?user=${user.name}&code=${user.codeRecoveryPass}"> Restablecer Contraseña</a>
+          
+          <p>Si no solicitó una nueva contraseña, háganoslo saber de inmediato respondiendo a este correo electrónico.</p>
+          
+          <h5>Att.
+          El equipo de MaipuJobs</h5>
+          </div>`
         }
         sendMail(mail);
         res.status(201).json({ info: { message: `Email enviado a ${user.email.substring(0, 4)}***${user.email.substring(user.email.indexOf("@"))}, revise su correo` } })
@@ -53,7 +67,7 @@ router.put('/recovery-pass', async (req, res) => {
             req.session.user = user;
             res.status(201).json({
                 response: { password: "", password2: "" },
-                info: { isLogin: true, eventCalls:[{eventName:"isLogin"}], message: "Contraseña cambiada" }
+                info: { isLogin: true, eventCalls: [{ eventName: "isLogin" }], message: "Contraseña cambiada" }
             });
         }
         else

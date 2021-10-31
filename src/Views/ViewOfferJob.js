@@ -9,13 +9,13 @@ import RutaTutorial from "../Components/tutorial";
 import { ApplicationStatus } from "../Server/models/ApplicationStatus";
 import { LoadRoles } from "../Components/role";
 
-export const ViewOfferJob=({...props})=>{
+export const ViewOfferJob = ({ ...props }) => {
     const status = useContext(Status.Context)
-        return <>{(status.get('selectUser')[status.get('selectRole')] 
-        && status.get('selectUser')[status.get('selectRole')].profileType===0)?
-            <OfferJob {...props}/>
-            :<LoadRoles select={0}/>}
-            </>
+    return <>{(status.get('selectUser')[status.get('selectRole')]
+        && status.get('selectUser')[status.get('selectRole')].profileType === 0) ?
+        <OfferJob {...props} />
+        : <LoadRoles select={0} />}
+    </>
 }
 
 
@@ -26,25 +26,25 @@ const OfferJob = () => {
 
     const status = useContext(Status.Context)
     const [selectRole,] = status.use('selectRole');
-    getJson.role=selectRole;
+    getJson.role = selectRole;
 
-    
+
 
     return (
         <Container className="abs-center" fluid={true}>
             <Row className="container-content-offerJob">
-                <Button size="lg"  style={{width:"100px",left:"10%"}} color="primary" href="/createJob/">Nuevo</Button>
+                <Button className="button-nueva-busqueda" size="lg" style={{ width: "auto", fontSize: "16px", marginLeft: "10px" }} color="primary" href="/createJob/">Nueva Busqueda</Button>
                 <Display nameDownload={"Busquedas"}
-                get={getJson}
-                link={{onClick:(element)=>`/ViewJob?application=${element._id}`,text:"Ver y Editar"}}
+                    get={getJson}
+                    link={{ onClick: (element) => `/ViewJob?application=${element._id}`, text: "Ver y Editar" }}
                 >
                     <APIComponent url='/jobs' />
                     <CardText key="name">Puesto:</CardText>
                     <CardText className="text-wrap" key="description">Descripción:</CardText>
                     <CardText key="req" hideData>Requerimientos:</CardText>
-                    <CardText func={(elemento)=>{
-                        const status = ApplicationStatus.find((status)=>status.code===elemento.status)
-                        return (status?status.title:"") + " " + elemento.status
+                    <CardText func={(elemento) => {
+                        const status = ApplicationStatus.find((status) => status.code === elemento.status)
+                        return (status ? status.title : "") + " " + elemento.status
                     }}>Estado:</CardText>
                 </Display>
             </Row>
