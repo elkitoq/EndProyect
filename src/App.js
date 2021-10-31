@@ -9,11 +9,13 @@ import { NavegadorPrincipal } from './Components/Navegador.js';
 import { ViewMain } from './Views/ViewMain.js';
 import { StatusComponent } from './Tools/Status';
 import { Events } from './Components/Events.js';
+import { ErrorDriver } from './Components/ErrorDriver';
 
 
 function App() {
 
   return (
+    <ErrorDriver>
     <Router>
       <StatusComponent>
       <Events/>
@@ -21,6 +23,7 @@ function App() {
       <ViewMain/>
       </StatusComponent>
     </Router>
+    </ErrorDriver>
   );
 }
 

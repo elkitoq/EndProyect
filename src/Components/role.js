@@ -9,38 +9,41 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { Status } from "../Tools/Status";
 import { Señalado } from "./Señalador";
+import RutaTutorial from "./tutorial";
 
 
-export const LoadRoles = ({ select, add }) => {
+export const LoadRoles = ({ select, add}) => {
 
     const status = useContext(Status.Context)
     // const [, setUser] = status.use('selectUser');
     const [load, setLoad] = useState(false)
 
     console.log("SELECT " + select);
-
+    
     useEffect(() => {
-        if (!load)
-        new QAPI('/profile').send("get", {}).then((res) => {
-            status.set("selectUser",(res.data.response),true)
-            if (res && res.data && res.data.response)
-                verificarRoles(status,res.data.response)
-            const user=status.get("selectUser")[status.get("selectRole")]
-            if (!user || (select!==undefined && user.profileType!==select)){
-                status.set("selectRole",res.data.response.findIndex((element) => element.profileType === select))
-                // alert (res.data.response.findIndex((element) => element.profileType === select))
-                // alert (status.get("selectRole"))
-                API.call(API.events.FINISHLOAD)
-            }
-            if (add!==undefined && (status.get("selectRole")<0 || select===undefined)){
-                  res.data.response.push(add)
-                  status.set("selectRole",""+res.data.response.indexOf(add))
-              }
-
-            status.save();
-            setLoad(true)
-            console.log("listo");
-        });
+        if (status.get('Login')) {
+            if (!load)
+                new QAPI('/profile').send("get", {}).then((res) => {
+                    status.set("selectUser", (res.data.response), true)
+                    if (res && res.data && res.data.response)
+                        verificarRoles(status, res.data.response)
+                    const user = status.get("selectUser")[status.get("selectRole")]
+                    if (!user || (select !== undefined && user.profileType !== select)) {
+                        status.set("selectRole", res.data.response.findIndex((element) => element.profileType === select))
+                        // alert (res.data.response.findIndex((element) => element.profileType === select))
+                        // alert (status.get("selectRole"))
+                        API.call(API.events.FINISHLOAD)
+                    }
+                    if (add !== undefined && add !== null  && (status.get("selectRole") < 0 || select === undefined)) {
+                        res.data.response.push(add)
+                        status.set("selectRole", "" + res.data.response.indexOf(add))
+                    }
+                    status.save();
+                    status.set('cargarPerfiles')
+                    setLoad(true)
+                    console.log("listo");
+                });
+        }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -152,3 +155,12 @@ export const verificarRoles = (status, users) => {
     status.set("haveEmpresa", users.find((element) => element.profileType === 0) !== undefined, true)
     status.set("haveAutonomo", users.find((element) => element.profileType === 2) !== undefined, true)
 }
+
+
+
+RutaTutorial.get("cargarPerfiles")
+    .setDescription(<></>)
+    .addRequisito("Login")
+    .setRender(LoadRoles)
+    .setMeta("")
+    .setInstrucciones(<></>);

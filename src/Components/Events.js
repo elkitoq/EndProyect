@@ -31,8 +31,9 @@ const status = useContext(Status.Context)
 
 
 API.on("isLogin",()=>{
-        status.set("Login");
-        return <LoadRoles/>
+        // status.set('cargarPerfiles',false,true)
+        status.set("Login");   
+    return ("OK")     
 },'Events')
 
 
