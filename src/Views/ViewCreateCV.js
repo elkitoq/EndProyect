@@ -59,7 +59,9 @@ export const ViewCreateCV = () => {
     const [selectUser,] = status.use('selectUser');
     const [selectRole, setRole] = status.use('selectRole');
 
-    // const [data,setData]=useState(1);
+
+    const [update,updater]=useState(1);
+    API.updater('/cv',updater)
 
     const dataDefault = {
         "role":

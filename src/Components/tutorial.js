@@ -116,7 +116,7 @@ export const RenderProgress = (page) => {
     return (props) => <>
         {/* <ProgressBar ruta={ruta} /> */}
 
-        {progress.length > 1 ? <ProgressBarStep steps={progress} toDo={toDo} /> : ""}
+        {progress.length > 1 ? <ProgressBarStep steps={progress.filter((e)=>e.meta!=='')} toDo={toDo} /> : ""}
 
         <Container className={`abs-center ${progress.length > 1 ? "main-progress-render" : "main-render"} `} fluid={true} style={{ marginTop: progress.length > 1 ? "60px" : "0px" }}>
             <div style={{

@@ -5,6 +5,7 @@ import '../Assets/Css/home.css';
 import RutaTutorial from "../Components/tutorial";
 import { Señalador } from "../Components/Señalador";
 
+
 export const ViewHome = () => <Container className="abs-center container-home no-scroll">
     <div className="text-center">
         <div className="title-center">
@@ -17,7 +18,6 @@ export const ViewHome = () => <Container className="abs-center container-home no
             <OptionMenu href="/lookforWorker/" fontSize="2vh">Busco empleados</OptionMenu>
         </Row>
     </div>
-
 </Container>
 
 
@@ -26,4 +26,3 @@ RutaTutorial.get("Home")
     .setInstrucciones(<>Has clic en nuestro <Señalador marca="logo" />, está en la esquina superior izquierda de la pagina</>)
     .setRender(ViewHome)
     ;
-

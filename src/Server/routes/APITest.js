@@ -3,7 +3,7 @@ const router = require('express').Router();
 
 router.get('/api', async(req, res) => {
     console.log(req.session.datos);
-    res.json(req.session.datos);
+    res.json({response:req.session.datos});
     res.end();
 });
 

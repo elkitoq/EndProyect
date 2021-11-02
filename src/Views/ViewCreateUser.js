@@ -243,21 +243,21 @@ const AddEmpresa = () => ViewCreateUser({ roleType: 0 })
 
 RutaTutorial.get("haveAspirante")
     .setDescription(<>Te dará acceso a toda las herramientas para aspirantes</>)
-    .addRequisito("Login")
+    .addRequisito("cargarPerfiles")
     .setRender(AddAspirante)
     .setMeta("Crear Perfil de Aspirante")
     .setInstrucciones(<>Has clic en <Señalador marca="CrearPerfil" texto="Crear Perfil" />, en el menu de <Señalador marca="Roles" texto="Perfiles" /></>);
 
 RutaTutorial.get("haveEmpresa")
     .setDescription(<>Te dará acceso a toda las herramientas para Empresa</>)
-    .addRequisito("Login")
+    .addRequisito("cargarPerfiles")
     .setRender(AddEmpresa)
     .setMeta("Crear Perfil de Empresa")
     .setInstrucciones(<>Has clic en <Señalador marca="CrearPerfil" texto="Crear Perfil" />, en el menu de <Señalador marca="Roles" texto="Perfiles" /></>);
 
 RutaTutorial.get("haveAutonomo")
     .setDescription(<>Te dará acceso a toda las herramientas para autonomo</>)
-    .addRequisito("Login")
+    .addRequisito("cargarPerfiles")
     .setRender(AddAutonomo)
     .setMeta("Crear Perfil de Autonomo  ")
     .setInstrucciones(<>Has clic en <Señalador marca="CrearPerfil" texto="Crear Perfil" />, en el menu de <Señalador marca="Roles" texto="Perfiles" /></>);
