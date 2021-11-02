@@ -1,0 +1,33 @@
+
+
+.ayuda-flotante{
+   background:greenyellow;
+   height:500px;
+   width:500px;
+   z-index: 3;
+   padding: 2%;
+}
+
+.semitransparente{
+   filter:alpha(opacity=50); opacity:0.5;
+}
+
+.flotante-0{
+    position:absolute;
+    top:30px; left:30px;
+}
+
+.flotante-1{
+    position:absolute;
+    top:30px; right:30px;
+}
+
+.flotante-2{
+    position:absolute;
+    bottom:30px; right:30px;
+}
+
+.flotante-3{
+    position:absolute;
+    bottom:30px; left:30px;
+}

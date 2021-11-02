@@ -61,6 +61,7 @@ export const NavegadorPrincipal = () => {
           </div>
           {(status.get("Login")) ?<DropdownRol />:""}
           {/* <NavButton className="btn-oficina-navbar" href="/jobOffice/">Oficina de empleo</NavButton> */}
+          <NavButton className="btn-cv-navbar" onClick={()=>status.set('helperPopup')} href='/mapSite'>Ayuda</NavButton>
         </Nav>
         <Nav className="ms-auto buscador" navbar>
           <Busqueda className="ocultar-search input-search"
@@ -90,9 +91,9 @@ export const NavegadorPrincipal = () => {
           // children={(status.get("Login")) ? "Crear Rol" : "Register"} 
           // children={(login.isLogin === "true") ? "Crear Rol" : "Register"}
           >
-            <span id="CrearRol">{(status.get("Login")) ? "Crear Perfil" : "Register"}</span>
+            <span id="CrearPerfil">{(status.get("Login")) ? "Crear Perfil" : "Register"}</span>
           </NavButton>
-          <Señalado marca="CrearRol" title="Crear Perfil" text={(status.get("Login")) ? "Crea un nuevo perfil con el Rol que prefieras (Aspirante, Empresa, Autónomo)" : "Crear una cuenta de usuario"} />
+          <Señalado marca="CrearPerfil" title="Crear Perfil" text={(status.get("Login")) ? "Crea un nuevo perfil con el Rol que prefieras (Aspirante, Empresa, Autónomo)" : "Crear una cuenta de usuario"} />
         </Nav>
       </Collapse>
     </Navbar>

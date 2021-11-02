@@ -1,8 +1,9 @@
-import { useContext } from "react";
-import { Container, Button, Row } from "reactstrap";
+import { useContext, useState } from "react";
+import { Container, Button, Row, ButtonGroup } from "reactstrap";
 import { List } from "../Tools/List";
 import { Status } from "../Tools/Status";
 import { ProgressBarStep } from "./ProgressBar";
+import '../Assets/Css/ayudaflotante.css'
 
 export default class RutaTutorial {
     static #list = new List();
@@ -15,6 +16,7 @@ export default class RutaTutorial {
         this.checkStatus = meta;
         RutaTutorial.#list[meta] = this;
         this.render = () => <></>;
+        this.pasos = []
     }
 
     setMeta(meta) {
@@ -92,6 +94,8 @@ export default class RutaTutorial {
 
     setInstrucciones(instrucciones) { this.instrucciones = instrucciones; return this };
 
+    addPaso(element,siguiente='Siguiente') { this.pasos.push({element,siguiente}); return this }
+
     setDescription(description) { this.description = description; return this };
 
     setRender(render) { this.render = render; return this }
@@ -101,9 +105,9 @@ export default class RutaTutorial {
 
 export const RenderProgress = (page) => {
     let ruta = RutaTutorial.get(page, false);
-    
+
     const unDone = ruta.check(useContext(Status.Context));
-    
+
     const progress = ruta.getRequisitos();
     progress.push(ruta);
     unDone.push(ruta);
@@ -114,14 +118,16 @@ export const RenderProgress = (page) => {
 
         {progress.length > 1 ? <ProgressBarStep steps={progress} toDo={toDo} /> : ""}
 
-        <Container className={`abs-center ${progress.length > 1 ?"main-progress-render":"main-render"} `} fluid={true} style={{ marginTop: progress.length > 1 ? "60px" : "0px" }}>
-            <div style={{height:"1px",width:"100%",marginTop:progress.length > 1 ?"-80vh":
-            (ruta.checkStatus==="Login" 
-                || ruta.checkStatus==="PostulateJob"
-                || ruta.checkStatus==="FindJob"
-                || ruta.checkStatus==="CreateJob"
-                || ruta.checkStatus==="ViewJob"
-            )?"-85vh":"0px"}}>
+        <Container className={`abs-center ${progress.length > 1 ? "main-progress-render" : "main-render"} `} fluid={true} style={{ marginTop: progress.length > 1 ? "60px" : "0px" }}>
+            <div style={{
+                height: "1px", width: "100%", marginTop: progress.length > 1 ? "-80vh" :
+                    (ruta.checkStatus === "Login"
+                        || ruta.checkStatus === "PostulateJob"
+                        || ruta.checkStatus === "FindJob"
+                        || ruta.checkStatus === "CreateJob"
+                        || ruta.checkStatus === "ViewJob"
+                    ) ? "-85vh" : "0px"
+            }}>
                 {unDone[0].render(props)}
             </div>
         </Container>
@@ -129,6 +135,9 @@ export const RenderProgress = (page) => {
 }
 
 export const Mapa = () => {
+
+
+    
     return <ul>
         {RutaTutorial.map((ruta) =>
             (ruta instanceof RutaTutorial) ?
@@ -161,8 +170,8 @@ export const Ruta = ({ ruta }) => <ul>
                 {req.meta}:{req.instrucciones}
             </li>
     )}
-    <li>{ruta.instrucciones}
-    </li>
+    {ruta.instrucciones ? <li>{ruta.instrucciones}</li> : ''}
+    {ruta.pasos.map((e) => <>{e.element}<br /></>)}
 </ul>
 
 export const NextButton = ({ text, reset = false, ruta }) => {
@@ -190,3 +199,30 @@ export const NextButton = ({ text, reset = false, ruta }) => {
         }}
     >{text}</button>
 }
+
+export const Ayuda = ({pos=2,ruta = RutaTutorial.get("Mapa")}) => {
+
+    const [tranp, setTransp] = useState(true)
+
+    const [paso,setPaso] = useState(0)
+
+    const status = useContext(Status.Context)
+
+    return <>{status.get('helperPopup')?<div onMouseEnter={() => setTransp(false)}
+        onMouseLeave={() => setTransp(true)}
+        className={`ayuda-flotante${tranp?' semitransparente':''} flotante-${pos}`}>
+        <Button className='flotante-1' onClick={()=>{status.set('helperPopup',false,true);status.save();}}>X</Button>
+        {ruta.pasos[paso].element}
+        <ButtonGroup className='flotante-3'>
+        {paso>0?<Button onClick={()=>setPaso(paso-1)}>Volver</Button>:''}
+        {paso<(ruta.pasos.length-1)?<Button onClick={()=>setPaso(paso+1)}>{ruta.pasos[paso].siguiente}</Button>:''}
+        </ButtonGroup>
+    </div>:''}</>
+}
+
+RutaTutorial.get("Mapa")
+    .setDescription(<>Puedes leer algunas instrucciones para facilitarte la navegacion</>)
+    .setRender(Mapa)
+    // .addRequisito("haveAutonomo")
+    .setMeta("Ayuda")
+    // .setInstrucciones(<>Has clic en <Señalador marca="CrearCV" texto="Crear CV" />, está en la esquina superior izquierda de la pagina</>);

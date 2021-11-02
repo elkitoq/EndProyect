@@ -9,10 +9,16 @@ import { LoadRoles } from '../Components/role';
 import { useLocation } from 'react-router-dom'
 import { ViewCreateUser } from './ViewCreateUser.js';
 import { ViewRecoverPassword } from './ViewRecoverPassword.js';
-import RutaTutorial from '../Components/tutorial'
+import RutaTutorial, { Ayuda } from '../Components/tutorial'
 import { Señalador } from '../Components/Señalador'
 import { Status } from "../Tools/Status";
 import { useContext } from "react";
+
+import userNameHelp from'../Assets/HelpGif/username.gif'
+import loginHelp from'../Assets/HelpGif/login.gif'
+import forgetPassHelp from'../Assets/HelpGif/forgetpass.gif'
+import passwordHelp from'../Assets/HelpGif/password.gif'
+import registerHelp from'../Assets/HelpGif/register.gif'
 
 
 export const ViewLogin = () => {
@@ -39,6 +45,7 @@ export const ViewLogin = () => {
                     <SlideShow className="carousel" />
                 </Col>
             </Row>
+            <Ayuda ruta = {RutaTutorial.get("Login")}/>
         </Container>
     )
 }
@@ -64,4 +71,15 @@ RutaTutorial.get("Login")
     .setDescription(<>Ingresa con tu cuenta para guardar tus datos</>)
     .setRender(ViewLogin)
     .setMeta("Iniciar Sesión")
-    .setInstrucciones(<>Has clic en <Señalador marca="Login" text="Login" />, está en la esquina superior derecha de la pagina</>);
+    .setInstrucciones(<>Has clic en <Señalador marca="Login" texto="Login" />, está en la esquina superior derecha de la pagina</>)
+    .addPaso(<>Si no tienes cuenta, has click en <a className="a-register" href="/Register/">Registrate acá</a>
+                <br/><img className="logo-login" alt="Nombre de usuario" src={registerHelp}/></>,'Ya tengo')
+    .addPaso(<>Si ya tienes cuenta, Escribe tu nombre de usuario
+                <br/><img className="logo-login" alt="Nombre de usuario" src={userNameHelp}/></>)
+    .addPaso(<>Si no recuerdas tu contraseña has click en <a className='a-recovery-pass' href="/recovery-pass/">Olvidaste tu contraseña?</a>
+                <br/><img className="logo-login" alt="Nombre de usuario" src={forgetPassHelp}/></>,'La recuerdo')
+    .addPaso(<>Si la recuerdas, Escribe tu contraseña
+                <br/><img className="logo-login" alt="Nombre de usuario" src={passwordHelp}/></>)
+    .addPaso(<>Pulsa en Login
+                <br/><img className="logo-login" alt="Nombre de usuario" src={loginHelp}/></>)
+    ;

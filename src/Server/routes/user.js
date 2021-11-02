@@ -5,13 +5,14 @@ const router = require('express').Router();
 
 router.post('/login', async (req, res) => {
     console.log(`LOGIN:${req.sessionID}`);
+
+    
+    if (req.body.name)
+        req.body.name = req.body.name.toLowerCase()
+
     const user = await User.findByName(req.body.name);
     // console.log(`login:${user.name}`);
     // console.log(`${user.password}=== ${req.body.password.hashCode()}`);
-
-
-    if (req.body.user)
-        req.body.user = req.body.user.toLowerCase()
 
     if (user)
         if (user.password === `${req.body.password.hashCode()}`) {

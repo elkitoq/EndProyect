@@ -267,12 +267,11 @@ RutaTutorial.get("CreateCV")
     .setRender(ViewCreateCV)
     .addRequisito("haveAspirante")
     .setMeta("Crear CV")
-    .setInstrucciones(<>Has clic en <Señalador marca="CrearCV" text="Crear CV" />, está en la esquina superior izquierda de la pagina</>);
-
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearCV" texto="Crear CV" />, está en la esquina superior izquierda de la pagina</>);
 
 RutaTutorial.get("CreateCVautonomo")
     .setDescription(<>Crea y anexa un Curriculum Vitae a tu perfil</>)
     .setRender(ViewCreateCV)
     .addRequisito("haveAutonomo")
-    .setMeta("Crear CV")
-    .setInstrucciones(<>Has clic en <Señalador marca="CrearCV" text="Crear CV" />, está en la esquina superior izquierda de la pagina</>);
+    .setMeta("Crear CV (Para Autonomo)")
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearCV" texto="Crear CV" />, está en la esquina superior izquierda de la pagina</>);

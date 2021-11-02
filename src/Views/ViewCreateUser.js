@@ -246,18 +246,18 @@ RutaTutorial.get("haveAspirante")
     .addRequisito("Login")
     .setRender(AddAspirante)
     .setMeta("Crear Perfil de Aspirante")
-    .setInstrucciones(<>Has clic en <Señalador marca="CrearRol" text="Crear Perfil" />, en el menu de <Señalador marca="Roles" text="Roles" /></>);
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearPerfil" texto="Crear Perfil" />, en el menu de <Señalador marca="Roles" texto="Perfiles" /></>);
 
 RutaTutorial.get("haveEmpresa")
     .setDescription(<>Te dará acceso a toda las herramientas para Empresa</>)
     .addRequisito("Login")
     .setRender(AddEmpresa)
     .setMeta("Crear Perfil de Empresa")
-    .setInstrucciones(<>Has clic en <Señalador marca="CrearRol" text="Crear Perfil" />, en el menu de <Señalador marca="Roles" text="Roles" /></>);
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearPerfil" texto="Crear Perfil" />, en el menu de <Señalador marca="Roles" texto="Perfiles" /></>);
 
 RutaTutorial.get("haveAutonomo")
     .setDescription(<>Te dará acceso a toda las herramientas para autonomo</>)
     .addRequisito("Login")
     .setRender(AddAutonomo)
     .setMeta("Crear Perfil de Autonomo  ")
-    .setInstrucciones(<>Has clic en <Señalador marca="CrearRol" text="Crear Perfil" />, en el menu de <Señalador marca="Roles" text="Roles" /></>);
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearPerfil" texto="Crear Perfil" />, en el menu de <Señalador marca="Roles" texto="Perfiles" /></>);

@@ -137,9 +137,9 @@ export const DropdownRol = () => {
                 }
                 <DropdownItem divider />
                 <DropdownItem href="/Register/">
-                    <span id="CrearRol2">Crear Roles</span>
+                    <span id="CrearRol2">Crear Perfil</span>
                 </DropdownItem>
-                <Señalado marca="CrearRol2" title="Crear Rol" text="Crea un nuevo perfil con el Rol que prefieras" />
+                <Señalado marca="CrearRol2" title="Crear Perfil" text="Crea un nuevo perfil con el Rol que prefieras" />
             </DropdownMenu>
         </Dropdown>);
 }

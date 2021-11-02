@@ -40,12 +40,12 @@ RutaTutorial.get("LookForJobSendCV")
     .setRender(ViewLookForJob)
     .addRequisito("CreateCV")
     .setMeta("Buscar Trabajo")
-    .setInstrucciones(<>Escribe algunas palabras claves relacionadas con lo que estas buscando en la <Señalador marca="BarraBusqueda" text="barra superior"/>, y has clic en Buscar Trabajo<Señalador marca="BotonBuscarTrabajo" text="barra superior"/></>);
+    .setInstrucciones(<>Escribe algunas palabras claves relacionadas con lo que estas buscando en la <Señalador marca="BarraBusqueda" texto="barra superior"/>, y has clic en Buscar Trabajo<Señalador marca="BotonBuscarTrabajo" texto="barra superior"/></>);
 
 
 RutaTutorial.get("LookForJob")
     .setDescription(<>Accede a nuestra lista de busquedas laborales</>)
     .setRender(ViewLookForJob)
     .setMeta("Buscar Trabajo")
-    .setInstrucciones(<>Escribe algunas palabras claves relacionadas con lo que estas buscando en la <Señalador marca="BarraBusqueda" text="barra superior"/>, y has clic en Buscar Trabajo<Señalador marca="BotonBuscarTrabajo" text="barra superior"/></>);
+    .setInstrucciones(<>Escribe algunas palabras claves relacionadas con lo que estas buscando en la <Señalador marca="BarraBusqueda" texto="barra superior"/>, y has clic en Buscar Trabajo<Señalador marca="BotonBuscarTrabajo" texto="barra superior"/></>);
 

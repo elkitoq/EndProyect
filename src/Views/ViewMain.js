@@ -23,7 +23,7 @@ import {  } from './ViewCreateOfferService.js';
 import { ViewCompanyProfile } from './ViewCompanyProfile.js';
 
 import { ViewPerfilAspirante } from './ViewPerfilAspirante.js';
-import { Mapa, RenderProgress } from '../Components/tutorial.js';
+import { RenderProgress } from '../Components/tutorial.js';
 import {  } from './ViewJob.js';
 import { ViewPostulatedJobs } from './ViewPostulatedJobs.js';
 
@@ -68,7 +68,7 @@ export const ViewMain = () => <Switch>
   <ViewRoute path="/postulateJob" view={RenderProgress("PostulateJob")} />
   <ViewRoute path="/recovery-pass" view={ViewLogin} />
   <ViewRoute path="/perfilAspirante" view={ViewPerfilAspirante} />
-  <ViewRoute path="/mapSite" view={Mapa} />
+  <ViewRoute path="/mapSite" view={RenderProgress('Mapa')} />
   <ViewRoute path="/" view={RenderProgress("Home")} />
   <ViewRoute path="/profileCompany" view={ViewCompanyProfile} />
 </Switch>
