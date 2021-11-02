@@ -1,15 +1,17 @@
 
 
 .ayuda-flotante{
-   background:greenyellow;
-   height:500px;
-   width:500px;
-   z-index: 3;
-   padding: 2%;
+    background:white;
+    height:500px;
+    width:500px;
+    z-index: 3;
+    padding: 2%;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    border-radius: 6px
 }
 
 .semitransparente{
-   filter:alpha(opacity=50); opacity:0.5;
+    filter:alpha(opacity=50); opacity:0.5;
 }
 
 .flotante-0{
