@@ -5,7 +5,7 @@ const { User } = require('../models/User.js')
 
 
 router.post('/recovery-pass', async (req, res) => {
-    console.log(req.body);
+    console.log('post/recovery-pass');
 
     if (req.body.email)
         req.body.email = req.body.email.toLowerCase()
@@ -15,7 +15,6 @@ router.post('/recovery-pass', async (req, res) => {
         req.body.user = req.body.user.toLowerCase()
 
     const user = await User.findByEmail(req.body.email) || await User.findByName(req.body.name);
-    console.log(user);
     if (user) {
         user.codeRecoveryPass = Math.random();
         user.save()
@@ -49,13 +48,8 @@ router.post('/recovery-pass', async (req, res) => {
 })
 
 router.put('/recovery-pass', async (req, res) => {
-    console.log(req.body);
-
+    console.log('put/recovery-pass');
     const user = await User.findByName(req.body.user);
-
-    console.log(user.codeRecoveryPass === req.body.code);
-    console.log(req.body.code);
-    console.log(user.codeRecoveryPass);
 
     if (user.codeRecoveryPass && user.codeRecoveryPass === req.body.code) {
         if (req.body["password"] === req.body["password2"]) {

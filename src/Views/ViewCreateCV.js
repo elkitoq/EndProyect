@@ -234,7 +234,7 @@ const mostrarFotoPerfil = () => {
         reader.readAsDataURL(archivo);
         reader.onloadend = function () {
             const marco = document.getElementById("fotoPerfil");
-            resizeBase64Img(reader.result, 260, 130).then((img) => {
+            resizeBase64Img(reader.result, 130, 130).then((img) => {
                 // resizeBase64Img(reader.result,300,150).then((img)=>{
                 marco.src = img;
                 console.log(img);

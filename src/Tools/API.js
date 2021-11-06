@@ -84,6 +84,8 @@ export default class API {
                 this.call(call.eventName,call)
         if (info.cookies)
             this.onCookie(info.cookies)
+        
+        this.actualizador(Math.random())
     }
 
 

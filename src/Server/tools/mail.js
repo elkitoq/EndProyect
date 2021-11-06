@@ -16,8 +16,6 @@ const sendMail = (bodyMail) => {
         subject: bodyMail.subject,
         html: bodyMail.html,
     });
-    console.log("Mensaje enviado:"); 
-    console.log(bodyMail  /*messageId*/);
 }
 
 module.exports = { sendMail };

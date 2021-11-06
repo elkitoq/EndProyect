@@ -12,18 +12,26 @@ export const ViewRecoverPassword = () => {
     const getJson = API.getSearchParam(search);
 
     const [error,setError]=useState(false)
-   
-    API.on(API.events.CHANGEINFO,(api)=>{
-        var info = api.getHookInfo()
-        if (info.error)
-            setError(true);
-        if (info.message)
-            setError("ok");
-    },'RecoverPassword')
     
+    const [update,updater]=useState(1);
+    API.updater('/recovery-pass',updater)
 
+    if (API.get("/recovery-pass")){
+        var info = API.get("/recovery-pass").getHookInfo()
+        if (info.error){
+            if (!error)setError(true);}
+        else if (info.message)
+            if (error!=='ok')setError("ok");
+    }
+    
+    console.log(error);
 
-    return getJson.code ?
+    document.error = error
+    document.setError = setError
+
+    document.updater=updater
+
+    return <>{getJson.code ?
                         <Form method="put" className="form-container">
                             <APIComponent url="/recovery-pass" /> 
                             <h3>Cambiar contraseña:</h3>
@@ -32,9 +40,9 @@ export const ViewRecoverPassword = () => {
                             <Input type="hidden" name="user" defaultValue={getJson.user} />
                             <Input type="hidden" name="code" defaultValue={getJson.code} />
                             <FormGroup className="separado">
-                                <Button size="lg" color="primary" blocks="true">Cambiar Contraseña</Button>
                                 {error===true?<Button size="lg" color="primary" blocks="true" href="/recovery-pass">Volver a Solicitar</Button>:""}
-                                {error==="ok"?<Button size="lg" color="primary" blocks="true" href="/login">Volver a Login</Button>:""}
+                                {error==="ok"?<Button size="lg" color="primary" blocks="true" href="/login">Volver a Login</Button>
+                                :<Button size="lg" color="primary" blocks="true">Cambiar Contraseña</Button>}
                             </FormGroup>
                         </Form> :
                         <Form method="post" className="form-container">
@@ -46,7 +54,7 @@ export const ViewRecoverPassword = () => {
                             <FormGroup className="separado">
                                 <Button size="lg" color="primary" blocks="true">Solicitar cambio de Contraseña</Button>
                             </FormGroup>
-                        </Form>
+                        </Form>}</>
 }
 
 

@@ -49,6 +49,8 @@ const ButtonCreate = ({ href }) => {
 
     return <Button size="lg" color="primary" blocks="true" type="submit" href={`${href}?user=${selectUser.length - 1}`}
         onClick={(e) => {
+            const form = document.getElementsByClassName('formtovalidate')[0]
+            if (form.checkValidity()){
             selectUser[selectUser.length - 1].new = false;
             if (selectUser[selectUser.length - 1].profileName === "" || selectUser[selectUser.length - 1].profileName === undefined)
                 selectUser[selectUser.length - 1].profileName = "N/N";
@@ -56,7 +58,10 @@ const ButtonCreate = ({ href }) => {
             saveUser();
             status.set("selectRole", "" + (selectUser.length - 1))
             new QAPI('/profile').send("put", selectUser[selectUser.length - 1]);
-
+            }
+            else{
+                form.requestSubmit()
+            }
         }}>
         Crear</Button>
 }
@@ -85,13 +90,13 @@ const CrearEmpresa = () => {
         <Container>
             Creando Perfil para Empresa
             <CancelButton visibility={pathname === "/Register/" || isRegister} />
-            <Form>
-            <FormItem name="Razón Social" idInput="razonSocial" reference={{ values, onChange, id: "profileName" }} />
+            <Form className='formtovalidate'>
+            <FormItem required name="Razón Social" idInput="razonSocial" reference={{ values, onChange, id: "profileName" }} />
             <FormItem name="CUIT" type="number" idInput="CUIT" reference={{ values: values.data, onChange, id: "cuit" }} />
             <FormItem name="Direccion" idInput="address" reference={{ values: values.data, onChange, id: "address" }} />
             <FormItem name="Ciudad" idInput="city" reference={{ values: values.data, onChange, id: "city" }} />
             <FormItem name="Telefono" type="number" idInput="phone" reference={{ values: values.data, onChange, id: "phone" }} />
-            <FormItem name="Email" type="email" idInput="email" reference={{ values: values.data, onChange, id: "email" }} />
+            <FormItem required name="Email" type="email" idInput="email" reference={{ values: values.data, onChange, id: "email" }} />
             <ButtonCreate href={(pathname === "/Register/" || isRegister) ? "/homeEmpresa" : "#"} />
             </Form>
         </Container>
@@ -169,13 +174,13 @@ const CrearAspirante = () => {
         <Container>
             Creando Perfil para Aspirante
             <CancelButton visibility={pathname === "/Register/"|| isRegister} />
-            <Form>
-            <FormItem name="Nombre" idInput="name" reference={{ values: values.cv, onChange, id: "name" }} />
+            <Form className='formtovalidate'>
+            <FormItem required name="Nombre" idInput="name" reference={{ values: values.cv, onChange, id: "name" }} />
             <FormItem name="Apellido" idInput="lastName" reference={{ values: values.cv, onChange, id: "lastName" }} />
             <FormItem name="Direccion" idInput="address" reference={{ values: values.cv, onChange, id: "address" }} />
             <FormItem name="Ciudad" idInput="city" reference={{ values: values.cv, onChange, id: "city" }} />
             <FormItem name="Telefono" type="number" idInput="phone" reference={{ values: values.cv, onChange, id: "phone" }} />
-            <FormItem name="Email" idInput="email" reference={{ values: values.cv, onChange, id: "email" }} />
+            <FormItem required name="Email" type="email" idInput="email" reference={{ values: values.cv, onChange, id: "email" }} />
             <ButtonCreate href={(pathname === "/Register/"|| isRegister) ? "/homeAspirante" : "#"} />
             </Form>
         </Container>
@@ -223,13 +228,15 @@ const CrearAutonomo = () => {
         <Container>
             Creando Perfil para Autonomo
             <CancelButton visibility={pathname === "/Register/"|| isRegister} />
-            <FormItem name="Razón Social" idInput="razonSocial" reference={{ values, onChange, id: "profileName" }} />
+            <Form className='formtovalidate'>
+            <FormItem required name="Razón Social" idInput="razonSocial" reference={{ values, onChange, id: "profileName" }} />
             <FormItem name="CUIT" type="number" idInput="CUIT" reference={{ values: values.cv, onChange, id: "cuit" }} />
             <FormItem name="Direccion" idInput="address" reference={{ values: values.cv, onChange, id: "address" }} />
             <FormItem name="Ciudad" idInput="city" reference={{ values: values.cv, onChange, id: "city" }} />
             <FormItem name="Telefono" type="number" idInput="phone" reference={{ values: values.cv, onChange, id: "phone" }} />
-            <FormItem name="Email" type="email" idInput="email" reference={{ values: values.cv, onChange, id: "email" }} />
+            <FormItem required name="Email" type="email" idInput="email" reference={{ values: values.cv, onChange, id: "email" }} />
             <ButtonCreate href={(pathname === "/Register/"|| isRegister) ? "/homeAutonomo" : "#"} />
+            </Form>
         </Container>
     )
 }
