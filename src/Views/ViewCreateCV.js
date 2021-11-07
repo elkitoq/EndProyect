@@ -109,14 +109,14 @@ export const ViewCreateCV = () => {
     }, 'CreateCV')
 
     API.on(API.events.CHANGEDATA, (api) => {
-        if (!status.get("CreateCV") && api.getHookData() && api.getHookData().photo) {
+        if (!status.get("CreateCV") && api.getHookData() && api.getHookData().photo && document.getElementById("fotoPerfil")) {
             document.getElementById("fotoPerfil").src = api.getHookData().photo
         }
     }, 'CreateCV')
 
     if (API.get('/cv')){
         const api = API.get('/cv')
-        if (api.getHookData().photo && document.getElementById("fotoPerfil").src === noPhoto)
+        if (api.getHookData().photo && document.getElementById("fotoPerfil") && document.getElementById("fotoPerfil").src === noPhoto)
         document.getElementById("fotoPerfil").src = api.getHookData().photo
     }
 

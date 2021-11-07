@@ -57,18 +57,18 @@ export const NavegadorPrincipal = () => {
           </div>
           <div style={profile && !profile.new && profile.profileType!==0?{display:"none"}:{}}>
           <NavButton className="btn-cv-navbar" href="/OfferJob/" ><span id="OfferJob"> Ofrecer Empleo </span></NavButton>
-          <Señalado marca="OfferJob" title="Ofrecer Empleo" text="Si haces click te lleva a la pagina para crear busquedas laborales" />
+          <Señalado marca="OfferJob" title="Ofrecer Empleo" text="Si haces click te lleva a la pagina para crear búsquedas laborales" />
           </div>
           {(status.get("Login")) ?<DropdownRol />:""}
           {/* <NavButton className="btn-oficina-navbar" href="/jobOffice/">Oficina de empleo</NavButton> */}
           <NavButton className="btn-cv-navbar" onClick={()=>status.set('helperPopup')} href={status.get('helperPopup')?'/mapSite':'#'}><span id="ayudaButton">{status.get('helperPopup')?'Mas ':''}Ayuda</span></NavButton>
-          <Señalado marca="ayudaButton" title="Boton de ayuda" text={(status.get('helperPopup'))?'Te lleva al mapa del sitio':'Abre un pequeño Popup asistente'} />
+          <Señalado marca="ayudaButton" title="Botón de ayuda" text={(status.get('helperPopup'))?'Te lleva al mapa del sitio':'Abre un pequeño Popup asistente'} />
         </Nav>
         <Nav className="ms-auto buscador" navbar>
           <Busqueda className="ocultar-search input-search"
             href="/findJob/"
             text="Buscar Trabajo"
-            othersButtons={[{ href: "/lookforWorker/", text: "Buscar Empleado" }]} />
+            othersButtons={[{ href: "/findService", text: "Buscar Empleado", param:'job' }]} />
           <NavButton href="/lookforJob/"
             className="mostrar-search"
             children="Buscar Trabajo" />

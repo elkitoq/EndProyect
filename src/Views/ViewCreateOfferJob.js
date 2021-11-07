@@ -8,12 +8,16 @@ import { useContext } from "react";
 import { ApplicationStatus } from "../Server/models/ApplicationStatus";
 import { ApplicationContrato } from "../Server/models/AplicationContrato";
 import { Applicationhorario } from "../Server/models/Aplicationhorario";
-import RutaTutorial from "../Components/tutorial";
+import RutaTutorial, { Ayuda } from "../Components/tutorial";
 import { ViewOfferJob } from "./ViewOfferJob";
 import { LoadRoles } from "../Components/role";
 import '../Assets/Css/Company.css';
+import { useHistory, useLocation } from "react-router";
 
 export const ViewCreateOfferJob = ({ mode = "put",id}) => {
+
+    const { pathname } = useLocation();
+    const history = useHistory();
 
     const status = useContext(Status.Context)
     const [selectRole,] = status.use('selectRole');
@@ -36,7 +40,8 @@ export const ViewCreateOfferJob = ({ mode = "put",id}) => {
     // } 
 
     
-    const [api,setApi]=useState(null)
+    const [update,updater]=useState(1);
+    API.updater('/job',updater)
 
     //API.apis=[]
     
@@ -46,7 +51,6 @@ export const ViewCreateOfferJob = ({ mode = "put",id}) => {
             api.setData({status:0})
             if (id)
             api.get({id}).then((res)=>(res.data && res.data.response)?setStatus(res.data.response.status):"");
-            setApi(api)
         }
         },
         'CreateJob')
@@ -55,12 +59,23 @@ export const ViewCreateOfferJob = ({ mode = "put",id}) => {
         if(api.id==='/job'){
         if (mode==="put") 
         setSaved(api.getHookInfo().saved)}
+
     },'CreateJob')
 
-    // setApi(API.get("/job"))
+    const api=API.get('/job')
+
+    if (api){
+        if ( api.getHookData() && api.getHookData().tipoContratacion === 'Planta Permanente')
+        api.getHookData().tipoContrato=99
+        if (api.getHookData() && api.getHookInfo().saved)
+             if(pathname.substring(0, 10) === "/createJob") history.push('/offerJob')
+        if ( api.getHookData() && api.getHookData())
+            api.getHookData().role=selectRole
+
+    }
 
     return (
-        <>
+        <>  
         {saved?<ViewOfferJob/>:
         <Container className="container-form-busqueda">
             <LoadRoles select={0}/>
@@ -75,12 +90,17 @@ export const ViewCreateOfferJob = ({ mode = "put",id}) => {
                     <option value="Contratado" selected="selected">Contratado</option>
                     <option value="Planta Permanente">Planta Permanente</option>
                 </FormItem>
-                <FormItem name="Tipo de contrato" type="select" idInput="tipoContrato" style={{ visibility: true ? "visible " : "hidden" }}>
+                <div style={{visibility:(api && api.getHookData() && api.getHookData().tipoContratacion === 'Planta Permanente')?"hidden":"visible"}}>
+                <FormItem name="Tipo de contrato" type="select" idInput="tipoContrato" 
+                value={(api && api.getHookData() && api.getHookData().tipoContratacion === 'Planta Permanente' )?99:undefined} 
+                disabled={(api && api.getHookData() && api.getHookData().tipoContratacion === 'Planta Permanente' )}
+                >
                 {ApplicationContrato.map(
                         (element, index) =>
                             <option key={`option-${index}`} value={element.code} selected={(element.code===selectStatus)?"selected":undefined}>{element.title}</option>
                     )}
                 </FormItem>
+                </div>
                 <FormItem name="Tipo de Jornada" type="select" idInput="tipoJornada"> 
                 {Applicationhorario.map(
                         (element, index) =>
@@ -99,17 +119,32 @@ export const ViewCreateOfferJob = ({ mode = "put",id}) => {
                 </div>
             </Form>
             <div className="container-back-button">
-                <Button className='back-button' size="lg" href="/offerJob/" color="secondary">Volver a Busquedas Laborales</Button>  
+                <Button className='back-button' size="lg" href="/offerJob/" color="secondary">Volver a Búsquedas Laborales</Button>  
             </div>
-
+            {mode==="put"?<Ayuda ruta={RutaTutorial.get('CreateJob')}/>:""}
         </Container>
         }
         </>);
 }
 
 RutaTutorial.get("CreateJob")
-    .setDescription(<>Crea una Busqueda laboral para tu empresa</>)
+    .setDescription(<>Crea una Búsqueda laboral para tu empresa</>)
     .setRender(ViewCreateOfferJob)
     .addRequisito('haveEmpresa')
-    .setMeta("Crear Busqueda")
-    .setInstrucciones(<>Rellena los datos pedidos</>);
+    .setMeta("Crear Búsqueda")
+    .setInstrucciones(<>Rellena los datos pedidos</>)
+    .addPaso(<>En se busca escribe el titulo del perfil de aspirante que estas buscando</>)
+    .addPaso(<>En descripcion puedes incluir como es el puesto de trabajo que quieres crear, tambien palabras claves que le permitan al aspirante encontrar tu búsqueda</>)
+    .addPaso(<>En requerimientos escribe lo que esperas de los aspirantes que se presenten, desde experiencia previa, movilidad o lenguajes, etc (en caso que se necesite)
+    <br/>En Zona incluye en donde puede esperar el aspirante a trabajar. Puede ser el distrito donde se encuentre las oficinas o si requerirá viajar</>)
+    .addPaso(<>En caso de que lo que ofrezcas sea un contrato temporal, pon Tipo de contratacion: Contrato y selecciona el periodo de duracion en Tipo de contrato
+    <br/>En caso contrario pon Tipo de contratacion:Planta permanente.
+    <br/>En Tipo de Jornada, pon la duracion de la jornada laboral habitual
+    </>)
+    .addPaso(<>Por ultimo vas a seleccionar el estado en que se creará la Búsqueda, esto puede ser:
+    <br/><b>Provisiorio</b>: Tu búsqueda queda en modo borrador, para seguir editándola, nadie puede verla hasta que la pases a Abierta
+    <br/><b>Abierta</b>: El estado normal de una búsqueda que espera nuevos postulantes, ellos pueden verla en la pagina de búsqueda y postularse a ella
+    <br/><b>En proceso</b>: Cuando ya no recibes nuevos postulantes, esta es la etapa de entrevistas. Aun puedes mandar mensajes a los aspirantes que se hayan postulando
+    <br/><b>Cerrada</b>: cuando ya se ha seleccionado a los candidatos y se da por terminada la búsqueda.</>) 
+    .addPaso(<>Puedes cambiar el estado en cualquier momento, de la misma manera que cambias cualquier otro campo. Desde tu lista de búsquedas has click en ella y pon 'Editar'
+    </>);

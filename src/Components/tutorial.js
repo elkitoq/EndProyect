@@ -96,6 +96,8 @@ export default class RutaTutorial {
 
     addPaso(element,siguiente='Siguiente') { this.pasos.push({element,siguiente}); return this }
 
+    addPasos(array) {array.forEach((e)=>{if (e.siguiente===undefined)e.siguiente='Sigiente'}); this.pasos.push.apply(this.pasos,array); return this }
+
     setDescription(description) { this.description = description; return this };
 
     setRender(render) { this.render = render; return this }
@@ -138,7 +140,7 @@ export const Mapa = () => {
 
 
     
-    return <> Esta es una lista de todo lo que puedes hacer en nuestro aplicacion web, si tienes dudas hay una lista de instrucciones en cada item. Algunos puntos requieren que completes algun paso extra (como iniciar sesion) en ese caso te saldrá en rojo si no lo has hecho o verde si ya esta cubierto<ul>
+    return <> Esta es una lista de todo lo que puedes hacer en nuestro aplicación web, si tienes dudas hay una lista de instrucciones en cada ítem. Algunos puntos requieren que completes algún paso extra (como iniciar sesión) en ese caso te saldrá en rojo si no lo has hecho o verde si ya esta cubierto<ul>
         {RutaTutorial.map((ruta) =>
             (ruta instanceof RutaTutorial) ? (ruta.meta!=='')?
                 <li key={ruta.toString()} >{ruta.toString()}:
@@ -167,7 +169,7 @@ export const Ruta = ({ ruta }) => <ul>
     {ruta.getRequisitos().filter((e)=>e.meta!=="").map(
         (req) =>
             <li key={req.toString()} style={{ color: (req.isDone) ? "GREEN" : "RED" }}>
-                {req.meta}:{req.instrucciones}
+                {`${req.meta}: `}{req.instrucciones}
             </li>
     )}
     {ruta.instrucciones ? <li>{ruta.instrucciones}</li> : ''}
@@ -226,7 +228,7 @@ export const Ayuda = ({pos=2,ruta = RutaTutorial.get("Mapa")}) => {
 }
 
 RutaTutorial.get("Mapa")
-    .setDescription(<>Puedes leer algunas instrucciones para facilitarte la navegacion</>)
+    .setDescription(<>Puedes leer algunas instrucciones para facilitarte la navegación</>)
     .setRender(Mapa)
     // .addRequisito("haveAutonomo")
     .setMeta("Ayuda")

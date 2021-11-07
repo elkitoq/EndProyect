@@ -1,3 +1,4 @@
+const { TextareaAutosize } = require('@material-ui/core');
 const { Application } = require('../models/Applications.js');
 const { Candidate } = require('../models/candidate.js');
 const { getProfile } = require('../models/Profile.js');
@@ -8,15 +9,26 @@ router.put('/job', async (req, res) => {
     console.log(`JOB:${req.sessionID}`);
     console.log(req.body);
 
-    if (req.session.user && req.body.role) {
+
+    const info = {}
+
+    console.log(req.body.role);
+
+    if (!req.session.user) {
+        info.error = "no ha iniciado sesión"
+        info.eventCalls = [{ eventName: "isLogOut" }]
+    }
+    else if (req.body.role) {
         const profile = await getProfile(req.session.user.profile[req.body.role])
         if (profile) {
             profile.applications.push(await new Application(req.body).save())
             profile.save()
+            info.saved=true;
         }
     }
+    else info.error = "No se localiza el perfil"
 
-    res.status(201).json({ info: { saved: true } });
+    res.status(201).json({ info });
     res.end();
 });
 
@@ -27,7 +39,7 @@ router.post('/job', async (req, res) => {
     const info = {}
 
     if (!req.session.user) {
-        info.error = "no ha iniciado sesion"
+        info.error = "no ha iniciado sesión"
         info.eventCalls = [{ eventName: "isLogOut" }]
     }
     else if (req.body.role) {
@@ -46,7 +58,7 @@ router.post('/job', async (req, res) => {
                 application.save()
                 info.saved = true;
             }
-            else info.error = "No puede editar la busqueda laboral"
+            else info.error = "No puede editar la búsqueda laboral"
 
         }
         else info.error = "No se localiza el perfil"
@@ -132,7 +144,7 @@ router.get('/candidates', async (req, res) => {
             }
             else res.status(201).json({ info: { error: "No se pudo acceder a su perfil" } });
         }
-        else res.status(201).json({ info: { error: "Se debe especificar la Busqueda" } });
+        else res.status(201).json({ info: { error: "Se debe especificar la Búsqueda" } });
     } else res.status(201).json({ info: { error: "No ha iniciado session", eventCalls: [{ eventName: "isLogOut" }] } });
     res.end();
 });
@@ -148,7 +160,7 @@ router.get('/postulates', async (req, res) => {
                 item.candidates=item.candidates.filter((e)=>""+e.data._id===""+id)}
             res.status(201).json({ response });
         }
-        else res.status(201).json({ info: { error: "Se debe especificar la Busqueda" } });
+        else res.status(201).json({ info: { error: "Se debe especificar la Búsqueda" } });
     } else res.status(201).json({ info: { error: "No ha iniciado session", eventCalls: [{ eventName: "isLogOut" }] } });
 });
 
@@ -166,7 +178,7 @@ router.post('/postulate', async (req, res) => {
             console.log(application);
             console.log(application.candidates);
             if (application.status !== 1)
-                res.status(201).json({ info: { error: "La Busqueda no esta actualmente abierta" } });
+                res.status(201).json({ info: { error: "La Búsqueda no esta actualmente abierta" } });
             else if (application.candidates.find((e) => ""+e.data._id === ""+req.session.user.profile[req.body.role]._id))
                 res.status(201).json({ info: { error: "Ya estaba postulado" } });
             else {

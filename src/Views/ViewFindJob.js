@@ -42,8 +42,8 @@ export const ViewFindJob = () => {
         <Container className="abs-center separado">
             <Row>
                 <Busqueda text="Buscar Empleo" href="/findJob" defaultValue={busqueda.get("b")} />
-                <h1 className="title-find">Estos son las busquedas laborales que responden a "{busqueda.get("b")}" </h1>
-                <Display nameDownload={() => "Busquedas(" + busqueda.get("b") + ")"}
+                <h1 className="title-find">Estos son las búsquedas laborales que responden a "{busqueda.get("b")}" </h1>
+                <Display nameDownload={() => "Búsquedas(" + busqueda.get("b") + ")"}
                     get={busqueda}
                     link={user[selectRole]?{
                         onClick: (element) => {
@@ -51,7 +51,7 @@ export const ViewFindJob = () => {
                             b.set("postulate", element._id)
                             return `/postulateJob?${b}`
                         }, text: "Postularse como" + user[selectRole].profileName
-                    }:{onClick:()=>'/login',text:'Inicia sesion para postularte'}}
+                    }:{onClick:()=>'/login',text:'Inicia sesión para postularte'}}
                 >
                     <APIComponent url='/jobs' />
                     <CardText key="name">Puesto:</CardText>
@@ -80,6 +80,6 @@ RutaTutorial.get("FindJob")
     .setRender(ViewFindJob)
 
 RutaTutorial.get("PostulateJob")
-    .setMeta("Postularse a una Busqueda")
+    .setMeta("Postularse a una Búsqueda")
     .setRender(ViewFindJob)
     .addRequisito("haveAspirante")

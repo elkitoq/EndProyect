@@ -36,16 +36,16 @@ const LocalNoLoginCard = () =>
     </Card>
 
 RutaTutorial.get("LookForJobSendCV")
-    .setDescription(<>Accede a nuestra lista de busquedas laborales</>)
+    .setDescription(<>Accede a nuestra lista de búsquedas laborales</>)
     .setRender(ViewLookForJob)
     .addRequisito("CreateCV")
     .setMeta("Buscar Trabajo")
-    .setInstrucciones(<>Escribe algunas palabras claves relacionadas con lo que estas buscando en la <Señalador marca="BarraBusqueda" texto="barra superior"/>, y has clic en Buscar Trabajo<Señalador marca="BotonBuscarTrabajo" texto="barra superior"/></>);
+    .setInstrucciones(<>Escribe algunas palabras claves relacionadas con lo que estas buscando en la <Señalador marca="BarraBusqueda" texto="barra superior"/>, y has clic en <Señalador marca="BotonBuscarTrabajo" texto=" Buscar Trabajo"/></>);
 
 
 RutaTutorial.get("LookForJob")
-    .setDescription(<>Accede a nuestra lista de busquedas laborales</>)
+    .setDescription(<>Accede a nuestra lista de búsquedas laborales</>)
     .setRender(ViewLookForJob)
     .setMeta("Buscar Trabajo")
-    .setInstrucciones(<>Escribe algunas palabras claves relacionadas con lo que estas buscando en la <Señalador marca="BarraBusqueda" texto="barra superior"/>, y has clic en Buscar Trabajo<Señalador marca="BotonBuscarTrabajo" texto="barra superior"/></>);
+    .setInstrucciones(<>Escribe algunas palabras claves relacionadas con lo que estas buscando en la <Señalador marca="BarraBusqueda" texto="barra superior"/>, y has clic en <Señalador marca="BotonBuscarTrabajo" texto=" Buscar Trabajo"/></>);
 

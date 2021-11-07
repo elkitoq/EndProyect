@@ -255,7 +255,7 @@ const AddEmpresa = () => ViewCreateUser({ roleType: 0 })
 
 
 const DatosBasicosCV=()=>
-<>Rellena con tus datos basicos, es importante tu nombre y tu mail. Puedes cambiar los demas datos en cualquier momento desde el boton{' '} 
+<>Rellena con tus datos basicos, es importante tu nombre y tu mail. Puedes cambiar los demas datos en cualquier momento desde el botón{' '} 
 <Señalador marca='CrearCV' texto='Crear CV' /> (Arriba a la izquierda)
 </>
 
@@ -280,6 +280,6 @@ RutaTutorial.get("haveAutonomo")
     .setDescription(<>Te dará acceso a toda las herramientas para autonomo</>)
     .addRequisito("cargarPerfiles")
     .setRender(AddAutonomo)
-    .setMeta("Crear Perfil de Autonomo  ")
+    .setMeta("Crear Perfil de Autónomo")
     .setInstrucciones(<>Has clic en <Señalador marca="CrearPerfil" texto="Crear Perfil" />, en el menu de <Señalador marca="Roles" texto="Perfiles" /></>)
     .addPaso(<>Rellena con los datos basicos de tu empresa</>)

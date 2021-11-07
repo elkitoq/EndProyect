@@ -33,10 +33,10 @@ router.put('/mensajeApplications', async (req, res) => {
                 const cv = (await Candidate.findById(candidate.data._id)).cv
                 mail = {
                     email: cv.email,
-                    subject: "Mensaje de tu busqueda de empleo",
+                    subject: "Mensaje de tu búsqueda de empleo",
                     html: `<div style="width: 600px !important; height: 700px !important">
                     <h1>Hola ${cv.name},</h1>
-                    <p>Hay nuevas novedades sobre tu busqueda de <a onmouseover="this.style.color='#A569BD'" onmouseout="this.style.color='#2980B9'" style="color: #2980B9;text-decoration: none; " href="http://${req.body.clientUrl}/postulates?id=${application._id}">${application.name}</a>
+                    <p>Hay nuevas novedades sobre tu búsqueda de <a onmouseover="this.style.color='#A569BD'" onmouseout="this.style.color='#2980B9'" style="color: #2980B9;text-decoration: none; " href="http://${req.body.clientUrl}/postulates?id=${application._id}">${application.name}</a>
                     , tienes un mensaje de <a onmouseover="this.style.color='#A569BD'" onmouseout="this.style.color='#2980B9'" style="color: #2980B9;text-decoration: none; " href="http://${req.body.clientUrl}/perfilEmpresa?id=${company._id}" >${company.data.razonSocial}</a> 
                     <h4>mensaje</h4>
                    <p>${req.body.mensaje}</p>
@@ -48,7 +48,7 @@ router.put('/mensajeApplications', async (req, res) => {
             res.status(201).json({ info: { message: `${mailCounter} Email enviados` } })
         }
         else
-            res.status(201).json({ info: { error: `No tiene permiso para enviar mail en nombre de esta Busqueda laboral` } })
+            res.status(201).json({ info: { error: `No tiene permiso para enviar mail en nombre de esta Búsqueda laboral` } })
     }
     else
         res.status(201).json({ info: { error: "No ha iniciado session", eventCalls: [{ eventName: "isLogOut" }] } });

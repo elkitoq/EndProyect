@@ -1,9 +1,11 @@
 import { useLocation } from "react-router";
 import { Container, Row, CardText, CardImg } from "reactstrap";
-import { Display } from "../Components/Display";
+import { Display, DisplayHelperStep } from "../Components/Display";
 import API, { APIComponent } from "../Tools/API";
-import RutaTutorial, { NextButton } from "../Components/tutorial";
+import RutaTutorial, { Ayuda, NextButton } from "../Components/tutorial";
 
+import {ViewLookForWorker} from "./ViewLookForWorker";
+import { Señalador } from "../Components/Señalador";
 
 
 
@@ -21,7 +23,7 @@ export const ViewFindService = (props) => {
     return (
         <Container className="abs-center" fluid={true}>
             <Row className="row-service-card">
-                <h1 className="title-find">Estos son los resultados que responden a su busqueda de "{getJson.job}" </h1>
+                <h1 className="title-find">Estos son los resultados que responden a su búsqueda de "{getJson.job}" </h1>
                 {/* <Display get={getJson} nameDownload={"Busqueda("+getJson.job+")"}>
                     <APIComponent url='https://randomuser.me/api/' responseKey="results" />
                     <CardImg func={(elemento) => elemento.picture.large} />
@@ -31,6 +33,8 @@ export const ViewFindService = (props) => {
                     <CardText text={getJson.job}>Ocupación: </CardText>
                     <CardText hideData text="OTROS DATOS SON DESCONOCIDOS">{""}</CardText>
                 </Display> */}
+
+                <ViewLookForWorker get={getJson}/>
                 <Display get={getJson} nameDownload={"Busqueda(" + getJson.job + ")"}>
                     <APIComponent url='/service' />
                     <CardImg func={(elemento) => elemento.freelance.photo} />
@@ -43,6 +47,7 @@ export const ViewFindService = (props) => {
                     <CardText func={(elemento) => elemento.match}>Coincidencias: </CardText>
 
                 </Display>
+                <Ayuda ruta={RutaTutorial.get('FindService')}/>
             </Row>
 
         </Container>
@@ -53,10 +58,13 @@ export const ViewFindService = (props) => {
 RutaTutorial.get("FindService")
     .setMeta("Lista de servicios")
     .setRender(ViewFindService)
+    .addPaso(<>Acá puedes ver una lista de los servicios que se están ofreciendo y que responden a la busqueda que has hecho. Puedes cambiar la busqueda en la
+    <Señalador marca="barraBusquedalookforworker" texto=" barra de búsqueda"/></>)
+    .addPasos(DisplayHelperStep)
 
 /*
 RutaTutorial.get("PostulateJob")
-    .setMeta("Postularse a una Busqueda")
+    .setMeta("Postularse a una Búsqueda")
     .setRender(ViewFindService)
     .addRequisito("haveAspirante")
     */

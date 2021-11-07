@@ -79,7 +79,7 @@ RutaTutorial.get("Login")
     .setRender(ViewLogin)
     .setMeta("Iniciar Sesión")
     .setInstrucciones(<>Has clic en <Señalador marca="Login" texto="Login" />, está en la esquina superior derecha de la pagina</>)
-    .addPaso(<>Si no tienes cuenta, has click en <a className="a-register" href="/Register/">Registrate acá</a>
+    .addPaso(<>Si no tienes cuenta, has click en <a className="a-register" href="/Register/">Regístrate acá</a>
                 <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={registerHelp}/></>,'Ya tengo')
     .addPaso(<>Si ya tienes cuenta, Escribe tu nombre de usuario
                 <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={userNameHelp}/></>)
@@ -93,7 +93,7 @@ RutaTutorial.get("Login")
 RutaTutorial.get("recovery")
     .setDescription(<>Si la olvidaste, puedes recuperar tu contraseña</>)
     .setMeta("Recupera tu contraseña")
-    .setInstrucciones(<>Si lo solicitas, desde la pantalla de iniciar sesion, Te enviaremos un mail para recuperar tu contraseña</>)
+    .setInstrucciones(<>Si lo solicitas, desde la pantalla de iniciar sesión, Te enviaremos un mail para recuperar tu contraseña</>)
     .addPaso(<> Para cambiar tu contraseña, necesitamos enviarte un mail. Escribe tu nombre de usuario o tu email y presione 'Solicitar cambio de Contraseña'
                 <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={recuperarPass}/></>)
     .addPaso(<> En la bandeja de entrada de su correo recibirá un mail, haga click en 'Restablecer Contraseña'

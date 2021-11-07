@@ -31,7 +31,7 @@ export const ViewCreateOfferService = ({ mode = "put", id }) => {
                     api.get({ id })//.then((res)=>(res.data && res.data.response)?setStatus(res.data.response.status):"");
             }
         },
-        'CreateJob')
+        'CreateService')
 
 
     API.on(API.events.CHANGEINFO, (api) => {
