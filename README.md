@@ -65,6 +65,8 @@
    6.  [service](#service)
    7.  [user](#user)
    8.  [mensaje](#mensaje)
+   9.  [profile](#profile)
+   10. [recovery-pass](#recoverypass)
 
 2. Tools
    1. [hashCode](#hashCode)
@@ -698,7 +700,34 @@ Guarda el body completo q se envia como un nuevo
 
 ### get /profile (id,type)
 
-devuelve el perfil del tipo: type (Candidate,Company, Freelance) 
+devuelve el perfil del tipo: type (Candidate,Company, Freelance) que tenga la id solicitada 
+
+### get /profile (index)
+
+Devuelve el perfil numero **index** de la cuenta que haya iniciado sesión
+
+### get /profile ()
+
+Devuelve la lista de perfiles de la cuenta que haya iniciado sesión (Es importante notar que la lista no incluye informacion especifica de cada tipo de perfil, usa la clase generica [profile](#profile-db))
+
+[indice](#indice)
+
+---
+
+## recoveryPass
+
+### POST /recovery-pass (email,user)
+
+Envia un email de recuperacion de password a una cuenta que responda ya sea al email proporcionado o al nombre de usuario.
+
+el email incluirá un link con un codigo q se genera de manera aleatoria y se guarda en la cuenta de usuario
+
+la recuperacion de password solo responderá al ultimo codigo enviado y solo se podrá usar una vez
+
+
+### PUT /recovery-pass (user,codeRecoveryPass,password,password2)
+
+Cambia la contraseña del user (siempre y cuando se reciba por duplicada y sea correcto el codigo de recuperación) 
 
 [indice](#indice)
 
