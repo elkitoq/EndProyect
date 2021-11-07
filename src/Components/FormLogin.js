@@ -53,14 +53,14 @@ export const FormLogin = ({showRegister}) => {
             <FormItem name="Usuario" idInput="name" />
             <FormItem name="Password" type="password" idInput="password" />
 
+            <FormGroup className="separado">
+                <Button className='button-submit' size="lg" color="primary" type="submit" block>Login</Button>
+            </FormGroup>
 
             <ButtonFacebook />
 
             <ButtonGoogle />
 
-            <FormGroup className="separado">
-                <Button className='button-submit' size="lg" color="primary" type="submit" block>Login</Button>
-            </FormGroup>
 
             <BoxLoginRecoveryPass />
 
@@ -68,7 +68,7 @@ export const FormLogin = ({showRegister}) => {
                 <Label >
                     ¿No tenes cuenta todavía? <a className="a-register" href="#" onClick={
                         ()=>{setRegister(true)}
-                    }>Registrate acá</a>
+                    }>Regístrate  acá</a>
                 </Label>
             </FormGroup>
         </Form>}</>

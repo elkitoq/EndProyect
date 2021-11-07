@@ -41,8 +41,8 @@ export const ViewService = () =>{
 }
 
 
-RutaTutorial.get("ViewService")
-    .setDescription(<>Muestra y permite editar un servicio ofrecido</>)
-    .setRender(ViewService)
-    .setMeta("Editar Servicio")
-    .setInstrucciones(<>Rellena los datos pedidos</>);
+// RutaTutorial.get("ViewService").setLink('/ViewService')
+//     .setDescription(<>Muestra y permite editar un servicio ofrecido</>)
+//     .setRender(ViewService)
+//     .setMeta("Editar Servicio")
+//     .setInstrucciones(<>Rellena los datos pedidos</>);

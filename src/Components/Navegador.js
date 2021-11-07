@@ -68,7 +68,7 @@ export const NavegadorPrincipal = () => {
           <Busqueda className="ocultar-search input-search"
             href="/findJob/"
             text="Buscar Trabajo"
-            othersButtons={[{ href: "/lookforWorker/", text: "Buscar Empleado" }]} />
+            othersButtons={[{ href: "/findService", text: "Buscar Empleado", param: 'job' }]} />
           <NavButton href="/lookforJob/"
             className="mostrar-search"
             children="Buscar Trabajo" />

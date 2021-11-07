@@ -1,11 +1,11 @@
 import { useLocation } from "react-router";
 import { Button, CardText, Container, Row } from "reactstrap";
 import API, { APIComponent } from "../Tools/API";
-import { Display } from "../Components/Display";
+import { Display, DisplayHelperStep } from "../Components/Display";
 
 import { Status } from "../Tools/Status";
 import { useContext } from "react";
-import RutaTutorial from "../Components/tutorial";
+import RutaTutorial, { Ayuda } from "../Components/tutorial";
 import { ApplicationStatus } from "../Server/models/ApplicationStatus";
 import { LoadRoles } from "../Components/role";
 
@@ -33,7 +33,7 @@ const OfferJob = () => {
     return (
         <Container className="abs-center" fluid={true}>
             <Row className="container-content-offerJob">
-                <Button className="button-nueva-busqueda" size="lg" style={{ width: "auto", fontSize: "16px", marginLeft: "10px" }} color="primary" href="/createJob/">Nueva Busqueda</Button>
+                <Button className="button-nueva-busqueda" size="lg" style={{ width: "auto", fontSize: "16px", marginLeft: "10px" }} color="primary" href="/createJob/">Nueva Búsqueda</Button>
                 <Display nameDownload={"Busquedas"}
                     get={getJson}
                     link={{ onClick: (element) => `/ViewJob?application=${element._id}`, text: "Ver y Editar" }}
@@ -48,7 +48,7 @@ const OfferJob = () => {
                     }}>Estado:</CardText>
                 </Display>
             </Row>
-
+            <Ayuda ruta={RutaTutorial.get('OfferJob')}/>
         </Container>
     );
 }
@@ -56,9 +56,12 @@ const OfferJob = () => {
 
 
 
-RutaTutorial.get("OfferJob")
-    .setDescription(<>Lista las actuales Busquedas de tu empresa</>)
+RutaTutorial.get("OfferJob").setLink('/OfferJob')
+    .setDescription(<>Lista las actuales Búsquedas de tu empresa</>)
     .setRender(ViewOfferJob)
     .addRequisito("haveEmpresa")
-    .setMeta("Listar Busquedas")
-    .setInstrucciones(<>Guarda tu nueva Busqueda</>);
+    .setMeta("Listar Búsquedas")
+    .setInstrucciones(<>Guarda tu nueva Búsqueda</>)
+    .addPaso(<>Acá puedes ver una lista de tus búsquedas laborales actuales. Has click en una de ellas para ver los detalles o para editarla
+    Puedes crear una Nueva Búsqueda si haces click en el botón 'Nueva Búsqueda' arriba a la izquierda</>)
+    .addPasos(DisplayHelperStep);

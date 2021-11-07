@@ -36,7 +36,7 @@ export const ViewOfferService = () => {
 }
 
 
-RutaTutorial.get("OfferService")
+RutaTutorial.get("OfferService").setLink('/OfferService')
     .setDescription(<>Lista los actuales Servicios ofrecidos</>)
     .setRender(ViewOfferService)
     .addRequisito("haveAutonomo")

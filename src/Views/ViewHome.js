@@ -5,7 +5,7 @@ import '../Assets/Css/home.css';
 import RutaTutorial, { Ayuda, Ruta } from "../Components/tutorial";
 import { Señalado, Señalador } from "../Components/Señalador";
 
-const menu1='podes consultar las diferentes busquedas laborales en las que actualmente miles de empresas buscan trabajadores como vos. Podras tambien postularte en ellos si creas un perfil de aspirante y cargas un Curriculum Vitae'
+const menu1='podes consultar las diferentes búsquedas laborales en las que actualmente miles de empresas buscan trabajadores como vos. Podrás también postularte en ellos si creas un perfil de aspirante y cargas un Curriculum Vitae'
 const menu2='podes cargar aquellos trabajos que estas realizando por cuenta propia para encontrar posibles clientes'
 const menu3='podes encontrar personas dispuestos a realizar el trabajo que vos necesitas.'
 export const ViewHome = () => <Container className="abs-center container-home no-scroll">
@@ -27,11 +27,11 @@ export const ViewHome = () => <Container className="abs-center container-home no
 </Container>
 
 
-RutaTutorial.get("Home")
+RutaTutorial.get("Home").setLink('/')
     .setDescription(<>Puedes ver la pagina inicial</>)
     .setInstrucciones(<>Has clic en nuestro <Señalador marca="logo" />, está en la esquina superior izquierda de la pagina</>)
     .setRender(ViewHome)
     .addPaso(<>En 'Busco empleo' {menu1}</>)
-    .addPaso(<>En 'Ofrecer mis servicios' {menu2}(Te pediremos que crees una cuenta o inicies sesion con un perfil de autonomo)</>)
-    .addPaso(<>En 'Busco empleados' {menu3} Si sos una empresa y buscas contratar a alguien te sugerimos que crees una busqueda laboral. Has click en <Señalador  marca="OfferJob" text ="Ofrecer Empleo"/></>)
+    .addPaso(<>{`En 'Ofrecer mis servicios' ${menu2} (Te pediremos que crees una cuenta o inicies sesión con un perfil de autónomo)`}</>)
+    .addPaso(<>En 'Busco empleados' {menu3} Si sos una empresa y buscas contratar a alguien te sugerimos que crees una búsqueda laboral. Has click en <Señalador  marca="OfferJob" text ="Ofrecer Empleo"/></>)
     ;

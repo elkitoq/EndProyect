@@ -109,14 +109,14 @@ export const ViewCreateCV = () => {
     }, 'CreateCV')
 
     API.on(API.events.CHANGEDATA, (api) => {
-        if (!status.get("CreateCV") && api.getHookData() && api.getHookData().photo) {
+        if (!status.get("CreateCV") && api.getHookData() && api.getHookData().photo && document.getElementById("fotoPerfil")) {
             document.getElementById("fotoPerfil").src = api.getHookData().photo
         }
     }, 'CreateCV')
 
     if (API.get('/cv')) {
         const api = API.get('/cv')
-        if (api.getHookData().photo && document.getElementById("fotoPerfil").src === noPhoto)
+        if (api.getHookData().photo && document.getElementById("fotoPerfil") && document.getElementById("fotoPerfil").src === noPhoto)
             document.getElementById("fotoPerfil").src = api.getHookData().photo
     }
 
@@ -308,9 +308,9 @@ RutaTutorial.get("CreateCV")
         <br /><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={guardarCV} /></>)
 
 
-RutaTutorial.get("CreateCVautonomo")
-    .setDescription(<p>Crea y anexa un Curriculum Vitae a tu perfil</p>)
+RutaTutorial.get("CreateCVautonomo").setLink('/CVCreate2')
+    .setDescription(<>Crea y anexa un Curriculum Vitae a tu perfil</>)
     .setRender(ViewCreateCV)
     .addRequisito("haveAutonomo")
     .setMeta("Crear CV (Para Autonomo)")
-    .setInstrucciones(<p>Has clic en <Señalador marca="CrearCV" texto="Crear CV" />, está en la esquina superior izquierda de la pagina</p>);
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearCV" texto="Crear CV" />, está en la esquina superior izquierda de la pagina</>)

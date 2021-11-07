@@ -255,12 +255,12 @@ const AddEmpresa = () => ViewCreateUser({ roleType: 0 })
 
 
 const DatosBasicosCV=()=>
-<>Rellena con tus datos basicos, es importante tu nombre y tu mail. Puedes cambiar los demas datos en cualquier momento desde el boton{' '} 
+<>Rellena con tus datos basicos, es importante tu nombre y tu mail. Puedes cambiar los demas datos en cualquier momento desde el botón{' '} 
 <Señalador marca='CrearCV' texto='Crear CV' /> (Arriba a la izquierda)
 </>
 
 
-RutaTutorial.get("haveAspirante")
+RutaTutorial.get("haveAspirante").setLink('/CreateAspirante')
     .setDescription(<>Te dará acceso a toda las herramientas para aspirantes</>)
     .addRequisito("cargarPerfiles")
     .setRender(AddAspirante)
@@ -268,7 +268,7 @@ RutaTutorial.get("haveAspirante")
     .setInstrucciones(<>Has clic en <Señalador marca="CrearPerfil" texto="Crear Perfil" />, en el menu de <Señalador marca="Roles" texto="Perfiles" /></>)
     .addPaso(<DatosBasicosCV/>)
 
-RutaTutorial.get("haveEmpresa")
+RutaTutorial.get("haveEmpresa").setLink('/CreateEmpresa')
     .setDescription(<>Te dará acceso a toda las herramientas para Empresa</>)
     .addRequisito("cargarPerfiles")
     .setRender(AddEmpresa)
@@ -276,10 +276,10 @@ RutaTutorial.get("haveEmpresa")
     .setInstrucciones(<>Has clic en <Señalador marca="CrearPerfil" texto="Crear Perfil" />, en el menu de <Señalador marca="Roles" texto="Perfiles" /></>)
     .addPaso(<DatosBasicosCV/>)
 
-RutaTutorial.get("haveAutonomo")
+RutaTutorial.get("haveAutonomo").setLink('/CreateAutonomo')
     .setDescription(<>Te dará acceso a toda las herramientas para autonomo</>)
     .addRequisito("cargarPerfiles")
     .setRender(AddAutonomo)
-    .setMeta("Crear Perfil de Autonomo  ")
+    .setMeta("Crear Perfil de Autónomo")
     .setInstrucciones(<>Has clic en <Señalador marca="CrearPerfil" texto="Crear Perfil" />, en el menu de <Señalador marca="Roles" texto="Perfiles" /></>)
     .addPaso(<>Rellena con los datos basicos de tu empresa</>)

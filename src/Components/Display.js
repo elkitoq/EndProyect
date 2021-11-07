@@ -154,3 +154,10 @@ const Selector = ({ onChange = () => { }, items, select }) => {
     );
 
 }
+
+export const DisplayHelperStep=[]
+DisplayHelperStep.push({element:<>En la lista puedes seleccionar la forma de display:
+    <br/><b>Tarjetas</b>: Muestra una tarjeta con los datos de cada item
+    <br/><b>Tabla</b>: Muestra una tabla con un ítem en cada renglon
+    <br/> has click en un ítem, para ver mas detalles o acciones</>})
+DisplayHelperStep.push({element:<>Puedes descargar la vista actual en un excel, si haces click en descargar</>})

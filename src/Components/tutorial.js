@@ -17,6 +17,7 @@ export default class RutaTutorial {
         RutaTutorial.#list[meta] = this;
         this.render = () => <></>;
         this.pasos = []
+        this.link = '#'
     }
 
     setMeta(meta) {
@@ -26,6 +27,10 @@ export default class RutaTutorial {
 
     toString() {
         return (this.meta.toString())
+    }
+
+    toLink() {
+        return <a href={this.link}>{this.toString()}</a>
     }
 
     static get(meta, create = true) {
@@ -40,6 +45,8 @@ export default class RutaTutorial {
 
         return r;
     }
+
+    setLink(link) { this.link = link; return this }
 
     static listRequisitosSorted(r, requisitos) {
         for (let req of requisitos) {
@@ -95,6 +102,8 @@ export default class RutaTutorial {
     setInstrucciones(instrucciones) { this.instrucciones = instrucciones; return this };
 
     addPaso(element, siguiente = 'Siguiente') { this.pasos.push({ element, siguiente }); return this }
+
+    addPasos(array) { array.forEach((e) => { if (e.siguiente === undefined) e.siguiente = 'Sigiente' }); this.pasos.push.apply(this.pasos, array); return this }
 
     setDescription(description) { this.description = description; return this };
 
@@ -171,7 +180,7 @@ export const Ruta = ({ ruta }) => <ul>
     {ruta.getRequisitos().filter((e) => e.meta !== "").map(
         (req) =>
             <li key={req.toString()} style={{ color: (req.isDone) ? "GREEN" : "RED" }}>
-                {req.meta}:{req.instrucciones}
+                {`${req.meta}: `}{req.instrucciones}
             </li>
     )}
     {ruta.instrucciones ? <li>{ruta.instrucciones}</li> : ''}
@@ -229,8 +238,8 @@ export const Ayuda = ({ pos = 2, ruta = RutaTutorial.get("Mapa") }) => {
     </div> : ''}</>
 }
 
-RutaTutorial.get("Mapa")
-    .setDescription(<>Puedes leer algunas instrucciones para facilitarte la navegacion</>)
+RutaTutorial.get("Mapa").setLink('/mapSite')
+    .setDescription(<>Puedes leer algunas instrucciones para facilitarte la navegación</>)
     .setRender(Mapa)
     // .addRequisito("haveAutonomo")
     .setMeta("Ayuda")

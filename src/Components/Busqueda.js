@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Form, Input, InputGroup, InputGroupAddon } from "reactstrap";
 
 
-export const Busqueda = ({ href = "#", text = "Buscar", othersButtons, param = "b", placeholder = "Busqueda", style, className, defaultValue}) => {
+export const Busqueda = ({ href = "#", text = "Buscar", othersButtons, param = "b", placeholder = "Busqueda", style, className, defaultValue, ...props}) => {
 
     const [buscado, setBuscado] = useState("")
 
@@ -11,6 +11,7 @@ export const Busqueda = ({ href = "#", text = "Buscar", othersButtons, param = "
         <Form action={href} className="form-busqueda">
             <InputGroup style={style} className={className}>
                 <Input
+                    {...props}
                     name={param}
                     autoFocus
                     placeholder={placeholder}
@@ -22,7 +23,7 @@ export const Busqueda = ({ href = "#", text = "Buscar", othersButtons, param = "
                     <Button >{text}</Button>
                     {Array.isArray(othersButtons) ? othersButtons.map(
                         (element, index) =>
-                            <Button key={`SearchButton${index}`} href={`${element.href}?${param}=${buscado}`}>{element.text}</Button>
+                            <Button key={`SearchButton${index}`} href={`${element.href}?${element.param || param}=${buscado}`}>{element.text}</Button>
                     ) : ""}
                 </InputGroupAddon>
             </InputGroup>

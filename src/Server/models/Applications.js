@@ -9,7 +9,8 @@ const applicationSchema = new mongoose.Schema({
     tipoContratacion:String,
     tipoContrato: Number,
     tipoJornada: Number,
-    status: Number,
+    status: {type: Number,
+        default:0},
     candidates:[{
         data:CandidateSchema,
         date:Date,

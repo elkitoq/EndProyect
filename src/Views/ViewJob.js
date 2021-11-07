@@ -1,10 +1,10 @@
 import { useContext, useState} from "react";
 import { useLocation } from "react-router";
 import { Button, CardImg, CardText, Container, Input, Modal, ModalBody, ModalFooter, Row } from "reactstrap";
-import { Display } from "../Components/Display";
+import { Display, DisplayHelperStep } from "../Components/Display";
 import { Form } from "../Components/Form";
 import { FormItem } from "../Components/FormItem";
-import RutaTutorial from "../Components/tutorial";
+import RutaTutorial, { Ayuda } from "../Components/tutorial";
 import API, { APIComponent } from "../Tools/API";
 import { Status } from "../Tools/Status";
 import { ViewCreateOfferJob } from "./ViewCreateOfferJob";
@@ -44,7 +44,7 @@ export const ViewJob = () => {
         <ModalBody >
             <Form method="put">
                 <APIComponent url='/mensajeApplications'/>
-                <b>Se enviara el mensaje a todos los postulantes que esten en el estado actual de la Busqueda</b>
+                <b>Se enviara el mensaje a todos los postulantes que esten en el estado actual de la Búsqueda</b>
                 <Input name="clientUrl" type="hidden" defaultValue={window.location.host} />
                 <FormItem type="textarea" idInput="mensaje"/>
             </Form>
@@ -56,7 +56,7 @@ export const ViewJob = () => {
     </Modal>
     
     return (
-        <Container className="center-container" fluid={true}>
+        <Container className="" fluid={true}>
             <Row>
                 <ViewCreateOfferJob mode="post" id={getJson.application}/>
             </Row>
@@ -83,6 +83,7 @@ export const ViewJob = () => {
 
                 </Display>
             </Row>
+            <Ayuda ruta={RutaTutorial.get('ViewJob')}/>
 
         </Container>
     );
@@ -90,7 +91,11 @@ export const ViewJob = () => {
 
 
 RutaTutorial.get("ViewJob")
-    .setDescription(<>Muestra y permite editar una Busqueda laboral de tu empresa</>)
+    .setDescription(<>Muestra y permite editar una Búsqueda laboral de tu empresa</>)
     .setRender(ViewJob)
-    .setMeta("Editar Busqueda")
-    .setInstrucciones(<>Rellena los datos pedidos</>);
+    .setMeta("Editar Búsqueda")
+    .setInstrucciones(<>Rellena los datos pedidos</>)
+    .addPasos(RutaTutorial.get("CreateJob").pasos)
+    .addPaso(<>Puedes ver una lista de los candidatos, y la fecha y hora de su postulación, has click en alguno para ver detalles o ir a su perfil</>)
+    .addPasos(DisplayHelperStep)
+    ;

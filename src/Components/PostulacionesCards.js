@@ -9,7 +9,7 @@ export const PostulacionesCards = ({ postulacion }) => {
                     Puesto solicitado: {postulacion.name}
                 </p>
                 <p className="estado-busqueda">
-                    Estado busqueda: {postulacion.status === 1 ? "Abierta" : postulacion.status === 2 ? "En Proceso" : postulacion.status === 10 ? "Cerrada" : postulacion.status === 99 ? "anulada" : "provisoria"}
+                    Estado Búsqueda: {postulacion.status === 1 ? "Abierta" : postulacion.status === 2 ? "En Proceso" : postulacion.status === 10 ? "Cerrada" : postulacion.status === 99 ? "anulada" : "provisoria"}
                 </p>
             </div>
         </div>

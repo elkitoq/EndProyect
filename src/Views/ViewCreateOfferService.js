@@ -5,8 +5,9 @@ import API, { APIComponent } from "../Tools/API";
 import { Status } from "../Tools/Status";
 import { useContext, useState } from "react";
 import { ViewOfferService } from "./ViewOfferService";
-import RutaTutorial from "../Components/tutorial";
+import RutaTutorial, { Ayuda } from "../Components/tutorial";
 import { useLocation } from "react-router";
+import { Señalador } from "../Components/Señalador";
 
 
 export const ViewCreateOfferService = ({ mode = "put", id }) => {
@@ -31,7 +32,7 @@ export const ViewCreateOfferService = ({ mode = "put", id }) => {
                     api.get({ id })//.then((res)=>(res.data && res.data.response)?setStatus(res.data.response.status):"");
             }
         },
-        'CreateJob')
+        'CreateService')
 
 
     API.on(API.events.CHANGEINFO, (api) => {
@@ -52,13 +53,18 @@ export const ViewCreateOfferService = ({ mode = "put", id }) => {
                     <Input name="role" type="hidden" defaultValue={selectRole} />
                     <Button className='button-submit' href="/offerService" onClick={() => API.get('/service').put()} size="lg" color="primary" type="submit" block>Enviar</Button>
                 </Form >
+                <Ayuda ruta={RutaTutorial.get("CreateService")}/>
             </Container >
         }</>);
 }
 
-RutaTutorial.get("CreateService")
+RutaTutorial.get("CreateService").setLink('/CreateService')
     .setDescription(<>Crea un servicio para ofrecerlo</>)
     .setRender(ViewCreateOfferService)
     .addRequisito("haveAutonomo")
     .setMeta("Crear Servicio")
-    .setInstrucciones(<>Rellena los datos pedidos</>);
+    .setInstrucciones(<>Rellena los datos pedidos</>)
+    .addPaso(<>Tanto si eres independiente o si tu empresa quiere ofrecer un servicio, en esta seccion puede publicarlo</>)
+    .addPaso(<>En <b>Ofrezco</b> podés ponerle un titulo a lo que estas dispuesto a hacer, en <b>Descripcion</b> puedes agregar tantos detalles como quieras, no es necesario que agreguesningun dato personal ya que incluiremos los que tengas en 
+    <Señalador marca='CrearCV' texto=' tu CV' />, Por ultimo en <b>Precio</b> elegí cuanto vas a pedir a cambio, podés especificar si es por hora/dia/trabajo/etc. </>)
+    ;
