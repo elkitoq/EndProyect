@@ -56,7 +56,7 @@ const OfferJob = () => {
 
 
 
-RutaTutorial.get("OfferJob")
+RutaTutorial.get("OfferJob").setLink('/OfferJob')
     .setDescription(<>Lista las actuales Búsquedas de tu empresa</>)
     .setRender(ViewOfferJob)
     .addRequisito("haveEmpresa")

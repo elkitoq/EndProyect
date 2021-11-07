@@ -182,7 +182,7 @@ export const ViewCV = ({ role }) => {
 }
 
 
-RutaTutorial.get("MostrarCV")
+RutaTutorial.get("MostrarCV").setLink('/MostrarCV')
     .setDescription(<>Puedes imprimir o descargar tu Curriculum Vitae</>)
     .setRender(ViewCV)
     .addRequisito("CreateCV")

@@ -127,24 +127,24 @@ export const ViewCreateOfferJob = ({ mode = "put",id}) => {
         </>);
 }
 
-RutaTutorial.get("CreateJob")
+RutaTutorial.get("CreateJob").setLink('/CreateJob')
     .setDescription(<>Crea una Búsqueda laboral para tu empresa</>)
     .setRender(ViewCreateOfferJob)
     .addRequisito('haveEmpresa')
     .setMeta("Crear Búsqueda")
     .setInstrucciones(<>Rellena los datos pedidos</>)
-    .addPaso(<>En se busca escribe el titulo del perfil de aspirante que estas buscando</>)
-    .addPaso(<>En descripcion puedes incluir como es el puesto de trabajo que quieres crear, tambien palabras claves que le permitan al aspirante encontrar tu búsqueda</>)
-    .addPaso(<>En requerimientos escribe lo que esperas de los aspirantes que se presenten, desde experiencia previa, movilidad o lenguajes, etc (en caso que se necesite)
+    .addPaso(<>En 'Se busca' escribe el título del perfil de aspirante que estás buscando</>)
+    .addPaso(<>En 'Descripción' puedes incluir como es el puesto de trabajo que quieres crear, tambien palabras claves que le permitan al aspirante encontrar tu búsqueda</>)
+    .addPaso(<>En 'Requerimientos' escribe lo que esperas de los aspirantes que se presenten, desde experiencia previa, movilidad o lenguajes, etc. (en caso que se necesite)
     <br/>En Zona incluye en donde puede esperar el aspirante a trabajar. Puede ser el distrito donde se encuentre las oficinas o si requerirá viajar</>)
-    .addPaso(<>En caso de que lo que ofrezcas sea un contrato temporal, pon Tipo de contratacion: Contrato y selecciona el periodo de duracion en Tipo de contrato
-    <br/>En caso contrario pon Tipo de contratacion:Planta permanente.
-    <br/>En Tipo de Jornada, pon la duracion de la jornada laboral habitual
+    .addPaso(<>En caso de que lo que ofrezcas sea un contrato temporal, elegí 'Tipo de contratación': Contrato y selecciona el periodo de duración en Tipo de contrato
+    <br/>En caso contrario seleccioná Tipo de contratación: Planta permanente.
+    <br/>En Tipo de Jornada, seleccioná la duración de la jornada laboral habitual
     </>)
     .addPaso(<>Por ultimo vas a seleccionar el estado en que se creará la Búsqueda, esto puede ser:
-    <br/><b>Provisiorio</b>: Tu búsqueda queda en modo borrador, para seguir editándola, nadie puede verla hasta que la pases a Abierta
-    <br/><b>Abierta</b>: El estado normal de una búsqueda que espera nuevos postulantes, ellos pueden verla en la pagina de búsqueda y postularse a ella
-    <br/><b>En proceso</b>: Cuando ya no recibes nuevos postulantes, esta es la etapa de entrevistas. Aun puedes mandar mensajes a los aspirantes que se hayan postulando
+    <br/><b>Provisorio</b>: Tu búsqueda queda en modo borrador, para seguir editándola, nadie puede verla hasta que la pases a Abierta
+    <br/><b>Abierta</b>: El estado normal de una búsqueda que espera nuevos postulantes, ellos pueden verla en la página de búsqueda y postularse a ella
+    <br/><b>En proceso</b>: Cuando ya no recibes nuevos postulantes, esta es la etapa de entrevistas. Aún puedes mandar mensajes a los aspirantes que se hayan postulando
     <br/><b>Cerrada</b>: cuando ya se ha seleccionado a los candidatos y se da por terminada la búsqueda.</>) 
-    .addPaso(<>Puedes cambiar el estado en cualquier momento, de la misma manera que cambias cualquier otro campo. Desde tu lista de búsquedas has click en ella y pon 'Editar'
+    .addPaso(<>Puedes cambiar el estado en cualquier momento, de la misma manera que cambias cualquier otro campo. Desde tu lista de búsquedas has click en ella y pulsá 'Editar'
     </>);

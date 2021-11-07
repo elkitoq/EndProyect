@@ -35,7 +35,7 @@ const LocalNoLoginCard = () =>
         </Col>
     </Card>
 
-RutaTutorial.get("LookForJobSendCV")
+RutaTutorial.get("LookForJobSendCV").setLink('/SendCV')
     .setDescription(<>Accede a nuestra lista de búsquedas laborales</>)
     .setRender(ViewLookForJob)
     .addRequisito("CreateCV")
@@ -43,7 +43,7 @@ RutaTutorial.get("LookForJobSendCV")
     .setInstrucciones(<>Escribe algunas palabras claves relacionadas con lo que estas buscando en la <Señalador marca="BarraBusqueda" texto="barra superior"/>, y has clic en <Señalador marca="BotonBuscarTrabajo" texto=" Buscar Trabajo"/></>);
 
 
-RutaTutorial.get("LookForJob")
+RutaTutorial.get("LookForJob").setLink('/lookforJob')
     .setDescription(<>Accede a nuestra lista de búsquedas laborales</>)
     .setRender(ViewLookForJob)
     .setMeta("Buscar Trabajo")

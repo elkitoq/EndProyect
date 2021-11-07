@@ -288,7 +288,7 @@ const LocalNoLoginCard = ({ isLogin }) =>
         </Col>
     </Card>
 
-RutaTutorial.get("CreateCV")
+RutaTutorial.get("CreateCV").setLink('/CVCreate')
     .setDescription(<>Puedes crear un Curriculum Vitae</>)
     .setRender(ViewCreateCV)
     .addRequisito("haveAspirante")
@@ -306,11 +306,11 @@ RutaTutorial.get("CreateCV")
         <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={agregarHabilidad}/></>)
     .addPaso(<>Por ultimo Guarda tu CV para ver como ha quedado, Si tienes más perfiles puedes guardarlo en cualquiera de ellos para hacer copias
         <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={guardarCV}/></>)
-    
 
-RutaTutorial.get("CreateCVautonomo")
+
+RutaTutorial.get("CreateCVautonomo").setLink('/CVCreate2')
     .setDescription(<>Crea y anexa un Curriculum Vitae a tu perfil</>)
     .setRender(ViewCreateCV)
     .addRequisito("haveAutonomo")
     .setMeta("Crear CV (Para Autonomo)")
-    .setInstrucciones(<>Has clic en <Señalador marca="CrearCV" texto="Crear CV" />, está en la esquina superior izquierda de la pagina</>);
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearCV" texto="Crear CV" />, está en la esquina superior izquierda de la pagina</>)

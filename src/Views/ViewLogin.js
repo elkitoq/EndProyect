@@ -74,7 +74,7 @@ const CorrectLogin = () => {
     </div>);
 }
 
-RutaTutorial.get("Login")
+RutaTutorial.get("Login").setLink('/login')
     .setDescription(<>Ingresa con tu cuenta para guardar tus datos</>)
     .setRender(ViewLogin)
     .setMeta("Iniciar Sesión")
@@ -90,7 +90,7 @@ RutaTutorial.get("Login")
     .addPaso(<>Pulsa en Login
                 <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={loginHelp}/></>);
 
-RutaTutorial.get("recovery")
+RutaTutorial.get("recovery").setLink('/recovery-pass')
     .setDescription(<>Si la olvidaste, puedes recuperar tu contraseña</>)
     .setMeta("Recupera tu contraseña")
     .setInstrucciones(<>Si lo solicitas, desde la pantalla de iniciar sesión, Te enviaremos un mail para recuperar tu contraseña</>)

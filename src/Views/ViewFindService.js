@@ -55,7 +55,7 @@ export const ViewFindService = (props) => {
 }
 
 
-RutaTutorial.get("FindService")
+RutaTutorial.get("FindService").setLink('/FindService')
     .setMeta("Lista de servicios")
     .setRender(ViewFindService)
     .addPaso(<>Acá puedes ver una lista de los servicios que se están ofreciendo y que responden a la busqueda que has hecho. Puedes cambiar la busqueda en la

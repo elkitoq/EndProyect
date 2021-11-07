@@ -27,7 +27,7 @@ export const ViewHome = () => <Container className="abs-center container-home no
 </Container>
 
 
-RutaTutorial.get("Home")
+RutaTutorial.get("Home").setLink('/')
     .setDescription(<>Puedes ver la pagina inicial</>)
     .setInstrucciones(<>Has clic en nuestro <Señalador marca="logo" />, está en la esquina superior izquierda de la pagina</>)
     .setRender(ViewHome)

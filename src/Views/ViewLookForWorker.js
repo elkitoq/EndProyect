@@ -38,7 +38,7 @@ const SugerirCrearPuesto = () =>
         <Button href="/offerJob/" color="secondary">Crear Búsqueda</Button>
     </Card>
 
-RutaTutorial.get("BuscarPostulantes")
+RutaTutorial.get("BuscarPostulantes").setLink('/lookforWorker')
     .setDescription(<>Buscar Postulantes</>)
     .setRender(ViewLookForWorker)
     .setMeta("Buscar Postulantes")

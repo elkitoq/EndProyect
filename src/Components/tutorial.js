@@ -17,6 +17,7 @@ export default class RutaTutorial {
         RutaTutorial.#list[meta] = this;
         this.render = () => <></>;
         this.pasos = []
+        this.link='#'
     }
 
     setMeta(meta) {
@@ -26,6 +27,10 @@ export default class RutaTutorial {
 
     toString() {
         return (this.meta.toString())
+    }
+
+    toLink(){
+        return <a href={this.link}>{this.toString()}</a>
     }
 
     static get(meta, create = true) {
@@ -40,6 +45,8 @@ export default class RutaTutorial {
 
         return r;
     }
+
+    setLink(link){this.link=link;return this}
 
     static listRequisitosSorted(r, requisitos) {
         for (let req of requisitos) {
@@ -143,7 +150,7 @@ export const Mapa = () => {
     return <> Esta es una lista de todo lo que puedes hacer en nuestro aplicación web, si tienes dudas hay una lista de instrucciones en cada ítem. Algunos puntos requieren que completes algún paso extra (como iniciar sesión) en ese caso te saldrá en rojo si no lo has hecho o verde si ya esta cubierto<ul>
         {RutaTutorial.map((ruta) =>
             (ruta instanceof RutaTutorial) ? (ruta.meta!=='')?
-                <li key={ruta.toString()} >{ruta.toString()}:
+                <li key={ruta.toString()} >{ruta.toLink()}:
                     <br />{ruta.description}
                     <br />
                     <Ruta ruta={ruta} />
@@ -227,7 +234,7 @@ export const Ayuda = ({pos=2,ruta = RutaTutorial.get("Mapa")}) => {
     </div>:''}</>
 }
 
-RutaTutorial.get("Mapa")
+RutaTutorial.get("Mapa").setLink('/mapSite')
     .setDescription(<>Puedes leer algunas instrucciones para facilitarte la navegación</>)
     .setRender(Mapa)
     // .addRequisito("haveAutonomo")

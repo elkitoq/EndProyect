@@ -2,8 +2,8 @@ import { useContext, useEffect } from "react";
 import { useLocation } from "react-router";
 import { CardText, Container, Row } from "reactstrap";
 import { Busqueda } from "../Components/Busqueda";
-import { Display } from "../Components/Display";
-import RutaTutorial, { NextButton } from "../Components/tutorial";
+import { Display, DisplayHelperStep } from "../Components/Display";
+import RutaTutorial, { Ayuda, NextButton } from "../Components/tutorial";
 import { ApplicationContrato } from "../Server/models/AplicationContrato";
 import API, { APIComponent, QAPI } from "../Tools/API";
 import { Status } from "../Tools/Status";
@@ -69,17 +69,21 @@ export const ViewFindJob = () => {
                     <CardText key="match">Coincidencias:</CardText>
                 </Display>
             </Row>
+            <Ayuda ruta={RutaTutorial.get('FindJob')}/>
         </Container>
     </>
     );
 }
 
 
-RutaTutorial.get("FindJob")
+RutaTutorial.get("FindJob").setLink('/FindJob')
     .setMeta("Lista de Puestos")
     .setRender(ViewFindJob)
+    .addPaso(<>Escribe palabras claves para filtrar las búsquedas laborales para encontrar tu trabajo ideal. Separa las palabras simplemente con un espacio</>)
+    .addPasos(DisplayHelperStep)
 
-RutaTutorial.get("PostulateJob")
+
+RutaTutorial.get("PostulateJob").setLink('/PostulateJob')
     .setMeta("Postularse a una Búsqueda")
     .setRender(ViewFindJob)
     .addRequisito("haveAspirante")

@@ -260,7 +260,7 @@ const DatosBasicosCV=()=>
 </>
 
 
-RutaTutorial.get("haveAspirante")
+RutaTutorial.get("haveAspirante").setLink('/CreateAspirante')
     .setDescription(<>Te dará acceso a toda las herramientas para aspirantes</>)
     .addRequisito("cargarPerfiles")
     .setRender(AddAspirante)
@@ -268,7 +268,7 @@ RutaTutorial.get("haveAspirante")
     .setInstrucciones(<>Has clic en <Señalador marca="CrearPerfil" texto="Crear Perfil" />, en el menu de <Señalador marca="Roles" texto="Perfiles" /></>)
     .addPaso(<DatosBasicosCV/>)
 
-RutaTutorial.get("haveEmpresa")
+RutaTutorial.get("haveEmpresa").setLink('/CreateEmpresa')
     .setDescription(<>Te dará acceso a toda las herramientas para Empresa</>)
     .addRequisito("cargarPerfiles")
     .setRender(AddEmpresa)
@@ -276,7 +276,7 @@ RutaTutorial.get("haveEmpresa")
     .setInstrucciones(<>Has clic en <Señalador marca="CrearPerfil" texto="Crear Perfil" />, en el menu de <Señalador marca="Roles" texto="Perfiles" /></>)
     .addPaso(<DatosBasicosCV/>)
 
-RutaTutorial.get("haveAutonomo")
+RutaTutorial.get("haveAutonomo").setLink('/CreateAutonomo')
     .setDescription(<>Te dará acceso a toda las herramientas para autonomo</>)
     .addRequisito("cargarPerfiles")
     .setRender(AddAutonomo)
