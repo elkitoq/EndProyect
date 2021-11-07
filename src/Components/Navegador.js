@@ -28,7 +28,7 @@ export const NavegadorPrincipal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
-  const profile=status.get("selectUser")[status.get("selectRole")]
+  const profile = status.get("selectUser")[status.get("selectRole")]
 
   const logout = () => {
     // if (login.isLogin === "true")
@@ -51,24 +51,24 @@ export const NavegadorPrincipal = () => {
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
-          <div style={profile && !profile.new && profile.profileType===0?{display:"none"}:{}}>
-          <NavButton className="btn-cv-navbar" href={profile && !profile.new && profile.profileType===2?"/CVCreate2/":"/CVCreate/"} ><span id="CrearCV"> Crear CV </span></NavButton>
-          <Señalado marca="CrearCV" title="Crear CV" text="Si haces click te lleva a la pagina para crear tu Curriculum" />
+          <div style={profile && !profile.new && profile.profileType === 0 ? { display: "none" } : {}}>
+            <NavButton className="btn-cv-navbar" href={profile && !profile.new && profile.profileType === 2 ? "/CVCreate2/" : "/CVCreate/"} ><span id="CrearCV"> Crear CV </span></NavButton>
+            <Señalado marca="CrearCV" title="Crear CV" text="Si haces click te lleva a la pagina para crear tu Curriculum" />
           </div>
-          <div style={profile && !profile.new && profile.profileType!==0?{display:"none"}:{}}>
-          <NavButton className="btn-cv-navbar" href="/OfferJob/" ><span id="OfferJob"> Ofrecer Empleo </span></NavButton>
-          <Señalado marca="OfferJob" title="Ofrecer Empleo" text="Si haces click te lleva a la pagina para crear búsquedas laborales" />
+          <div style={profile && !profile.new && profile.profileType !== 0 ? { display: "none" } : {}}>
+            <NavButton className="btn-cv-navbar" href="/OfferJob/" ><span id="OfferJob"> Ofrecer Empleo </span></NavButton>
+            <Señalado marca="OfferJob" title="Ofrecer Empleo" text="Si haces click te lleva a la pagina para crear busquedas laborales" />
           </div>
-          {(status.get("Login")) ?<DropdownRol />:""}
+          {(status.get("Login")) ? <DropdownRol /> : ""}
           {/* <NavButton className="btn-oficina-navbar" href="/jobOffice/">Oficina de empleo</NavButton> */}
-          <NavButton className="btn-cv-navbar" onClick={()=>status.set('helperPopup')} href={status.get('helperPopup')?'/mapSite':'#'}><span id="ayudaButton">{status.get('helperPopup')?'Mas ':''}Ayuda</span></NavButton>
-          <Señalado marca="ayudaButton" title="Botón de ayuda" text={(status.get('helperPopup'))?'Te lleva al mapa del sitio':'Abre un pequeño Popup asistente'} />
+          <NavButton className="btn-cv-navbar btn-ayuda-navbar" onClick={() => status.set('helperPopup')} href={status.get('helperPopup') ? '/mapSite' : '#'}><span id="ayudaButton">{status.get('helperPopup') ? 'Mas ' : ''}Ayuda</span></NavButton>
+          <Señalado marca="ayudaButton" title="Boton de ayuda" text={(status.get('helperPopup')) ? 'Te lleva al mapa del sitio' : 'Abre un pequeño Popup asistente'} />
         </Nav>
         <Nav className="ms-auto buscador" navbar>
           <Busqueda className="ocultar-search input-search"
             href="/findJob/"
             text="Buscar Trabajo"
-            othersButtons={[{ href: "/findService", text: "Buscar Empleado", param:'job' }]} />
+            othersButtons={[{ href: "/findService", text: "Buscar Empleado", param: 'job' }]} />
           <NavButton href="/lookforJob/"
             className="mostrar-search"
             children="Buscar Trabajo" />
