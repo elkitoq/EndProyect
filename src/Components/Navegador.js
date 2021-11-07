@@ -61,7 +61,8 @@ export const NavegadorPrincipal = () => {
           </div>
           {(status.get("Login")) ?<DropdownRol />:""}
           {/* <NavButton className="btn-oficina-navbar" href="/jobOffice/">Oficina de empleo</NavButton> */}
-          <NavButton className="btn-cv-navbar" onClick={()=>status.set('helperPopup')} href={status.get('helperPopup')?'/mapSite':'#'}>{status.get('helperPopup')?'Mas ':''}Ayuda</NavButton>
+          <NavButton className="btn-cv-navbar" onClick={()=>status.set('helperPopup')} href={status.get('helperPopup')?'/mapSite':'#'}><span id="ayudaButton">{status.get('helperPopup')?'Mas ':''}Ayuda</span></NavButton>
+          <Señalado marca="ayudaButton" title="Boton de ayuda" text={(status.get('helperPopup'))?'Te lleva al mapa del sitio':'Abre un pequeño Popup asistente'} />
         </Nav>
         <Nav className="ms-auto buscador" navbar>
           <Busqueda className="ocultar-search input-search"

@@ -6,6 +6,9 @@ import { Form } from '../Components/Form.js';
 import { FormItem } from '../Components/FormItem.js';
 import API, { APIComponent } from '../Tools/API';
 
+
+
+
 export const ViewRecoverPassword = () => {
 
     const { search } = useLocation();
@@ -91,3 +94,4 @@ export const ViewRecoverPassword2 = () => {
         </Container>
     )
 }
+

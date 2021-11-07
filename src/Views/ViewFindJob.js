@@ -45,13 +45,13 @@ export const ViewFindJob = () => {
                 <h1 className="title-find">Estos son las busquedas laborales que responden a "{busqueda.get("b")}" </h1>
                 <Display nameDownload={() => "Busquedas(" + busqueda.get("b") + ")"}
                     get={busqueda}
-                    link={{
+                    link={user[selectRole]?{
                         onClick: (element) => {
                             const b = new URLSearchParams(search)
                             b.set("postulate", element._id)
                             return `/postulateJob?${b}`
                         }, text: "Postularse como" + user[selectRole].profileName
-                    }}
+                    }:{onClick:()=>'/login',text:'Inicia sesion para postularte'}}
                 >
                     <APIComponent url='/jobs' />
                     <CardText key="name">Puesto:</CardText>

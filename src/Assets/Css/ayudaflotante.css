@@ -6,6 +6,7 @@
     width:500px;
     z-index: 3;
     padding: 2%;
+    padding-top: 4%;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     border-radius: 6px
 }
@@ -32,4 +33,13 @@
 .flotante-3{
     position:absolute;
     bottom:30px; left:30px;
+}
+
+.gif-ayuda{
+margin-top: 2rem;
+margin-bottom:1rem;
+padding: 1rem;
+width: 70% !important;
+height: 70% !important;
+max-width: 500px !important;
 }

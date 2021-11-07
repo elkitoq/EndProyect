@@ -3,11 +3,12 @@ import { FormRegister } from "../Components/FormRegister";
 import { QAPI } from "../Tools/API";
 import { Status } from "../Tools/Status";
 import { useContext, useEffect, useState } from "react";
-import RutaTutorial from "../Components/tutorial";
+import RutaTutorial, { Ayuda } from "../Components/tutorial";
 import { Señalador } from "../Components/Señalador";
 import { useLocation } from "react-router-dom";
 import { LoadRoles, verificarRoles } from "../Components/role";
 import { FormItem } from "../Components/FormItem";
+import { useHistory } from 'react-router-dom';
 
 let selectUser, saveUser;
 
@@ -45,9 +46,9 @@ export const ViewCreateUser = ({ roleType,showRegister }) => {
 }
 
 const ButtonCreate = ({ href }) => {
+    const history = useHistory();
     const status = useContext(Status.Context)
-
-    return <Button size="lg" color="primary" blocks="true" type="submit" href={`${href}?user=${selectUser.length - 1}`}
+    return <Button size="lg" color="primary" blocks="true" type="submit" href={`#`}
         onClick={(e) => {
             const form = document.getElementsByClassName('formtovalidate')[0]
             if (form.checkValidity()){
@@ -58,6 +59,7 @@ const ButtonCreate = ({ href }) => {
             saveUser();
             status.set("selectRole", "" + (selectUser.length - 1))
             new QAPI('/profile').send("put", selectUser[selectUser.length - 1]);
+            history.push(`${href}?user=${selectUser.length - 1}`)
             }
             else{
                 form.requestSubmit()
@@ -98,6 +100,7 @@ const CrearEmpresa = () => {
             <FormItem name="Telefono" type="number" idInput="phone" reference={{ values: values.data, onChange, id: "phone" }} />
             <FormItem required name="Email" type="email" idInput="email" reference={{ values: values.data, onChange, id: "email" }} />
             <ButtonCreate href={(pathname === "/Register/" || isRegister) ? "/homeEmpresa" : "#"} />
+            <Ayuda ruta={RutaTutorial.get('haveEmpresa')}/>
             </Form>
         </Container>
     )
@@ -165,7 +168,7 @@ const CrearAspirante = () => {
         values.cv = {}
 
     const onChange = () => {
-        values.profileName = `${values.cv.lastName}, ${values.cv.name}` 
+        values.profileName = values.cv.name
         saveUser()
     }
 
@@ -183,6 +186,7 @@ const CrearAspirante = () => {
             <FormItem required name="Email" type="email" idInput="email" reference={{ values: values.cv, onChange, id: "email" }} />
             <ButtonCreate href={(pathname === "/Register/"|| isRegister) ? "/homeAspirante" : "#"} />
             </Form>
+            <Ayuda ruta={RutaTutorial.get('haveAspirante')}/>
         </Container>
 
 
@@ -237,6 +241,7 @@ const CrearAutonomo = () => {
             <FormItem required name="Email" type="email" idInput="email" reference={{ values: values.cv, onChange, id: "email" }} />
             <ButtonCreate href={(pathname === "/Register/"|| isRegister) ? "/homeAutonomo" : "#"} />
             </Form>
+            <Ayuda ruta={RutaTutorial.get('haveAutonomo')}/>
         </Container>
     )
 }
@@ -248,23 +253,33 @@ const AddAspirante = () => ViewCreateUser({ roleType: 1 })
 
 const AddEmpresa = () => ViewCreateUser({ roleType: 0 })
 
+
+const DatosBasicosCV=()=>
+<>Rellena con tus datos basicos, es importante tu nombre y tu mail. Puedes cambiar los demas datos en cualquier momento desde el boton{' '} 
+<Señalador marca='CrearCV' texto='Crear CV' /> (Arriba a la izquierda)
+</>
+
+
 RutaTutorial.get("haveAspirante")
     .setDescription(<>Te dará acceso a toda las herramientas para aspirantes</>)
     .addRequisito("cargarPerfiles")
     .setRender(AddAspirante)
     .setMeta("Crear Perfil de Aspirante")
-    .setInstrucciones(<>Has clic en <Señalador marca="CrearPerfil" texto="Crear Perfil" />, en el menu de <Señalador marca="Roles" texto="Perfiles" /></>);
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearPerfil" texto="Crear Perfil" />, en el menu de <Señalador marca="Roles" texto="Perfiles" /></>)
+    .addPaso(<DatosBasicosCV/>)
 
 RutaTutorial.get("haveEmpresa")
     .setDescription(<>Te dará acceso a toda las herramientas para Empresa</>)
     .addRequisito("cargarPerfiles")
     .setRender(AddEmpresa)
     .setMeta("Crear Perfil de Empresa")
-    .setInstrucciones(<>Has clic en <Señalador marca="CrearPerfil" texto="Crear Perfil" />, en el menu de <Señalador marca="Roles" texto="Perfiles" /></>);
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearPerfil" texto="Crear Perfil" />, en el menu de <Señalador marca="Roles" texto="Perfiles" /></>)
+    .addPaso(<DatosBasicosCV/>)
 
 RutaTutorial.get("haveAutonomo")
     .setDescription(<>Te dará acceso a toda las herramientas para autonomo</>)
     .addRequisito("cargarPerfiles")
     .setRender(AddAutonomo)
     .setMeta("Crear Perfil de Autonomo  ")
-    .setInstrucciones(<>Has clic en <Señalador marca="CrearPerfil" texto="Crear Perfil" />, en el menu de <Señalador marca="Roles" texto="Perfiles" /></>);
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearPerfil" texto="Crear Perfil" />, en el menu de <Señalador marca="Roles" texto="Perfiles" /></>)
+    .addPaso(<>Rellena con los datos basicos de tu empresa</>)

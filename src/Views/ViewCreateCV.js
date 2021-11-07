@@ -5,7 +5,7 @@ import { ViewAddCVData } from './ViewAddCVData'
 import '../Assets/Css/cargarCV.css';
 import { FormItem } from '../Components/FormItem'
 import noPhoto from '../Assets/image/blank-profile.png'
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import API, { APIComponent } from '../Tools/API.js';
 import { Form } from '../Components/Form';
 
@@ -14,8 +14,17 @@ import { ViewCV } from './ViewCV';
 import { Status } from '../Tools/Status';
 
 import { LoadRoles } from '../Components/role';
-import RutaTutorial from '../Components/tutorial';
+import RutaTutorial, { Ayuda } from "../Components/tutorial";
 import { Señalador } from '../Components//Señalador';
+
+
+
+import agregarFoto from '../Assets/HelpGif/agregarFoto.gif'
+import agregarHabilidad from '../Assets/HelpGif/agregarHabilidad.gif'
+import agregaritemAcademico from '../Assets/HelpGif/agregaritemAcademico.gif'
+import eliminaritemAcademico from '../Assets/HelpGif/eliminaritemAcademico.gif'
+import guardarCV from '../Assets/HelpGif/guardarCV.gif'
+import rellenarDatosCV from '../Assets/HelpGif/rellenarDatosCV.GIF'
 
 
 let displayChargePhoto, setDisplayChargePhoto;
@@ -63,6 +72,14 @@ export const ViewCreateCV = () => {
     const [update,updater]=useState(1);
     API.updater('/cv',updater)
 
+    useEffect(() => {
+        setTimeout(() => {
+            updater(Math.random())
+        }, 300)
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     const dataDefault = {
         "role":
             (selectUser && selectUser[selectRole] && perfilConCV(selectUser[selectRole])) ?
@@ -96,6 +113,12 @@ export const ViewCreateCV = () => {
             document.getElementById("fotoPerfil").src = api.getHookData().photo
         }
     }, 'CreateCV')
+
+    if (API.get('/cv')){
+        const api = API.get('/cv')
+        if (api.getHookData().photo && document.getElementById("fotoPerfil").src === noPhoto)
+        document.getElementById("fotoPerfil").src = api.getHookData().photo
+    }
 
     return (<>{status.get("CreateCV") ? <ViewCV role={selectRole} /> :
         <Container>
@@ -194,7 +217,7 @@ export const ViewCreateCV = () => {
                 </Row>
             </Form>
 
-
+            <Ayuda ruta={RutaTutorial.get('CreateCV')}/>
         </Container>}</>
     )
 }
@@ -238,10 +261,11 @@ const mostrarFotoPerfil = () => {
                 // resizeBase64Img(reader.result,300,150).then((img)=>{
                 marco.src = img;
                 console.log(img);
-                API.on(API.events.SENDING, (api) => {
+                const api = API.get('/cv')
+                //API.on(API.events.SENDING, (api) => {
                     api.getHookData().photo = img
                     api.refresh()
-                }, 'uploadImageCV')
+                //}, 'uploadImageCV')
                 setDisplayChargePhoto("none");
             });
         }
@@ -269,7 +293,20 @@ RutaTutorial.get("CreateCV")
     .setRender(ViewCreateCV)
     .addRequisito("haveAspirante")
     .setMeta("Crear CV")
-    .setInstrucciones(<>Has clic en <Señalador marca="CrearCV" texto="Crear CV" />, está en la esquina superior izquierda de la pagina</>);
+    .setInstrucciones(<>Has clic en <Señalador marca="CrearCV" texto="Crear CV" />, está en la esquina superior izquierda de la pagina</>)
+    .addPaso(<>Rellena con tus datos 
+        <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={rellenarDatosCV}/></>)
+    .addPaso(<>Carga una foto, haciendo click en la imagen actual
+        <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={agregarFoto}/></>)
+    .addPaso(<>Agrega Items a tu historial academico y tu experiencia 
+        <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={agregaritemAcademico}/></>)
+    .addPaso(<>Puedes borrar el item que estes editando, o alguno ya terminado, desde la cruz de la derecha
+        <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={eliminaritemAcademico}/></>)
+    .addPaso(<>Puedes incluir habilidades como idiomas, programas informaticos que manejes, trabajo en equipo, etc. Todo suma
+        <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={agregarHabilidad}/></>)
+    .addPaso(<>Por ultimo Guarda tu CV para ver como ha quedado, Si tienes más perfiles puedes guardarlo en cualquiera de ellos para hacer copias
+        <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={guardarCV}/></>)
+    
 
 RutaTutorial.get("CreateCVautonomo")
     .setDescription(<>Crea y anexa un Curriculum Vitae a tu perfil</>)

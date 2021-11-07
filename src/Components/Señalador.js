@@ -38,13 +38,14 @@ export const Señalado = ({ marca, title, text }) => {
             title,
             text
         }
+    else marcas[marca].text=text
     marcas[marca].toggle = () => setPopoverOpen(!popoverOpen);
 
     return (<>
         {/* <div id={marca} style={{ backgroundColor: "#CCE01F",color:#565B2F, float: "right", zIndex: 10, marginRight: "-20px" }}>?</div> */}
 
         <Tooltip placement="bottom" isOpen={popoverOpen} target={marca} toggle={marcas[marca].toggle}>
-            {marcas[marca].text}
+            {(typeof marcas[marca].text==='function')?marcas[marca].text():marcas[marca].text}
         </Tooltip>
         </>)
 }

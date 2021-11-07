@@ -51,8 +51,8 @@ export const ViewCV = ({ role }) => {
 
                 window.print();
 
-                document.body.innerHTML = contenidoOriginal;
-
+                //document.body.innerHTML = contenidoOriginal;
+                window.location.reload()
 
             }}
         >Imprimir</Button>
@@ -88,7 +88,8 @@ export const ViewCV = ({ role }) => {
 
                     pdf.save(`${cv.lastName}.CV.pdf`);
                     // doc.output("dataurlnewwindow");
-
+                    
+                    window.location.reload()
                 }).catch(error => console.log(error));
 
             }}

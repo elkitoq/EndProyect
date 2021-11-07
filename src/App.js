@@ -16,13 +16,13 @@ function App() {
 
   return (
     <ErrorDriver>
-    <Router>
-      <StatusComponent>
-      <Events/>
-      <NavegadorPrincipal />
-      <ViewMain/>
-      </StatusComponent>
-    </Router>
+      <Router>
+        <StatusComponent>
+          <Events />
+          <NavegadorPrincipal />
+          <ViewMain />
+        </StatusComponent>
+      </Router>
     </ErrorDriver>
   );
 }

@@ -138,16 +138,16 @@ export const Mapa = () => {
 
 
     
-    return <ul>
+    return <> Esta es una lista de todo lo que puedes hacer en nuestro aplicacion web, si tienes dudas hay una lista de instrucciones en cada item. Algunos puntos requieren que completes algun paso extra (como iniciar sesion) en ese caso te saldrá en rojo si no lo has hecho o verde si ya esta cubierto<ul>
         {RutaTutorial.map((ruta) =>
-            (ruta instanceof RutaTutorial) ?
+            (ruta instanceof RutaTutorial) ? (ruta.meta!=='')?
                 <li key={ruta.toString()} >{ruta.toString()}:
                     <br />{ruta.description}
                     <br />
                     <Ruta ruta={ruta} />
 
-                </li> : "")}
-    </ul>
+                </li> : "":"")}
+    </ul></>
 }
 
 // export const ProgressBar = ({ ruta }) => {
@@ -164,7 +164,7 @@ export const Mapa = () => {
 // </ul>}
 
 export const Ruta = ({ ruta }) => <ul>
-    {ruta.getRequisitos().map(
+    {ruta.getRequisitos().filter((e)=>e.meta!=="").map(
         (req) =>
             <li key={req.toString()} style={{ color: (req.isDone) ? "GREEN" : "RED" }}>
                 {req.meta}:{req.instrucciones}
@@ -212,7 +212,12 @@ export const Ayuda = ({pos=2,ruta = RutaTutorial.get("Mapa")}) => {
         onMouseLeave={() => setTransp(true)}
         className={`ayuda-flotante${tranp?' semitransparente':''} flotante-${pos}`}>
         <Button className='flotante-1' onClick={()=>{status.set('helperPopup',false,true);status.save();}}>X</Button>
-        {ruta.pasos[paso].element}
+        {paso<=(ruta.pasos.length-1)?
+            ruta.pasos[paso].element:
+            <>Puedes pasar el Mouse, por encima de los elementos para ver una descripcion, 
+            Tambien puedes hacer click en Mas Ayuda para ir al mapa del sitio
+            </>
+            }
         <ButtonGroup className='flotante-3'>
         {paso>0?<Button onClick={()=>setPaso(paso-1)}>Volver</Button>:''}
         {paso<(ruta.pasos.length-1)?<Button onClick={()=>setPaso(paso+1)}>{ruta.pasos[paso].siguiente}</Button>:''}

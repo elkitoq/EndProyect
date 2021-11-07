@@ -48,7 +48,9 @@ export const ViewAddCVData = ({reference = { values: {}, onChange: () => { } }, 
     }
 
     const remove=(index)=>{
+        console.log('Borrando '+index);
         reference.values[reference.id].splice(index,1);
+        reference.onChange()
         setActivo(-1);
     }
 

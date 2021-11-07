@@ -21,6 +21,11 @@ import passwordHelp from'../Assets/HelpGif/password.gif'
 import registerHelp from'../Assets/HelpGif/register.gif'
 
 
+import cambiarPass from '../Assets/HelpGif/cambiarPass.GIF'
+import mailrecuperacion from '../Assets/HelpGif/mailrecuperacion.GIF'
+import recuperarPass from '../Assets/HelpGif/recuperarPass.GIF'
+
+
 export const ViewLogin = () => {
 
     const status = useContext(Status.Context)
@@ -45,7 +50,9 @@ export const ViewLogin = () => {
                     <SlideShow className="carousel" />
                 </Col>
             </Row>
-            <Ayuda ruta = {RutaTutorial.get("Login")}/>
+            {(pathname.substring(0, 14) === "/recovery-pass") ?
+            <Ayuda ruta = {RutaTutorial.get("recovery")}/>:
+            <Ayuda ruta = {RutaTutorial.get("Login")}/>}
         </Container>
     )
 }
@@ -73,13 +80,23 @@ RutaTutorial.get("Login")
     .setMeta("Iniciar Sesión")
     .setInstrucciones(<>Has clic en <Señalador marca="Login" texto="Login" />, está en la esquina superior derecha de la pagina</>)
     .addPaso(<>Si no tienes cuenta, has click en <a className="a-register" href="/Register/">Registrate acá</a>
-                <br/><img className="logo-login" alt="Nombre de usuario" src={registerHelp}/></>,'Ya tengo')
+                <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={registerHelp}/></>,'Ya tengo')
     .addPaso(<>Si ya tienes cuenta, Escribe tu nombre de usuario
-                <br/><img className="logo-login" alt="Nombre de usuario" src={userNameHelp}/></>)
+                <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={userNameHelp}/></>)
     .addPaso(<>Si no recuerdas tu contraseña has click en <a className='a-recovery-pass' href="/recovery-pass/">Olvidaste tu contraseña?</a>
-                <br/><img className="logo-login" alt="Nombre de usuario" src={forgetPassHelp}/></>,'La recuerdo')
+                <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={forgetPassHelp}/></>,'La recuerdo')
     .addPaso(<>Si la recuerdas, Escribe tu contraseña
-                <br/><img className="logo-login" alt="Nombre de usuario" src={passwordHelp}/></>)
+                <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={passwordHelp}/></>)
     .addPaso(<>Pulsa en Login
-                <br/><img className="logo-login" alt="Nombre de usuario" src={loginHelp}/></>)
-    ;
+                <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={loginHelp}/></>);
+
+RutaTutorial.get("recovery")
+    .setDescription(<>Si la olvidaste, puedes recuperar tu contraseña</>)
+    .setMeta("Recupera tu contraseña")
+    .setInstrucciones(<>Si lo solicitas, desde la pantalla de iniciar sesion, Te enviaremos un mail para recuperar tu contraseña</>)
+    .addPaso(<> Para cambiar tu contraseña, necesitamos enviarte un mail. Escribe tu nombre de usuario o tu email y presione 'Solicitar cambio de Contraseña'
+                <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={recuperarPass}/></>)
+    .addPaso(<> En la bandeja de entrada de su correo recibirá un mail, haga click en 'Restablecer Contraseña'
+                <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={mailrecuperacion}/></>)
+    .addPaso(<> Escriba y repita su nueva contraseña
+                <br/><img className="gif-ayuda" alt="Tu navegador no te permite ver la imagen" src={cambiarPass}/></>)
