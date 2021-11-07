@@ -19,7 +19,7 @@ export const ViewPerfilAspirante = () => {
     const [cv, setCV] = useState({})
     const [postulaciones, setPostulaciones] = useState({})
 
-    const [viewAptitudes, setViewAptitudes] = useState(2)
+    const [viewAptitudes, setViewAptitudes] = useState(true)
 
     // const status = useContext(Status.Context)
     // const [selectUser,] = status.use('selectUser');
@@ -50,9 +50,8 @@ export const ViewPerfilAspirante = () => {
 
             <Row className="sub-navigation">
                 <ul className="navigation-profile">
-                    <a href="javascript:void(0)" className="link-aptitud" onClick={(e) => setViewAptitudes(1)}>Aptitudes</a>
-                    <a href="javascript:void(0)" className="link-curriculum" onClick={(e) => setViewAptitudes(2)}>Curriculum</a>
-                    <a href="javascript:void(0)" className="link-postulaciones" onClick={(e) => setViewAptitudes(3)}>Postulaciones</a>
+                    <a href="javascript:void(0)" className="link-aptitud" onClick={(e) => setViewAptitudes(false)}>Aptitudes</a>
+                    <a href="javascript:void(0)" className="link-curriculum" onClick={(e) => setViewAptitudes(true)}>Curriculum</a>
                 </ul>
             </Row>
 
@@ -62,7 +61,7 @@ export const ViewPerfilAspirante = () => {
                 </Col>
 
                 <Col md={{ size: 6 }} >
-                    {viewAptitudes === 1 ? <AptitudesProfile info={cv.skill} /> : viewAptitudes === 2 ? <CurriculumProfile info={cv} /> : <PostulacionesProfile info={postulaciones} />}
+                    {viewAptitudes ? <CurriculumProfile info={cv} /> : <AptitudesProfile info={cv.skill} />}
                 </Col>
 
                 <Col md={{ size: 3 }}>

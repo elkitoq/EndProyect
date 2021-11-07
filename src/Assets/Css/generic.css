@@ -83,6 +83,15 @@ input::-webkit-inner-spin-button{
     justify-content: center;
 }
 
+.list-tutorial li {
+    margin: 40px;
+    /* border: #4e9bf5; */
+    border: solid;
+    border-width: 1px;
+    padding: 10px;
+    border-radius: 6px;
+}
+
 @media screen and (max-width: 1060px) {
     .ocultar-search{
     display:none;

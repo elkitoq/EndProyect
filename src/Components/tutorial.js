@@ -94,7 +94,7 @@ export default class RutaTutorial {
 
     setInstrucciones(instrucciones) { this.instrucciones = instrucciones; return this };
 
-    addPaso(element,siguiente='Siguiente') { this.pasos.push({element,siguiente}); return this }
+    addPaso(element, siguiente = 'Siguiente') { this.pasos.push({ element, siguiente }); return this }
 
     setDescription(description) { this.description = description; return this };
 
@@ -116,7 +116,7 @@ export const RenderProgress = (page) => {
     return (props) => <>
         {/* <ProgressBar ruta={ruta} /> */}
 
-        {progress.length > 1 ? <ProgressBarStep steps={progress.filter((e)=>e.meta!=='')} toDo={toDo} /> : ""}
+        {progress.length > 1 ? <ProgressBarStep steps={progress.filter((e) => e.meta !== '')} toDo={toDo} /> : ""}
 
         <Container className={`abs-center ${progress.length > 1 ? "main-progress-render" : "main-render"} `} fluid={true} style={{ marginTop: progress.length > 1 ? "60px" : "0px" }}>
             <div style={{
@@ -137,17 +137,21 @@ export const RenderProgress = (page) => {
 export const Mapa = () => {
 
 
-    
-    return <> Esta es una lista de todo lo que puedes hacer en nuestro aplicacion web, si tienes dudas hay una lista de instrucciones en cada item. Algunos puntos requieren que completes algun paso extra (como iniciar sesion) en ese caso te saldrá en rojo si no lo has hecho o verde si ya esta cubierto<ul>
-        {RutaTutorial.map((ruta) =>
-            (ruta instanceof RutaTutorial) ? (ruta.meta!=='')?
-                <li key={ruta.toString()} >{ruta.toString()}:
-                    <br />{ruta.description}
-                    <br />
-                    <Ruta ruta={ruta} />
 
-                </li> : "":"")}
-    </ul></>
+    return <div className="container-tutorial" style={{ marginTop: "-43vh" }} >
+        <h4>Esta es una lista de todo lo que puedes hacer en nuestro aplicacion web, si tienes dudas hay una lista de instrucciones en cada item. Algunos puntos requieren que completes algun paso extra (como iniciar sesion) en ese caso te saldrá en rojo si no lo has hecho o verde si ya esta cubierto</h4>
+        <ul className="list-tutorial">
+            {RutaTutorial.map((ruta) =>
+                (ruta instanceof RutaTutorial) ? (ruta.meta !== '') ?
+                    <li key={ruta.toString()} >{ruta.toString()}:
+                        <br />{ruta.description}
+                        <br />
+                        <Ruta ruta={ruta} />
+
+                    </li> : "" : "")}
+        </ul>
+    </div>
+
 }
 
 // export const ProgressBar = ({ ruta }) => {
@@ -164,7 +168,7 @@ export const Mapa = () => {
 // </ul>}
 
 export const Ruta = ({ ruta }) => <ul>
-    {ruta.getRequisitos().filter((e)=>e.meta!=="").map(
+    {ruta.getRequisitos().filter((e) => e.meta !== "").map(
         (req) =>
             <li key={req.toString()} style={{ color: (req.isDone) ? "GREEN" : "RED" }}>
                 {req.meta}:{req.instrucciones}
@@ -200,29 +204,29 @@ export const NextButton = ({ text, reset = false, ruta }) => {
     >{text}</button>
 }
 
-export const Ayuda = ({pos=2,ruta = RutaTutorial.get("Mapa")}) => {
+export const Ayuda = ({ pos = 2, ruta = RutaTutorial.get("Mapa") }) => {
 
     const [tranp, setTransp] = useState(true)
 
-    const [paso,setPaso] = useState(0)
+    const [paso, setPaso] = useState(0)
 
     const status = useContext(Status.Context)
 
-    return <>{status.get('helperPopup')?<div onMouseEnter={() => setTransp(false)}
+    return <>{status.get('helperPopup') ? <div onMouseEnter={() => setTransp(false)}
         onMouseLeave={() => setTransp(true)}
-        className={`ayuda-flotante${tranp?' semitransparente':''} flotante-${pos}`}>
-        <Button className='flotante-1' onClick={()=>{status.set('helperPopup',false,true);status.save();}}>X</Button>
-        {paso<=(ruta.pasos.length-1)?
-            ruta.pasos[paso].element:
-            <>Puedes pasar el Mouse, por encima de los elementos para ver una descripcion, 
-            Tambien puedes hacer click en Mas Ayuda para ir al mapa del sitio
+        className={`ayuda-flotante${tranp ? ' semitransparente' : ''} flotante-${pos}`}>
+        <Button className='flotante-1' onClick={() => { status.set('helperPopup', false, true); status.save(); }}>X</Button>
+        {paso <= (ruta.pasos.length - 1) ?
+            ruta.pasos[paso].element :
+            <><span>Puedes pasar el Mouse, por encima de los elementos para ver una descripcion,
+                Tambien puedes hacer click en Mas Ayuda para ir al mapa del sitio</span>
             </>
-            }
+        }
         <ButtonGroup className='flotante-3'>
-        {paso>0?<Button onClick={()=>setPaso(paso-1)}>Volver</Button>:''}
-        {paso<(ruta.pasos.length-1)?<Button onClick={()=>setPaso(paso+1)}>{ruta.pasos[paso].siguiente}</Button>:''}
+            {paso > 0 ? <Button onClick={() => setPaso(paso - 1)}>Volver</Button> : ''}
+            {paso < (ruta.pasos.length - 1) ? <Button onClick={() => setPaso(paso + 1)}>{ruta.pasos[paso].siguiente}</Button> : ''}
         </ButtonGroup>
-    </div>:''}</>
+    </div> : ''}</>
 }
 
 RutaTutorial.get("Mapa")
