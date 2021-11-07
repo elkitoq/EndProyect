@@ -23,14 +23,14 @@
 1. Componentes View
 
    1. [Búsqueda](#búsqueda)
-   2. [Button]()
-   3. [CardWorkerDisplay](#cardWorkerDisplay)
-   4. [Inputs]()
-   5. [Labels]()
-   6. [NavegadorPrincipal](#NavegadorPrincipal)
-   7. [Api](#api-client)
-   8. [Display / Api consumer](#Display)
-   9. [Form / Api send](#Form)
+   2. [NavegadorPrincipal](#NavegadorPrincipal)
+   3. [Api](#api-client)
+   4. [Display / Api consumer](#Display)
+   5. [Form / Api send](#Form)
+   6. [DownloadXLS](#DownloadXLS)
+   7. [OptionMenu](#OptionMenu)
+   8. [Events](#Events)
+   9. [ErrorDriver](#ErrorDriver)
 
 2. Views
 
@@ -64,6 +64,7 @@
    5.  [role](#role)
    6.  [service](#service)
    7.  [user](#user)
+   8.  [mensaje](#mensaje)
 
 2. Tools
    1. [hashCode](#hashCode)
@@ -72,6 +73,12 @@
    
 3. DataBase
    1. [User](#User-DB)
+   2. [Profile](#Profile-DB)
+   3. [Candidate](#Candidate-DB)
+   4. [Company](#Company-DB)
+   5. [Freelance](#Freelance-DB)
+   6. [Application](#Application-DB)
+   7. [Listas](#Listas-DB)
 ---
 
 ## Introducción
@@ -109,7 +116,7 @@ Comenzaremos hablando de los modulos que usará el cliente. Todos estos modulos 
 
 ## React app
 
-El principal que usaremos, este modulo marca toda la estructura de la interefaz. Maneja los estados de la pantalla y comprueba que partes de la misma deben actualizarse con nueva informacion
+El principal que usaremos, este modulo marca toda la estructura de la interfaz. Maneja los estados de la pantalla y comprueba que partes de la misma deben actualizarse con nueva informacion
 
 [indice](#indice)
 ---
@@ -208,50 +215,6 @@ El texto mostrado por el input.
 #### param
 
 Titulo del parámetro que encabeza la búsqueda. El valor predeterminado agregara a la url de **href** el parámetro "?b=\<valor del input\>"
-
-[indice](#indice)
-
----
-
-### CardWorkerDisplay
-
-Crea un conjunto de tarjetas para consumir una api de trabajadores
-
-```javascript
-{ seed, gender, cant = 10 }
-```
-
-#### seed
-
-La semilla buscada (porque usamos una api aleatoria, cuando sea el final le ponemos algo mas util). Por defecto busca con semilla aleatoria (sin semilla)
-
-#### gender
-
-Filtra por genero. Por defecto, sin filtro
-
-#### cant
-
-Cantidad mostrada por pagina
-
-[indice](#indice)
-
----
-
-#### CardWorker
-
-Del archivo CardWorkerDisplay. Muestra un elemento **worker**.
-
-#### elemento
-
-Un **worker**, el cual incluye:
-
-```javascript
-{ name:{first,last}, email, cell, job, picture:{large}}
-```
-
-#### index
-
-Indice para usar en caso de crear una lista de tarjeta
 
 [indice](#indice)
 
@@ -451,28 +414,54 @@ En el ejemplo el se crearía un json del tipo:
 [indice](#indice)
 
 ---
+## DownloadXLS
+
+Permite la descarga de archivos con formato xls (Excell)
+
+[indice](#indice)
+
+---
+## OptionMenu
+
+Este sencillo componente le da forma a los items del menu principal tanto de la pagina de inicio como de los perfiles
+
+[indice](#indice)
+
+---
+## Events
+
+Carga los eventos de la API para que por ejemplo se muestren los mensajes enviados por el servidor, se muestren los carteles de error y se actualice el estado de login y logout
+
+[indice](#indice)
+
+---
+## ErrorDriver
+
+Este modulo se encarga del manejo de errores
+
+[indice](#indice)
+
+---
 
 ## Views
 
 ### ViewAddCVData
+
+Este representa dentro de la pantalla de Crear CV los items que se pueden agregar a experiencia laboral, historial academico y habilidades
 
 [indice](#indice)
 
 ---
 
 ## ViewCreateCV
-Le permite al usuario crear su CV
+Le permite al usuario crear su CV puede accederse desde la url `/CVCreate` para los aspirantes o `/CVCreate2` para los autonomos
 [indice](#indice)
 
 ---
 
 ## ViewCreateUser
 
-[indice](#indice)
-
----
-
-## ViewFindJob
+Puede accederse desde `/Register` esta vista permite crear los diferentes perfiles que usará una cuenta
 
 [indice](#indice)
 
@@ -480,11 +469,7 @@ Le permite al usuario crear su CV
 
 ## ViewFindService
 
-[indice](#indice)
-
----
-
-## ViewFindWorker
+Desde `/findService` es posible acceder a un listado de de los servicios que se están ofreciendo y filtrarlos por palabras claves
 
 [indice](#indice)
 
@@ -492,11 +477,7 @@ Le permite al usuario crear su CV
 
 ## ViewHome
 
-[indice](#indice)
-
----
-
-## ViewHomeAdmin
+Pagina de inicio, muestra un menu para las primeras tareas que puede realizar el usuario (el url es `/`)
 
 [indice](#indice)
 
@@ -504,24 +485,30 @@ Le permite al usuario crear su CV
 
 ## ViewHomeAspirante
 
+Pagina principal para el aspirante (el url es `/HomeAspirante`)
+
 [indice](#indice)
 
 ---
 
 ## ViewHomeEmpresa
 
+Pagina principal para el Empresa (el url es `/HomeEmpresa`)
+
 [indice](#indice)
 
 ---
 
-## ViewJobOffice
-Le permite al usuario sacar turnos para la oficina de empleo (en progreso)
+## ViewHomeAutonomo
+
+Pagina principal para el Autonomo (el url es `/HomeAutonomo`)
+
 [indice](#indice)
 
 ---
 
 ## ViewLogin
-Le permite al usuario infresar a la pagina 
+Le permite al usuario ingresar a la pagina con su cuenta
 [indice](#indice)
 
 ---
@@ -533,18 +520,20 @@ Le permite al usuario buscar el trabajo que desea
 ---
 
 ## ViewLookForWorker
- Le permite buscar ala empresa postulnates para el puesto que necesitan cubrir 
+ Le permite buscar ala empresa postulantes para el puesto que necesitan cubrir 
 [indice](#indice)
 
 ---
 
 ## ViewMain
-Pagina principal del sistema 
+Pagina principal del sistema, enruta a todas las demas paginas
 [indice](#indice)
 
 ---
 
 ## ViewOfferJob
+
+Crea busquedas laborales para una empresa
 
 [indice](#indice)
 
@@ -563,7 +552,9 @@ Verificar o recuperar la contraseña
 ---
 
 ## ViewRegister
-El usuario puede crear su perfil en la pagina 
+
+El usuario puede crear su cuenta en la pagina 
+
 [indice](#indice)
 
 ---
@@ -689,6 +680,30 @@ Luego de hacer verificaciones crea un nuevo usuario
 
 ---
 
+## mensaje
+
+### PUT /mensaje(application,mensaje)
+Permite al usuario que haya iniciado sesión enviarle un **mensaje** (por email) a todos los postulantes de una **application** propia
+
+[indice](#indice)
+
+---
+
+## profile
+
+### put /profile ({profile})
+
+Guarda el body completo q se envia como un nuevo 
+[profile](#profile-db)
+
+### get /profile (id,type)
+
+devuelve el perfil del tipo: type (Candidate,Company, Freelance) 
+
+[indice](#indice)
+
+---
+
 ## hashCode
 
 Agrega a los String una función para obtener su hashCode. Ej:
@@ -745,3 +760,108 @@ const terminal = new (require('./terminal'))();
 
 ---
 
+## Profile DB
+
+Es una generalizacion para los perfiles (Candidate,Company, Freelance) por si mismo no agrega ningun dato pero se usa como composicion en User, de esta forma se puede agregar a cualquiera de sus hijos mencionados mas arriba
+
+Ademas incluye funcion de creacion de alguno de sus hijos o de busqueda por tipo de perfil
+
+[indice](#indice)
+
+---
+
+## Candidate DB
+
+Esta formado por un cv que incluye los siguientes datos por tipo:
+
+name: String,
+lastName: String,
+age: Number,
+address: String,
+cp: Number,
+city: String,
+phone: String,
+email: String,
+puesto: String,
+description: String,
+laboral: Array,
+academico: Array,
+skill:Array,
+jobs:String,
+objetives:String,
+photo:String
+
+[indice](#indice)
+
+---
+
+
+## Freelance DB
+
+Al cv de Candidate le agrega 
+cuit: Number
+
+y una lista de stalls con estos datos
+
+name: String,
+description: String,
+price: String
+
+incluye busqueda por servicio 
+
+[indice](#indice)
+
+---
+
+## Company DB
+
+este incluye un objeto data con
+
+razonSocial: String,
+cuit:Number,
+address: String,
+cp: Number,
+city: String,
+phone: String,
+email: String
+
+y una lista de [applications](#Application-DB)
+
+[indice](#indice)
+
+---
+## Application DB
+
+name: String,
+description: String,
+req: String,
+zona: String,
+tipoContratacion:String,
+tipoContrato: Number,
+tipoJornada: Number,
+status: Number
+
+y una lista de 
+data:[Candidates](#candidate-db),
+date:Date,
+status:Number
+
+Incluye un buscador por nombre,
+otro por palabras clave y
+uno por candidato
+
+[indice](#indice)
+
+---
+
+## Listas DB
+
+Existen 3 enumeracion simples es la Base de datos
+
+ApplicationContrato incluye los tipos de contrato que puede tener una application (por duracion del contrato)
+
+
+
+[indice](#indice)
+
+---

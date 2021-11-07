@@ -9,7 +9,6 @@ const candidateSchema = extendSchema(roleSchema,{
         name: String,
         lastName: String,
         age: Number,
-        imgCv: String,
         address: String,
         cp: Number,
         city: String,
