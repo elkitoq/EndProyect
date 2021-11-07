@@ -1,11 +1,12 @@
 # Indice
 
 1. [Introducción](#introducción)
+   1. [Instalación](#Instalación)
 
 ## Módulos usados
 
-1. Cliente
-   1. [Create React App](#getting-started-with-create-react-app)
+1. [Cliente](#modulos-del-cliente)
+   1. [React App](#react-app)
    2. [Reacstrap](#reactstrap)
 2. Servidor
    1. [Cookie Parser](#cookie-parser)
@@ -77,11 +78,45 @@
 
 El proyecto se refiere a un software de oferta y demanda de empleo. Será el enlace entre las empresas y los candidatos, ya que su servicio consiste en servir como medio para que las empresas den a conocer las ofertas de trabajo que tienen y para que los postulantes ofrezcan sus servicios.
 
+
+[indice](#indice)
+---
+
+### Instalación
+
+Es necesario tener instalado nodeJS para ejecutar el software. Y tambien npm que se incluye en nodeJS en sus versiones v14.17.0 pra nodeJS y 6.14.13 para nmp.
+
+Si se adquiere el software se puede clonar o descargar desde git
+Una vez clonado el repositorio se pueden instalar todos los modulos con el codigo
+
+   npm install
+
+y comenzar a ejecutarlo con
+
+   npm start
+
+
+[indice](#indice)
+
+---
+
+# Modulos del Cliente
+
+
+Comenzaremos hablando de los modulos que usará el cliente. Todos estos modulos estan disponibles desde el momento que se instala el sistema. Esta informacion es importante en caso de que se vaya a realizar modificaciones en la lista de modulos o si se cambiará la version de alguno de ellos, recuerde verificar si se mantienen las compatibilidades
+
+[indice](#indice)
+
+## React app
+
+El principal que usaremos, este modulo marca toda la estructura de la interefaz. Maneja los estados de la pantalla y comprueba que partes de la misma deben actualizarse con nueva informacion
+
+[indice](#indice)
 ---
 
 ## Reactstrap
 
-Para usar Bootstrap dentro de Rect
+Para usar Bootstrap dentro de Rect. De las opciones disponibles elegimos esta por ser la mas completa aunque hay que tener en cuenta que no todos sus partes estan actualizadas. Debimos incluir un script para que se actualice el segmento react-transition-group, puede verse en [repairModule](#repairModule). Incluso con esta mejora el carousel de Reactstrap continua presentando un warning que si bien no es un problema esperabamos se solucionara a mitad del desarrollo cuando saliera la nueva version, algo que no ocurrió y queda esperar a la proxima version de Reactstrap. 
 
 [indice](#indice)
 
@@ -192,7 +227,7 @@ La semilla buscada (porque usamos una api aleatoria, cuando sea el final le pone
 
 #### gender
 
-Filtra por genero. Pro defecto, sin filtro
+Filtra por genero. Por defecto, sin filtro
 
 #### cant
 
