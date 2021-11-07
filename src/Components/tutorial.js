@@ -103,7 +103,7 @@ export default class RutaTutorial {
 
     addPaso(element, siguiente = 'Siguiente') { this.pasos.push({ element, siguiente }); return this }
 
-    addPasos(array) { array.forEach((e) => { if (e.siguiente === undefined) e.siguiente = 'Sigiente' }); this.pasos.push.apply(this.pasos, array); return this }
+    addPasos(array) { array.forEach((e) => { if (e.siguiente === undefined) e.siguiente = 'Siguiente' }); this.pasos.push.apply(this.pasos, array); return this }
 
     setDescription(description) { this.description = description; return this };
 
@@ -152,7 +152,7 @@ export const Mapa = () => {
         <ul className="list-tutorial">
             {RutaTutorial.map((ruta) =>
                 (ruta instanceof RutaTutorial) ? (ruta.meta !== '') ?
-                    <li key={ruta.toString()} >{ruta.toString()}:
+                    <li key={ruta.toString()} >{ruta.toLink()}:
                         <br />{ruta.description}
                         <br />
                         <Ruta ruta={ruta} />

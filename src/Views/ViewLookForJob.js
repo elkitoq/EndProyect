@@ -7,8 +7,6 @@ import { Status } from "../Tools/Status";
 import { useContext } from "react";
 import { Señalador } from "../Components/Señalador";
 
-const tutorial=RutaTutorial.get("look")
-
 export const ViewLookForJob = () => {
 
     const status = useContext(Status.Context)

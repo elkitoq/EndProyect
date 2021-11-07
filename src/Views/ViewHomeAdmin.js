@@ -10,6 +10,6 @@ export const ViewHomeAdmin = () => {
 
 
 
-RutaTutorial.get("homeAdmin").setLink('/homeAdmin')
-    .setMeta("Inicio para Admins")
-    .setRender(ViewHomeAdmin);
+// RutaTutorial.get("homeAdmin").setLink('/homeAdmin')
+//     .setMeta("Inicio para Admins")
+//     .setRender(ViewHomeAdmin);
