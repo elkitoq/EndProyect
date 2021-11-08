@@ -22,7 +22,7 @@ export class ErrorDriver extends React.Component {
       if (this.state.hasError) {
         // Puedes renderizar cualquier interfaz de repuesto
         window.location.reload(); 
-        return <h1>Cargando...</h1>;
+        return <h3>Cargando...</h3>;
       }
   
       return this.props.children; 

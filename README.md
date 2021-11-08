@@ -133,6 +133,7 @@ Para usar Bootstrap dentro de Rect. De las opciones disponibles elegimos esta po
 
 ## Cookie parser
 
+
 Para convertir las cookies en Json
 
 [indice](#indice)
