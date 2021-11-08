@@ -1,28 +1,35 @@
 .row-login{
+  margin-top: -1rem;
   border-radius: 9px;
   box-shadow: 0px 3px 28px #0000002B;
-  padding: 5;
+  padding: 0;
   height: 100%;
 }
 
-.column, .col-slideshow{
-  height: 800px;
+ /* start style colum form login*/
+
+.container-logo{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  vertical-align: start
 }
 
 .logo-login{
-  margin-top: -4rem;
-  margin-left: 2rem;
-  margin-bottom: 2rem;
-  width: 80% !important;
-  height: 80%;
+  margin-top: 2rem;
+  margin-bottom:1rem;
+  padding: 1rem;
+  width: 70% !important;
+  height: 70% !important;
 }
 
 .themed-container .row-login .column .form-container{
-  margin-top: -8rem;
-  margin-left: 2rem;
-  width: 85%;
+  width: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
 }
- 
+
 .themed-container .row-login .column .form-container label{
   margin-bottom: 0.5rem;
 }
@@ -31,6 +38,9 @@
   margin-bottom: 1.5rem;
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 5px;
+  position: relative;
+  z-index: 2;
+  font-size: 18px
 }
 
  .themed-container .row-login .column .form-container .button-submit{
@@ -39,9 +49,9 @@
     border-radius: 5px;
     font-size: larger;
     font-weight: 600;
-    
+
  }
- 
+
  .my-facebook-button-class{
    width: 100%;
    height: 48px;
@@ -58,7 +68,7 @@
 
  .my-facebook-button-class:hover{
   opacity: 0.85;
-  
+
 }
 
  .butonLoginGoogle{
@@ -75,19 +85,23 @@
 
  .butonLoginGoogle:hover{
   opacity: 0.85;
-  
+
 }
 
  .check-remember{
-   margin-top: 1.5rem;
-   width: 100%;
-   padding: 0;
-   margin-left: 1.5rem;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  width: 100%;
+  margin-top: 1.5rem;
  }
 
  .formgroup-a{
-   margin-left: 2.3rem;
-   margin-top: 1.5rem;
+  display: flex;
+  align-items: end;
+  justify-content: end;
+  width: 100%;
+  margin-top: 1.5rem;
  }
 
  .formgroup-a a{
@@ -95,36 +109,264 @@
  }
 
  .label-register{
-   margin-top: 1.5rem;
-   margin-left: 4rem;
    width: 100%;
-   display: block;
+   margin-top: 0.7rem;
+   margin-bottom: 0.1rem;
+   display:flex;
+   justify-content:center;
+   align-items: center;
  }
 
  .label-register a{
   margin-left: 3px;
   text-decoration: none;
  }
+ /*end style colum form login*/
+
+ /* start style welcome*/
+ .column-welcome{
+   height:50%;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+ }
+ /* end style welcome*/
+
+ /* start style slideshow*/
+
+ .column, .col-slideshow{
+  height: auto;
+  }
 
  .col-slideshow{
    background-color: #0d6efd;
+   border-top-right-radius: 5px;
+   border-bottom-right-radius: 5px;
  }
 
- .carousel{
-   width: 100%;
-   height: 100%;
- }
+.carousel{
+  height:100%;
+}
 
- .img-carousel{
-   margin-left: 12rem;
-   margin-top: 8rem;
- }
+.carousel-inner .active{
+  height: 100%;
+  margin-top: 3rem;
+  display: flex ;
+  justify-items: center ;
+  align-items:center;
+  flex-direction: column;
+}
+
+.carousel-item img{
+ display: block;
+ width: 60%;
+ height: 40%;
+ 
+}
 
  .carousel-caption{
+   display: flex !important;
+   flex-direction: column;
    position: static;
+   justify-content: center !important;
+   align-items: center !important;
+   width: 100%;
+   margin-top:3.5rem
  }
 
- @media (max-width: 450px ){
+ .carousel-caption p{
+   width: 70%;
+ }
+
+ .buton-create-user{
+   display: block;
+   width: 100%;
+
+ }
+
+  @media (max-width: 1367px ){
+  .row-login{
+    border-radius: 9px;
+    box-shadow: 0px 3px 28px #0000002B;
+    padding: 5;
+    height: 575px;
+  }
+
+  .column, .col-slideshow{
+    height: 575px !important;
+  }
+
+   /* start style colum form login*/
+
+.container-logo{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  vertical-align: top !important
+}
+
+.logo-login{
+  margin-top: 0;
+  margin-bottom:0;
+  padding: 1rem;
+  width: 60% !important;
+  height: 60% !important;
+}
+
+.themed-container .row-login .column .form-container{
+  width: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.themed-container .row-login .column .form-container label{
+  margin-bottom: 0.2rem;
+}
+
+.themed-container .row-login .column .form-container input{
+  margin-bottom: 0.5rem;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 5px;
+  position: relative;
+  z-index: 2;
+  font-size: 18px
+}
+
+ .themed-container .row-login .column .form-container .button-submit{
+    width: 100%;
+    margin-top: 0.5rem;
+    border-radius: 5px;
+    font-size: larger;
+    font-weight: 600;
+
+ }
+
+ .my-facebook-button-class{
+   width: 100%;
+   height: 40px;
+   padding: 5px;
+   border-radius: 5px;
+   margin-bottom: 0.8rem;
+   margin-top: 1rem;
+   background-color: #3b5998;
+   color: white;
+   border-color: transparent;
+   font-size: large;
+   font-weight: 600;
+ }
+
+ .my-facebook-button-class:hover{
+  opacity: 0.85;
+
+}
+
+ .butonLoginGoogle{
+   width: 100%;
+   height: 40px;
+   padding: 5px;
+   border-radius: 5px;
+   background-color: #E9523A !important;
+   border-color: transparent;
+   color: white !important;
+   font-size: large;
+   font-weight: 600;
+ }
+
+ .butonLoginGoogle:hover{
+  opacity: 0.85;
+
+}
+
+ .check-remember{
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  width: 100%;
+  margin-top: 1rem;
+ }
+
+ .formgroup-a{
+  display: flex;
+  align-items: end;
+  justify-content: end;
+  width: 100%;
+  margin-top: 1rem;
+ }
+
+ .formgroup-a a{
+  text-decoration: none;
+ }
+
+ .label-register{
+   width: 100%;
+   margin-top: 0.3rem;
+   margin-bottom: 0rem;
+   display:flex;
+   justify-content:center;
+   align-items: center;
+ }
+
+ .label-register a{
+  margin-left: 3px;
+  text-decoration: none;
+ }
+ /*end style colum form login*/
+
+ /* start style slideshow*/
+
+ .column, .col-slideshow{
+  height: 570px;
+  }
+
+ .col-slideshow{
+   background-color: #0d6efd;
+   border-top-right-radius: 5px;
+   border-bottom-right-radius: 5px;
+ }
+
+.carousel{
+  height:100%;
+}
+
+.carousel-inner .active{
+  height: 100%;
+  margin-top: 2rem;
+  display: flex ;
+  justify-items: center ;
+  align-items:center;
+  flex-direction: column;
+}
+
+.carousel-item img{
+ display: block;
+ width: 60%;
+ height: 40%;
+ 
+}
+
+ .carousel-caption{
+   display: flex !important;
+   flex-direction: column;
+   position: static;
+   justify-content: center !important;
+   align-items: center !important;
+   width: 100%;
+   margin-top:-10px !important
+ }
+
+ .carousel-caption p{
+   width: 70%;
+ }
+
+ .buton-create-user{
+   display: block;
+   width: 100%;
+
+ }
+}
+
+ @media (min-width:464px) and (max-width: 768px ){
     .row-login{
       box-shadow: none;
       width: 100%;
@@ -134,21 +376,27 @@
     .column{
       width: 100%;
       height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center !important;
+    }
+
+    .container-logo{
+      display: flex;
+      align-items: center;
+      justify-content:center;
+      vertical-align: start
     }
 
     .logo-login{
-      margin-top: -2.8rem;
-      margin-left: 3rem;
-      width: 80%;
-      height: 80%;
+      width: 80% !important;
+      height: 80% !important;
     }
 
     .themed-container .row-login .column .form-container{
-      margin-top: -5rem;
-    }
-
-    .col-slideshow{
-      display: none;
+     width: auto;
+     display: flex;
+     flex-direction: column;
     }
 
     .butonLoginGoogle{
@@ -162,7 +410,7 @@
       font-size: large;
       font-weight: 600;
     }
-   
+
     .my-facebook-button-class{
       width: 100%;
       height: 30%;
@@ -194,42 +442,141 @@
 
   .check-remember{
     margin-top: 1.1rem;
-    width: 50%;
-    padding: 0;
-    margin-left: 1.5rem;
-    font-size: 15px;
+    width: 100%;
+    display: block;
+    align-items: start;
+    justify-content: start;
+    padding: 7;
   }
- 
+
   .formgroup-a{
-    font-size: 15px;
-    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     margin-top: 1.1rem;
+    width: 100%;
   }
 
   .label-register{
     margin-top: 1rem;
-    margin-left: 0;
     width: 100%;
     font-size: 15px;
   }
- 
+
   .label-register a{
    margin-left: 3px;
    text-decoration: none;
    font-size: 15px;
   }
- }
-
- @media (min-width: 451px) and (max-width: 767px){
-   .logo-login{
-     margin-top: 5rem;
-   }
-
-   .themed-container .row-login .column .form-container{
-    margin-top: -3.5rem;
-  }
 
   .col-slideshow{
     display: none;
   }
+ } 
+
+ @media (max-width: 466px)  {
+  .row-login{
+    box-shadow: none;
+    height: 100%;
+  }
+
+  .column{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center !important;
+  }
+
+  .container-logo{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    vertical-align: start
+  }
+
+  .logo-login{
+    width: 80% !important;
+    height: 80% !important;
+  }
+
+  .themed-container .row-login .column .form-container{
+   width: auto;
+   display: flex;
+   flex-direction: column;
+  }
+
+  .butonLoginGoogle{
+    width: 100%;
+    height: 30%;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #E9523A !important;
+    border-color: transparent;
+    color: white !important;
+    font-size: large;
+    font-weight: 600;
+  }
+
+  .my-facebook-button-class{
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    margin-top: 0.8rem;
+    background-color: #3b5998;
+    color: white;
+    border-color: transparent;
+    font-size: large;
+    font-weight: 600;
+  }
+
+  .themed-container .row-login .column .form-container .button-submit{
+    width: 100%;
+    height: 40px;
+    margin-top: 0.5rem;
+    border-radius: 5px;
+    font-size: larger;
+    font-weight: 600;
+ }
+
+ .themed-container .row-login .column .form-container input{
+  margin-bottom: 0.8rem;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 5px;
+}
+
+.check-remember{
+  margin-top: 1.1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 0;
+}
+
+.formgroup-a{
+  margin-top: 1.1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.label-register{
+  margin-top: 2rem;
+  width: 100%;
+  font-size: 15px;
+}
+
+.label-register a{
+ text-decoration: none;
+ font-size: 15px;
+}
+
+.col-slideshow{
+  display: none;
+}
  }

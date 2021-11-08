@@ -1,59 +1,76 @@
-import { useState } from 'react'
 import { ButtonFacebook } from '../Components/ButtonFacebook';
 import { ButtonGoogle } from '../Components/ButtonGoogle';
 import { BoxLoginRecoveryPass } from '../Components/BoxLoginRecoveryPass'
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap'
+import { Form } from './Form';
+import API, { APIComponent } from '../Tools/API';
+import { Button, FormGroup, Label } from 'reactstrap';
+import { FormItem } from './FormItem';
+import { ViewCreateUser } from '../Views/ViewCreateUser';
+import { useState } from 'react';
 
-export const FormLogin = () => {
+// import { Form, Input } from 'reactstrap'
 
-    const [datos, setdatos] = useState({
-        user: '',
-        password: ''
-    })
 
-    const handleInputChange = (event) => {
-        setdatos({
-            ...datos,
-            [event.target.name]: event.target.value
-        })
-    }
+export const FormLogin = ({showRegister}) => {
+
+    // const [datos, setdatos] = useState({
+    //     user: '',
+    //     password: ''
+    // })
+
+    // const handleInputChange = (event) => {
+    //     setdatos({
+    //         ...datos,
+    //         [event.target.name]: event.target.value
+    //     })
+    // }
 
     const submit = (event) => {
-        event.preventDefault()
-        //aqui iria la llamada al server
-        console.log(datos)
+        // event.preventDefault()
+        // //aqui iria la llamada al server
+        // console.log(datos)
 
     }
 
-    return (
-        <Form className="form-container" onSubmit={submit}>
+    const [register,setRegister] = useState(showRegister||false)
+   
+   
 
-            <FormGroup>
+    return (<>{register?<ViewCreateUser showRegister={setRegister}/>:
+        <Form className="form-container" onSubmit={submit}>
+            <APIComponent url='/login'/>
+
+            {/* <FormGroup>
                 <Label for="userInput">Usuario</Label>
-                <Input type="text" id="userInput" name="user" onChange={handleInputChange} />
+                <Input type="text" id="userInput" name="user" onChange={handleInputChange} className="form-control" />
             </FormGroup>
 
             <FormGroup>
                 <Label for="userPassword">Password</Label>
                 <Input type="password" id="userPassword" name="password" autoComplete="off" onChange={handleInputChange} className="form-control" />
+            </FormGroup> */}
+
+            <FormItem name="Usuario" idInput="name" />
+            <FormItem name="Password" type="password" idInput="password" />
+
+            <FormGroup className="separado">
+                <Button className='button-submit' size="lg" color="primary" type="submit" block>Login</Button>
             </FormGroup>
 
             <ButtonFacebook />
 
             <ButtonGoogle />
 
-            <FormGroup>
-                <Button className='button-submit' size="lg" color="primary" type="submit" block>Login</Button>
-            </FormGroup>
 
             <BoxLoginRecoveryPass />
 
             <FormGroup className="label-register">
                 <Label >
-                    No tenes cuenta todavia? <a className="a-register" href="http://localhost:3000/Register/">Registrate aca</a>
+                    ¿No tenes cuenta todavía? <a className="a-register" href="#" onClick={
+                        ()=>{setRegister(true)}
+                    }>Regístrate  acá</a>
                 </Label>
             </FormGroup>
-
-        </Form>
+        </Form>}</>
     )
 }

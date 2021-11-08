@@ -1,0 +1,82 @@
+
+.cv-complete{
+  height:1120px
+}
+
+.lateralCV{
+    background-color: rgba(43, 77, 34, 0.637);
+  }
+  
+  .principalCV-inner{
+    margin-top: 5rem;
+    padding: auto;
+  }
+
+  .separadorCV{
+    color: rgb(41, 78, 66);
+    border-top: #282c34 solid 4 px; 
+    border-bottom: #282c34 solid 2px;
+    font-size: 1.3rem; 
+
+  }
+  
+  .principalCV-inner > .row{
+    padding: 2rem 2rem 0 2rem;
+  }
+
+  .principalCV-inner > *{
+    font-size: 1.3rem;
+  }
+  
+  .lateralCV > .row{
+    margin: 5px;
+  }
+
+  .lateralCV > .name{
+      margin-top:8rem;
+
+      /* font-size: 3rem;
+      font-weight: "bold";    */
+  }
+  
+  .itemsCV > div{
+    border-bottom: rgba(35, 68, 57, 0.308) solid 1px;
+    border-top  : rgba(35, 68, 57, 0.308) solid 1px;
+  }
+
+  .column-year{
+    display: flex;
+    align-items:center;
+    justify-content:center
+  }
+
+  .column-description-academy{
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .column-description-academy h5{
+    margin-top:15px;
+  }
+  
+  .column-description-lab h5{
+    margin-top:15px;
+  }
+
+  .row-button{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .row-button button, .row-button a{
+    margin-top: 3px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #0D6EFD;
+  }
+
+  .row-button button:hover, .row-button a:hover{
+    opacity: 0.9;
+    background-color: #0D7ffd
+  }

@@ -1,0 +1,54 @@
+.content-home{
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center !important;
+    text-align: center;
+}
+
+.content-home .content-home-inner .title{
+    margin-bottom:1.5rem;
+}
+
+.content-home .content-home-inner .option-menu{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align:center;
+
+}
+
+.row  .tarjetasQBuscas{
+    width: 15vw;
+    height: 65px;
+    padding: 1rem;
+    cursor: pointer;
+    margin: 3rem 1.5rem 0px ;
+    font-size: 25px !important;
+}
+
+@media (max-width:767px) {
+
+    .content-home .content-home-inner .option-menu{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align:center;
+
+    }
+    
+    .content-home .content-home-inner .option-menu .a{
+        width: 100%;
+    }
+
+    .option-menu .tarjetasQBuscas{
+        width: 100%;
+        height: 65px;
+        padding: 1rem;
+        cursor: pointer;
+        font-size: 25px !important;
+        display: block;
+        margin: 1rem 0 0 0 !important;
+    }
+}

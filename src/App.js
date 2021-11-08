@@ -7,16 +7,23 @@ import {
 import React from 'react';
 import { NavegadorPrincipal } from './Components/Navegador.js';
 import { ViewMain } from './Views/ViewMain.js';
-
+import { StatusComponent } from './Tools/Status';
+import { Events } from './Components/Events.js';
+import { ErrorDriver } from './Components/ErrorDriver';
 
 
 function App() {
 
   return (
-    <Router>
-      <NavegadorPrincipal />
-      <ViewMain />
-    </Router>
+    <ErrorDriver>
+      <Router>
+        <StatusComponent>
+          <Events />
+          <NavegadorPrincipal />
+          <ViewMain />
+        </StatusComponent>
+      </Router>
+    </ErrorDriver>
   );
 }
 

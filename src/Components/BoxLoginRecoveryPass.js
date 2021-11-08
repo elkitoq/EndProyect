@@ -12,7 +12,7 @@ export const BoxLoginRecoveryPass = () => {
             </Col>
             <Col>
                 <FormGroup className="formgroup-a">
-                    <a className='a-recovery-pass' href="/register/">Olvidaste tu contraseña?</a>
+                    <a className='a-recovery-pass' href="/recovery-pass/">Olvidaste tu contraseña?</a>
                 </FormGroup>
             </Col>
         </Row>

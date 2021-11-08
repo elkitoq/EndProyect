@@ -24,3 +24,5 @@ yarn-error.log*
 
 #Archivo temporal de Enterprice Architect
 *.ldb
+doc/~$Plantilla Sprint.xlsm
+src/Server/tools/PDF.js
