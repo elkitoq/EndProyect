@@ -4,6 +4,7 @@ import { OptionMenu } from "../Components/OptionMenu";
 import { Status } from "../Tools/Status";
 import { useContext } from "react";
 import { LoadRoles } from "../Components/role";
+import '../Assets/Css/Autonomo.css'
 
 
 
@@ -23,10 +24,10 @@ export const ViewHomeAutonomo = () => {
     return (
         <Container className="abs-center">
             <LoadRoles/>
-            <div className="text-center">
+            <div className="text-center container-home-autonomo">
                 <h1>Bienvenido {user?user.profileName:""}</h1>
                 <h2>¿Que estas buscando hoy?</h2>
-                <Row className="">
+                <Row className="container-button">
                     <OptionMenu href="/CVCreate/"       >Crear Curriculum</OptionMenu>
                     <OptionMenu href="/offerService/"   >Servicios Ofrecidos</OptionMenu>
                     <OptionMenu href="/createService/"   >Ofrecer servicio</OptionMenu>

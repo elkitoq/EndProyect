@@ -18,9 +18,9 @@ export const ViewPostulatedJobs = () => {
                 <Display nameDownload={()=>"EmpleosSolicitados"}
                 get={{role:selectRole}}>
                     <APIComponent url="/postulates"/> 
-                    <CardText key="name">Se ofrece:</CardText>
-                    <CardText className="text-wrap" key="description">Descripción:</CardText>
-                    <CardText className="text-wrap" func={(e)=>e.candidates.date}>Fecha:</CardText>
+                    <CardText key="name">Se ofrece: </CardText>
+                    <CardText className="text-wrap" key="description">Descripción: </CardText>
+                    <CardText className="text-wrap" func={(e)=>e.candidates.date}>Fecha: </CardText>
                 </Display>
             </Row>
         <Ayuda ruta={RutaTutorial.get('Postulates')}/>
