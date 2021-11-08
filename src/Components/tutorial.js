@@ -148,7 +148,7 @@ export const Mapa = () => {
 
 
     return <div className="container-tutorial" style={{ marginTop: "-43vh" }} >
-        <h4>Esta es una lista de todo lo que puedes hacer en nuestro aplicacion web, si tienes dudas hay una lista de instrucciones en cada item. Algunos puntos requieren que completes algun paso extra (como iniciar sesion) en ese caso te saldrá en rojo si no lo has hecho o verde si ya esta cubierto</h4>
+        <h4>Esta es una lista de todo lo que puedes hacer en nuestro aplicación web, si tienes dudas hay una lista de instrucciones en cada ítem. Algunos puntos requieren que completes algún paso extra (como iniciar sesión) en ese caso te saldrá en rojo si no lo has hecho o verde si ya esta cubierto</h4>
         <ul className="list-tutorial">
             {RutaTutorial.map((ruta) =>
                 (ruta instanceof RutaTutorial) ? (ruta.meta !== '') ?
