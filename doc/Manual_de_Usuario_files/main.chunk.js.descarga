@@ -8333,7 +8333,7 @@ const Mapa = () => {
       marginTop: "-43vh"
     },
     children: [/*#__PURE__*/Object(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_8__["jsxDEV"])("h4", {
-      children: "Esta es una lista de todo lo que puedes hacer en nuestro aplicacion web, si tienes dudas hay una lista de instrucciones en cada item. Algunos puntos requieren que completes algun paso extra (como iniciar sesion) en ese caso te saldr\xE1 en rojo si no lo has hecho o verde si ya esta cubierto"
+      children: "Esta es una lista de todo lo que puedes hacer en nuestro aplicación web, si tienes dudas hay una lista de instrucciones en cada ítem. Algunos puntos requieren que completes algún paso extra (como iniciar sesión) en ese caso te saldrá en rojo si no lo has hecho o verde si ya esta cubierto"
     }, void 0, false, {
       fileName: _jsxFileName,
       lineNumber: 151,
