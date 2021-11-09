@@ -30,7 +30,7 @@ export const ViewHomeAutonomo = () => {
                 <Row className="container-button">
                     <OptionMenu href="/CVCreate/"       >Crear Curriculum</OptionMenu>
                     <OptionMenu href="/offerService/"   >Servicios Ofrecidos</OptionMenu>
-                    <OptionMenu href="/createService/"   >Ofrecer servicio</OptionMenu>
+                    <OptionMenu href="/createService/"   >Crear nuevo Servicio</OptionMenu>
                     {/* <OptionMenu href="/message/"        >Ver mensajes</OptionMenu> */}
                 </Row>
             </div>
